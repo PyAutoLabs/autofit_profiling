@@ -1,0 +1,54 @@
+# ruff configuration for autofit_profiling.
+#
+# This repo is a collection of standalone scripts, not a Python
+# package — there is no pyproject.toml. A standalone ruff.toml at the
+# repository root is the supported configuration location for that case
+# (see https://docs.astral.sh/ruff/configuration/).
+#
+# It is also the repo's **root sentinel**: every leaf script finds the
+# repository root by walking up from its own location to the first directory
+# containing this file, then puts that root and `scripts/misc/` on sys.path.
+# Do not remove or rename it, and do not add a second one in a subdirectory.
+#
+# Copied from autolens_inference's ruff.toml so the PyAutoFit and PyAutoLens
+# benchmark repos lint identically.
+
+target-version = "py311"
+line-length = 100
+
+# Exclude generated / external folders.
+extend-exclude = [
+    "dataset",
+    "output",
+    ".venv",
+    "venv",
+]
+
+[lint]
+# Conservative selection — catch real bugs without imposing a strict style.
+# Benchmark scripts use scientific patterns that can clash with stricter rule
+# sets (long lines for table headers, `if __name__ == "__main__":` is rare
+# because scripts run top-level, etc.).
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes (undefined names, unused imports)
+    "W",   # pycodestyle warnings
+    "I",   # isort (import order)
+    "UP",  # pyupgrade (Python version idioms)
+    "B",   # flake8-bugbear (likely bugs)
+]
+ignore = [
+    "E501",  # long lines — common in scientific code; ruff format handles wrapping
+    "E402",  # module-level imports not at top of file — scripts often set env
+             # vars (NUMBA_CACHE_DIR etc.) before importing autolens
+    "F401",  # unused imports — some scripts deliberately import-for-side-effect
+             # (e.g. `from autonerves import jax_wrapper  # noqa: F401`)
+    "B008",  # function call in default argument — common autofit pattern
+    "B905",  # zip() without strict= — scripts zip equal-length lists they built
+             # themselves; threading strict= through adds noise, not safety
+    "B007",  # unused loop-control variable — warm-up/repeat loops (`for _i in
+             # range(n)`) are a common pattern in timing code
+]
+
+[format]
+# Defaults: black-compatible. Nothing to override.

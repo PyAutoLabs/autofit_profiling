@@ -1,0 +1,562 @@
+#!/usr/bin/env bash
+# hpc/sync — drive the RAL HPC from the laptop, and pull run outputs back for review.
+#
+# Copied from `autolens_inference/hpc/sync` (itself adapted from the no-push
+# `autolens_profiling/hpc/sync`, with the euclid pipeline's `PYAUTO_PULL_DIRS` block).
+# This repo runs CPU jobs only (`hpc/batch_cpu/`, --partition=ral), so `submit` and `tail`
+# default to cpu; the gpu log roots stay in the pull list and are skipped while absent. One deliberate
+# difference from the generic Science-project sync: **there is no `push`.** The RAL
+# checkout of this repo is a real git checkout with local state; it is updated with git on
+# the login node, not by rsync (see `push` below and `hpc/README.md`). This script only
+# ever *reads* from RAL, plus `sbatch`/`squeue`/`scancel`.
+#
+# SETUP
+#   cp hpc/sync.conf.example hpc/sync.conf
+#   # Edit hpc/sync.conf — in particular LOCAL_PULL_ROOT, where pulled runs land.
+#   # sync.conf is gitignored; it stays on your machine only.
+#
+# USAGE (run from anywhere; paths resolve from the script's own location)
+#
+# Transfer:
+#   hpc/sync pull                Download batch logs, then run outputs and results
+#   hpc/sync logs                Download SLURM output/error logs only (fast, use mid-run)
+#   hpc/sync status              Dry run — show what a pull would transfer
+#
+#   A real `pull` also writes `$LOCAL_PULL_ROOT/.cortex/pull.json`: the size and mtime of
+#   every Nautilus checkpoint.hdf5 on RAL, which the pull itself excludes. It is how
+#   PyAutoCortex tells a run that is still advancing from one that has stalled. `status`
+#   is a dry run and never writes it.
+#
+# Jobs:
+#   hpc/sync submit <script>     sbatch a submit script from hpc/batch_cpu/ (or --gpu)
+#                                GPU jobs run on --partition=gpu; CPU jobs on
+#                                --partition=ral (RAL has NO `cpu` partition).
+#   hpc/sync jobs                Show queued/running jobs (squeue)
+#   hpc/sync sacct               Show job history and exit codes (sacct)
+#   hpc/sync cancel <job_id>     Cancel a job by ID
+#
+# Inspect:
+#   hpc/sync tail [gpu|cpu]      Stream the newest live SLURM log (Ctrl+C to stop)
+#   hpc/sync du                  Show remote disk usage of output/ and results/
+#   hpc/sync check               Verify SSH connection and remote paths
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+CONF="${SCRIPT_DIR}/sync.conf"
+
+# ---------------------------------------------------------------------------
+# Configuration — loaded from hpc/sync.conf, with environment variable overrides
+# ---------------------------------------------------------------------------
+[[ -f "$CONF" ]] && source "$CONF"
+
+HPC_HOST="${HPC_HOST:?HPC_HOST not set. Copy hpc/sync.conf.example -> hpc/sync.conf and edit it.}"
+HPC_BASE="${HPC_BASE:?HPC_BASE not set. Copy hpc/sync.conf.example -> hpc/sync.conf and edit it.}"
+# Hard-coded, not $(basename "$PROJECT_ROOT"): this script is normally run from a git
+# worktree (e.g. ~/Code/PyAutoLabs-wt/hpc-sync), whose directory name is the branch, not
+# the project. Override in sync.conf only if the RAL directory is named differently.
+PROJECT_NAME="${PROJECT_NAME:-autofit_profiling}"
+
+# Where pulled run outputs land locally: THE REPO ROOT.
+#
+# `output/` is gitignored here precisely so a pull can land in it, and `results/` maps 1:1
+# too: a pulled row is read in place and committed by a human from this checkout, which is
+# the only way a result ever enters git. Override in sync.conf if you want it elsewhere.
+LOCAL_PULL_ROOT="${LOCAL_PULL_ROOT:-$PROJECT_ROOT}"
+
+REMOTE="${HPC_HOST}:${HPC_BASE}/${PROJECT_NAME}"
+REMOTE_ROOT="${HPC_BASE}/${PROJECT_NAME}"
+
+# ---------------------------------------------------------------------------
+# What gets pulled, and where it lands.
+#
+# One entry per line: "<remote path under the project>  ->  <local path under
+# LOCAL_PULL_ROOT>". The remote and local trees deliberately differ: RAL keeps SLURM logs
+# next to the submit scripts under hpc/batch_gpu/, but on the laptop they are review
+# material, so they land under logs/.
+# ---------------------------------------------------------------------------
+PULL_DIRS=(
+    "output"
+    "results"
+    "hpc/batch_gpu/output"
+    "hpc/batch_gpu/error"
+    "hpc/batch_cpu/output"
+    "hpc/batch_cpu/error"
+)
+
+# Local destination for each PULL_DIRS entry, same order.
+#
+# `output` and `results` map 1:1 — the pull root IS the repo root here. The SLURM logs do
+# not: on RAL they live beside the submit scripts because that is where SLURM writes them,
+# but on the laptop they are review material, so they land at the top of the tree under
+# logs/, split by partition.
+PULL_DESTS=(
+    "output"
+    "results"
+    "logs/gpu/output"
+    "logs/gpu/error"
+    "logs/cpu/output"
+    "logs/cpu/error"
+)
+
+# The log entries of PULL_DIRS (indices into the arrays) — pulled first by `pull`, and
+# alone by `logs`. Small and fast; useful mid-run.
+LOG_INDICES=(2 3 4 5)
+
+# Extra roots the caller asks for, space-separated — the Cortex check-in passes the
+# `output*` roots its tasks declare, so a run written to a custom PYAUTO_OUTPUT_DIR is
+# pulled without this list being edited by hand. The expansion is deliberately unquoted:
+# word-splitting is how the list is parsed, which is why only `output*` names are ever
+# passed. Appended, never replacing — this project's own roots always pull, and an unset
+# variable leaves the pull exactly as it was. A destination is added in lockstep so the
+# two arrays stay index-aligned; PULL_DESTS is what `pull_indices` reads.
+if [[ -n "${PYAUTO_PULL_DIRS:-}" ]]; then
+    for _extra in ${PYAUTO_PULL_DIRS}; do
+        if [[ " ${PULL_DIRS[*]} " != *" ${_extra} "* ]]; then
+            PULL_DIRS+=("${_extra}")
+            PULL_DESTS+=("${_extra}")
+        fi
+    done
+    unset _extra
+fi
+
+# ---------------------------------------------------------------------------
+# rsync options
+#   -a                    archive (timestamps, permissions, symlinks)
+#   -z                    compress in transit (big win for text/JSON/YAML)
+#   --skip-compress       skip compression for formats that don't benefit
+#   --partial             keep partial files so interrupted transfers resume
+#   --info=progress2      single updating line per file (less noisy than -v)
+#   -e / ControlMaster    reuse a single SSH connection across all rsync calls;
+#                         avoids a fresh handshake for every directory in the loop
+# ---------------------------------------------------------------------------
+RSYNC=(rsync -az --partial --info=progress2
+    --skip-compress=fits/gz/bz2/xz/zst/png/jpg
+    -e "ssh -o ControlMaster=auto -o ControlPath=/tmp/ssh_mux_%h_%p_%r -o ControlPersist=120")
+
+EXCLUDES=(
+    --exclude='search_internal/'   # sampler state: Nautilus checkpoint.hdf5, live points.
+                                   # Large, and not needed to read a result. A run that
+                                   # needs its checkpoint is read on RAL.
+    --exclude='__pycache__/'
+    --exclude='*.pyc'
+    --exclude='.git/'
+    --exclude='*.egg-info/'
+    --exclude='sync.conf'
+)
+
+# ---------------------------------------------------------------------------
+# Transfer
+# ---------------------------------------------------------------------------
+
+# pull_indices <dryrun> <index>...
+pull_indices() {
+    local dryrun="$1"; shift
+    local zip_count=0
+
+    for i in "$@"; do
+        local remote_dir="${PULL_DIRS[$i]}"
+        local local_dir="${LOCAL_PULL_ROOT}/${PULL_DESTS[$i]}"
+
+        echo "    ${remote_dir}/  ->  ${local_dir}/"
+
+        # The remote dir may not exist yet if nothing has run; rsync would abort with
+        # exit 23. Check rather than create — this script does not write to RAL.
+        if ! ssh "${HPC_HOST}" "test -d '${REMOTE_ROOT}/${remote_dir}'" 2>/dev/null; then
+            echo "        skip: not present on the HPC"
+            continue
+        fi
+
+        mkdir -p "$local_dir"
+
+        # --update  skip local files newer than the remote copy
+        # Exit 23/24 (vanished / partial) are normal when jobs are still writing, so
+        # they are tolerated rather than aborting the whole pull.
+        "${RSYNC[@]}" "${EXCLUDES[@]}" --update ${dryrun} \
+            "${REMOTE}/${remote_dir}/" "${local_dir}/" || {
+                local rc=$?
+                if [[ $rc -eq 23 || $rc -eq 24 ]]; then
+                    echo "        (rsync exit ${rc}: some files vanished or were partial — expected mid-run)"
+                else
+                    echo "        rsync exited ${rc}"
+                fi
+            }
+
+        # Autofit writes completed searches as .zip; unpack anything new.
+        if [[ -z "$dryrun" ]]; then
+            while IFS= read -r -d '' zipfile; do
+                local target="${zipfile%.zip}"
+                if [[ ! -d "$target" ]]; then
+                    # Not `&& (( zip_count++ ))`: at zip_count=0 that arithmetic returns 1
+                    # and `set -e` aborts the whole pull mid-way. (The Science-project sync
+                    # this was adapted from had exactly that bug — it silently stopped
+                    # after the first PULL_DIRS entry.) `|| true` would hide a real unzip
+                    # failure instead, so branch explicitly and say so.
+                    if unzip -q -o "$zipfile" -d "$target"; then
+                        zip_count=$(( zip_count + 1 ))
+                    else
+                        echo "        WARNING: could not unzip ${zipfile}"
+                    fi
+                fi
+            done < <(find "$local_dir" -name '*.zip' -print0 2>/dev/null)
+        fi
+    done
+
+    if [[ -z "$dryrun" ]]; then
+        echo ""
+        echo "    extracted ${zip_count} archive(s)"
+    fi
+}
+
+pull_logs() {
+    local dryrun="${1:-}"
+    echo "<== [logs] SLURM output/error  <-  ${REMOTE}"
+    pull_indices "$dryrun" "${LOG_INDICES[@]}"
+}
+
+# ---------------------------------------------------------------------------
+# Cortex pull manifest
+# ---------------------------------------------------------------------------
+# `${LOCAL_PULL_ROOT}/.cortex/pull.json` records the size and mtime of every Nautilus
+# `checkpoint.hdf5` on RAL at the moment of the pull. The pull deliberately excludes the
+# checkpoints themselves (`search_internal/` — large, and only readable on RAL), so
+# without this file nothing on the laptop can tell a run that is still advancing from one
+# that has stalled. PyAutoCortex `collect` reads it to score the checkpoint leg.
+#
+# Schema (v1):
+#   {"schema": 1, "pulled_at": "<ISO UTC>",
+#    "checkpoints": {"<run dir relative to the pull root>": {"bytes": N, "mtime": "<ISO>"}},
+#    "runs": {}}
+#
+# Keys are `output/<…>/<hash>` — RAL's `output/` maps 1:1 onto the local checkout.
+# `runs` stays empty here: this repo's SLURM logs do not name the run directory a job
+# wrote, so a job id cannot honestly be linked to a checkpoint.
+#
+# Gathered with one `find` over the existing ControlMaster mux, read-only like the rest of
+# this script. A failed gather is not fatal: the manifest is still written, with empty
+# `checkpoints` and a `gather_error`. Written only by a real pull — `status` runs
+# `pull --dry-run` and must not touch it. `.cortex/` is gitignored in the mirror.
+write_pull_manifest() {
+    local manifest="${LOCAL_PULL_ROOT}/.cortex/pull.json"
+    local listing gather_error=""
+
+    listing="$(mktemp)"
+    if ! ssh "${HPC_HOST}" \
+        "find '${REMOTE_ROOT}/output' -name checkpoint.hdf5 -printf '%s %T@ %p\n' 2>/dev/null || true" \
+        > "$listing" 2>/dev/null; then
+        gather_error="could not list checkpoints on ${HPC_HOST}"
+        : > "$listing"
+        echo "    WARNING: ${gather_error} — manifest written with no checkpoints"
+    fi
+
+    # The listing goes in by path, not on stdin: `python3 -` reads the program itself from
+    # stdin, so a pipe into it would be swallowed by the heredoc.
+    CORTEX_RAL_ROOT="${REMOTE_ROOT}" \
+    CORTEX_MANIFEST="$manifest" \
+    CORTEX_LISTING="$listing" \
+    CORTEX_GATHER_ERROR="$gather_error" \
+    python3 - <<'PYEOF'
+import json
+import os
+from datetime import datetime, timezone
+from pathlib import Path
+
+ral_root = os.environ["CORTEX_RAL_ROOT"].rstrip("/")
+manifest = Path(os.environ["CORTEX_MANIFEST"])
+gather_error = os.environ.get("CORTEX_GATHER_ERROR", "")
+
+checkpoints = {}
+for line in Path(os.environ["CORTEX_LISTING"]).read_text(errors="replace").splitlines():
+    line = line.strip()
+    if not line:
+        continue
+    parts = line.split(" ", 2)
+    if len(parts) != 3:
+        continue
+    size, mtime, path = parts
+    # PyAutoFit writes the checkpoint to <run dir>/files/search_internal/checkpoint.hdf5
+    # (AbstractPaths.search_internal_path is _files_path / "search_internal"), so the
+    # parent of search_internal is not the run directory — its `files/` is. The key is the
+    # run directory itself, which is what a Cortex member resolves, so the `files` segment
+    # is dropped.
+    run_dir = path.split("/search_internal/")[0].rstrip("/")
+    if run_dir.endswith("/files"):
+        run_dir = run_dir[: -len("/files")]
+    prefix = ral_root + "/"
+    if not run_dir.startswith(prefix):
+        continue
+    try:
+        checkpoints[run_dir[len(prefix):]] = {
+            "bytes": int(size),
+            "mtime": datetime.fromtimestamp(float(mtime), timezone.utc).isoformat(),
+        }
+    except ValueError:
+        continue
+
+document = {
+    "schema": 1,
+    "pulled_at": datetime.now(timezone.utc).isoformat(),
+    "checkpoints": checkpoints,
+    "runs": {},
+}
+if gather_error:
+    document["gather_error"] = gather_error
+
+manifest.parent.mkdir(parents=True, exist_ok=True)
+tmp = manifest.with_name(manifest.name + ".tmp")
+tmp.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n")
+os.replace(tmp, manifest)  # atomic: a reader sees either the old file or the new one
+
+print(f"    .cortex/pull.json: {len(checkpoints)} checkpoint(s)")
+PYEOF
+
+    rm -f "$listing"
+}
+
+pull() {
+    local dryrun="${1:-}"
+
+    pull_logs "$dryrun"
+    echo ""
+    echo "<== [pull] run outputs and results  <-  ${REMOTE}"
+    echo "    (search_internal/ excluded — sampler state stays on RAL)"
+
+    local data_indices=()
+    local i
+    for i in "${!PULL_DIRS[@]}"; do
+        local is_log=0
+        local j
+        for j in "${LOG_INDICES[@]}"; do
+            [[ "$i" == "$j" ]] && is_log=1
+        done
+        [[ "$is_log" -eq 0 ]] && data_indices+=("$i")
+    done
+
+    pull_indices "$dryrun" "${data_indices[@]}"
+
+    # Record the RAL checkpoint state this pull deliberately could not bring back.
+    if [[ -z "$dryrun" ]]; then
+        write_pull_manifest
+    fi
+}
+
+status() {
+    echo "========================================"
+    echo " DRY RUN — nothing will be transferred "
+    echo "========================================"
+    echo ""
+    pull "--dry-run"
+}
+
+push() {
+    cat <<EOF
+==> [push] not available for this repo — and that is deliberate.
+
+The RAL copy of autofit_profiling at ${HPC_BASE}/${PROJECT_NAME} is a **git checkout**,
+not an rsync target. It carries local uncommitted state, and rsyncing a laptop tree over
+it would silently clobber that and make the RAL working tree disagree with its own HEAD.
+
+To get code onto RAL, use git on the login node:
+
+    ssh euclid_jump
+    cd ${HPC_BASE}/${PROJECT_NAME}
+    git status          # look before you pull — the checkout is often dirty
+    git pull
+
+The PyAuto* libraries are a separate story again: they are resolved from the shared
+checkouts on PYTHONPATH and updated with \`HPCPullPyAuto\`, never pip-installed and never
+rsynced. See hpc/README.md.
+EOF
+    return 1
+}
+
+# ---------------------------------------------------------------------------
+# Jobs
+# ---------------------------------------------------------------------------
+
+submit() {
+    local script_name="${1:-}"
+    local batch_type="cpu"
+
+    if [[ "$script_name" == "--cpu" ]]; then
+        batch_type="cpu"; script_name="${2:-}"
+    elif [[ "$script_name" == "--gpu" ]]; then
+        batch_type="gpu"; script_name="${2:-}"
+    fi
+
+    if [[ -z "$script_name" ]]; then
+        echo "Usage: $(basename "$0") submit [--gpu|--cpu] <submit_script_name>"
+        echo "  e.g. hpc/sync submit --cpu submit_<name>"
+        exit 1
+    fi
+
+    local remote_dir="${REMOTE_ROOT}/hpc/batch_${batch_type}"
+
+    # sbatch is run from hpc/batch_<type>/ on purpose: the submit scripts' `#SBATCH -o`
+    # / `-e` paths are relative (output/…, error/…), so submitting from the project root
+    # makes SLURM fail to open the error file and kill the batch step at t=1s with
+    # ExitCode 0:53 and no .err to read. Jobs 342008-342010 died exactly this way.
+    echo "==> [submit] sbatch ${script_name}  (from hpc/batch_${batch_type}/)  @  ${HPC_HOST}"
+    echo ""
+    ssh "${HPC_HOST}" "cd '${remote_dir}' && sbatch '${script_name}'"
+}
+
+jobs_cmd() {
+    echo "==> [jobs] SLURM queue  @  ${HPC_HOST}"
+    echo ""
+    ssh "${HPC_HOST}" "squeue --me 2>/dev/null || squeue -u \"\$(id -un)\""
+}
+
+sacct_cmd() {
+    echo "==> [sacct] SLURM accounting (last 3 days)  @  ${HPC_HOST}"
+    echo ""
+    ssh "${HPC_HOST}" "sacct --starttime=now-3days \
+        --format=JobID%20,JobName%40,State,ExitCode,Elapsed,Start"
+}
+
+cancel() {
+    local job_id="${1:-}"
+    if [[ -z "$job_id" ]]; then
+        echo "Usage: $(basename "$0") cancel <job_id>"
+        exit 1
+    fi
+    echo "==> [cancel] scancel ${job_id}  @  ${HPC_HOST}"
+    ssh "${HPC_HOST}" "scancel '${job_id}'"
+}
+
+# ---------------------------------------------------------------------------
+# Inspect
+# ---------------------------------------------------------------------------
+
+tail_logs() {
+    local batch_type="${1:-cpu}"
+    if [[ "$batch_type" != "gpu" && "$batch_type" != "cpu" ]]; then
+        echo "ERROR: batch type must be 'gpu' or 'cpu', got: ${batch_type}"
+        exit 1
+    fi
+    local remote_dir="${REMOTE_ROOT}/hpc/batch_${batch_type}/output"
+    echo "==> [tail] newest log in hpc/batch_${batch_type}/output/  @  ${HPC_HOST}"
+    echo "    Ctrl+C to stop."
+    echo ""
+    ssh -t "${HPC_HOST}" "cd '${remote_dir}' && f=\$(ls -t *.out 2>/dev/null | head -1) && \
+        echo \"--- \$f ---\" && tail -f \"\$f\""
+}
+
+du_cmd() {
+    echo "==> [du] remote disk usage  @  ${HPC_HOST}"
+    echo ""
+    # -d1, never a bare recursive du: RAL's NFS makes a full walk of output/ very slow.
+    ssh "${HPC_HOST}" "cd '${REMOTE_ROOT}' && \
+        du -h -d1 output 2>/dev/null; \
+        du -sh results hpc/batch_gpu/output hpc/batch_gpu/error \
+               hpc/batch_cpu/output hpc/batch_cpu/error 2>/dev/null"
+}
+
+check_cmd() {
+    local all_ok=1
+    echo "==> [check] connection and paths"
+    echo ""
+
+    printf "    SSH to %s ... " "${HPC_HOST}"
+    if ssh -o BatchMode=yes -o ConnectTimeout=20 "${HPC_HOST}" true 2>/dev/null; then
+        echo "OK"
+    else
+        echo "FAILED"; all_ok=0
+        echo ""
+        echo "    Cannot reach the HPC — remaining checks skipped."
+        return 1
+    fi
+
+    printf "    Remote project %s ... " "${REMOTE_ROOT}"
+    if ssh "${HPC_HOST}" "test -d '${REMOTE_ROOT}'" 2>/dev/null; then
+        echo "OK"
+    else
+        echo "NOT FOUND"; all_ok=0
+    fi
+
+    local i
+    for i in "${!PULL_DIRS[@]}"; do
+        printf "    Remote %s ... " "${PULL_DIRS[$i]}"
+        if ssh "${HPC_HOST}" "test -d '${REMOTE_ROOT}/${PULL_DIRS[$i]}'" 2>/dev/null; then
+            echo "OK"
+        else
+            echo "absent (will be skipped by pull)"
+        fi
+    done
+
+    printf "    sbatch on PATH ... "
+    if ssh "${HPC_HOST}" "command -v sbatch &>/dev/null" 2>/dev/null; then
+        echo "OK"
+    else
+        echo "NOT FOUND"; all_ok=0
+    fi
+
+    printf "    Local pull root %s ... " "${LOCAL_PULL_ROOT}"
+    if [[ -d "$LOCAL_PULL_ROOT" ]]; then
+        echo "OK"
+    else
+        echo "MISSING — create it, or set LOCAL_PULL_ROOT in hpc/sync.conf"; all_ok=0
+    fi
+
+    echo ""
+    if [[ "$all_ok" -eq 1 ]]; then
+        echo "    All checks passed."
+    else
+        echo "    One or more checks FAILED — review above."
+        return 1
+    fi
+}
+
+print_help() {
+    echo "Usage: $(basename "$0") <command> [options]"
+    echo ""
+    echo "Transfer:"
+    echo "  pull                         Download SLURM logs, then run outputs and results"
+    echo "  logs                         Download SLURM logs only (fast, use mid-run)"
+    echo "  status                       Dry run — show what a pull would transfer"
+    echo ""
+    echo "Jobs:"
+    echo "  submit [--gpu|--cpu] <name>  sbatch a submit script (from hpc/batch_<type>/)"
+    echo "  jobs                         Show queued/running jobs"
+    echo "  sacct                        Show job history and exit codes"
+    echo "  cancel <job_id>              Cancel a job"
+    echo ""
+    echo "Inspect:"
+    echo "  tail [gpu|cpu]               Stream the newest live SLURM log (default: cpu)"
+    echo "  du                           Show remote disk usage"
+    echo "  check                        Verify SSH connection and paths"
+    echo ""
+    echo "  help                         Show this message"
+    echo ""
+    echo "There is no 'push' — the RAL checkout is updated with git. Run 'sync push' to"
+    echo "see the actual procedure."
+}
+
+# ---------------------------------------------------------------------------
+cmd="${1:-help}"
+
+echo ""
+echo "Project   : ${PROJECT_NAME}"
+echo "Remote    : ${REMOTE}"
+echo "Pull root : ${LOCAL_PULL_ROOT}"
+echo ""
+
+case "$cmd" in
+    pull)     pull ;;
+    logs)     pull_logs ;;
+    status)   status ;;
+    push)     push ;;
+    submit)   submit "${2:-}" "${3:-}" ;;
+    jobs)     jobs_cmd ;;
+    sacct)    sacct_cmd ;;
+    cancel)   cancel "${2:-}" ;;
+    tail)     tail_logs "${2:-cpu}" ;;
+    du)       du_cmd ;;
+    check)    check_cmd ;;
+    help)     print_help; exit 0 ;;
+    *)        print_help; exit 1 ;;
+esac
+
+echo ""
+echo "Done."

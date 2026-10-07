@@ -1,0 +1,23 @@
+# hpc/sync configuration — copy to hpc/sync.conf and edit. sync.conf is gitignored.
+
+# SSH alias for the RAL login node (defined in ~/.ssh/config; ProxyJumps via jump_finan).
+HPC_HOST=euclid_jump
+
+# Parent directory of the project on RAL.
+HPC_BASE=/mnt/ral/jnightin
+
+# Directory name of this project under HPC_BASE. Set explicitly if you run `hpc/sync`
+# from a git worktree, whose directory name is the branch rather than the project.
+PROJECT_NAME=autofit_profiling
+
+# Where `hpc/sync pull` writes run outputs, results and batch logs. Defaults to THE REPO
+# ROOT: `output/` is gitignored so a pull can land in it, and a pulled result row is read
+# in place and committed by a human from this checkout.
+#
+#   RAL output/                 ->  $LOCAL_PULL_ROOT/output/
+#   RAL results/                ->  $LOCAL_PULL_ROOT/results/
+#   RAL hpc/batch_cpu/output/   ->  $LOCAL_PULL_ROOT/logs/cpu/output/
+#   RAL hpc/batch_cpu/error/    ->  $LOCAL_PULL_ROOT/logs/cpu/error/
+#
+# Uncomment to send pulls somewhere else (an external disk, a scratch mirror):
+# LOCAL_PULL_ROOT=/path/to/autofit_profiling

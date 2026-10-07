@@ -1,0 +1,45 @@
+__pycache__/
+*.pyc
+root.log
+*.log
+.codex/
+
+# PyAutoFit run output — bulk run state, kept on disk and pulled from RAL, never committed.
+# The committed artifact is the small result row under results/.
+/output/
+
+# Cortex pull state written by `hpc/sync pull` — a manifest of RAL-side checkpoints, not
+# science.
+.cortex/
+
+# Profiler artifacts
+*.prof
+*.pstats
+
+# JAX / numba / matplotlib caches (when not redirected via env vars)
+.jax_cache/
+__jax_cache__/
+.numba_cache/
+.mplconfig/
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+
+# hpc/sync's local HPC configuration (host, base path, pull destination). Machine-
+# specific; hpc/sync.conf.example is the tracked template.
+hpc/sync.conf
+
+# SLURM stdout/stderr, written beside the submit scripts because that is where SLURM
+# puts them. Pulled to the laptop by `hpc/sync logs`; the directories themselves are
+# tracked via .gitkeep so a fresh clone can submit without mkdir.
+hpc/batch_cpu/output/*
+hpc/batch_cpu/error/*
+!hpc/batch_cpu/output/.gitkeep
+!hpc/batch_cpu/error/.gitkeep
+# `hpc/sync pull` lands SLURM logs here (logs/{gpu,cpu}/{output,error}); never tracked.
+logs/
+
+# Local virtualenvs
+.venv/
+venv/

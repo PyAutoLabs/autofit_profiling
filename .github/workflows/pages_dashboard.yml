@@ -1,0 +1,79 @@
+name: Pages Dashboard
+
+# Publishes the producer page (`dashboard/index.html`), the PyAutoPulse read contract
+# (`dashboard/catalogue.json`, profiling-summary@2) and the project badge feed
+# (`dashboard/state.json`) at https://pyautolabs.github.io/autofit_profiling/. The files
+# are rendered and committed by `scripts/misc/tooling/build_catalogue.py`; this workflow
+# only validates and publishes them, then tells PyAutoPulse to re-read the summary.
+# Mirrors autolens_profiling's pages_dashboard.yml (project-feed identity:
+# PyAutoMind complete/2026/10/pulse-refresh-project-identity.md).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "dashboard/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: PyAutoLabs/PyAutoBrain
+          path: _brain
+      - uses: actions/checkout@v4
+        with:
+          repository: PyAutoLabs/PyAutoPulse
+          path: _pulse
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate the catalogue with the Pulse reader and check it is current
+        run: |
+          pip install pyyaml
+          python scripts/misc/tooling/build_catalogue.py --check --validate-with _pulse
+      # enablement: true creates the Pages site on first run.
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Stage the dashboard as the site
+        run: |
+          mkdir -p _site
+          cp dashboard/index.html dashboard/catalogue.json dashboard/state.json _site/
+      - name: Validate the project badge feed against the Brain contract
+        run: python3 _brain/board/_state.py _site/state.json
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Tell the PyAutoPulse dashboard to refresh (repository_dispatch pulse-refresh)
+        env:
+          GH_TOKEN: ${{ secrets.PAT_PYAUTOLABS }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::PAT_PYAUTOLABS is not available to this repo — skipping the pulse-refresh dispatch to PyAutoLabs/PyAutoPulse."
+            exit 0
+          fi
+          sha=$(git rev-parse HEAD)
+          gh api repos/PyAutoLabs/PyAutoPulse/dispatches \
+            -f event_type=pulse-refresh \
+            -f "client_payload[repo]=${{ github.repository }}" \
+            -f "client_payload[sha]=${sha}" \
+            -f "client_payload[summary]=dashboard/catalogue.json"
+          echo "Dispatched pulse-refresh to PyAutoLabs/PyAutoPulse (${{ github.repository }}@${sha})."

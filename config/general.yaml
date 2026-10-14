@@ -1,0 +1,4 @@
+# PyAutoConf overrides for runs launched from this repo. Output keeps the library
+# defaults on purpose: a breakdown cell measures what a user's search.fit pays.
+version:
+  workspace_version_check: false    # this repo tracks PyAutoFit main, not a release tag; the mismatch warning is expected noise.

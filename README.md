@@ -9,10 +9,12 @@ It is the sibling of [autofit_inference](https://github.com/PyAutoLabs/autofit_i
 (PyAutoFit search benchmarking) and the PyAutoFit counterpart of
 [autolens_profiling](https://github.com/PyAutoLabs/autolens_profiling).
 
-**Status: skeleton — no results yet.** The repo was born 2026-10-07 as phase B1 of the
-[search-extensibility epic](https://github.com/PyAutoLabs/PyAutoMind/blob/main/draft/research/autofit/search_extensibility_epic.md). The breakdown exporter and first results arrive in
-B4a, when the repo starts reporting to
-[PyAutoPulse](https://github.com/PyAutoLabs/PyAutoPulse); the EP baseline port follows in
-B4b.
+**Status:** the first cell — where the time in one Nautilus `search.fit` goes on a fast
+1-D Gaussian likelihood — landed in B4a of the
+[search-extensibility epic](https://github.com/PyAutoLabs/PyAutoMind/blob/main/draft/research/autofit/search_extensibility_epic.md),
+with its ranked table in [`wiki/campaigns/search_fit_bottlenecks.md`](wiki/campaigns/search_fit_bottlenecks.md).
+The repo reports to [PyAutoPulse](https://github.com/PyAutoLabs/PyAutoPulse) as instance
+`fit` (`dashboard/catalogue.json`, `profiling-summary@2`); its own board is published to
+GitHub Pages from `dashboard/`. The EP baseline port follows in B4b.
 
 Agents and contributors: start with [`AGENTS.md`](AGENTS.md).

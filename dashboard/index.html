@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>autofit_profiling</title>
+<style>
+:root{--bg:#fff;--fg:#1b1f24;--muted:#57606a;--line:#d0d7de;--bar:#3b6fb6}
+@media (prefers-color-scheme: dark){:root{--bg:#0d1117;--fg:#e6edf3;--muted:#8b949e;--line:#30363d;--bar:#6ea0e6}}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif;margin:0 auto;max-width:960px;padding:16px}
+table{border-collapse:collapse;width:100%;margin:8px 0 24px}th,td{border-bottom:1px solid var(--line);padding:4px 8px;text-align:left}
+td.n{text-align:right;font-variant-numeric:tabular-nums}.bar{background:var(--bar);height:10px}
+p.m,li{color:var(--muted)}a{color:var(--bar)}
+</style></head><body>
+<h1>autofit_profiling</h1>
+<p>Where the time in one PyAutoFit <code>search.fit</code> goes. Producer page for the <a href="https://pyautolabs.github.io/PyAutoPulse/">PyAutoPulse</a> instance <code>fit</code> (<a href="catalogue.json">catalogue.json</a>, <code>profiling-summary@2</code>). Measurements are declared, not judged.</p>
+<h2>gaussian_x1/nautilus/search_fit</h2>
+<p class=m>af.Nautilus search.fit (PyAutoFit, checkpointing and output on) · wall 28.41 s (median of 3) · 7501 likelihood calls · cpu/numpy · PyAutoFit 2026.10.12.1 · measured 2026-10-14T09:19:45Z · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/gaussian_x1/nautilus/breakdown.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>11.87</td><td class=n>43.4 %</td><td style="width:40%"><div class=bar style="width:43.4%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>7.09</td><td class=n>24.5 %</td><td style="width:40%"><div class=bar style="width:24.5%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>5.60</td><td class=n>20.4 %</td><td style="width:40%"><div class=bar style="width:20.4%"></div></td></tr>
+<tr><td>visualisation</td><td class=n>1.16</td><td class=n>4.1 %</td><td style="width:40%"><div class=bar style="width:4.1%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.67</td><td class=n>2.3 %</td><td style="width:40%"><div class=bar style="width:2.3%"></div></td></tr>
+<tr><td>samples_output</td><td class=n>0.49</td><td class=n>1.7 %</td><td style="width:40%"><div class=bar style="width:1.7%"></div></td></tr>
+<tr><td>likelihood</td><td class=n>0.32</td><td class=n>1.1 %</td><td style="width:40%"><div class=bar style="width:1.1%"></div></td></tr>
+<tr><td>other</td><td class=n>0.29</td><td class=n>1.0 %</td><td style="width:40%"><div class=bar style="width:1.0%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.22</td><td class=n>0.8 %</td><td style="width:40%"><div class=bar style="width:0.8%"></div></td></tr>
+</table>
+<p class=m>Findings-page shares (sampler_internal_shares, information only): nn_training 51.7 % (Δ -4.7 pp), bound_geometry 25.2 % (Δ -3.4 pp), likelihood 14.3 % (Δ -13.1 pp) — outside ±10 pp.</p>
+<h2>gaussian_x1/nautilus/bare_sampler</h2>
+<p class=m>bare nautilus.Sampler (the findings page&#x27;s measurement; no PyAutoFit, no checkpoint) · wall 22.53 s (median of 3) · 16400 likelihood calls · cpu/numpy · PyAutoFit 2026.10.12.1 · measured 2026-10-14T09:19:45Z · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/gaussian_x1/nautilus/breakdown_bare_sampler.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>12.11</td><td class=n>53.8 %</td><td style="width:40%"><div class=bar style="width:53.8%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>5.80</td><td class=n>25.3 %</td><td style="width:40%"><div class=bar style="width:25.3%"></div></td></tr>
+<tr><td>likelihood</td><td class=n>2.66</td><td class=n>11.6 %</td><td style="width:40%"><div class=bar style="width:11.6%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>1.31</td><td class=n>5.7 %</td><td style="width:40%"><div class=bar style="width:5.7%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.70</td><td class=n>3.1 %</td><td style="width:40%"><div class=bar style="width:3.1%"></div></td></tr>
+<tr><td>other</td><td class=n>0.00</td><td class=n>0.0 %</td><td style="width:40%"><div class=bar style="width:0.0%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>0.00</td><td class=n>0.0 %</td><td style="width:40%"><div class=bar style="width:0.0%"></div></td></tr>
+</table>
+<p class=m>Findings-page shares (shares_of_wall, reproduction gate): nn_training 51.7 % (Δ +2.1 pp), bound_geometry 25.2 % (Δ +0.1 pp), likelihood 14.3 % (Δ -2.7 pp) — within ±10 pp.</p>
+<h2>Limitations</h2><ul>
+<li>Laptop CPU only (single host, WSL2); wall times vary up to ±40 % between sessions, so shares are the comparable quantity, not seconds.</li>
+<li>Component times are exclusive monkey-patched wall-clock intervals; &#x27;other&#x27; is wall minus the instrumented total, not a measured phase.</li>
+<li>Every record is unreviewed: the producer declares measurements, the Brain&#x27;s profiling conductor judges them; nothing here is a verdict.</li>
+<li>No temporal comparisons yet: one baseline per setup, no drift policy.</li>
+</ul>
+<p class=m>Rendered from 2 result rows by <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/scripts/misc/tooling/build_catalogue.py">build_catalogue.py</a>; evidence updated 2026-10-14T09:19:45Z.</p>
+</body></html>

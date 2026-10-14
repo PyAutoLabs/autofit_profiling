@@ -12,8 +12,10 @@ It is a collection of standalone scripts, **not** an installable package — the
 `pyproject.toml`. These are the canonical, agent-agnostic instructions; `README.md` is the
 human-facing overview.
 
-**Status:** skeleton born 2026-10-07 (PyAutoMind#492), phase B1 of the
-`search-extensibility` epic. There is no harness, no exporter and no result yet.
+**Status:** born 2026-10-07 (PyAutoMind#492, phase B1 of the `search-extensibility`
+epic). B4a (2026-10-14) added the first cell — the Nautilus `search.fit` breakdown on
+gaussian_x1 — the `profiling-summary@2` exporter and the Pages board; the repo reports to
+PyAutoPulse as instance `fit`. The EP / graphical baseline port is B4b.
 
 ## Where this repo is going
 
@@ -26,7 +28,7 @@ The work arrives in later phases of the `search-extensibility` epic, whose ledge
   `fit` (`profiling-summary@2`). This adopts Pulse's task `autofit_profiling_bootstrap`.
 - **B4b** — the EP / graphical-model baseline port.
 
-Until then, do not add scripts, results or exporters outside the phase that owns them.
+Do not add scripts, results or exporters outside the phase that owns them.
 PyAutoPulse validates the published summary contract; the Brain's profiling conductor
 judges it. Nothing here issues a verdict.
 
@@ -35,10 +37,33 @@ judges it. Nothing here issues a verdict.
 ```
 ruff.toml        lint config AND the root sentinel (leaf scripts walk up to it)
 activate.sh      RAL shared venv + PYTHONPATH (PyAutoNerves, PyAutoFit only)
+config/          PyAutoConf overrides (library output defaults kept on purpose)
+scripts/<dataset>/<search>/<cell>.py   measurement cells, e.g. gaussian_x1/nautilus/search_fit_breakdown.py
+scripts/misc/profiling/                stdlib helpers shared by cells (exclusive component timer)
+scripts/misc/tooling/build_catalogue.py  results/ -> dashboard/{catalogue.json,index.html,state.json}
+scripts/misc/test/                     stdlib-only tests (no PyAuto install)
+results/         committed result rows (schema autofit-profiling-breakdown), one file per cell variant
+dashboard/       generated: catalogue.json (profiling-summary@2), index.html, state.json
+wiki/campaigns/  findings pages; search_fit_bottlenecks.md is epic 1's ranked table
 hpc/             hpc/sync (laptop-side RAL driver) + the batch_cpu submit template
 ```
 
-`scripts/`, `results/` and the summary exporter arrive in B4a.
+## Producing a result and publishing it
+
+1. `source activate.sh`, run a cell (e.g. `python scripts/gaussian_x1/nautilus/search_fit_breakdown.py`);
+   it writes its row under `results/`. Laptop CPU cells need no RAL.
+2. `python scripts/misc/tooling/build_catalogue.py --validate-with ../PyAutoPulse` renders
+   `dashboard/` and validates the catalogue with the Pulse reader; commit rows and
+   `dashboard/` together. The renderer is deterministic (its stamp is the newest
+   evidence time), so `--check` is the lint gate.
+3. On merge, `.github/workflows/pages_dashboard.yml` publishes `dashboard/` to Pages
+   (`https://pyautolabs.github.io/autofit_profiling/`) and dispatches `pulse-refresh` to
+   PyAutoPulse (payload repo / sha / `dashboard/catalogue.json`; needs the org secret
+   `PAT_PYAUTOLABS`, warns and skips without it). `dashboard/state.json` is this
+   project's own badge feed; the Brain cockpit reads the PyAutoPulse organ feed.
+
+Every catalogue record is declared `unreviewed`: the producer measures, the Brain's
+profiling conductor judges.
 
 ## RAL
 
@@ -53,8 +78,9 @@ detail in [`hpc/README.md`](hpc/README.md).
 ## Testing
 
 The PR gate is `.github/workflows/lint.yml` on Python 3.12: `ruff check .`,
-`ruff format --check .` and a `lychee` link check over `README.md` and `AGENTS.md`. It
-installs no PyAuto library and runs no script.
+`ruff format --check .`, `pytest -q scripts/misc/test`, `build_catalogue.py --check
+--validate-with _pulse` (PyAutoPulse checked out beside) and a `lychee` link check over
+`README.md` and `AGENTS.md`. It installs no PyAuto library and runs no measurement cell.
 
 ## Related Repos
 

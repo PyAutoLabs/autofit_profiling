@@ -1,9 +1,9 @@
 # lint.yml — PR / push-to-main gate.
 #
-# Cheap, fast, CPU-only. Runs on every PR and on push to main. It lints only what exists
-# in the skeleton: ruff (check + format) and a lychee link check over README.md and
-# AGENTS.md. No PyAuto library is installed and no script runs; the pytest and smoke legs
-# arrive with the harness in a later phase of the search-extensibility epic.
+# Cheap, fast, CPU-only. Runs on every PR and on push to main: ruff (check + format), the
+# stdlib-only tests under scripts/misc/test, the "committed catalogue is current and
+# validates with the PyAutoPulse reader" check, and a lychee link check over README.md and
+# AGENTS.md. No PyAuto library is installed and no measurement cell runs.
 
 name: lint
 
@@ -30,7 +30,7 @@ jobs:
 
       - name: Install lint tools
         run: |
-          pip install ruff
+          pip install ruff pytest pyyaml
           # lychee is a Rust binary; fetch the prebuilt release. The tarball
           # nests everything under lychee-x86_64-unknown-linux-gnu/, so strip
           # that leading directory and extract just the binary.
@@ -42,6 +42,19 @@ jobs:
 
       - name: ruff format --check
         run: ruff format --check .
+
+      # Checked out after ruff so the Pulse tree is never linted as this repo's code.
+      - name: Checkout PyAutoPulse (the profiling-summary@2 reader)
+        uses: actions/checkout@v4
+        with:
+          repository: PyAutoLabs/PyAutoPulse
+          path: _pulse
+
+      - name: pytest (stdlib-only tooling tests)
+        run: python -m pytest -q scripts/misc/test
+
+      - name: catalogue up to date and valid profiling-summary@2
+        run: python scripts/misc/tooling/build_catalogue.py --check --validate-with _pulse
 
       - name: lychee — markdown link-rot
         run: |

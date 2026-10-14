@@ -1,0 +1,173 @@
+{
+  "schema": "autofit-profiling-breakdown",
+  "version": 1,
+  "cell": "gaussian_x1/nautilus/search_fit_breakdown",
+  "script": "scripts/gaussian_x1/nautilus/search_fit_breakdown.py",
+  "axis": "breakdown",
+  "unit": "s",
+  "setup": {
+    "id": "gaussian_x1/nautilus/bare_sampler",
+    "label": "bare nautilus.Sampler (the findings page's measurement; no PyAutoFit, no checkpoint)",
+    "dataset": "gaussian_x1",
+    "dataset_description": "1-D Gaussian, 100 pixels, noise 0.01, numpy seed 1 (findings page scenario 1)",
+    "model": "Gaussian (centre, normalization, sigma), 3 free parameters, uniform priors",
+    "search": "Nautilus",
+    "search_settings": {
+      "n_live": 200,
+      "n_networks": 4,
+      "seed": 1,
+      "number_of_cores": 1
+    },
+    "likelihood": "numpy, no JAX",
+    "config": "config/general.yaml (library output defaults; version check off)"
+  },
+  "method": {
+    "id": "bare-sampler-exclusive-component-wall",
+    "statistic": "median",
+    "repetitions": 3,
+    "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+    "synchronization": "none (numpy, single process)",
+    "cache_state": "warm process: imports and first-touch costs fall in the first repeat",
+    "timer": "time.perf_counter, exclusive per component (scripts/misc/profiling/exclusive_timer.py)"
+  },
+  "variant": "bare_sampler",
+  "wall_s": 22.533835900000668,
+  "components_s": {
+    "nn_training": 12.11267449999832,
+    "bound_geometry": 5.800184900003842,
+    "proposal_sampling": 1.3069437999929505,
+    "likelihood": 2.658846300001642,
+    "checkpoint_io": 0.0,
+    "sampler_bookkeeping": 0.6964637999963088,
+    "other": 3.700000888784416e-06
+  },
+  "shares_of_wall": {
+    "nn_training": 0.537532737601855,
+    "bound_geometry": 0.2529185867842278,
+    "proposal_sampling": 0.05665423573593358,
+    "likelihood": 0.11632621736069092,
+    "checkpoint_io": 0.0,
+    "sampler_bookkeeping": 0.03144706169292557,
+    "other": 1.6419756073506802e-07
+  },
+  "sampler_internal_shares": {
+    "nn_training": 0.537532737601855,
+    "bound_geometry": 0.2529185867842278,
+    "proposal_sampling": 0.05665423573593358,
+    "likelihood": 0.11632621736069092,
+    "checkpoint_io": 0.0,
+    "sampler_bookkeeping": 0.03144706169292557
+  },
+  "likelihood_function_calls": 16400,
+  "deterministic_calls": true,
+  "reference": {
+    "source": "autofit_workspace_developer/searches_minimal/nautilus_bottleneck_findings.md \u00a71 (nautilus 1.0.5, n_live=200, seed=1, bare Sampler, laptop CPU)",
+    "shares": {
+      "nn_training": 0.517,
+      "bound_geometry": 0.252,
+      "likelihood": 0.143
+    },
+    "compared": "shares_of_wall",
+    "tolerance_abs": 0.1,
+    "deltas": {
+      "nn_training": 0.020532737601855033,
+      "bound_geometry": 0.0009185867842277928,
+      "likelihood": -0.02667378263930907
+    },
+    "within_tolerance": true,
+    "gates_reproduction": true
+  },
+  "repeats": [
+    {
+      "wall_s": 23.068774700000176,
+      "components_s": {
+        "nn_training": 12.542782399998941,
+        "bound_geometry": 5.800184900003842,
+        "proposal_sampling": 1.3069437999929505,
+        "likelihood": 2.683503299997028,
+        "checkpoint_io": 0.0,
+        "sampler_bookkeeping": 0.735355900007562,
+        "other": 4.399999852466863e-06
+      },
+      "sampler_run_s": 23.068774700000176,
+      "likelihood_function_calls": 16400,
+      "component_calls": {
+        "bound_geometry": 26,
+        "likelihood": 164,
+        "nn_training": 26,
+        "proposal_sampling": 164,
+        "sampler_bookkeeping": 1
+      },
+      "max_log_likelihood": -38.1725465805512,
+      "log_evidence": -57.45518380555804
+    },
+    {
+      "wall_s": 22.533835900000668,
+      "components_s": {
+        "nn_training": 12.11267449999832,
+        "bound_geometry": 5.8514490000025035,
+        "proposal_sampling": 1.2527613999991445,
+        "likelihood": 2.620483500003502,
+        "checkpoint_io": 0.0,
+        "sampler_bookkeeping": 0.6964637999963088,
+        "other": 3.700000888784416e-06
+      },
+      "sampler_run_s": 22.533835900000668,
+      "likelihood_function_calls": 16400,
+      "component_calls": {
+        "bound_geometry": 26,
+        "likelihood": 164,
+        "nn_training": 26,
+        "proposal_sampling": 164,
+        "sampler_bookkeeping": 1
+      },
+      "max_log_likelihood": -38.1725465805512,
+      "log_evidence": -57.45518380555804
+    },
+    {
+      "wall_s": 21.812791500000458,
+      "components_s": {
+        "nn_training": 11.624765800002024,
+        "bound_geometry": 5.516860399999132,
+        "proposal_sampling": 1.3263674000018,
+        "likelihood": 2.658846300001642,
+        "checkpoint_io": 0.0,
+        "sampler_bookkeeping": 0.6859481999954369,
+        "other": 3.4000004234258085e-06
+      },
+      "sampler_run_s": 21.812791500000458,
+      "likelihood_function_calls": 16400,
+      "component_calls": {
+        "bound_geometry": 26,
+        "likelihood": 164,
+        "nn_training": 26,
+        "proposal_sampling": 164,
+        "sampler_bookkeeping": 1
+      },
+      "max_log_likelihood": -38.1725465805512,
+      "log_evidence": -57.45518380555804
+    }
+  ],
+  "identity": {
+    "device": "cpu",
+    "backend": "numpy",
+    "precision": "float64",
+    "library_version": "2026.10.12.1",
+    "software": {
+      "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+      "nautilus-sampler": "1.0.5",
+      "scikit-learn": "1.5.1",
+      "numpy": "2.2.6",
+      "scipy": "1.17.1",
+      "python": "3.12.10",
+      "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d"
+    }
+  },
+  "provenance": {
+    "host": "DESKTOP-H143S82",
+    "measured_at": "2026-10-14T09:19:45Z",
+    "platform": "Linux-5.10.16.3-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "cpu_count": 8,
+    "pyautofit_checkout_dirty": false
+  }
+}

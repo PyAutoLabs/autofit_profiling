@@ -1,0 +1,1447 @@
+{
+  "schema": "profiling-summary",
+  "version": 2,
+  "project": "autofit_profiling",
+  "scope": "search-fit-breakdown",
+  "generated_at": "2026-10-14T09:19:45Z",
+  "evidence_updated_at": "2026-10-14T09:19:45Z",
+  "valid_until": null,
+  "producer_revision": null,
+  "comparison_policy": {
+    "id": "no-temporal-comparisons"
+  },
+  "coverage": {
+    "expected": {
+      "cells": 18
+    },
+    "observed": {
+      "setups": 2,
+      "records": 17,
+      "selected": 17
+    },
+    "excluded": []
+  },
+  "setups": [
+    {
+      "id": "gaussian_x1/nautilus/search_fit",
+      "label": "af.Nautilus search.fit (PyAutoFit, checkpointing and output on)",
+      "dataset": "gaussian_x1",
+      "model": "gaussian",
+      "instrument": null,
+      "unknowns": {
+        "instrument": "toy 1-D dataset; no instrument"
+      },
+      "configuration_id": "gaussian_x1/nautilus/search_fit@1",
+      "configuration": {
+        "data_pixels": {
+          "value": 100,
+          "unit": "count"
+        },
+        "free_parameters": {
+          "value": 3,
+          "unit": "count"
+        },
+        "likelihood": {
+          "value": "numpy, no JAX",
+          "unit": "name"
+        },
+        "n_live": {
+          "value": 200,
+          "unit": "count"
+        },
+        "n_networks": {
+          "value": 4,
+          "unit": "count"
+        },
+        "number_of_cores": {
+          "value": 1,
+          "unit": "count"
+        },
+        "output_config": {
+          "value": "config/general.yaml (library output defaults; version check off)",
+          "unit": "name"
+        },
+        "search": {
+          "value": "Nautilus",
+          "unit": "name"
+        },
+        "seed": {
+          "value": 1,
+          "unit": "dimensionless"
+        },
+        "variant": {
+          "value": "search_fit",
+          "unit": "name"
+        }
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/bare_sampler",
+      "label": "bare nautilus.Sampler (the findings page's measurement; no PyAutoFit, no checkpoint)",
+      "dataset": "gaussian_x1",
+      "model": "gaussian",
+      "instrument": null,
+      "unknowns": {
+        "instrument": "toy 1-D dataset; no instrument"
+      },
+      "configuration_id": "gaussian_x1/nautilus/bare_sampler@1",
+      "configuration": {
+        "data_pixels": {
+          "value": 100,
+          "unit": "count"
+        },
+        "free_parameters": {
+          "value": 3,
+          "unit": "count"
+        },
+        "likelihood": {
+          "value": "numpy, no JAX",
+          "unit": "name"
+        },
+        "n_live": {
+          "value": 200,
+          "unit": "count"
+        },
+        "n_networks": {
+          "value": 4,
+          "unit": "count"
+        },
+        "number_of_cores": {
+          "value": 1,
+          "unit": "count"
+        },
+        "output_config": {
+          "value": "config/general.yaml (library output defaults; version check off)",
+          "unit": "name"
+        },
+        "search": {
+          "value": "Nautilus",
+          "unit": "name"
+        },
+        "seed": {
+          "value": 1,
+          "unit": "dimensionless"
+        },
+        "variant": {
+          "value": "bare_sampler",
+          "unit": "name"
+        }
+      }
+    }
+  ],
+  "records": [
+    {
+      "id": "gaussian_x1/nautilus/search_fit/runtime/wall",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "run_id": "gaussian_x1/nautilus/search_fit@2026-10-14T09:19:45Z",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "measurement": {
+        "wall": 28.41256609999982
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "search-fit-exclusive-component-wall/wall",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown.json",
+        "fragment": "/wall_s"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/search_fit/breakdown/nn_training",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "run_id": "gaussian_x1/nautilus/search_fit@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "nn_training",
+      "unit": "s",
+      "measurement": {
+        "nn_training": 11.872448799996164
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "search-fit-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown.json",
+        "fragment": "/components_s/nn_training"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/search_fit/breakdown/bound_geometry",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "run_id": "gaussian_x1/nautilus/search_fit@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "bound_geometry",
+      "unit": "s",
+      "measurement": {
+        "bound_geometry": 5.604948700006389
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "search-fit-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown.json",
+        "fragment": "/components_s/bound_geometry"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/search_fit/breakdown/proposal_sampling",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "run_id": "gaussian_x1/nautilus/search_fit@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "proposal_sampling",
+      "unit": "s",
+      "measurement": {
+        "proposal_sampling": 0.21894529999826773
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "search-fit-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown.json",
+        "fragment": "/components_s/proposal_sampling"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/search_fit/breakdown/likelihood",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "run_id": "gaussian_x1/nautilus/search_fit@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "likelihood",
+      "unit": "s",
+      "measurement": {
+        "likelihood": 0.3219049000008454
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "search-fit-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown.json",
+        "fragment": "/components_s/likelihood"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/search_fit/breakdown/checkpoint_io",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "run_id": "gaussian_x1/nautilus/search_fit@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "checkpoint_io",
+      "unit": "s",
+      "measurement": {
+        "checkpoint_io": 7.0924251000005825
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "search-fit-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown.json",
+        "fragment": "/components_s/checkpoint_io"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/search_fit/breakdown/sampler_bookkeeping",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "run_id": "gaussian_x1/nautilus/search_fit@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "sampler_bookkeeping",
+      "unit": "s",
+      "measurement": {
+        "sampler_bookkeeping": 0.667890200003967
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "search-fit-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown.json",
+        "fragment": "/components_s/sampler_bookkeeping"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/search_fit/breakdown/samples_output",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "run_id": "gaussian_x1/nautilus/search_fit@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "samples_output",
+      "unit": "s",
+      "measurement": {
+        "samples_output": 0.48924609999903623
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "search-fit-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown.json",
+        "fragment": "/components_s/samples_output"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/search_fit/breakdown/visualisation",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "run_id": "gaussian_x1/nautilus/search_fit@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "visualisation",
+      "unit": "s",
+      "measurement": {
+        "visualisation": 1.1609661000002234
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "search-fit-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown.json",
+        "fragment": "/components_s/visualisation"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/search_fit/breakdown/other",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "run_id": "gaussian_x1/nautilus/search_fit@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "other",
+      "unit": "s",
+      "measurement": {
+        "other": 0.29422839999915595
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "search-fit-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown.json",
+        "fragment": "/components_s/other"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/bare_sampler/runtime/wall",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "run_id": "gaussian_x1/nautilus/bare_sampler@2026-10-14T09:19:45Z",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "measurement": {
+        "wall": 22.533835900000668
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "bare-sampler-exclusive-component-wall/wall",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown_bare_sampler.json",
+        "fragment": "/wall_s"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/bare_sampler/breakdown/nn_training",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "run_id": "gaussian_x1/nautilus/bare_sampler@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "nn_training",
+      "unit": "s",
+      "measurement": {
+        "nn_training": 12.11267449999832
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "bare-sampler-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown_bare_sampler.json",
+        "fragment": "/components_s/nn_training"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/bare_sampler/breakdown/bound_geometry",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "run_id": "gaussian_x1/nautilus/bare_sampler@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "bound_geometry",
+      "unit": "s",
+      "measurement": {
+        "bound_geometry": 5.800184900003842
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "bare-sampler-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown_bare_sampler.json",
+        "fragment": "/components_s/bound_geometry"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/bare_sampler/breakdown/proposal_sampling",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "run_id": "gaussian_x1/nautilus/bare_sampler@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "proposal_sampling",
+      "unit": "s",
+      "measurement": {
+        "proposal_sampling": 1.3069437999929505
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "bare-sampler-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown_bare_sampler.json",
+        "fragment": "/components_s/proposal_sampling"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/bare_sampler/breakdown/likelihood",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "run_id": "gaussian_x1/nautilus/bare_sampler@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "likelihood",
+      "unit": "s",
+      "measurement": {
+        "likelihood": 2.658846300001642
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "bare-sampler-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown_bare_sampler.json",
+        "fragment": "/components_s/likelihood"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/bare_sampler/breakdown/sampler_bookkeeping",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "run_id": "gaussian_x1/nautilus/bare_sampler@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "sampler_bookkeeping",
+      "unit": "s",
+      "measurement": {
+        "sampler_bookkeeping": 0.6964637999963088
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "bare-sampler-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown_bare_sampler.json",
+        "fragment": "/components_s/sampler_bookkeeping"
+      }
+    },
+    {
+      "id": "gaussian_x1/nautilus/bare_sampler/breakdown/other",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "run_id": "gaussian_x1/nautilus/bare_sampler@2026-10-14T09:19:45Z",
+      "axis": "breakdown",
+      "metric": "other",
+      "unit": "s",
+      "measurement": {
+        "other": 3.700000888784416e-06
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "bare-sampler-exclusive-component-wall/components",
+        "statistic": "median",
+        "repetitions": 3,
+        "warmup": "none; each repeat is a fresh fit (output removed, never a resume)",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "warm process: imports and first-touch costs fall in the first repeat"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T09:19:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage"
+      },
+      "evidence": {
+        "path": "results/gaussian_x1/nautilus/breakdown_bare_sampler.json",
+        "fragment": "/components_s/other"
+      }
+    }
+  ],
+  "selections": [
+    {
+      "id": "select/gaussian_x1/nautilus/search_fit/runtime/wall",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "method_id": "search-fit-exclusive-component-wall/wall",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/search_fit/runtime/wall",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/search_fit/breakdown/nn_training",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "axis": "breakdown",
+      "metric": "nn_training",
+      "unit": "s",
+      "method_id": "search-fit-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/search_fit/breakdown/nn_training",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/search_fit/breakdown/bound_geometry",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "axis": "breakdown",
+      "metric": "bound_geometry",
+      "unit": "s",
+      "method_id": "search-fit-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/search_fit/breakdown/bound_geometry",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/search_fit/breakdown/proposal_sampling",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "axis": "breakdown",
+      "metric": "proposal_sampling",
+      "unit": "s",
+      "method_id": "search-fit-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/search_fit/breakdown/proposal_sampling",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/search_fit/breakdown/likelihood",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "axis": "breakdown",
+      "metric": "likelihood",
+      "unit": "s",
+      "method_id": "search-fit-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/search_fit/breakdown/likelihood",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/search_fit/breakdown/checkpoint_io",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "axis": "breakdown",
+      "metric": "checkpoint_io",
+      "unit": "s",
+      "method_id": "search-fit-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/search_fit/breakdown/checkpoint_io",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/search_fit/breakdown/sampler_bookkeeping",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "axis": "breakdown",
+      "metric": "sampler_bookkeeping",
+      "unit": "s",
+      "method_id": "search-fit-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/search_fit/breakdown/sampler_bookkeeping",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/search_fit/breakdown/samples_output",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "axis": "breakdown",
+      "metric": "samples_output",
+      "unit": "s",
+      "method_id": "search-fit-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/search_fit/breakdown/samples_output",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/search_fit/breakdown/visualisation",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "axis": "breakdown",
+      "metric": "visualisation",
+      "unit": "s",
+      "method_id": "search-fit-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/search_fit/breakdown/visualisation",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/search_fit/breakdown/other",
+      "setup_id": "gaussian_x1/nautilus/search_fit",
+      "axis": "breakdown",
+      "metric": "other",
+      "unit": "s",
+      "method_id": "search-fit-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/search_fit/breakdown/other",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/bare_sampler/runtime/wall",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "method_id": "bare-sampler-exclusive-component-wall/wall",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/bare_sampler/runtime/wall",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/bare_sampler/breakdown/nn_training",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "axis": "breakdown",
+      "metric": "nn_training",
+      "unit": "s",
+      "method_id": "bare-sampler-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/bare_sampler/breakdown/nn_training",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/bare_sampler/breakdown/bound_geometry",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "axis": "breakdown",
+      "metric": "bound_geometry",
+      "unit": "s",
+      "method_id": "bare-sampler-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/bare_sampler/breakdown/bound_geometry",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/bare_sampler/breakdown/proposal_sampling",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "axis": "breakdown",
+      "metric": "proposal_sampling",
+      "unit": "s",
+      "method_id": "bare-sampler-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/bare_sampler/breakdown/proposal_sampling",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/bare_sampler/breakdown/likelihood",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "axis": "breakdown",
+      "metric": "likelihood",
+      "unit": "s",
+      "method_id": "bare-sampler-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/bare_sampler/breakdown/likelihood",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/bare_sampler/breakdown/checkpoint_io",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "axis": "breakdown",
+      "metric": "checkpoint_io",
+      "unit": "s",
+      "method_id": "bare-sampler-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "inapplicable",
+      "record_id": null,
+      "reason": "the bare sampler is run without a checkpoint file, so it writes none"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/bare_sampler/breakdown/sampler_bookkeeping",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "axis": "breakdown",
+      "metric": "sampler_bookkeeping",
+      "unit": "s",
+      "method_id": "bare-sampler-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/bare_sampler/breakdown/sampler_bookkeeping",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_x1/nautilus/bare_sampler/breakdown/other",
+      "setup_id": "gaussian_x1/nautilus/bare_sampler",
+      "axis": "breakdown",
+      "metric": "other",
+      "unit": "s",
+      "method_id": "bare-sampler-exclusive-component-wall/components",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "nautilus-sampler": "1.0.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scikit-learn": "1.5.1",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_x1/nautilus/bare_sampler/breakdown/other",
+      "reason": "the cell's committed median row"
+    }
+  ],
+  "hazards": [],
+  "recommendations": [],
+  "comparisons": [],
+  "limitations": [
+    "Laptop CPU only (single host, WSL2); wall times vary up to \u00b140 % between sessions, so shares are the comparable quantity, not seconds.",
+    "Component times are exclusive monkey-patched wall-clock intervals; 'other' is wall minus the instrumented total, not a measured phase.",
+    "Every record is unreviewed: the producer declares measurements, the Brain's profiling conductor judges them; nothing here is a verdict.",
+    "No temporal comparisons yet: one baseline per setup, no drift policy."
+  ]
+}

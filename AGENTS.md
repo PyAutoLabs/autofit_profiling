@@ -15,7 +15,9 @@ human-facing overview.
 **Status:** born 2026-10-07 (PyAutoMind#492, phase B1 of the `search-extensibility`
 epic). B4a (2026-10-14) added the first cell — the Nautilus `search.fit` breakdown on
 gaussian_x1 — the `profiling-summary@2` exporter and the Pages board; the repo reports to
-PyAutoPulse as instance `fit`. The EP / graphical baseline port is B4b.
+PyAutoPulse as instance `fit`. B4b (2026-10-14) ported the EP / graphical-model baselines
+(`scripts/gaussian_1d_ep/`) and added the analytic Gaussian parity cell
+(`scripts/analytic_gaussian/`); findings in `wiki/campaigns/ep_graphical_baselines.md`.
 
 ## Where this repo is going
 
@@ -26,7 +28,7 @@ The work arrives in later phases of the `search-extensibility` epic, whose ledge
 - **B4a** — the `search.fit` breakdown exporter and the first bottleneck table. From B4a
   this repo reports to [PyAutoPulse](https://github.com/PyAutoLabs/PyAutoPulse) as instance
   `fit` (`profiling-summary@2`). This adopts Pulse's task `autofit_profiling_bootstrap`.
-- **B4b** — the EP / graphical-model baseline port.
+- **B4b** — the EP / graphical-model baseline port (shipped; pinned to the B4a laptop host).
 
 Do not add scripts, results or exporters outside the phase that owns them.
 PyAutoPulse validates the published summary contract; the Brain's profiling conductor
@@ -39,10 +41,13 @@ ruff.toml        lint config AND the root sentinel (leaf scripts walk up to it)
 activate.sh      RAL shared venv + PYTHONPATH (PyAutoNerves, PyAutoFit only)
 config/          PyAutoConf overrides (library output defaults kept on purpose)
 scripts/<dataset>/<search>/<cell>.py   measurement cells, e.g. gaussian_x1/nautilus/search_fit_breakdown.py
+scripts/gaussian_1d_ep/{ep,graphical}/baseline.py  EP / graphical N3/N10/N30 (shared.py, config/ beside)
+scripts/analytic_gaussian/parity/benchmark.py     runs autofit_workspace_test's analytic parity script
 scripts/misc/profiling/                stdlib helpers shared by cells (exclusive component timer)
 scripts/misc/tooling/build_catalogue.py  results/ -> dashboard/{catalogue.json,index.html,state.json}
 scripts/misc/test/                     stdlib-only tests (no PyAuto install)
-results/         committed result rows (schema autofit-profiling-breakdown), one file per cell variant
+results/         committed result rows, one file per cell variant (schemas autofit-profiling-breakdown,
+                 autofit-profiling-baseline, autofit-profiling-parity; build_catalogue.py documents each)
 dashboard/       generated: catalogue.json (profiling-summary@2), index.html, state.json
 wiki/campaigns/  findings pages; search_fit_bottlenecks.md is epic 1's ranked table
 hpc/             hpc/sync (laptop-side RAL driver) + the batch_cpu submit template

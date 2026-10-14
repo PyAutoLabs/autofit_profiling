@@ -1,0 +1,169 @@
+{
+  "schema": "autofit-profiling-baseline",
+  "version": 1,
+  "cell": "gaussian_1d_ep/ep/baseline",
+  "script": "scripts/gaussian_1d_ep/ep/baseline.py",
+  "setup": {
+    "id": "gaussian_1d_ep/ep/N10",
+    "label": "factor_graph.optimise EP, 10 datasets (per-factor DynestyStatic + Laplace cavity)",
+    "dataset": "gaussian_1d_ep",
+    "dataset_description": "N independent 1-D Gaussians (100 pixels, S/N 25, noise 0.04) sharing centre 50; dataset i is numpy default_rng(seed=i); simulated by scripts/gaussian_1d_ep/shared.py",
+    "model": "per dataset af.ex.Gaussian with a shared GaussianPrior(50, 30) centre and TruncatedGaussianPrior normalization (0.5, 2, >0) and sigma (5, 5, >0): 1 + 2N free parameters",
+    "n_datasets": 10,
+    "free_parameters": 21,
+    "data_pixels": 1000,
+    "search": "DynestyStatic+LaplaceOptimiser (EP)",
+    "search_settings": {
+      "nlive": 100,
+      "sample": "rwalk",
+      "optimiser": "LaplaceOptimiser",
+      "kl_tol": 0.05,
+      "max_steps": 5,
+      "n_datasets": 10
+    },
+    "likelihood": "af.ex.Analysis(use_jax=True), af.FactorGraphModel(use_jax=True)",
+    "config": "scripts/gaussian_1d_ep/config (verbatim from the developer packages)"
+  },
+  "method": {
+    "id": "fresh-process-single-fit",
+    "statistic": "single",
+    "repetitions": 1,
+    "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+    "synchronization": "none (JAX CPU, results read back to Python floats)",
+    "cache_state": "cold process; JAX compilation falls inside the timed fit",
+    "timer": "time.perf_counter around the fit call only (simulation, imports and sanity excluded)"
+  },
+  "wall_s": 152.9010105999987,
+  "peak_rss_kib": 412424,
+  "output_dir_bytes": 8987080,
+  "correctness": {
+    "truth_log_likelihood_sum": -472.2530881754556,
+    "max_log_likelihood": null,
+    "max_log_likelihood_reason": "EP returns marginal messages, not a joint max-likelihood sample",
+    "sanity_pass": true,
+    "sanity_rule": "every parameter |mean - truth| <= 3 sigma of its EP mean-field message",
+    "sanity_checks": [
+      {
+        "passed": true,
+        "message": "shared centre: mean=49.89 \u00b1 0.6289 truth=50 |z|=0.18 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_0 normalization: mean=0.9127 \u00b1 0.2472 truth=0.5 |z|=1.67 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_0 sigma: mean=6.474 \u00b1 2.24 truth=5 |z|=0.66 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_1 normalization: mean=0.4586 \u00b1 0.17 truth=0.5 |z|=0.24 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_1 sigma: mean=4.662 \u00b1 2.299 truth=5 |z|=0.15 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_2 normalization: mean=0.7103 \u00b1 0.2068 truth=0.5 |z|=1.02 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_2 sigma: mean=6.489 \u00b1 2.023 truth=5 |z|=0.74 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_3 normalization: mean=0.495 \u00b1 0.1752 truth=0.5 |z|=0.03 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_3 sigma: mean=4.431 \u00b1 1.945 truth=5 |z|=0.29 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_4 normalization: mean=0.5284 \u00b1 0.2239 truth=0.5 |z|=0.13 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_4 sigma: mean=6.858 \u00b1 2.809 truth=5 |z|=0.66 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_5 normalization: mean=0.4427 \u00b1 0.3165 truth=0.5 |z|=0.18 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_5 sigma: mean=6.854 \u00b1 2.79 truth=5 |z|=0.66 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_6 normalization: mean=0.5902 \u00b1 0.2513 truth=0.5 |z|=0.36 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_6 sigma: mean=7.152 \u00b1 2.737 truth=5 |z|=0.79 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_7 normalization: mean=0.62 \u00b1 0.21 truth=0.5 |z|=0.57 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_7 sigma: mean=5.508 \u00b1 1.916 truth=5 |z|=0.27 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_8 normalization: mean=0.5403 \u00b1 0.2364 truth=0.5 |z|=0.17 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_8 sigma: mean=8.318 \u00b1 3.157 truth=5 |z|=1.05 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_9 normalization: mean=0.3546 \u00b1 0.4121 truth=0.5 |z|=0.35 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_9 sigma: mean=6.373 \u00b1 3.182 truth=5 |z|=0.43 (k=3.0) -> PASS"
+      }
+    ]
+  },
+  "reference": {
+    "source": "autofit_workspace_developer/ep/profiles/baseline.json @ 07b92ace3b3afa51afb914c17972f6fcbe17d994",
+    "wall_s": 566.8557853000002,
+    "peak_rss_kb": 688632,
+    "truth_log_likelihood_sum": -472.2530881754556,
+    "sanity_pass": true,
+    "wall_drift": {
+      "policy": "runtime-drift-2x-1ms",
+      "ratio": 0.27,
+      "status": "improved"
+    },
+    "truth_log_likelihood_sum_matches": true,
+    "sanity_pass_matches": true
+  },
+  "identity": {
+    "device": "cpu",
+    "backend": "jax",
+    "precision": "float64",
+    "library_version": "2026.10.12.1",
+    "software": {
+      "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+      "dynesty": "2.1.5",
+      "jax": "0.10.2",
+      "numpy": "2.2.6",
+      "scipy": "1.17.1",
+      "python": "3.12.10",
+      "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d"
+    }
+  },
+  "provenance": {
+    "host": "DESKTOP-H143S82",
+    "measured_at": "2026-10-14T14:29:09Z",
+    "platform": "Linux-5.10.16.3-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "cpu_count": 8,
+    "jax_platform": "cpu",
+    "pyautofit_checkout_dirty": false
+  }
+}

@@ -11,7 +11,7 @@ td.n{text-align:right;font-variant-numeric:tabular-nums}.bar{background:var(--ba
 p.m,li{color:var(--muted)}a{color:var(--bar)}
 </style></head><body>
 <h1>autofit_profiling</h1>
-<p>Where the time in one PyAutoFit <code>search.fit</code> goes. Producer page for the <a href="https://pyautolabs.github.io/PyAutoPulse/">PyAutoPulse</a> instance <code>fit</code> (<a href="catalogue.json">catalogue.json</a>, <code>profiling-summary@2</code>). Measurements are declared, not judged.</p>
+<p>Where the time in one PyAutoFit <code>search.fit</code> goes, and the expectation-propagation / graphical-model baselines. Producer page for the <a href="https://pyautolabs.github.io/PyAutoPulse/">PyAutoPulse</a> instance <code>fit</code> (<a href="catalogue.json">catalogue.json</a>, <code>profiling-summary@2</code>). Measurements are declared, not judged.</p>
 <h2>gaussian_x1/nautilus/search_fit</h2>
 <p class=m>af.Nautilus search.fit (PyAutoFit, checkpointing and output on) · wall 28.41 s (median of 3) · 7501 likelihood calls · cpu/numpy · PyAutoFit 2026.10.12.1 · measured 2026-10-14T09:19:45Z · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/gaussian_x1/nautilus/breakdown.json">result row</a></p>
 <table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
@@ -38,11 +38,36 @@ p.m,li{color:var(--muted)}a{color:var(--bar)}
 <tr><td>checkpoint_io</td><td class=n>0.00</td><td class=n>0.0 %</td><td style="width:40%"><div class=bar style="width:0.0%"></div></td></tr>
 </table>
 <p class=m>Findings-page shares (shares_of_wall, reproduction gate): nn_training 51.7 % (Δ +2.1 pp), bound_geometry 25.2 % (Δ +0.1 pp), likelihood 14.3 % (Δ -2.7 pp) — within ±10 pp.</p>
+<h2>EP / graphical-model baselines (gaussian_1d_ep)</h2>
+<p class=m>N 1-D Gaussians sharing one centre, fitted by expectation propagation (<code>factor_graph.optimise</code>, per-factor DynestyStatic + Laplace cavity) and by one joint DynestyStatic graphical fit. One fresh-process fit per cell, reproduced against the committed <code>autofit_workspace_developer</code> baselines with the <code>runtime-drift-2x-1ms</code> rule (producer note, not a Pulse comparison).</p>
+<table><tr><th>cell</th><th>wall s</th><th>committed s</th><th>ratio</th><th>drift</th><th>peak RSS MiB</th><th>truth logL sum</th><th>sanity (committed)</th></tr>
+<tr><td><a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/gaussian_1d_ep/ep/N10.json">gaussian_1d_ep/ep/N10</a></td><td class=n>152.9</td><td class=n>566.9</td><td class=n>0.27</td><td>improved</td><td class=n>403</td><td class=n>-472.253 (match yes)</td><td>PASS (PASS)</td></tr>
+<tr><td><a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/gaussian_1d_ep/ep/N3.json">gaussian_1d_ep/ep/N3</a></td><td class=n>37.1</td><td class=n>251.9</td><td class=n>0.15</td><td>improved</td><td class=n>353</td><td class=n>-128.397 (match yes)</td><td>PASS (PASS)</td></tr>
+<tr><td><a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/gaussian_1d_ep/ep/N30.json">gaussian_1d_ep/ep/N30</a></td><td class=n>842.8</td><td class=n>1758.7</td><td class=n>0.48</td><td>improved</td><td class=n>642</td><td class=n>-1500.561 (match yes)</td><td>FAIL (FAIL)</td></tr>
+<tr><td><a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/gaussian_1d_ep/graphical/N10.json">gaussian_1d_ep/graphical/N10</a></td><td class=n>7.1</td><td class=n>50.7</td><td class=n>0.14</td><td>improved</td><td class=n>446</td><td class=n>-472.253 (match yes)</td><td>PASS (PASS)</td></tr>
+<tr><td><a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/gaussian_1d_ep/graphical/N3.json">gaussian_1d_ep/graphical/N3</a></td><td class=n>6.0</td><td class=n>22.8</td><td class=n>0.26</td><td>improved</td><td class=n>420</td><td class=n>-128.397 (match yes)</td><td>PASS (PASS)</td></tr>
+<tr><td><a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/gaussian_1d_ep/graphical/N30.json">gaussian_1d_ep/graphical/N30</a></td><td class=n>19.0</td><td class=n>132.8</td><td class=n>0.14</td><td>improved</td><td class=n>515</td><td class=n>-1500.561 (match yes)</td><td>FAIL (FAIL)</td></tr>
+</table>
+<p class=m>cpu/jax/float64 · PyAutoFit df6d218f10 · host DESKTOP-H143S82.</p>
+<h2>Analytic Gaussian benchmark (closed form vs EP vs graphical)</h2>
+<p class=m>analytic Gaussian parity: closed form | minimal EP | autofit graphical | autofit EP · wall 130.0 s · peak RSS 332 MiB · PARITY PASS (41/41) · sigma_q95 12.1536 (banked 12.15, match yes) · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/parity/seed0_n5.json">result row</a></p>
+<table><tr><th>leg</th><th>column</th><th>cells passed</th><th>max a</th><th>max b</th><th>column s</th></tr>
+<tr><td>A</td><td>minimal EP</td><td class=n>6/6</td><td class=n>0.000</td><td class=n>0.000</td><td class=n>0.0</td></tr>
+<tr><td>A</td><td>autofit graphical</td><td class=n>6/6</td><td class=n>0.065</td><td class=n>0.058</td><td class=n>24.5</td></tr>
+<tr><td>A</td><td>autofit EP</td><td class=n>6/6</td><td class=n>0.000</td><td class=n>0.000</td><td class=n>1.9</td></tr>
+<tr><td>B</td><td>minimal EP</td><td class=n>7/7</td><td class=n>0.078</td><td class=n>0.146</td><td class=n>0.0</td></tr>
+<tr><td>B</td><td>autofit graphical</td><td class=n>7/7</td><td class=n>0.050</td><td class=n>0.041</td><td class=n>44.4</td></tr>
+<tr><td>B</td><td>autofit EP</td><td class=n>7/7</td><td class=n>0.079</td><td class=n>0.146</td><td class=n>56.8</td></tr>
+</table>
+<p class=m>Parked, not run: <code>graphical/analytic_gaussian_priors.py</code> (NEEDS_FIX 2026-09-30 - moments projection (PyAutoFit#1656) passes the gaussian and truncated scatter families (16/16 each) but the loggaussian family misses 11/16: log-space scatter comes back at log sigma 3.28 vs mode 1.53 / reference 1.83 - TransformedMessage moments path suspected; see PyAutoMind draft/bug/autofit/ep_moments_loggaussian_transformed_scatter.md).</p>
 <h2>Limitations</h2><ul>
-<li>Laptop CPU only (single host, WSL2); wall times vary up to ±40 % between sessions, so shares are the comparable quantity, not seconds.</li>
+<li>Laptop CPU only, pinned to one host (DESKTOP-H143S82, WSL2) so Pulse&#x27;s same-host rule pairs every record; the epic&#x27;s release-sweep pin (euclid-ral-gpu-2, an A100 node) does not fit CPU Dynesty runs. Cross-machine reproduction on RAL is a later campaign.</li>
+<li>Wall times vary up to ±40 % between sessions on this host, so breakdown shares are the comparable quantity, not seconds; the EP / graphical / parity rows are single fresh-process fits (repetitions 1).</li>
 <li>Component times are exclusive monkey-patched wall-clock intervals; &#x27;other&#x27; is wall minus the instrumented total, not a measured phase.</li>
+<li>The EP / graphical rows carry a producer-side reproduction note against the committed autofit_workspace_developer baselines (runtime-drift-2x-1ms, in each row&#x27;s `reference`); it is not a Pulse comparison, because those baselines recorded no host and no record pair exists.</li>
+<li>The N30 EP and graphical rows reproduce the committed sanity FAIL; their wall and memory are real measurements of a fit whose parameter recovery fails, not of a correct fit.</li>
 <li>Every record is unreviewed: the producer declares measurements, the Brain&#x27;s profiling conductor judges them; nothing here is a verdict.</li>
-<li>No temporal comparisons yet: one baseline per setup, no drift policy.</li>
+<li>No temporal comparisons: one baseline per setup.</li>
 </ul>
-<p class=m>Rendered from 2 result rows by <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/scripts/misc/tooling/build_catalogue.py">build_catalogue.py</a>; evidence updated 2026-10-14T09:19:45Z.</p>
+<p class=m>Rendered from 9 result rows by <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/scripts/misc/tooling/build_catalogue.py">build_catalogue.py</a>; evidence updated 2026-10-14T14:45:45Z.</p>
 </body></html>

@@ -15,6 +15,8 @@ It is the sibling of [autofit_inference](https://github.com/PyAutoLabs/autofit_i
 with its ranked table in [`wiki/campaigns/search_fit_bottlenecks.md`](wiki/campaigns/search_fit_bottlenecks.md).
 The repo reports to [PyAutoPulse](https://github.com/PyAutoLabs/PyAutoPulse) as instance
 `fit` (`dashboard/catalogue.json`, `profiling-summary@2`); its own board is published to
-GitHub Pages from `dashboard/`. The EP baseline port follows in B4b.
+GitHub Pages from `dashboard/`. B4b added the expectation-propagation / graphical-model
+baselines (N = 3, 10, 30 datasets) and the analytic Gaussian parity benchmark; their
+reproduction table is [`wiki/campaigns/ep_graphical_baselines.md`](wiki/campaigns/ep_graphical_baselines.md).
 
 Agents and contributors: start with [`AGENTS.md`](AGENTS.md).

@@ -1,0 +1,12 @@
+default: true
+samples: true
+samples_weight_threshold: 1.0e-10
+search_internal: false
+start_point: true
+latent_during_fit: false
+latent_after_fit: true
+latent_draw_via_pdf: true
+latent_draw_via_pdf_size: 100
+latent_csv: true
+latent_results: true
+search_log: true

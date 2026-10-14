@@ -2,9 +2,9 @@
   "schema": "profiling-summary",
   "version": 2,
   "project": "autofit_profiling",
-  "scope": "search-fit-breakdown",
-  "generated_at": "2026-10-14T09:19:45Z",
-  "evidence_updated_at": "2026-10-14T09:19:45Z",
+  "scope": "pyautofit-profiling",
+  "generated_at": "2026-10-14T14:45:45Z",
+  "evidence_updated_at": "2026-10-14T14:45:45Z",
   "valid_until": null,
   "producer_revision": null,
   "comparison_policy": {
@@ -12,16 +12,419 @@
   },
   "coverage": {
     "expected": {
-      "cells": 18
+      "cells": 32
     },
     "observed": {
-      "setups": 2,
-      "records": 17,
-      "selected": 17
+      "setups": 9,
+      "records": 31,
+      "selected": 31
     },
     "excluded": []
   },
   "setups": [
+    {
+      "id": "analytic_gaussian/parity/seed0_n5",
+      "label": "analytic Gaussian parity: closed form | minimal EP | autofit graphical | autofit EP",
+      "dataset": "analytic_gaussian",
+      "model": "conjugate hierarchical gaussian",
+      "instrument": null,
+      "unknowns": {
+        "instrument": "toy 1-D dataset; no instrument"
+      },
+      "configuration_id": "analytic_gaussian/parity/seed0_n5@1",
+      "configuration": {
+        "data_pixels": {
+          "value": 100,
+          "unit": "count"
+        },
+        "free_parameters": {
+          "value": 7,
+          "unit": "count"
+        },
+        "kl_tol": {
+          "value": 0.0001,
+          "unit": "dimensionless"
+        },
+        "likelihood": {
+          "value": "numpy (GaussianDataAnalysis, no JAX)",
+          "unit": "name"
+        },
+        "max_steps": {
+          "value": 30,
+          "unit": "count"
+        },
+        "maxcall": {
+          "value": 30000,
+          "unit": "count"
+        },
+        "n_datasets": {
+          "value": 5,
+          "unit": "count"
+        },
+        "nlive": {
+          "value": 100,
+          "unit": "count"
+        },
+        "output_config": {
+          "value": "autofit_workspace_test config (the parity script's CI home)",
+          "unit": "name"
+        },
+        "sample": {
+          "value": "unif",
+          "unit": "name"
+        },
+        "search": {
+          "value": "DynestyStatic (graphical) + LaplaceOptimiser(projection='moments') (EP)",
+          "unit": "name"
+        },
+        "seed": {
+          "value": 0,
+          "unit": "count"
+        }
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/ep/N10",
+      "label": "factor_graph.optimise EP, 10 datasets (per-factor DynestyStatic + Laplace cavity)",
+      "dataset": "gaussian_1d_ep",
+      "model": "gaussian, centre shared across datasets",
+      "instrument": null,
+      "unknowns": {
+        "instrument": "toy 1-D dataset; no instrument"
+      },
+      "configuration_id": "gaussian_1d_ep/ep/N10@1",
+      "configuration": {
+        "data_pixels": {
+          "value": 1000,
+          "unit": "count"
+        },
+        "free_parameters": {
+          "value": 21,
+          "unit": "count"
+        },
+        "kl_tol": {
+          "value": 0.05,
+          "unit": "dimensionless"
+        },
+        "likelihood": {
+          "value": "af.ex.Analysis(use_jax=True), af.FactorGraphModel(use_jax=True)",
+          "unit": "name"
+        },
+        "max_steps": {
+          "value": 5,
+          "unit": "count"
+        },
+        "n_datasets": {
+          "value": 10,
+          "unit": "count"
+        },
+        "nlive": {
+          "value": 100,
+          "unit": "count"
+        },
+        "optimiser": {
+          "value": "LaplaceOptimiser",
+          "unit": "name"
+        },
+        "output_config": {
+          "value": "scripts/gaussian_1d_ep/config (verbatim from the developer packages)",
+          "unit": "name"
+        },
+        "sample": {
+          "value": "rwalk",
+          "unit": "name"
+        },
+        "search": {
+          "value": "DynestyStatic+LaplaceOptimiser (EP)",
+          "unit": "name"
+        }
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/ep/N3",
+      "label": "factor_graph.optimise EP, 3 datasets (per-factor DynestyStatic + Laplace cavity)",
+      "dataset": "gaussian_1d_ep",
+      "model": "gaussian, centre shared across datasets",
+      "instrument": null,
+      "unknowns": {
+        "instrument": "toy 1-D dataset; no instrument"
+      },
+      "configuration_id": "gaussian_1d_ep/ep/N3@1",
+      "configuration": {
+        "data_pixels": {
+          "value": 300,
+          "unit": "count"
+        },
+        "free_parameters": {
+          "value": 7,
+          "unit": "count"
+        },
+        "kl_tol": {
+          "value": 0.05,
+          "unit": "dimensionless"
+        },
+        "likelihood": {
+          "value": "af.ex.Analysis(use_jax=True), af.FactorGraphModel(use_jax=True)",
+          "unit": "name"
+        },
+        "max_steps": {
+          "value": 5,
+          "unit": "count"
+        },
+        "n_datasets": {
+          "value": 3,
+          "unit": "count"
+        },
+        "nlive": {
+          "value": 100,
+          "unit": "count"
+        },
+        "optimiser": {
+          "value": "LaplaceOptimiser",
+          "unit": "name"
+        },
+        "output_config": {
+          "value": "scripts/gaussian_1d_ep/config (verbatim from the developer packages)",
+          "unit": "name"
+        },
+        "sample": {
+          "value": "rwalk",
+          "unit": "name"
+        },
+        "search": {
+          "value": "DynestyStatic+LaplaceOptimiser (EP)",
+          "unit": "name"
+        }
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/ep/N30",
+      "label": "factor_graph.optimise EP, 30 datasets (per-factor DynestyStatic + Laplace cavity)",
+      "dataset": "gaussian_1d_ep",
+      "model": "gaussian, centre shared across datasets",
+      "instrument": null,
+      "unknowns": {
+        "instrument": "toy 1-D dataset; no instrument"
+      },
+      "configuration_id": "gaussian_1d_ep/ep/N30@1",
+      "configuration": {
+        "data_pixels": {
+          "value": 3000,
+          "unit": "count"
+        },
+        "free_parameters": {
+          "value": 61,
+          "unit": "count"
+        },
+        "kl_tol": {
+          "value": 0.05,
+          "unit": "dimensionless"
+        },
+        "likelihood": {
+          "value": "af.ex.Analysis(use_jax=True), af.FactorGraphModel(use_jax=True)",
+          "unit": "name"
+        },
+        "max_steps": {
+          "value": 5,
+          "unit": "count"
+        },
+        "n_datasets": {
+          "value": 30,
+          "unit": "count"
+        },
+        "nlive": {
+          "value": 100,
+          "unit": "count"
+        },
+        "optimiser": {
+          "value": "LaplaceOptimiser",
+          "unit": "name"
+        },
+        "output_config": {
+          "value": "scripts/gaussian_1d_ep/config (verbatim from the developer packages)",
+          "unit": "name"
+        },
+        "sample": {
+          "value": "rwalk",
+          "unit": "name"
+        },
+        "search": {
+          "value": "DynestyStatic+LaplaceOptimiser (EP)",
+          "unit": "name"
+        }
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/graphical/N10",
+      "label": "joint DynestyStatic search.fit on factor_graph.global_prior_model, 10 datasets",
+      "dataset": "gaussian_1d_ep",
+      "model": "gaussian, centre shared across datasets",
+      "instrument": null,
+      "unknowns": {
+        "instrument": "toy 1-D dataset; no instrument"
+      },
+      "configuration_id": "gaussian_1d_ep/graphical/N10@1",
+      "configuration": {
+        "bound": {
+          "value": "multi",
+          "unit": "name"
+        },
+        "data_pixels": {
+          "value": 1000,
+          "unit": "count"
+        },
+        "free_parameters": {
+          "value": 21,
+          "unit": "count"
+        },
+        "likelihood": {
+          "value": "af.ex.Analysis(use_jax=True), af.FactorGraphModel(use_jax=True)",
+          "unit": "name"
+        },
+        "n_datasets": {
+          "value": 10,
+          "unit": "count"
+        },
+        "nlive": {
+          "value": 50,
+          "unit": "count"
+        },
+        "number_of_cores": {
+          "value": 1,
+          "unit": "count"
+        },
+        "output_config": {
+          "value": "scripts/gaussian_1d_ep/config (verbatim from the developer packages)",
+          "unit": "name"
+        },
+        "sample": {
+          "value": "rwalk",
+          "unit": "name"
+        },
+        "search": {
+          "value": "DynestyStatic (joint)",
+          "unit": "name"
+        },
+        "walks": {
+          "value": 5,
+          "unit": "count"
+        }
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/graphical/N3",
+      "label": "joint DynestyStatic search.fit on factor_graph.global_prior_model, 3 datasets",
+      "dataset": "gaussian_1d_ep",
+      "model": "gaussian, centre shared across datasets",
+      "instrument": null,
+      "unknowns": {
+        "instrument": "toy 1-D dataset; no instrument"
+      },
+      "configuration_id": "gaussian_1d_ep/graphical/N3@1",
+      "configuration": {
+        "bound": {
+          "value": "multi",
+          "unit": "name"
+        },
+        "data_pixels": {
+          "value": 300,
+          "unit": "count"
+        },
+        "free_parameters": {
+          "value": 7,
+          "unit": "count"
+        },
+        "likelihood": {
+          "value": "af.ex.Analysis(use_jax=True), af.FactorGraphModel(use_jax=True)",
+          "unit": "name"
+        },
+        "n_datasets": {
+          "value": 3,
+          "unit": "count"
+        },
+        "nlive": {
+          "value": 50,
+          "unit": "count"
+        },
+        "number_of_cores": {
+          "value": 1,
+          "unit": "count"
+        },
+        "output_config": {
+          "value": "scripts/gaussian_1d_ep/config (verbatim from the developer packages)",
+          "unit": "name"
+        },
+        "sample": {
+          "value": "rwalk",
+          "unit": "name"
+        },
+        "search": {
+          "value": "DynestyStatic (joint)",
+          "unit": "name"
+        },
+        "walks": {
+          "value": 5,
+          "unit": "count"
+        }
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/graphical/N30",
+      "label": "joint DynestyStatic search.fit on factor_graph.global_prior_model, 30 datasets",
+      "dataset": "gaussian_1d_ep",
+      "model": "gaussian, centre shared across datasets",
+      "instrument": null,
+      "unknowns": {
+        "instrument": "toy 1-D dataset; no instrument"
+      },
+      "configuration_id": "gaussian_1d_ep/graphical/N30@1",
+      "configuration": {
+        "bound": {
+          "value": "multi",
+          "unit": "name"
+        },
+        "data_pixels": {
+          "value": 3000,
+          "unit": "count"
+        },
+        "free_parameters": {
+          "value": 61,
+          "unit": "count"
+        },
+        "likelihood": {
+          "value": "af.ex.Analysis(use_jax=True), af.FactorGraphModel(use_jax=True)",
+          "unit": "name"
+        },
+        "n_datasets": {
+          "value": 30,
+          "unit": "count"
+        },
+        "nlive": {
+          "value": 50,
+          "unit": "count"
+        },
+        "number_of_cores": {
+          "value": 1,
+          "unit": "count"
+        },
+        "output_config": {
+          "value": "scripts/gaussian_1d_ep/config (verbatim from the developer packages)",
+          "unit": "name"
+        },
+        "sample": {
+          "value": "rwalk",
+          "unit": "name"
+        },
+        "search": {
+          "value": "DynestyStatic (joint)",
+          "unit": "name"
+        },
+        "walks": {
+          "value": 5,
+          "unit": "count"
+        }
+      }
+    },
     {
       "id": "gaussian_x1/nautilus/search_fit",
       "label": "af.Nautilus search.fit (PyAutoFit, checkpointing and output on)",
@@ -130,6 +533,678 @@
     }
   ],
   "records": [
+    {
+      "id": "analytic_gaussian/parity/seed0_n5/runtime/wall",
+      "setup_id": "analytic_gaussian/parity/seed0_n5",
+      "run_id": "analytic_gaussian/parity/seed0_n5@2026-10-14T14:45:45Z",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "measurement": {
+        "wall": 130.01728060000096
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "autofit_workspace_test": "26877bc69b4a0302f5be9106ec735bebf89d2a1a",
+          "dynesty": "2.1.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "parity-script-subprocess-wall/wall",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one run of the parity script in a fresh child process",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "cold process; imports inside the timed interval"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:45:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; parity PASS (41/41)"
+      },
+      "evidence": {
+        "path": "results/analytic_gaussian/parity/seed0_n5.json",
+        "fragment": "/wall_s"
+      }
+    },
+    {
+      "id": "analytic_gaussian/parity/seed0_n5/memory/host_peak_rss",
+      "setup_id": "analytic_gaussian/parity/seed0_n5",
+      "run_id": "analytic_gaussian/parity/seed0_n5@2026-10-14T14:45:45Z",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "measurement": {
+        "host_peak_rss": 340284
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "autofit_workspace_test": "26877bc69b4a0302f5be9106ec735bebf89d2a1a",
+          "dynesty": "2.1.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "parity-script-subprocess-wall/peak_rss",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one run of the parity script in a fresh child process",
+        "synchronization": "none (numpy, single process)",
+        "cache_state": "cold process; imports inside the timed interval"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:45:45Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; parity PASS (41/41)"
+      },
+      "evidence": {
+        "path": "results/analytic_gaussian/parity/seed0_n5.json",
+        "fragment": "/peak_rss_kib"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/ep/N10/runtime/wall",
+      "setup_id": "gaussian_1d_ep/ep/N10",
+      "run_id": "gaussian_1d_ep/ep/N10@2026-10-14T14:29:09Z",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "measurement": {
+        "wall": 152.9010105999987
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/wall",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:29:09Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/ep/N10.json",
+        "fragment": "/wall_s"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/ep/N10/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/ep/N10",
+      "run_id": "gaussian_1d_ep/ep/N10@2026-10-14T14:29:09Z",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "measurement": {
+        "host_peak_rss": 412424
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/peak_rss",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:29:09Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/ep/N10.json",
+        "fragment": "/peak_rss_kib"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/ep/N3/runtime/wall",
+      "setup_id": "gaussian_1d_ep/ep/N3",
+      "run_id": "gaussian_1d_ep/ep/N3@2026-10-14T14:26:33Z",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "measurement": {
+        "wall": 37.0929971000005
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/wall",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:26:33Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/ep/N3.json",
+        "fragment": "/wall_s"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/ep/N3/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/ep/N3",
+      "run_id": "gaussian_1d_ep/ep/N3@2026-10-14T14:26:33Z",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "measurement": {
+        "host_peak_rss": 361292
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/peak_rss",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:26:33Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/ep/N3.json",
+        "fragment": "/peak_rss_kib"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/ep/N30/runtime/wall",
+      "setup_id": "gaussian_1d_ep/ep/N30",
+      "run_id": "gaussian_1d_ep/ep/N30@2026-10-14T14:43:14Z",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "measurement": {
+        "wall": 842.7632974000007
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/wall",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:43:14Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/ep/N30.json",
+        "fragment": "/wall_s"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/ep/N30/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/ep/N30",
+      "run_id": "gaussian_1d_ep/ep/N30@2026-10-14T14:43:14Z",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "measurement": {
+        "host_peak_rss": 657556
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/peak_rss",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:43:14Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/ep/N30.json",
+        "fragment": "/peak_rss_kib"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/graphical/N10/runtime/wall",
+      "setup_id": "gaussian_1d_ep/graphical/N10",
+      "run_id": "gaussian_1d_ep/graphical/N10@2026-10-14T14:25:32Z",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "measurement": {
+        "wall": 7.1306849000029615
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/wall",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:25:32Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/graphical/N10.json",
+        "fragment": "/wall_s"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/graphical/N10/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/graphical/N10",
+      "run_id": "gaussian_1d_ep/graphical/N10@2026-10-14T14:25:32Z",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "measurement": {
+        "host_peak_rss": 456628
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/peak_rss",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:25:32Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/graphical/N10.json",
+        "fragment": "/peak_rss_kib"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/graphical/N3/runtime/wall",
+      "setup_id": "gaussian_1d_ep/graphical/N3",
+      "run_id": "gaussian_1d_ep/graphical/N3@2026-10-14T14:25:23Z",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "measurement": {
+        "wall": 5.984727600000042
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/wall",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:25:23Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/graphical/N3.json",
+        "fragment": "/wall_s"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/graphical/N3/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/graphical/N3",
+      "run_id": "gaussian_1d_ep/graphical/N3@2026-10-14T14:25:23Z",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "measurement": {
+        "host_peak_rss": 429952
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/peak_rss",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:25:23Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/graphical/N3.json",
+        "fragment": "/peak_rss_kib"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/graphical/N30/runtime/wall",
+      "setup_id": "gaussian_1d_ep/graphical/N30",
+      "run_id": "gaussian_1d_ep/graphical/N30@2026-10-14T14:25:53Z",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "measurement": {
+        "wall": 18.954002700000274
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/wall",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:25:53Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/graphical/N30.json",
+        "fragment": "/wall_s"
+      }
+    },
+    {
+      "id": "gaussian_1d_ep/graphical/N30/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/graphical/N30",
+      "run_id": "gaussian_1d_ep/graphical/N30@2026-10-14T14:25:53Z",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "measurement": {
+        "host_peak_rss": 527420
+      },
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "method": {
+        "id": "fresh-process-single-fit/peak_rss",
+        "statistic": "single",
+        "repetitions": 1,
+        "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+        "synchronization": "none (JAX CPU, results read back to Python floats)",
+        "cache_state": "cold process; JAX compilation falls inside the timed fit"
+      },
+      "provenance": {
+        "host": "DESKTOP-H143S82",
+        "measured_at": "2026-10-14T14:25:53Z",
+        "has_provenance": true,
+        "qualified": true
+      },
+      "validation": {
+        "status": "unreviewed",
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL)"
+      },
+      "evidence": {
+        "path": "results/gaussian_1d_ep/graphical/N30.json",
+        "fragment": "/peak_rss_kib"
+      }
+    },
     {
       "id": "gaussian_x1/nautilus/search_fit/runtime/wall",
       "setup_id": "gaussian_x1/nautilus/search_fit",
@@ -949,6 +2024,384 @@
   ],
   "selections": [
     {
+      "id": "select/analytic_gaussian/parity/seed0_n5/runtime/wall",
+      "setup_id": "analytic_gaussian/parity/seed0_n5",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "method_id": "parity-script-subprocess-wall/wall",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "autofit_workspace_test": "26877bc69b4a0302f5be9106ec735bebf89d2a1a",
+          "dynesty": "2.1.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "analytic_gaussian/parity/seed0_n5/runtime/wall",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/analytic_gaussian/parity/seed0_n5/memory/host_peak_rss",
+      "setup_id": "analytic_gaussian/parity/seed0_n5",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "method_id": "parity-script-subprocess-wall/peak_rss",
+      "identity": {
+        "device": "cpu",
+        "backend": "numpy",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "autofit_workspace_test": "26877bc69b4a0302f5be9106ec735bebf89d2a1a",
+          "dynesty": "2.1.5",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "analytic_gaussian/parity/seed0_n5/memory/host_peak_rss",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/ep/N10/runtime/wall",
+      "setup_id": "gaussian_1d_ep/ep/N10",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "method_id": "fresh-process-single-fit/wall",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/ep/N10/runtime/wall",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/ep/N10/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/ep/N10",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "method_id": "fresh-process-single-fit/peak_rss",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/ep/N10/memory/host_peak_rss",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/ep/N3/runtime/wall",
+      "setup_id": "gaussian_1d_ep/ep/N3",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "method_id": "fresh-process-single-fit/wall",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/ep/N3/runtime/wall",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/ep/N3/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/ep/N3",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "method_id": "fresh-process-single-fit/peak_rss",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/ep/N3/memory/host_peak_rss",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/ep/N30/runtime/wall",
+      "setup_id": "gaussian_1d_ep/ep/N30",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "method_id": "fresh-process-single-fit/wall",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/ep/N30/runtime/wall",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/ep/N30/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/ep/N30",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "method_id": "fresh-process-single-fit/peak_rss",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/ep/N30/memory/host_peak_rss",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/graphical/N10/runtime/wall",
+      "setup_id": "gaussian_1d_ep/graphical/N10",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "method_id": "fresh-process-single-fit/wall",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/graphical/N10/runtime/wall",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/graphical/N10/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/graphical/N10",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "method_id": "fresh-process-single-fit/peak_rss",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/graphical/N10/memory/host_peak_rss",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/graphical/N3/runtime/wall",
+      "setup_id": "gaussian_1d_ep/graphical/N3",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "method_id": "fresh-process-single-fit/wall",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/graphical/N3/runtime/wall",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/graphical/N3/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/graphical/N3",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "method_id": "fresh-process-single-fit/peak_rss",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/graphical/N3/memory/host_peak_rss",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/graphical/N30/runtime/wall",
+      "setup_id": "gaussian_1d_ep/graphical/N30",
+      "axis": "runtime",
+      "metric": "wall",
+      "unit": "s",
+      "method_id": "fresh-process-single-fit/wall",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/graphical/N30/runtime/wall",
+      "reason": "the cell's committed median row"
+    },
+    {
+      "id": "select/gaussian_1d_ep/graphical/N30/memory/host_peak_rss",
+      "setup_id": "gaussian_1d_ep/graphical/N30",
+      "axis": "memory",
+      "metric": "host_peak_rss",
+      "unit": "KiB",
+      "method_id": "fresh-process-single-fit/peak_rss",
+      "identity": {
+        "device": "cpu",
+        "backend": "jax",
+        "precision": "float64",
+        "library_version": "2026.10.12.1",
+        "software": {
+          "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+          "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d",
+          "dynesty": "2.1.5",
+          "jax": "0.10.2",
+          "numpy": "2.2.6",
+          "python": "3.12.10",
+          "scipy": "1.17.1"
+        }
+      },
+      "host": "DESKTOP-H143S82",
+      "status": "unreviewed",
+      "record_id": "gaussian_1d_ep/graphical/N30/memory/host_peak_rss",
+      "reason": "the cell's committed median row"
+    },
+    {
       "id": "select/gaussian_x1/nautilus/search_fit/runtime/wall",
       "setup_id": "gaussian_x1/nautilus/search_fit",
       "axis": "runtime",
@@ -1439,9 +2892,12 @@
   "recommendations": [],
   "comparisons": [],
   "limitations": [
-    "Laptop CPU only (single host, WSL2); wall times vary up to \u00b140 % between sessions, so shares are the comparable quantity, not seconds.",
+    "Laptop CPU only, pinned to one host (DESKTOP-H143S82, WSL2) so Pulse's same-host rule pairs every record; the epic's release-sweep pin (euclid-ral-gpu-2, an A100 node) does not fit CPU Dynesty runs. Cross-machine reproduction on RAL is a later campaign.",
+    "Wall times vary up to \u00b140 % between sessions on this host, so breakdown shares are the comparable quantity, not seconds; the EP / graphical / parity rows are single fresh-process fits (repetitions 1).",
     "Component times are exclusive monkey-patched wall-clock intervals; 'other' is wall minus the instrumented total, not a measured phase.",
+    "The EP / graphical rows carry a producer-side reproduction note against the committed autofit_workspace_developer baselines (runtime-drift-2x-1ms, in each row's `reference`); it is not a Pulse comparison, because those baselines recorded no host and no record pair exists.",
+    "The N30 EP and graphical rows reproduce the committed sanity FAIL; their wall and memory are real measurements of a fit whose parameter recovery fails, not of a correct fit.",
     "Every record is unreviewed: the producer declares measurements, the Brain's profiling conductor judges them; nothing here is a verdict.",
-    "No temporal comparisons yet: one baseline per setup, no drift policy."
+    "No temporal comparisons: one baseline per setup."
   ]
 }

@@ -154,6 +154,14 @@ def test_parity_row_reason_carries_the_parity_verdict(root):
     assert "sigma_q95 12.1536" in bc.render_html(rows, doc)
 
 
+def test_host_contention_is_named_in_the_record_reason(root):
+    row = _run_row(bc.BASELINE_SCHEMA, "gaussian_1d_ep/ep/N30")
+    row["provenance"]["host_contention"] = "load 4.7 on 8 cores"
+    _write(root, "n30.json", row)
+    doc, _ = bc.build(root)
+    assert all("host contended" in r["validation"]["reason"] for r in doc["records"])
+
+
 @pytest.mark.skipif(not (PULSE / "pulse" / "summary.py").is_file(), reason="no PyAutoPulse beside")
 def test_mixed_schemas_validate_with_the_pulse_reader(root):
     _write(root, "a.json", _row())

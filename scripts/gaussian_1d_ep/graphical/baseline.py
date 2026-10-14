@@ -109,6 +109,7 @@ def measure(n: int) -> dict:
         number_of_cores=1,
     )
 
+    load_before = shared.load_average()
     t0 = time.perf_counter()
     result = search.fit(model=factor_graph.global_prior_model, analysis=factor_graph)
     wall_s = time.perf_counter() - t0
@@ -176,6 +177,7 @@ def measure(n: int) -> dict:
         correctness=correctness,
         reference=reference,
         sw_before=sw_before,
+        load_before=load_before,
     )
 
 

@@ -166,6 +166,7 @@
     "measured_at": "2026-10-14T14:45:45Z",
     "platform": "Linux-5.10.16.3-microsoft-standard-WSL2-x86_64-with-glibc2.35",
     "cpu_count": 8,
-    "pyautofit_checkout_dirty": false
+    "pyautofit_checkout_dirty": false,
+    "host_contention": "contended: another session's CPU jobs (PyAutoFit pytest, seeded Dynesty runs) shared this 8-core host; uptime load average 3.43 \u2192 4.67 (15:43\u201315:45 BST) during the run (recorded post hoc from the session's uptime log; the cell now records load_average_before/after); seconds are conservative"
   }
 }

@@ -115,6 +115,7 @@
     "platform": "Linux-5.10.16.3-microsoft-standard-WSL2-x86_64-with-glibc2.35",
     "cpu_count": 8,
     "jax_platform": "cpu",
-    "pyautofit_checkout_dirty": false
+    "pyautofit_checkout_dirty": false,
+    "host_contention": "contended: another session's CPU jobs (PyAutoFit pytest, seeded Dynesty runs) shared this 8-core host; uptime load average ~3.0 during the run (recorded post hoc from the session's uptime log; the cell now records load_average_before/after); seconds are conservative"
   }
 }

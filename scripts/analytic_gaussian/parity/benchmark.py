@@ -182,6 +182,7 @@ def main(argv=None) -> int:
     ws = workspace_test()
     sw_before, _, _ = software(ws)
     env = {**os.environ, "PYAUTO_SKIP_WORKSPACE_VERSION_CHECK": "1"}
+    load_before = [round(x, 2) for x in os.getloadavg()]
     t0 = time.perf_counter()
     proc = subprocess.run(
         [sys.executable, PARITY_SCRIPT], cwd=ws, env=env, capture_output=True, text=True
@@ -279,6 +280,8 @@ def main(argv=None) -> int:
             "platform": platform.platform(),
             "cpu_count": os.cpu_count(),
             "pyautofit_checkout_dirty": dirty,
+            "load_average_before": load_before,
+            "load_average_after": [round(x, 2) for x in os.getloadavg()],
         },
     }
     c = row["correctness"]

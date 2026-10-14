@@ -169,6 +169,13 @@ _REASON = "producer measurement on one laptop host; awaits the profiling conduct
 def _reason(doc):
     if doc["schema"] == RESULT_SCHEMA:
         return _REASON
+    reason = _reason_core(doc)
+    if doc["provenance"].get("host_contention"):
+        reason += "; host contended during the run (see provenance.host_contention)"
+    return reason
+
+
+def _reason_core(doc):
     c = doc["correctness"]
     verdict = "PASS" if c["sanity_pass"] else "FAIL"
     if doc["schema"] == BASELINE_SCHEMA:

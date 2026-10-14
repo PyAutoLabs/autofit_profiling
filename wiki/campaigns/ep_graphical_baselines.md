@@ -71,7 +71,7 @@ truncnorm prior transforms at 25–38 %): against those, graphical N3 is flat (1
 EP N3 are still faster (0.48×, 0.49×). The baselines have moved; nothing here is a
 regression. The new rows are the baselines going forward.
 
-**Caveat on the seconds.** Another session's CPU work (a PyAutoFit pytest run and seeded
+**Caveat on the seconds.** (Machine-readable: every B4b row carries `provenance.host_contention`, and its catalogue records say "host contended" in `validation.reason`; future runs record `load_average_before/after`.) Another session's CPU work (a PyAutoFit pytest run and seeded
 Dynesty runs) shared the 8-core host during these measurements (load average 2.5 → 4.7,
 growing through the EP N30 fit). The ratios are therefore conservative upper bounds — the
 direction (improved) is not in doubt, but EP N30's 842.8 s is likely inflated, and its EP
@@ -84,7 +84,8 @@ are information, not a like-for-like pair (graphical N30: 515 vs 2979 MiB).
 
 The CI parity script `autofit_workspace_test/scripts/graphical/analytic_gaussian.py`
 (autofit_workspace_test#91) run unchanged from the sibling checkout
-(`8b86eca55`), timed as one child process:
+(`26877bc69`, which includes 825362d "graphical: seed the joint Dynesty fit"), timed as one
+child process:
 
 | leg | column | cells passed | max a | max b | column s |
 |---|---|---:|---:|---:|---:|
@@ -96,7 +97,8 @@ The CI parity script `autofit_workspace_test/scripts/graphical/analytic_gaussian
 | B | autofit EP | 7/7 | 0.079 | 0.146 | 56.8 |
 
 `PARITY: PASS (41/41)`, both leg-B hard caps pass, wall 130.0 s, peak RSS 332 MiB (the
-docstring's "~85–130 s locally"; an earlier quiet probe the same day took 104.9 s). The
+docstring's "~85–130 s locally"; an earlier probe the same day, at the pre-seeding
+`8b86eca55`, took 104.9 s). The
 closed-form leg-B scatter quantiles are q05/q50/q95 = 2.9797 / 5.9814 / **12.1536**:
 `sigma_q95` matches the value banked in the benchmark's own docstrings, `[q05, q95] =
 [2.98, 12.15]`.

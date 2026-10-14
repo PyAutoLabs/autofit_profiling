@@ -269,6 +269,10 @@ def software():
     return {k: v for k, v in sw.items() if v}, tag or autofit.__version__, bool(dirty)
 
 
+def load_average() -> list[float]:
+    return [round(x, 2) for x in os.getloadavg()]
+
+
 def precision() -> str:
     import jax
 
@@ -294,6 +298,7 @@ def baseline_row(
     correctness: dict,
     reference: dict,
     sw_before: dict,
+    load_before: list[float],
 ) -> dict:
     """One ``autofit-profiling-baseline`` v1 result row (see build_catalogue.py)."""
     sw, library_version, dirty = software()
@@ -351,6 +356,10 @@ def baseline_row(
             "cpu_count": os.cpu_count(),
             "jax_platform": jax.default_backend(),
             "pyautofit_checkout_dirty": dirty,
+            # Host load (1/5/15-min) just before and just after the fit: a contended host
+            # inflates wall times, so the reader can tell a quiet baseline from a busy one.
+            "load_average_before": load_before,
+            "load_average_after": load_average(),
         },
     }
 

@@ -101,6 +101,7 @@ def measure(n: int) -> dict:
     factor_graph = af.FactorGraphModel(*analysis_factor_list, use_jax=True)
     laplace = af.LaplaceOptimiser()
 
+    load_before = shared.load_average()
     t0 = time.perf_counter()
     result = factor_graph.optimise(
         optimiser=laplace,
@@ -157,6 +158,7 @@ def measure(n: int) -> dict:
         correctness=correctness,
         reference=shared.reference_block(REFERENCE_SOURCE, REFERENCE[n], wall_s, correctness),
         sw_before=sw_before,
+        load_before=load_before,
     )
 
 

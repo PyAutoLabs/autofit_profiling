@@ -574,7 +574,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; parity PASS (41/41)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; parity PASS (41/41); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/analytic_gaussian/parity/seed0_n5.json",
@@ -622,7 +622,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; parity PASS (41/41)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; parity PASS (41/41); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/analytic_gaussian/parity/seed0_n5.json",
@@ -670,7 +670,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/ep/N10.json",
@@ -718,7 +718,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/ep/N10.json",
@@ -766,7 +766,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/ep/N3.json",
@@ -814,7 +814,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/ep/N3.json",
@@ -862,7 +862,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/ep/N30.json",
@@ -910,7 +910,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/ep/N30.json",
@@ -958,7 +958,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/graphical/N10.json",
@@ -1006,7 +1006,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/graphical/N10.json",
@@ -1054,7 +1054,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/graphical/N3.json",
@@ -1102,7 +1102,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity PASS (committed baseline PASS); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/graphical/N3.json",
@@ -1150,7 +1150,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/graphical/N30.json",
@@ -1198,7 +1198,7 @@
       },
       "validation": {
         "status": "unreviewed",
-        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL)"
+        "reason": "producer measurement on one laptop host; awaits the profiling conductor's triage; sanity FAIL (committed baseline FAIL); host contended during the run (see provenance.host_contention)"
       },
       "evidence": {
         "path": "results/gaussian_1d_ep/graphical/N30.json",

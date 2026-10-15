@@ -4,7 +4,7 @@
 HPC_HOST=euclid_jump
 
 # Parent directory of the project on RAL.
-HPC_BASE=/mnt/ral/jnightin
+HPC_BASE=/mnt/ral/jnightin/profiling
 
 # Directory name of this project under HPC_BASE. Set explicitly if you run `hpc/sync`
 # from a git worktree, whose directory name is the branch rather than the project.

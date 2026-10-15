@@ -23,7 +23,7 @@
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=james.w.nightingale@durham.ac.uk
 
-export AP_ROOT=/mnt/ral/jnightin/autofit_profiling
+export AP_ROOT=${AP_ROOT:-/mnt/ral/jnightin/profiling/autofit_profiling}
 source $AP_ROOT/activate.sh
 
 export JAX_PLATFORMS=cpu

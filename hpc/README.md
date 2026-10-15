@@ -26,7 +26,7 @@ with `sinfo` before inventing a partition name.
 On the login node:
 
 ```bash
-cd /mnt/ral/jnightin/autofit_profiling
+cd /mnt/ral/jnightin/profiling/autofit_profiling
 source activate.sh          # shared venv + PYTHONPATH at PyAutoNerves and PyAutoFit
 cd hpc/batch_cpu && sbatch submit_<name>
 ```
@@ -61,6 +61,6 @@ from here — a job on RAL never commits.
 
 ### There is no `push`
 
-The RAL copy is a **git clone** at `/mnt/ral/jnightin/autofit_profiling`. Code goes to RAL
+The RAL copy is a **git clone** at `/mnt/ral/jnightin/profiling/autofit_profiling`. Code goes to RAL
 with git on the login node (`git status`, then `git pull`); `hpc/sync push` prints that
 procedure and exits non-zero.

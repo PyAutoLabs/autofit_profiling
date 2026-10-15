@@ -72,7 +72,7 @@ profiling conductor judges.
 
 ## RAL
 
-The RAL copy of this repo is a **git clone** at `/mnt/ral/jnightin/autofit_profiling`.
+The RAL copy of this repo is a **git clone** at `/mnt/ral/jnightin/profiling/autofit_profiling`.
 Code goes over with `git pull` on the login node; results come back with `hpc/sync pull`
 (`cp hpc/sync.conf.example hpc/sync.conf` first; `sync.conf` is gitignored). Runs here are
 CPU runs on `--partition=ral` — there is no `cpu` partition on RAL, and CPU arrays never go

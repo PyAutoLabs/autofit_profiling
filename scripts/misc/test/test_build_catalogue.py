@@ -62,6 +62,114 @@ def _row(variant="search_fit", **components):
     }
 
 
+def _run_row(schema, setup_id, sanity_pass=True):
+    """A whole-run row (EP / graphical baseline or analytic parity)."""
+    row = {
+        "schema": schema,
+        "version": 1,
+        "setup": {
+            "id": setup_id,
+            "label": setup_id,
+            "dataset": setup_id.split("/")[0],
+            "n_datasets": 3,
+            "free_parameters": 7,
+            "data_pixels": 300,
+            "search": "DynestyStatic",
+            "search_settings": {"nlive": 100, "sample": "rwalk", "kl_tol": 0.05},
+            "likelihood": "jax",
+            "config": "cell config",
+        },
+        "method": {
+            "id": "fresh-process-single-fit",
+            "statistic": "single",
+            "repetitions": 1,
+            "warmup": "none",
+            "synchronization": "none",
+            "cache_state": "cold process",
+        },
+        "wall_s": 37.0,
+        "peak_rss_kib": 361472,
+        "correctness": {
+            "sanity_pass": sanity_pass,
+            "truth_log_likelihood_sum": -128.4,
+            "parity": "PASS",
+            "parity_cells_passed": 41,
+            "parity_cells_total": 41,
+            "sigma_q95": 12.1536,
+            "sigma_q95_banked": 12.15,
+            "sigma_q95_matches_banked": True,
+            "legs": {},
+        },
+        "reference": {
+            "wall_s": 251.9,
+            "sanity_pass": sanity_pass,
+            "truth_log_likelihood_sum_matches": True,
+            "wall_drift": {"policy": "runtime-drift-2x-1ms", "ratio": 0.147, "status": "improved"},
+        },
+        "suite": {"parked": {"script": "p.py", "reason": "NEEDS_FIX"}},
+        "identity": {
+            "device": "cpu",
+            "backend": "jax",
+            "precision": "float64",
+            "library_version": "2026.10.12.1",
+            "software": {"PyAutoFit": "0" * 40, "dynesty": "2.1.5"},
+        },
+        "provenance": {"host": "test-host", "measured_at": "2026-10-14T11:00:00Z"},
+    }
+    return row
+
+
+def test_baseline_row_exports_runtime_and_memory_records_only(root):
+    _write(root, "n3.json", _run_row(bc.BASELINE_SCHEMA, "gaussian_1d_ep/ep/N3"))
+    doc, _ = bc.build(root)
+    got = {(r["axis"], r["metric"], r["unit"]) for r in doc["records"]}
+    assert got == {("runtime", "wall", "s"), ("memory", "host_peak_rss", "KiB")}
+    rss = next(r for r in doc["records"] if r["axis"] == "memory")
+    assert rss["measurement"] == {"host_peak_rss": 361472}
+    assert rss["evidence"]["fragment"] == "/peak_rss_kib"
+    setup = doc["setups"][0]
+    assert setup["model"] == "gaussian, centre shared across datasets"
+    assert setup["configuration"]["n_datasets"] == {"value": 3, "unit": "count"}
+    assert setup["configuration"]["sample"] == {"value": "rwalk", "unit": "name"}
+    assert setup["configuration"]["kl_tol"] == {"value": 0.05, "unit": "dimensionless"}
+    assert doc["comparisons"] == [] and len(doc["selections"]) == 2
+
+
+def test_failed_sanity_is_exported_and_named_never_hidden(root):
+    _write(root, "n30.json", _run_row(bc.BASELINE_SCHEMA, "gaussian_1d_ep/ep/N30", False))
+    doc, rows = bc.build(root)
+    assert len(doc["records"]) == 2
+    assert all(
+        "sanity FAIL (committed baseline FAIL)" in r["validation"]["reason"] for r in doc["records"]
+    )
+    assert all(r["validation"]["status"] == "unreviewed" for r in doc["records"])
+    assert "FAIL (FAIL)" in bc.render_html(rows, doc)
+
+
+def test_parity_row_reason_carries_the_parity_verdict(root):
+    _write(root, "p.json", _run_row(bc.PARITY_SCHEMA, "analytic_gaussian/parity/seed0_n5"))
+    doc, rows = bc.build(root)
+    assert {r["axis"] for r in doc["records"]} == {"runtime", "memory"}
+    assert all("parity PASS (41/41)" in r["validation"]["reason"] for r in doc["records"])
+    assert "sigma_q95 12.1536" in bc.render_html(rows, doc)
+
+
+def test_host_contention_is_named_in_the_record_reason(root):
+    row = _run_row(bc.BASELINE_SCHEMA, "gaussian_1d_ep/ep/N30")
+    row["provenance"]["host_contention"] = "load 4.7 on 8 cores"
+    _write(root, "n30.json", row)
+    doc, _ = bc.build(root)
+    assert all("host contended" in r["validation"]["reason"] for r in doc["records"])
+
+
+@pytest.mark.skipif(not (PULSE / "pulse" / "summary.py").is_file(), reason="no PyAutoPulse beside")
+def test_mixed_schemas_validate_with_the_pulse_reader(root):
+    _write(root, "a.json", _row())
+    _write(root, "n3.json", _run_row(bc.BASELINE_SCHEMA, "gaussian_1d_ep/graphical/N3"))
+    _write(root, "p.json", _run_row(bc.PARITY_SCHEMA, "analytic_gaussian/parity/seed0_n5"))
+    assert bc.validate(bc.render(root), PULSE) == "ok"
+
+
 @pytest.fixture
 def root(tmp_path):
     (tmp_path / "results" / "x").mkdir(parents=True)

@@ -1,0 +1,181 @@
+{
+  "schema": "autofit-profiling-baseline",
+  "version": 1,
+  "cell": "gaussian_1d_ep/graphical/baseline",
+  "script": "scripts/gaussian_1d_ep/graphical/baseline.py",
+  "setup": {
+    "id": "gaussian_1d_ep/graphical/N10",
+    "label": "joint DynestyStatic search.fit on factor_graph.global_prior_model, 10 datasets",
+    "dataset": "gaussian_1d_ep",
+    "dataset_description": "N independent 1-D Gaussians (100 pixels, S/N 25, noise 0.04) sharing centre 50; dataset i is numpy default_rng(seed=i); simulated by scripts/gaussian_1d_ep/shared.py",
+    "model": "per dataset af.ex.Gaussian with a shared GaussianPrior(50, 30) centre and TruncatedGaussianPrior normalization (0.5, 2, >0) and sigma (5, 5, >0): 1 + 2N free parameters",
+    "n_datasets": 10,
+    "free_parameters": 21,
+    "data_pixels": 1000,
+    "search": "DynestyStatic (joint)",
+    "search_settings": {
+      "nlive": 50,
+      "sample": "rwalk",
+      "walks": 5,
+      "bound": "multi",
+      "number_of_cores": 1,
+      "n_datasets": 10
+    },
+    "likelihood": "af.ex.Analysis(use_jax=True), af.FactorGraphModel(use_jax=True)",
+    "config": "scripts/gaussian_1d_ep/config (verbatim from the developer packages)"
+  },
+  "method": {
+    "id": "fresh-process-single-fit",
+    "statistic": "single",
+    "repetitions": 1,
+    "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+    "synchronization": "none (JAX CPU, results read back to Python floats)",
+    "cache_state": "cold process; JAX compilation falls inside the timed fit",
+    "timer": "time.perf_counter around the fit call only (simulation, imports and sanity excluded)"
+  },
+  "wall_s": 7.1306849000029615,
+  "peak_rss_kib": 456628,
+  "output_dir_bytes": 2167368,
+  "correctness": {
+    "truth_log_likelihood_sum": -472.2530881754556,
+    "max_log_likelihood": -519.7404542396127,
+    "sanity_pass": true,
+    "sanity_rule": "every parameter |median - truth| <= 3 x mean 1-sigma error, and max logL >= truth logL sum - 5 nats per dataset",
+    "sanity_checks": [
+      {
+        "passed": true,
+        "message": "shared centre: mean=122.9 \u00b1 83 truth=50 |z|=0.88 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_0 normalization: mean=2.007 \u00b1 1.615 truth=0.5 |z|=0.93 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_0 sigma: mean=5.179 \u00b1 2.611 truth=5 |z|=0.07 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_1 normalization: mean=1.461 \u00b1 0.9703 truth=0.5 |z|=0.99 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_1 sigma: mean=5.85 \u00b1 4.135 truth=5 |z|=0.21 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_2 normalization: mean=1.569 \u00b1 1.15 truth=0.5 |z|=0.93 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_2 sigma: mean=4.177 \u00b1 3.588 truth=5 |z|=0.23 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_3 normalization: mean=1.773 \u00b1 1.274 truth=0.5 |z|=1.00 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_3 sigma: mean=5.117 \u00b1 3.871 truth=5 |z|=0.03 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_4 normalization: mean=1.521 \u00b1 1.304 truth=0.5 |z|=0.78 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_4 sigma: mean=4.415 \u00b1 3.028 truth=5 |z|=0.19 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_5 normalization: mean=1.028 \u00b1 1.571 truth=0.5 |z|=0.34 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_5 sigma: mean=5.025 \u00b1 3.319 truth=5 |z|=0.01 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_6 normalization: mean=0.7339 \u00b1 0.9571 truth=0.5 |z|=0.24 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_6 sigma: mean=4.202 \u00b1 3.615 truth=5 |z|=0.22 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_7 normalization: mean=1.56 \u00b1 1.329 truth=0.5 |z|=0.80 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_7 sigma: mean=6.405 \u00b1 3.313 truth=5 |z|=0.42 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_8 normalization: mean=1.653 \u00b1 1.433 truth=0.5 |z|=0.80 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_8 sigma: mean=4.74 \u00b1 3.166 truth=5 |z|=0.08 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_9 normalization: mean=1.882 \u00b1 0.9673 truth=0.5 |z|=1.43 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_9 sigma: mean=6.922 \u00b1 4.263 truth=5 |z|=0.45 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "max_log_likelihood: -519.740 vs truth_sum=-472.253 (N=10, tol=5.0/dset, threshold=-522.253) -> PASS"
+      }
+    ]
+  },
+  "reference": {
+    "source": "autofit_workspace_developer/graphical/profiles/baseline.json @ 07b92ace3b3afa51afb914c17972f6fcbe17d994",
+    "wall_s": 50.74623470000006,
+    "peak_rss_kb": 864280,
+    "truth_log_likelihood_sum": -472.2530881754556,
+    "sanity_pass": true,
+    "wall_drift": {
+      "policy": "runtime-drift-2x-1ms",
+      "ratio": 0.141,
+      "status": "improved"
+    },
+    "truth_log_likelihood_sum_matches": true,
+    "sanity_pass_matches": true,
+    "postfix_wall_s": 14.934478999999556,
+    "postfix_source": "autofit_workspace_developer/graphical/profiles/postfix_N10_summary.json @ 27f0a3a9fac4484e71b2aeaeb877a9c77204fc4f",
+    "postfix_wall_drift": {
+      "policy": "runtime-drift-2x-1ms",
+      "ratio": 0.477,
+      "status": "improved"
+    },
+    "max_log_likelihood": -519.3259230865922
+  },
+  "identity": {
+    "device": "cpu",
+    "backend": "jax",
+    "precision": "float64",
+    "library_version": "2026.10.12.1",
+    "software": {
+      "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+      "dynesty": "2.1.5",
+      "jax": "0.10.2",
+      "numpy": "2.2.6",
+      "scipy": "1.17.1",
+      "python": "3.12.10",
+      "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d"
+    }
+  },
+  "provenance": {
+    "host": "DESKTOP-H143S82",
+    "measured_at": "2026-10-14T14:25:32Z",
+    "platform": "Linux-5.10.16.3-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "cpu_count": 8,
+    "jax_platform": "cpu",
+    "pyautofit_checkout_dirty": false,
+    "host_contention": "contended: another session's CPU jobs (PyAutoFit pytest, seeded Dynesty runs) shared this 8-core host; uptime load average 2.54 at start \u2192 ~3.0 by its end (15:25\u201315:27 BST) during the run (recorded post hoc from the session's uptime log; the cell now records load_average_before/after); seconds are conservative"
+  }
+}

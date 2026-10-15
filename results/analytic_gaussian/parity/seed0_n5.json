@@ -1,0 +1,172 @@
+{
+  "schema": "autofit-profiling-parity",
+  "version": 1,
+  "cell": "analytic_gaussian/parity/benchmark",
+  "script": "scripts/analytic_gaussian/parity/benchmark.py",
+  "setup": {
+    "id": "analytic_gaussian/parity/seed0_n5",
+    "label": "analytic Gaussian parity: closed form | minimal EP | autofit graphical | autofit EP",
+    "dataset": "analytic_gaussian",
+    "dataset_description": "conjugate hierarchical Gaussian, seed 0, N = 5 datasets of 20 points, truth mu = 50, sigma = 10, noise s_i = linspace(3, 8), simulated in memory",
+    "model": "leg A: mu, x_1..x_5 with sigma = 10 known (6 parameters); leg B: sigma ~ TruncatedGaussian(10, 5, 0, 100) added (7 parameters)",
+    "n_datasets": 5,
+    "free_parameters": 7,
+    "data_pixels": 100,
+    "search": "DynestyStatic (graphical) + LaplaceOptimiser(projection='moments') (EP)",
+    "search_settings": {
+      "nlive": 100,
+      "sample": "unif",
+      "maxcall": 30000,
+      "seed": 0,
+      "kl_tol": 0.0001,
+      "max_steps": 30
+    },
+    "likelihood": "numpy (GaussianDataAnalysis, no JAX)",
+    "config": "autofit_workspace_test config (the parity script's CI home)",
+    "benchmark_script": "autofit_workspace_test/scripts/graphical/analytic_gaussian.py"
+  },
+  "method": {
+    "id": "parity-script-subprocess-wall",
+    "statistic": "single",
+    "repetitions": 1,
+    "warmup": "none; one run of the parity script in a fresh child process",
+    "synchronization": "none (numpy, single process)",
+    "cache_state": "cold process; imports inside the timed interval",
+    "timer": "time.perf_counter around the whole child process; peak RSS is the child's ru_maxrss"
+  },
+  "wall_s": 130.01728060000096,
+  "peak_rss_kib": 340284,
+  "exit_code": 0,
+  "correctness": {
+    "legs": {
+      "A": {
+        "columns": {
+          "minimal EP": {
+            "passed": 6,
+            "cells": 6,
+            "max_a": 0.0,
+            "max_b": 0.0
+          },
+          "autofit graphical": {
+            "passed": 6,
+            "cells": 6,
+            "max_a": 0.065,
+            "max_b": 0.058
+          },
+          "autofit EP": {
+            "passed": 6,
+            "cells": 6,
+            "max_a": 0.0,
+            "max_b": 0.0
+          }
+        },
+        "cells_passed": 18,
+        "cells_total": 18,
+        "hard_caps": [],
+        "column_runtimes_s": {
+          "closed form": 0.0,
+          "minimal EP": 0.0,
+          "autofit graphical": 24.5,
+          "autofit EP": 1.9
+        }
+      },
+      "B": {
+        "columns": {
+          "minimal EP": {
+            "passed": 7,
+            "cells": 7,
+            "max_a": 0.078,
+            "max_b": 0.146
+          },
+          "autofit graphical": {
+            "passed": 7,
+            "cells": 7,
+            "max_a": 0.05,
+            "max_b": 0.041
+          },
+          "autofit EP": {
+            "passed": 7,
+            "cells": 7,
+            "max_a": 0.079,
+            "max_b": 0.146
+          }
+        },
+        "cells_passed": 23,
+        "cells_total": 23,
+        "hard_caps": [
+          {
+            "passed": true,
+            "message": "minimal EP E[sigma] = 6.3423 inside closed-form [q05, q95] = [2.9797, 12.1536]"
+          },
+          {
+            "passed": true,
+            "message": "autofit EP E[sigma] = 6.3401 inside closed-form [q05, q95] = [2.9797, 12.1536]"
+          }
+        ],
+        "column_runtimes_s": {
+          "closed form": 0.0,
+          "minimal EP": 0.0,
+          "autofit graphical": 44.4,
+          "autofit EP": 56.8
+        },
+        "sigma_quantiles": {
+          "sigma_q05": 2.9797,
+          "sigma_q50": 5.9814,
+          "sigma_q95": 12.1536
+        }
+      }
+    },
+    "parity": "PASS",
+    "parity_cells_passed": 41,
+    "parity_cells_total": 41,
+    "sanity_pass": true,
+    "sanity_rule": "the parity script's own PARITY verdict (tolerances never loosened)",
+    "sigma_q95": 12.1536,
+    "sigma_q95_banked": 12.15,
+    "sigma_q95_matches_banked": true,
+    "sigma_q05_matches_banked": true,
+    "banked_source": "autofit_workspace_test/scripts/graphical/analytic_gaussian.py and analytic_gaussian_collapse.py docstrings ([q05, q95] = [2.98, 12.15], seed 0)"
+  },
+  "suite": {
+    "parity_script": "scripts/graphical/analytic_gaussian.py (run)",
+    "imported": [
+      "analytic_reference.py",
+      "analytic_ep_minimal.py",
+      "analytic_autofit.py"
+    ],
+    "not_profiled": [
+      "analytic_gaussian_collapse.py (separate CI smoke script)"
+    ],
+    "parked": {
+      "script": "graphical/analytic_gaussian_priors.py",
+      "status": "not run",
+      "reason": "NEEDS_FIX 2026-09-30 - moments projection (PyAutoFit#1656) passes the gaussian and truncated scatter families (16/16 each) but the loggaussian family misses 11/16: log-space scatter comes back at log sigma 3.28 vs mode 1.53 / reference 1.83 - TransformedMessage moments path suspected; see PyAutoMind draft/bug/autofit/ep_moments_loggaussian_transformed_scatter.md"
+    }
+  },
+  "reference": {
+    "documented_runtime": "the script runs in ~85-130 s locally against the 300 s CI cap (its docstring)"
+  },
+  "identity": {
+    "device": "cpu",
+    "backend": "numpy",
+    "precision": "float64",
+    "library_version": "2026.10.12.1",
+    "software": {
+      "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+      "autofit_workspace_test": "26877bc69b4a0302f5be9106ec735bebf89d2a1a",
+      "dynesty": "2.1.5",
+      "numpy": "2.2.6",
+      "scipy": "1.17.1",
+      "python": "3.12.10",
+      "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d"
+    }
+  },
+  "provenance": {
+    "host": "DESKTOP-H143S82",
+    "measured_at": "2026-10-14T14:45:45Z",
+    "platform": "Linux-5.10.16.3-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "cpu_count": 8,
+    "pyautofit_checkout_dirty": false,
+    "host_contention": "contended: another session's CPU jobs (PyAutoFit pytest, seeded Dynesty runs) shared this 8-core host; uptime load average 3.43 \u2192 4.67 (15:43\u201315:45 BST) during the run (recorded post hoc from the session's uptime log; the cell now records load_average_before/after); seconds are conservative"
+  }
+}

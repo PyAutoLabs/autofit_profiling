@@ -1,0 +1,25 @@
+hpc:
+  hpc_mode: false
+  iterations_per_quick_update: 250000
+  iterations_per_full_update: 1e99
+output:
+  force_pickle_overwrite: false
+  force_visualize_overwrite: false
+  info_whitespace_length: 80
+  log_level: INFO
+  log_to_file: false
+  log_file: output.log
+  model_results_decimal_places: 3
+  remove_files: false
+  samples_to_csv: true
+  unconverged_sample_size: 100
+parallel:
+  warn_environment_variables: true
+profiling:
+  parallel_profile: false
+  repeats: 1
+test:
+  check_likelihood_function: true
+  lh_timeout_seconds:
+version:
+  workspace_version_check: false

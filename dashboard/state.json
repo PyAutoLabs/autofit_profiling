@@ -3,8 +3,8 @@
   "organ": "autofit_profiling",
   "repo": "autofit_profiling",
   "status": "green",
-  "headline": "2 setups \u00b7 17 records (search.fit breakdown); no drift policy yet \u2014 baseline only, not a verdict",
-  "updated": "2026-10-14T09:19:45Z",
+  "headline": "9 setups \u00b7 31 records (search.fit breakdown, EP / graphical baselines, analytic parity) \u2014 baseline only, not a verdict",
+  "updated": "2026-10-14T14:45:45Z",
   "pages_url": "https://pyautolabs.github.io/autofit_profiling/",
   "items": []
 }

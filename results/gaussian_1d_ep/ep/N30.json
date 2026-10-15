@@ -1,0 +1,330 @@
+{
+  "schema": "autofit-profiling-baseline",
+  "version": 1,
+  "cell": "gaussian_1d_ep/ep/baseline",
+  "script": "scripts/gaussian_1d_ep/ep/baseline.py",
+  "setup": {
+    "id": "gaussian_1d_ep/ep/N30",
+    "label": "factor_graph.optimise EP, 30 datasets (per-factor DynestyStatic + Laplace cavity)",
+    "dataset": "gaussian_1d_ep",
+    "dataset_description": "N independent 1-D Gaussians (100 pixels, S/N 25, noise 0.04) sharing centre 50; dataset i is numpy default_rng(seed=i); simulated by scripts/gaussian_1d_ep/shared.py",
+    "model": "per dataset af.ex.Gaussian with a shared GaussianPrior(50, 30) centre and TruncatedGaussianPrior normalization (0.5, 2, >0) and sigma (5, 5, >0): 1 + 2N free parameters",
+    "n_datasets": 30,
+    "free_parameters": 61,
+    "data_pixels": 3000,
+    "search": "DynestyStatic+LaplaceOptimiser (EP)",
+    "search_settings": {
+      "nlive": 100,
+      "sample": "rwalk",
+      "optimiser": "LaplaceOptimiser",
+      "kl_tol": 0.05,
+      "max_steps": 5,
+      "n_datasets": 30
+    },
+    "likelihood": "af.ex.Analysis(use_jax=True), af.FactorGraphModel(use_jax=True)",
+    "config": "scripts/gaussian_1d_ep/config (verbatim from the developer packages)"
+  },
+  "method": {
+    "id": "fresh-process-single-fit",
+    "statistic": "single",
+    "repetitions": 1,
+    "warmup": "none; one fit per fresh process from an empty output directory (never a resume)",
+    "synchronization": "none (JAX CPU, results read back to Python floats)",
+    "cache_state": "cold process; JAX compilation falls inside the timed fit",
+    "timer": "time.perf_counter around the fit call only (simulation, imports and sanity excluded)"
+  },
+  "wall_s": 842.7632974000007,
+  "peak_rss_kib": 657556,
+  "output_dir_bytes": 27103933,
+  "correctness": {
+    "truth_log_likelihood_sum": -1500.5605499266132,
+    "max_log_likelihood": null,
+    "max_log_likelihood_reason": "EP returns marginal messages, not a joint max-likelihood sample",
+    "sanity_pass": false,
+    "sanity_rule": "every parameter |mean - truth| <= 3 sigma of its EP mean-field message",
+    "sanity_checks": [
+      {
+        "passed": false,
+        "message": "shared centre: mean=49.26 \u00b1 0.1104 truth=50 |z|=6.68 (k=3.0) -> FAIL"
+      },
+      {
+        "passed": true,
+        "message": "dset_0 normalization: mean=0.8847 \u00b1 0.2325 truth=0.5 |z|=1.65 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_0 sigma: mean=5.954 \u00b1 1.993 truth=5 |z|=0.48 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_1 normalization: mean=0.4343 \u00b1 0.2059 truth=0.5 |z|=0.32 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_1 sigma: mean=4.379 \u00b1 2.477 truth=5 |z|=0.25 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_2 normalization: mean=0.7024 \u00b1 0.2076 truth=0.5 |z|=0.97 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_2 sigma: mean=6.521 \u00b1 2.134 truth=5 |z|=0.71 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_3 normalization: mean=0.49 \u00b1 0.1561 truth=0.5 |z|=0.06 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_3 sigma: mean=4.108 \u00b1 1.6 truth=5 |z|=0.56 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_4 normalization: mean=0.502 \u00b1 0.2142 truth=0.5 |z|=0.01 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_4 sigma: mean=6.681 \u00b1 3.064 truth=5 |z|=0.55 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_5 normalization: mean=0.426 \u00b1 0.2021 truth=0.5 |z|=0.37 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_5 sigma: mean=7.251 \u00b1 2.906 truth=5 |z|=0.77 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_6 normalization: mean=0.6136 \u00b1 0.27 truth=0.5 |z|=0.42 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_6 sigma: mean=7.14 \u00b1 2.922 truth=5 |z|=0.73 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_7 normalization: mean=0.6083 \u00b1 0.2037 truth=0.5 |z|=0.53 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_7 sigma: mean=5.353 \u00b1 1.984 truth=5 |z|=0.18 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_8 normalization: mean=0.5318 \u00b1 0.2276 truth=0.5 |z|=0.14 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_8 sigma: mean=8.108 \u00b1 3.053 truth=5 |z|=1.02 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_9 normalization: mean=0.3277 \u00b1 0.1871 truth=0.5 |z|=0.92 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_9 sigma: mean=6.601 \u00b1 3.169 truth=5 |z|=0.51 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_10 normalization: mean=0.3333 \u00b1 0.1771 truth=0.5 |z|=0.94 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_10 sigma: mean=6.171 \u00b1 3.123 truth=5 |z|=0.37 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_11 normalization: mean=0.5155 \u00b1 0.2098 truth=0.5 |z|=0.07 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_11 sigma: mean=5.427 \u00b1 2.745 truth=5 |z|=0.16 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_12 normalization: mean=0.8532 \u00b1 0.2174 truth=0.5 |z|=1.62 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_12 sigma: mean=7.481 \u00b1 1.624 truth=5 |z|=1.53 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_13 normalization: mean=0.724 \u00b1 0.1775 truth=0.5 |z|=1.26 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_13 sigma: mean=5.412 \u00b1 1.603 truth=5 |z|=0.26 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_14 normalization: mean=0.6351 \u00b1 0.1871 truth=0.5 |z|=0.72 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_14 sigma: mean=5.27 \u00b1 1.967 truth=5 |z|=0.14 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_15 normalization: mean=0.6642 \u00b1 0.1761 truth=0.5 |z|=0.93 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_15 sigma: mean=5.203 \u00b1 1.764 truth=5 |z|=0.12 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_16 normalization: mean=0.7836 \u00b1 0.2578 truth=0.5 |z|=1.10 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_16 sigma: mean=8.098 \u00b1 2.849 truth=5 |z|=1.09 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_17 normalization: mean=0.2706 \u00b1 0.2438 truth=0.5 |z|=0.94 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_17 sigma: mean=6.091 \u00b1 3.505 truth=5 |z|=0.31 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_18 normalization: mean=0.3826 \u00b1 0.241 truth=0.5 |z|=0.49 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_18 sigma: mean=6.532 \u00b1 3.052 truth=5 |z|=0.50 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_19 normalization: mean=0.6719 \u00b1 0.1932 truth=0.5 |z|=0.89 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_19 sigma: mean=5.41 \u00b1 1.672 truth=5 |z|=0.25 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_20 normalization: mean=0.4624 \u00b1 0.1734 truth=0.5 |z|=0.22 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_20 sigma: mean=5.693 \u00b1 2.1 truth=5 |z|=0.33 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_21 normalization: mean=0.4277 \u00b1 0.1824 truth=0.5 |z|=0.40 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_21 sigma: mean=5.499 \u00b1 2.908 truth=5 |z|=0.17 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_22 normalization: mean=0.8871 \u00b1 0.1706 truth=0.5 |z|=2.27 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_22 sigma: mean=4.102 \u00b1 0.9057 truth=5 |z|=0.99 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_23 normalization: mean=0.4175 \u00b1 0.2003 truth=0.5 |z|=0.41 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_23 sigma: mean=7.8 \u00b1 2.811 truth=5 |z|=1.00 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_24 normalization: mean=0.3059 \u00b1 0.4634 truth=0.5 |z|=0.42 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_24 sigma: mean=3.854 \u00b1 3.702 truth=5 |z|=0.31 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_25 normalization: mean=0.9603 \u00b1 0.2003 truth=0.5 |z|=2.30 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_25 sigma: mean=4.796 \u00b1 1.246 truth=5 |z|=0.16 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_26 normalization: mean=0.8022 \u00b1 0.2605 truth=0.5 |z|=1.16 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_26 sigma: mean=8.818 \u00b1 2.787 truth=5 |z|=1.37 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_27 normalization: mean=0.7388 \u00b1 0.2126 truth=0.5 |z|=1.12 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_27 sigma: mean=5.715 \u00b1 1.947 truth=5 |z|=0.37 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_28 normalization: mean=0.4679 \u00b1 0.2881 truth=0.5 |z|=0.11 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_28 sigma: mean=9.144 \u00b1 3.801 truth=5 |z|=1.09 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_29 normalization: mean=0.8303 \u00b1 0.2651 truth=0.5 |z|=1.25 (k=3.0) -> PASS"
+      },
+      {
+        "passed": true,
+        "message": "dset_29 sigma: mean=8.619 \u00b1 2.572 truth=5 |z|=1.41 (k=3.0) -> PASS"
+      }
+    ]
+  },
+  "reference": {
+    "source": "autofit_workspace_developer/ep/profiles/baseline.json @ 07b92ace3b3afa51afb914c17972f6fcbe17d994",
+    "wall_s": 1758.7042256000004,
+    "peak_rss_kb": 1149596,
+    "truth_log_likelihood_sum": -1500.5605499266132,
+    "sanity_pass": false,
+    "wall_drift": {
+      "policy": "runtime-drift-2x-1ms",
+      "ratio": 0.479,
+      "status": "improved"
+    },
+    "truth_log_likelihood_sum_matches": true,
+    "sanity_pass_matches": true
+  },
+  "identity": {
+    "device": "cpu",
+    "backend": "jax",
+    "precision": "float64",
+    "library_version": "2026.10.12.1",
+    "software": {
+      "PyAutoFit": "df6d218f10cd75a7f0d79bb03dca5c131fd29d33",
+      "dynesty": "2.1.5",
+      "jax": "0.10.2",
+      "numpy": "2.2.6",
+      "scipy": "1.17.1",
+      "python": "3.12.10",
+      "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d"
+    }
+  },
+  "provenance": {
+    "host": "DESKTOP-H143S82",
+    "measured_at": "2026-10-14T14:43:14Z",
+    "platform": "Linux-5.10.16.3-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "cpu_count": 8,
+    "jax_platform": "cpu",
+    "pyautofit_checkout_dirty": false,
+    "host_contention": "contended: another session's CPU jobs (PyAutoFit pytest, seeded Dynesty runs) shared this 8-core host; uptime load average 3.48 \u2192 4.67 (15:38\u201315:43 BST) during the run (recorded post hoc from the session's uptime log; the cell now records load_average_before/after); seconds are conservative"
+  }
+}

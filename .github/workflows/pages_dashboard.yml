@@ -62,14 +62,19 @@ jobs:
           path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Mint a pyautolabs-bot token for the PyAutoPulse dispatch
+        id: app
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.APP_CLIENT_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: PyAutoLabs
+          repositories: PyAutoPulse
+          permission-contents: write
       - name: Tell the PyAutoPulse dashboard to refresh (repository_dispatch pulse-refresh)
         env:
-          GH_TOKEN: ${{ secrets.PAT_PYAUTOLABS }}
+          GH_TOKEN: ${{ steps.app.outputs.token }}
         run: |
-          if [ -z "$GH_TOKEN" ]; then
-            echo "::warning::PAT_PYAUTOLABS is not available to this repo — skipping the pulse-refresh dispatch to PyAutoLabs/PyAutoPulse."
-            exit 0
-          fi
           sha=$(git rev-parse HEAD)
           gh api repos/PyAutoLabs/PyAutoPulse/dispatches \
             -f event_type=pulse-refresh \

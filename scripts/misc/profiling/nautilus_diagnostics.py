@@ -283,6 +283,9 @@ def evidence(case, checkpoint, target, log):
                 case["resample_seed"]
             ).bit_generator.state
         discard_saved_exploration(sampler)
+        # Incremental native shell writes omit the discard flag.
+        # Persist the changed mode first so a capped copy can be reopened correctly.
+        sampler.write(str(checkpoint), overwrite=True)
         with log.stage("fresh_sampling"):
             converged = sampler.run(
                 n_eff=10000, n_shell=100, discard_exploration=True, verbose=False

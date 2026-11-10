@@ -1,0 +1,10 @@
+{
+  "status": "success",
+  "discard_mode_survived_native_reload": true,
+  "selected_samples": 0,
+  "n_like_before": 34100,
+  "n_like_after": 34100,
+  "likelihood_calls_added": 0,
+  "originals_unchanged": true,
+  "note": "Post-measurement corrective smoke; no resampling and no retry of capped case."
+}

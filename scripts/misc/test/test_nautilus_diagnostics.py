@@ -135,3 +135,146 @@ def test_patches_restore_after_exception(tmp_path):
         Example().call()
     assert Example.call is original
     assert stage_summary(log.path)["completed"][0]["status"] == "error"
+
+
+def test_timeout_cannot_promote_a_child_success_or_run_next_case(tmp_path, monkeypatch):
+    import importlib.util
+    from pathlib import Path
+
+    path = Path(__file__).resolve().parents[2] / "analytic_gaussian/nautilus/diagnose.py"
+    spec = importlib.util.spec_from_file_location("diagnostic_cli", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    p = plan()
+    for i, case in enumerate(p["cases"]):
+        case["id"] = str(i)
+    p["sha256"] = fingerprint({k: v for k, v in p.items() if k != "sha256"})
+    monkeypatch.setattr(module, "host_snapshot", lambda: {"load": [0], "affinity": [0]})
+    monkeypatch.setattr(module, "memory_available", lambda: 10 * 1024**3)
+    monkeypatch.setattr(module, "check_inputs", lambda p: None)
+    calls = []
+
+    def launch(command, **kwargs):
+        directory = Path(command[-1])
+        (directory / "child.json").write_text('{"status":"success"}')
+        calls.append(command)
+        return object()
+
+    monkeypatch.setattr(module.subprocess, "Popen", launch)
+    monkeypatch.setattr(
+        module, "supervise", lambda *a: {"returncode": 124, "termination_reason": "timeout"}
+    )
+    output = tmp_path / "pilot"
+    assert module.run(p, output) == 1
+    state = json.loads((output / "state.json").read_text())
+    assert state["status"] == "halted"
+    assert state["attempts"][0]["status"] == "timeout"
+    assert len(calls) == 1 and len(state["unrun"]) == 5
+    with pytest.raises(FileExistsError):
+        module.run(p, output)  # No restart silently resets the budget.
+
+
+def test_output_replay_rejects_even_a_swallowed_likelihood_attempt(tmp_path, monkeypatch):
+    import sys
+    from types import ModuleType
+
+    import profiling.nautilus_baseline as baseline
+    from profiling.nautilus_diagnostics import output_replay
+
+    def owner(names):
+        return type("Fake", (), {n: lambda *a, **k: None for n in names})
+
+    classes = {
+        "autofit.non_linear.paths.directory": (
+            "DirectoryPaths",
+            owner(["save_samples", "save_samples_summary"]),
+        ),
+        "autofit.non_linear.samples.pdf": (
+            "SamplesPDF",
+            owner(["summary", "samples_drawn_randomly_via_pdf_from"]),
+        ),
+        "autofit.non_linear.search.abstract_search": (
+            "NonLinearSearch",
+            owner(["samples_from", "pre_fit_output", "post_fit_output"]),
+        ),
+        "autofit.non_linear.search.updater": (
+            "SearchUpdater",
+            owner(
+                ["_save_samples", "_compute_latent_samples", "visualize", "_profile_and_summarize"]
+            ),
+        ),
+    }
+
+    class FakeSampler:
+        def __init__(self, **kwargs):
+            self.n_like = 34100
+
+        def evaluate_likelihood(self):
+            raise AssertionError("original evaluation must never run")
+
+        def run(self):
+            pass
+
+    classes["nautilus"] = ("Sampler", FakeSampler)
+    for name, (attr, cls) in classes.items():
+        module = ModuleType(name)
+        setattr(module, attr, cls)
+        monkeypatch.setitem(sys.modules, name, module)
+    original = FakeSampler.evaluate_likelihood
+
+    def replay(*args):
+        sampler = FakeSampler()
+        with pytest.raises(RuntimeError, match="attempted likelihood"):
+            sampler.evaluate_likelihood()
+
+    monkeypatch.setattr(baseline, "run_wrapped", replay)
+    with pytest.raises(ValueError, match="invalid"):
+        output_replay(
+            {"original_n_like": 34100},
+            tmp_path / "copy.hdf5",
+            None,
+            tmp_path,
+            StageLog(tmp_path / "stages.jsonl"),
+        )
+    assert FakeSampler.evaluate_likelihood is original
+
+
+def test_report_keeps_timeout_and_unrun_cases_separate(tmp_path, monkeypatch):
+    import importlib.util
+    from pathlib import Path
+
+    path = Path(__file__).resolve().parents[2] / "analytic_gaussian/nautilus/diagnose_report.py"
+    spec = importlib.util.spec_from_file_location("diagnostic_report", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    p = plan()
+    p["interpretation"] = "conditional repetitions"
+    for i, case in enumerate(p["cases"]):
+        case.update(
+            id=str(i),
+            result=f"archive/{i}/result.json",
+            checkpoint=f"archive/{i}/checkpoint.hdf5",
+            original_logZ_error=-0.9,
+        )
+    p["sha256"] = fingerprint({k: v for k, v in p.items() if k != "sha256"})
+    root = tmp_path / "input"
+    (root / "0").mkdir(parents=True)
+    row = {
+        "case": "0",
+        "status": "timeout",
+        "child": {"status": "success", "fresh_only": {"logZ_error": 0}},
+        "stages": {"completed": [], "incomplete": []},
+    }
+    (root / "0/result.json").write_text(json.dumps(row))
+    (root / "plan.json").write_text(json.dumps(p))
+    (root / "state.json").write_text(
+        json.dumps({"status": "halted", "spent_s": 120, "attempts": [row]})
+    )
+    monkeypatch.setattr(module, "check_inputs", lambda p: None)
+    out = tmp_path / "report"
+    module.export(root, out)
+    rows = json.loads((out / "summary.json").read_text())["coverage"]
+    assert rows[0]["fresh_logZ_error"] is None
+    assert rows[0]["eligible_as_success"] is False
+    assert [r["status"] for r in rows] == ["timeout"] + ["unrun"] * 5
+    assert "partial-checkpoint.json" not in (out / "report.html").read_text()

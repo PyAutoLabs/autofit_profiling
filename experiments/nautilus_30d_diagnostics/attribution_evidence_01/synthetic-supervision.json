@@ -1,0 +1,8 @@
+{
+  "returncode": 0,
+  "termination_reason": null,
+  "sampled_group_peak_rss_bytes": 183922688,
+  "memory_limit_bytes": 4294967296,
+  "rss_sample_interval_s": 0.05,
+  "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+}

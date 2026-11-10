@@ -1,0 +1,8 @@
+{
+  "byte_identical": true,
+  "original_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+  "copied_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+  "new_sampler_likelihood_calls": 0,
+  "summary_timing_calls": 1,
+  "posterior_hash_verified": true
+}

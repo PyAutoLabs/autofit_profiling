@@ -1,0 +1,24 @@
+{
+  "status": "success",
+  "panels": {
+    "hist_2d": 1,
+    "kde_1d": 2
+  },
+  "labels": [
+    "agg_draw",
+    "figure_draw",
+    "hist_kernel",
+    "histogram2d",
+    "image_write",
+    "kde_kernel",
+    "make_axes",
+    "panel_hist_2d",
+    "panel_kde_1d",
+    "pcolormesh",
+    "plot_2d",
+    "quantile",
+    "savefig",
+    "set_labels",
+    "shared_axes"
+  ]
+}

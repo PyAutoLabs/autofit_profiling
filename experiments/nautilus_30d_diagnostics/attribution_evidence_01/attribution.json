@@ -1,0 +1,112 @@
+{
+  "schema": "nautilus-plot-attribution@1",
+  "elapsed_s": 103.8469470759992,
+  "completed": {
+    "make_axes": {
+      "calls": 1,
+      "errors": 0,
+      "inclusive_s": 5.017711517000862,
+      "self_s": 5.017711517000862
+    },
+    "plot_2d/panel_kde_1d/kde_kernel/quantile": {
+      "calls": 60,
+      "errors": 0,
+      "inclusive_s": 0.35942267200334754,
+      "self_s": 0.35942267200334754
+    },
+    "plot_2d/panel_kde_1d/kde_kernel": {
+      "calls": 30,
+      "errors": 0,
+      "inclusive_s": 5.915568484997493,
+      "self_s": 5.556145812994146
+    },
+    "plot_2d/panel_kde_1d": {
+      "calls": 30,
+      "errors": 0,
+      "inclusive_s": 6.265927385004034,
+      "self_s": 0.35035890000654035
+    },
+    "plot_2d/panel_hist_2d/hist_kernel/quantile": {
+      "calls": 1740,
+      "errors": 0,
+      "inclusive_s": 10.406860538982073,
+      "self_s": 10.406860538982073
+    },
+    "plot_2d/panel_hist_2d/hist_kernel/histogram2d": {
+      "calls": 435,
+      "errors": 0,
+      "inclusive_s": 0.7847039899970696,
+      "self_s": 0.7847039899970696
+    },
+    "plot_2d/panel_hist_2d/hist_kernel/pcolormesh": {
+      "calls": 435,
+      "errors": 0,
+      "inclusive_s": 0.4716326409834437,
+      "self_s": 0.4716326409834437
+    },
+    "plot_2d/panel_hist_2d/hist_kernel": {
+      "calls": 435,
+      "errors": 0,
+      "inclusive_s": 12.035451117015327,
+      "self_s": 0.37225394705274084
+    },
+    "plot_2d/panel_hist_2d": {
+      "calls": 435,
+      "errors": 0,
+      "inclusive_s": 22.828930774987384,
+      "self_s": 10.793479657972057
+    },
+    "plot_2d": {
+      "calls": 1,
+      "errors": 0,
+      "inclusive_s": 43.00883913899452,
+      "self_s": 13.9139809790031
+    },
+    "shared_axes": {
+      "calls": 1,
+      "errors": 0,
+      "inclusive_s": 4.793684431000656,
+      "self_s": 4.793684431000656
+    },
+    "set_labels": {
+      "calls": 1,
+      "errors": 0,
+      "inclusive_s": 0.01953263799805427,
+      "self_s": 0.01953263799805427
+    },
+    "legend": {
+      "calls": 1,
+      "errors": 0,
+      "inclusive_s": 0.001520371000879095,
+      "self_s": 0.001520371000879095
+    },
+    "savefig/agg_draw/figure_draw": {
+      "calls": 1,
+      "errors": 0,
+      "inclusive_s": 21.519126875999063,
+      "self_s": 21.519126875999063
+    },
+    "savefig/agg_draw": {
+      "calls": 1,
+      "errors": 0,
+      "inclusive_s": 21.520371429998704,
+      "self_s": 0.0012445539996406296
+    },
+    "savefig/image_write": {
+      "calls": 1,
+      "errors": 0,
+      "inclusive_s": 0.09534235899991472,
+      "self_s": 0.09534235899991472
+    },
+    "savefig": {
+      "calls": 1,
+      "errors": 0,
+      "inclusive_s": 21.628039545998035,
+      "self_s": 0.012325756999416626
+    }
+  },
+  "active": [],
+  "logging_s": 4.111741979006183,
+  "writes": 947,
+  "note": "Nested inclusive times overlap. Self time excludes timed children. Both exclude snapshot I/O. Active frames and unfinished-panel counters are incomplete; last write's own I/O is not in its receipt."
+}

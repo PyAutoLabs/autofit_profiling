@@ -1,0 +1,268 @@
+{
+  "status": "complete",
+  "attempts": [
+    {
+      "case": "plot-thirty-small",
+      "status": "success",
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.46435546875,
+          0.72802734375,
+          0.82861328125
+        ],
+        "time": 1794325732.814333
+      },
+      "process_wall_s": 114.76796561400079,
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 1087815680,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "stages": {
+        "completed": [
+          {
+            "stage": "pre_fit_output",
+            "status": "exit",
+            "wall_s": 0.008327348999955575
+          },
+          {
+            "stage": "run",
+            "status": "exit",
+            "wall_s": 0.007753457000944763
+          },
+          {
+            "stage": "samples_from",
+            "status": "exit",
+            "wall_s": 4.968851353998616
+          },
+          {
+            "stage": "summary",
+            "status": "exit",
+            "wall_s": 4.5572329070000706
+          },
+          {
+            "stage": "save_samples",
+            "status": "exit",
+            "wall_s": 2.5121177099990746
+          },
+          {
+            "stage": "save_samples_summary",
+            "status": "exit",
+            "wall_s": 0.004500090000874479
+          },
+          {
+            "stage": "_save_samples",
+            "status": "exit",
+            "wall_s": 12.066978396000195
+          },
+          {
+            "stage": "samples_drawn_randomly_via_pdf_from",
+            "status": "exit",
+            "wall_s": 0.004115789999559638
+          },
+          {
+            "stage": "_compute_latent_samples",
+            "status": "exit",
+            "wall_s": 0.009728640001412714
+          },
+          {
+            "stage": "axes_construction",
+            "status": "exit",
+            "wall_s": 5.0128894970002875
+          },
+          {
+            "stage": "posterior_plotting",
+            "status": "exit",
+            "wall_s": 47.03935970999919
+          },
+          {
+            "stage": "png_export",
+            "status": "exit",
+            "wall_s": 21.65380381000068
+          },
+          {
+            "stage": "search_corner",
+            "status": "exit",
+            "wall_s": 78.87415934599994
+          },
+          {
+            "stage": "visualize",
+            "status": "exit",
+            "wall_s": 78.88429583799916
+          },
+          {
+            "stage": "_profile_and_summarize",
+            "status": "exit",
+            "wall_s": 2.6819919889985613
+          },
+          {
+            "stage": "summary",
+            "status": "exit",
+            "wall_s": 7.512107890999687
+          },
+          {
+            "stage": "post_fit_output",
+            "status": "exit",
+            "wall_s": 2.0839698469990253
+          },
+          {
+            "stage": "wrapped_replay",
+            "status": "exit",
+            "wall_s": 103.83680916799858
+          }
+        ],
+        "incomplete": []
+      },
+      "child": {
+        "status": "success",
+        "case": "plot-thirty-small",
+        "original_unchanged": true,
+        "new_likelihood_calls": 1,
+        "new_sampler_likelihood_calls": 0,
+        "summary_timing_calls": 1,
+        "posterior": {
+          "logZ": -37.675778339891494,
+          "logZ_error": -0.9080901865173772,
+          "n_eff": 9740.435782984026,
+          "posterior_sha256": "a4234203f31abb988319385b0a5d92f0f57fbc10dbf23e0715e5906e146d499a",
+          "n_like": 34100,
+          "selected_samples": 33984,
+          "fresh_samples_per_shell": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "max_standardized_mean_error": 0.05301148462884267,
+          "covariance_relative_error": 0.10297281361050024,
+          "shell_log_v": [
+            -0.6906503003613582,
+            -1.2543778853856073,
+            -1.9080951335307206,
+            -2.6238976432200727,
+            -3.3250784458389484,
+            -4.235060512551583,
+            -5.118574718291416,
+            -5.77617394972751,
+            -6.610165024205517,
+            -7.418196183075631,
+            -8.26128372546977,
+            -9.047098776382557,
+            -9.775100522301566,
+            -10.52025286552771,
+            -11.387655100634438,
+            -12.340946417915271,
+            -12.916200213633221,
+            -13.94249010301089,
+            -14.63927751214904,
+            -15.13039048765964
+          ]
+        },
+        "plot": {
+          "policy": {
+            "name": "thirty-small",
+            "indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29
+            ],
+            "figsize": [
+              12,
+              12
+            ],
+            "dpi": 100
+          },
+          "style": {
+            "kinds": {
+              "diagonal": "kde_1d",
+              "lower": "hist_2d"
+            },
+            "upper": false
+          },
+          "search_plot_calls": 1,
+          "input_samples": 33984,
+          "figures": [
+            {
+              "figsize": [
+                12.0,
+                12.0
+              ],
+              "dpi": 100.0,
+              "axes": 495
+            }
+          ],
+          "errors": [],
+          "png": {
+            "path": "fit/baseline/1e4d19895da90a4826f2b5c4989c4595/image/search/diagnostic_corner.png",
+            "dimensions": [
+              1200,
+              1200
+            ],
+            "sha256": "fd3be1c8a96cebc800b89b1d7c161a319d35ca6ac48ad0f23f2640553d9f9bb9",
+            "bytes": 265351
+          }
+        }
+      },
+      "original_unchanged": true
+    }
+  ],
+  "spent_s": 118.7550095739989,
+  "unrun": []
+}

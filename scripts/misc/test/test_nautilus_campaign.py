@@ -199,8 +199,13 @@ def test_supervisor_terminates_actual_process_group(tmp_path, cap, timeout, expe
     assert process.poll() is not None
     if child_pid.exists():
         path = Path("/proc") / child_pid.read_text() / "stat"
-        if path.exists():
-            assert path.read_text().rsplit(")", 1)[1].split()[0] == "Z"
+        try:
+            child_stat = path.read_text()
+        except FileNotFoundError:
+            # The terminated child may be reaped between any check and read.
+            pass
+        else:
+            assert child_stat.rsplit(")", 1)[1].split()[0] == "Z"
 
 
 def test_rss_group_reader_handles_spaces_in_process_name(tmp_path):

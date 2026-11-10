@@ -71,3 +71,9 @@ def test_one_shot_directory_cannot_be_reused(tmp_path):
     root.mkdir()
     with pytest.raises(FileExistsError):
         benchmark.run(None, None, root)
+
+
+def test_auxiliary_metadata_paths_never_reintroduce_library_roots(tmp_path):
+    names = ["PyAutoFit", "PyAutoNerves", "PyAutoArray", "PyAutoGalaxy", "PyAutoLens", "unknown"]
+    paths = [str(tmp_path / name) for name in names]
+    assert benchmark.metadata_paths(benchmark.os.pathsep.join(paths)) == paths[2:5]

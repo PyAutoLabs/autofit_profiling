@@ -38,6 +38,17 @@ ORDER = ["baseline", "candidate", "candidate", "baseline", "baseline", "candidat
 PROTOCOL = "nautilus-compact-array-experiment@1"
 
 
+def metadata_paths(pythonpath):
+    """Retain the original activation's auxiliary distribution visibility.
+
+    These are not imported by PyAutoFit. Their egg-info was nevertheless part
+    of the archived full inventory. Keep that inventory check exact, without
+    admitting a second PyAutoFit/PyAutoNerves tree into a measured child.
+    """
+    names = {"PyAutoArray", "PyAutoGalaxy", "PyAutoLens", "PyAutoCTI"}
+    return [p for p in pythonpath.split(os.pathsep) if p and Path(p).name in names]
+
+
 def validate(plan):
     if plan["sha256"] != fingerprint({k: v for k, v in plan.items() if k != "sha256"}):
         raise ValueError("frozen plan changed")
@@ -105,6 +116,7 @@ def prepare(input_plan, baseline_fit):
             "candidate": actual["sources"]["PyAutoFit"]["root"],
             "nerves": actual["sources"]["PyAutoNerves"]["root"],
         },
+        "metadata_pythonpath": metadata_paths(os.environ.get("PYTHONPATH", "")),
         "input_plan": str(input_plan.resolve()),
         "input_plan_sha256": sha256(input_plan),
         "cases": [
@@ -190,6 +202,7 @@ def run(input_plan, baseline_fit, root):
             env = dict(os.environ)
             env["PYTHONPATH"] = os.pathsep.join(
                 [plan["source_roots"][case["backend"]], plan["source_roots"]["nerves"]]
+                + plan["metadata_pythonpath"]
             )
             with (directory / "run.log").open("w") as output:
                 tick = time.monotonic()

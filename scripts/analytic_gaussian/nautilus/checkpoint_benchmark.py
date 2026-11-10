@@ -103,7 +103,8 @@ def posterior(sampler):
         digest.update(np.ascontiguousarray(array).tobytes())
     return {
         "posterior_sha256": digest.hexdigest(),
-        "n_like": sampler.n_like,
+        # HDF5 restoration gives this scalar numpy.int64; fresh runs use int.
+        "n_like": int(sampler.n_like),
         "n_eff": float(sampler.n_eff),
         "shells": len(sampler.bounds),
     }

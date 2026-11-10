@@ -94,3 +94,23 @@ def test_supervisor_kills_group_at_boundary_or_cap(tmp_path, monkeypatch, condit
 def test_completed_directory_cannot_be_reused(tmp_path):
     with pytest.raises(FileExistsError):
         benchmark.run(tmp_path)
+
+
+def test_restored_numpy_count_serializes_without_changing_posterior(tmp_path):
+    import json
+    from types import SimpleNamespace
+
+    import numpy as np
+
+    arrays = (np.array([[1.0, 2.0]]), np.array([0.0]), np.array([-1.0]))
+    sampler = SimpleNamespace(
+        posterior=lambda: arrays,
+        n_like=np.int64(16300),
+        n_eff=np.float64(10020.77),
+        bounds=[None] * 9,
+    )
+    result = benchmark.posterior(sampler)
+    benchmark.atomic_json(tmp_path / "child.json", result)
+    assert json.loads((tmp_path / "child.json").read_text()) == result
+    sampler.n_like = 16300
+    assert benchmark.posterior(sampler) == result

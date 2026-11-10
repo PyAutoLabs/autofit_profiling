@@ -86,6 +86,16 @@ Measurement code was frozen at `51663d11fc6a873d9681899608bd352a294293e5`. Runti
 
 The small raw plan/state archive is retained under `output/nautilus-plot-comparison/`; earlier raw archives are preserved. This report and its driver-stop display were added after the frozen measurement commit. The runtime plotting path remains unvalidated end to end. A further attempt requires a new human compute decision and separate plan/output identity; PR #13 remains open for human review, outside Pulse.
 
+## Fresh plotting attempt: harness error before summary timing
+
+The human authorized one fresh attempt with “I approve, continue”, retaining the earlier host-guard halt. The unchanged harness at `9dbc272a1bb498d0d2b6d4e904484c3d84e7914f` passed preflight in3.067seconds and launched the no-corner case. That child failed after18.982seconds; total charged time was22.364seconds. Both plotted cases remain unrun under the stop-on-first-failure rule.
+
+This was a **diagnostic harness defect**, not a PyAutoFit or sampling failure: the wrapper declared `timed_summary(instance, ...)`, so Python's bound updater argument collided with PyAutoFit's separate `instance=` keyword. It raised `TypeError: ...timed_summary() got multiple values for argument 'instance'` before entering the summary timing gate. No likelihood evaluation occurred, and the copied checkpoint is byte-identical to its original. Sample output completed in14.805seconds, latent processing in0.0127seconds, and no-corner visualization in0.0150seconds. These are inclusive diagnostic stage observations; finalization did not complete and the case is not a success.
+
+The wrapper's bound argument is now named `updater`, preserving PyAutoFit's keyword unchanged. A regression test exercises the real keyword calling convention and verifies that the guard and method restoration still work. This correction was made **after** the failed measurement; no timed replay has been run against it. There is still no end-to-end plotting or successful finalization witness.
+
+See [attempt02 report](plot_evidence_02/report.html), [attempt receipts](plot_evidence_02/attempts.json), [checkpoint integrity](plot_evidence_02/checkpoint-integrity.json) and [portable plan](plot_evidence_02/plan.json). Raw data remain under `output/nautilus-plot-comparison-02/`; the first comparison's guard-halted state and every earlier experiment remain unchanged. The same120s/4096MiB child and420s aggregate caps apply to any separately authorized next attempt; no automatic retry or merge.
+
 ## Reproduce
 
 Use the phase-0b.1 pinned environment: PyAutoFit `bdb7af0e9c339ad07850679fd6ac168aacc7d18c`, PyAutoNerves `9b204c90c2ce05c5bb0cf3e9800ed13f005c6c56`, and the [third-party requirements](../nautilus_cpu_dimensions/requirements.txt). Activate the pinned library sources and commit measurement code before preparing a new plan. The runtime preflight verifies dependency, package, target, host, CPU-affinity and thread identities against the input archive; the new producer identity is recorded separately.
@@ -102,6 +112,6 @@ The published plan removes local paths while retaining input hashes, case identi
 
 ## Validation and readiness
 
-The 98-test tooling suite covers plan tampering, source/input identity, the resumed exclusion semantics, stage persistence, patch restoration, no-likelihood enforcement even when an exception is swallowed, timeout precedence over child success, no retry/budget reset, and missing-case reporting. Runtime preflight restored all three archived posterior hashes and verified that exclusion leaves zero selected samples. The post-measurement checkpoint-mode smoke passed without sampling. Ruff and the unchanged catalogue check are required alongside the tooling suite; no notebooks are generated for these standalone diagnostic scripts.
+The 99-test tooling suite covers plan tampering, source/input identity, the resumed exclusion semantics, stage persistence, patch restoration, no-likelihood enforcement even when an exception is swallowed, timeout precedence over child success, no retry/budget reset, and missing-case reporting. Runtime preflight restored all three archived posterior hashes and verified that exclusion leaves zero selected samples. The post-measurement checkpoint-mode smoke passed without sampling. Ruff and the unchanged catalogue check are required alongside the tooling suite; no notebooks are generated for these standalone diagnostic scripts.
 
 [Authoritative Heart readiness](evidence/heart-readiness.json) remains RED: **PyAutoGalaxy: CI failure**; **PyAutoLens: CI failure**. The live phase-0b development override and approval of this bounded member permit the development PR. Merge remains a separate human decision; no release or readiness-clearance claim.

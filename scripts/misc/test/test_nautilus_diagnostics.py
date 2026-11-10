@@ -174,7 +174,7 @@ def test_timeout_cannot_promote_a_child_success_or_run_next_case(tmp_path, monke
         module.run(p, output)  # No restart silently resets the budget.
 
 
-@pytest.mark.parametrize("route", ["native", "wrapper"])
+@pytest.mark.parametrize("route", ["native", "wrapper", "summary_keyword"])
 def test_output_replay_rejects_even_a_swallowed_likelihood_attempt(tmp_path, monkeypatch, route):
     import sys
     from types import ModuleType
@@ -217,6 +217,13 @@ def test_output_replay_rejects_even_a_swallowed_likelihood_attempt(tmp_path, mon
             pass
 
     classes["nautilus"] = ("Sampler", FakeSampler)
+    updater = classes["autofit.non_linear.search.updater"][1]
+
+    def original_summary(self, *, fitness, instance):
+        # The real method receives an instance keyword distinct from its bound self.
+        return fitness(instance)
+
+    updater._profile_and_summarize = original_summary
     for name, (attr, cls) in classes.items():
         module = ModuleType(name)
         setattr(module, attr, cls)
@@ -228,6 +235,8 @@ def test_output_replay_rejects_even_a_swallowed_likelihood_attempt(tmp_path, mon
         with pytest.raises(RuntimeError, match="attempted likelihood"):
             if route == "native":
                 sampler.evaluate_likelihood()
+            elif route == "summary_keyword":
+                updater()._profile_and_summarize(fitness=args[1], instance=[0.0] * 30)
             else:
                 args[1]([0.0] * 30)
 
@@ -241,6 +250,7 @@ def test_output_replay_rejects_even_a_swallowed_likelihood_attempt(tmp_path, mon
             StageLog(tmp_path / "stages.jsonl"),
         )
     assert FakeSampler.evaluate_likelihood is original
+    assert updater._profile_and_summarize is original_summary
 
 
 @pytest.mark.parametrize("output_only", [False, True])

@@ -387,9 +387,9 @@ def output_replay(case, checkpoint, target, directory, log):
     gate = SummaryTimingGate(target, forbidden, case.get("summary_timing_call_limit", 0))
     original_summary = SearchUpdater._profile_and_summarize
 
-    def timed_summary(instance, *args, **kwargs):
+    def timed_summary(updater, *args, **kwargs):
         with gate.summary():
-            result = original_summary(instance, *args, **kwargs)
+            result = original_summary(updater, *args, **kwargs)
         # Outside the likelihood timer: durable accounting must not time disk I/O as likelihood work.
         atomic_json(
             directory / "summary-timing.json",

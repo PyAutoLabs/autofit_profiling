@@ -266,6 +266,10 @@ img{max-width:100%;height:auto}summary{cursor:pointer}h1{font-size:30px}
                     f"<h2>{html.escape(case['plot_policy']['name'])}</h2><img src='{filename}' alt='Diagnostic corner plot'>"
                 )
         unfinished = [s["stage"] for s in stages["incomplete"]]
+        if attempt.get("child", {}).get("error"):
+            details.append(
+                f"<p>{html.escape(case['id'])}: {html.escape(attempt['child']['error'])}.</p>"
+            )
         if unfinished:
             details.append(
                 f"<p>{html.escape(case['id'])}: unfinished stages {html.escape(', '.join(unfinished))}.</p>"

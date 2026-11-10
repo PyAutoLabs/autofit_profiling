@@ -1,0 +1,11 @@
+{
+  "case": "plot-no-corner",
+  "copied_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+  "original_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+  "byte_identical": true,
+  "status": "error",
+  "eligible_as_success": false,
+  "summary_timing_calls": 0,
+  "new_sampler_likelihood_calls": 0,
+  "call_count_basis": "bound-method argument binding failed before timing gate; native evaluator guarded; checkpoint unchanged"
+}

@@ -1,0 +1,19 @@
+{
+  "policy": {
+    "name": "no-corner",
+    "indices": [],
+    "figsize": null,
+    "dpi": null
+  },
+  "style": {
+    "kinds": {
+      "diagonal": "kde_1d",
+      "lower": "hist_2d"
+    },
+    "upper": false
+  },
+  "search_plot_calls": 1,
+  "input_samples": 33984,
+  "figures": [],
+  "errors": []
+}

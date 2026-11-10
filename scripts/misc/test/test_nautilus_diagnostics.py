@@ -174,7 +174,8 @@ def test_timeout_cannot_promote_a_child_success_or_run_next_case(tmp_path, monke
         module.run(p, output)  # No restart silently resets the budget.
 
 
-def test_output_replay_rejects_even_a_swallowed_likelihood_attempt(tmp_path, monkeypatch):
+@pytest.mark.parametrize("route", ["native", "wrapper"])
+def test_output_replay_rejects_even_a_swallowed_likelihood_attempt(tmp_path, monkeypatch, route):
     import sys
     from types import ModuleType
 
@@ -225,7 +226,10 @@ def test_output_replay_rejects_even_a_swallowed_likelihood_attempt(tmp_path, mon
     def replay(*args):
         sampler = FakeSampler()
         with pytest.raises(RuntimeError, match="attempted likelihood"):
-            sampler.evaluate_likelihood()
+            if route == "native":
+                sampler.evaluate_likelihood()
+            else:
+                args[1]([0.0] * 30)
 
     monkeypatch.setattr(baseline, "run_wrapped", replay)
     with pytest.raises(ValueError, match="invalid"):
@@ -278,3 +282,25 @@ def test_report_keeps_timeout_and_unrun_cases_separate(tmp_path, monkeypatch):
     assert rows[0]["eligible_as_success"] is False
     assert [r["status"] for r in rows] == ["timeout"] + ["unrun"] * 5
     assert "partial-checkpoint.json" not in (out / "report.html").read_text()
+
+
+def test_output_only_plan_cannot_admit_evidence_or_larger_budget():
+    from profiling.nautilus_diagnostics import OUTPUT_LIMITS
+
+    p = plan()
+    p.update(scope="output-only", limits=OUTPUT_LIMITS.copy(), cases=[p["cases"][-1]])
+
+    def seal():
+        p["sha256"] = fingerprint({k: v for k, v in p.items() if k != "sha256"})
+
+    seal()
+    validate_plan(p)
+    p["cases"][0]["arm"] = "evidence"
+    seal()
+    with pytest.raises(ValueError, match="matrix"):
+        validate_plan(p)
+    p["cases"][0]["arm"] = "output"
+    p["limits"]["budget_s"] = 900
+    seal()
+    with pytest.raises(ValueError, match="limits"):
+        validate_plan(p)

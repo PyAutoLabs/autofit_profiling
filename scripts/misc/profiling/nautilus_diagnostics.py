@@ -16,6 +16,7 @@ from profiling.nautilus_resources import atomic_json
 
 PROTOCOL = "nautilus-copied-checkpoint-diagnostics@1"
 LIMITS = {"budget_s": 900, "timeout_s": 120, "memory_mib": 4096}
+OUTPUT_LIMITS = {"budget_s": 180, "timeout_s": 120, "memory_mib": 4096}
 # These are conditional repetitions with fixed learned bounds, NOT new explorations.
 CASES = [(5, None), (10, None), (30, None), (30, 1), (30, 2)]
 
@@ -50,16 +51,21 @@ def validate_plan(plan):
     body = {k: v for k, v in plan.items() if k != "sha256"}
     if plan["sha256"] != fingerprint(body):
         raise ValueError("plan changed")
-    if plan["protocol"] != PROTOCOL or plan["limits"] != LIMITS:
+    if plan.get("scope") not in (None, "output-only"):
+        raise ValueError("unauthorized scope")
+    limits = OUTPUT_LIMITS if plan.get("scope") == "output-only" else LIMITS
+    if plan["protocol"] != PROTOCOL or plan["limits"] != limits:
         raise ValueError("unauthorized protocol or limits")
     expected = [("evidence", d, seed) for d, seed in CASES] + [("output", 30, None)]
+    if plan.get("scope") == "output-only":
+        expected = [("output", 30, None)]
     if [(c["arm"], c["dimension"], c["resample_seed"]) for c in plan["cases"]] != expected:
         raise ValueError("unauthorized case matrix")
-    if not 0 <= plan["preflight_s"] < LIMITS["budget_s"]:
+    if not 0 <= plan["preflight_s"] < limits["budget_s"]:
         raise ValueError("preflight exhausted budget")
 
 
-def prepare(archive):
+def prepare(archive, *, output_only=False):
     start = time.monotonic()
     from profiling.nautilus_baseline import provenance
     from profiling.nautilus_target import CorrelatedGaussianTarget
@@ -76,6 +82,8 @@ def prepare(archive):
         if config["adapter"] != "direct" or config["trace"] or config["seed"] != 0:
             continue
         dimension = config["dimension"]
+        if output_only and dimension != 30:
+            continue
         if config != RunConfig(dimension=dimension, n_live=400, trace=False).to_dict():
             raise ValueError("archive settings differ")
         if row["manifest"]["target_sha256"] != fingerprint(
@@ -131,7 +139,12 @@ def prepare(archive):
         if sum(sampler.shell_n) != 0:
             raise ValueError("preflight exploration exclusion failed")
     cases = []
-    for arm, dimension, seed in [("evidence", d, s) for d, s in CASES] + [("output", 30, None)]:
+    matrix = (
+        [("output", 30, None)]
+        if output_only
+        else [("evidence", d, s) for d, s in CASES] + [("output", 30, None)]
+    )
+    for arm, dimension, seed in matrix:
         cases.append(
             {
                 "id": f"{arm}-d{dimension}-r{seed if seed is not None else 'saved'}",
@@ -149,6 +162,13 @@ def prepare(archive):
         "preflight_s": time.monotonic() - start,
         "interpretation": "conditional on seed-0 learned bounds; not independent full searches",
     }
+    if output_only:
+        plan.update(
+            scope="output-only",
+            limits=OUTPUT_LIMITS,
+            cases=[c for c in cases if c["arm"] == "output"],
+            interpretation="Output-only follow-up authorized after halted pilot; no new likelihood evaluations",
+        )
     plan["sha256"] = fingerprint(plan)
     validate_plan(plan)
     return plan
@@ -328,6 +348,15 @@ def output_replay(case, checkpoint, target, directory, log):
         evaluations.append(True)
         raise RuntimeError("output-only replay attempted likelihood evaluation")
 
+    class NoLikelihood:
+        @property
+        def prior(self):
+            return target.prior
+
+        def __call__(self, *args, **kwargs):
+            # Also catch wrapper/output calls that bypass the native sampler.
+            return forbidden(*args, **kwargs)
+
     Sampler.__init__ = resume
     Sampler.evaluate_likelihood = forbidden
     try:
@@ -352,7 +381,7 @@ def output_replay(case, checkpoint, target, directory, log):
             with log.stage("wrapped_replay"):
                 run_wrapped(
                     RunConfig(adapter="pyautofit", dimension=30, n_live=400, trace=False),
-                    target,
+                    NoLikelihood(),
                     directory,
                 )
         if evaluations or len(captured) != 1 or captured[0].n_like != case["original_n_like"]:

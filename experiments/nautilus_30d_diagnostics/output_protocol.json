@@ -1,0 +1,10 @@
+{
+  "schema": "nautilus-copied-checkpoint-diagnostics@1",
+  "scope": "output-only",
+  "authorization": "Continue the wrapped-output investigation (live human,2026-11-10)",
+  "cases": [{"arm":"output","dimension":30,"resample_seed":null}],
+  "limits": {"budget_s":180,"timeout_s":120,"memory_mib":4096},
+  "new_likelihood_calls": 0,
+  "failure_policy": "Stop; no retry or cap escalation.",
+  "relationship": "Separate follow-up; original halted pilot and its unrun coverage unchanged; outside Pulse."
+}

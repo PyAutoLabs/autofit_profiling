@@ -121,6 +121,34 @@ a{color:#125db3}</style><h1>Nautilus evidence diagnostics</h1>
         document = document.replace(
             '<a href="partial-checkpoint.json">its receipt</a>', "the retained raw checkpoint"
         )
+    if plan.get("scope") == "output-only":
+        attempt = state["attempts"][0] if state["attempts"] else None
+        result = attempt.get("child", {}) if attempt else {}
+        stages = attempt.get("stages", {}).get("completed", []) if attempt else []
+        document = (
+            "<!doctype html><html lang='en'><meta charset='utf-8'>"
+            "<title>Nautilus wrapped-output replay</title>"
+            "<style>body{font:17px/1.6 system-ui;max-width:1000px;margin:40px auto;padding:0 24px}"
+            "td,th{text-align:left;padding:8px;border-bottom:1px solid #ddd}table{border-collapse:collapse}</style>"
+            "<h1>Nautilus wrapped-output replay</h1>"
+            "<p>Experimental continuation outside Pulse. One copied original30D checkpoint; "
+            "120s child cap,4GiB memory cap,180s aggregate including preflight.</p>"
+            f"<p>Status: <strong>{html.escape(attempt['status'] if attempt else 'unrun')}</strong>. "
+            f"Charged time: {state['spent_s']:.2f}s. "
+            f"Added likelihood calls: {html.escape(str(result.get('new_likelihood_calls', 'unverified')))}.</p>"
+            "<table><tr><th>Stage</th><th>Inclusive wall seconds</th><th>Exit</th></tr>"
+        )
+        for stage in stages:
+            document += (
+                f"<tr><td>{html.escape(stage['stage'])}</td><td>{stage['wall_s']:.4f}</td>"
+                f"<td>{html.escape(stage['status'])}</td></tr>"
+            )
+        document += (
+            "</table><p>Nested stage times overlap; do not sum them. "
+            "This replay excludes the original search and does not replace its timeout receipt.</p>"
+            "<p><a href='attempts.json'>Complete receipts</a> · <a href='plan.json'>Portable plan</a> · "
+            "<a href='../README.md'>Findings and interpretation</a></p></html>"
+        )
     (destination / "report.html").write_text(document)
 
 

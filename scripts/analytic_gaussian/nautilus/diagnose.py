@@ -14,7 +14,6 @@ ROOT = next(p for p in Path(__file__).resolve().parents if (p / "ruff.toml").exi
 sys.path.insert(0, str(ROOT / "scripts/misc"))
 from profiling.nautilus_campaign import host_snapshot
 from profiling.nautilus_diagnostics import (
-    LIMITS,
     check_inputs,
     child,
     prepare,
@@ -26,6 +25,7 @@ from profiling.nautilus_resources import atomic_json, memory_available, supervis
 
 def run(plan, root):
     validate_plan(plan)
+    limits = plan["limits"]
     # Exclusive creation prevents duplicate/restarted execution and budget reset.
     root.mkdir(parents=True, exist_ok=False)
     atomic_json(root / "plan.json", plan)
@@ -35,11 +35,11 @@ def run(plan, root):
     try:
         for case in plan["cases"]:
             spent = plan["preflight_s"] + time.monotonic() - start
-            if spent + LIMITS["timeout_s"] > LIMITS["budget_s"]:
+            if spent + limits["timeout_s"] > limits["budget_s"]:
                 state.update(status="halted", reason="aggregate budget")
                 break
             snapshot = host_snapshot()
-            if memory_available() < 2 * LIMITS["memory_mib"] * 1024**2:
+            if memory_available() < 2 * limits["memory_mib"] * 1024**2:
                 raise RuntimeError("insufficient safe host memory")
             if snapshot["load"][0] > max(1.0, len(snapshot["affinity"]) / 4):
                 raise RuntimeError("host load exceeds guard")
@@ -68,7 +68,7 @@ def run(plan, root):
                 )
                 tick = time.monotonic()
                 supervision = supervise(
-                    process, LIMITS["timeout_s"], LIMITS["memory_mib"] * 1024**2
+                    process, limits["timeout_s"], limits["memory_mib"] * 1024**2
                 )
             row.update(
                 process_wall_s=time.monotonic() - tick,
@@ -111,6 +111,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=("prepare", "run", "child"))
     parser.add_argument("--archive", type=Path)
+    parser.add_argument(
+        "--output-only",
+        action="store_true",
+        help="prepare the separately authorized single output replay",
+    )
     parser.add_argument("--plan", type=Path)
     parser.add_argument("--case")
     parser.add_argument("--output", type=Path, required=True)
@@ -134,7 +139,7 @@ def main():
         if args.output.exists():
             raise ValueError("refusing to overwrite frozen plan")
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        atomic_json(args.output, prepare(args.archive.resolve()))
+        atomic_json(args.output, prepare(args.archive.resolve(), output_only=args.output_only))
         return 0
     plan = json.loads(args.plan.read_text())
     validate_plan(plan)

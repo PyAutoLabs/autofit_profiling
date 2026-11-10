@@ -24,3 +24,7 @@ Compare direct Nautilus and PyAutoFit on the same analytic target with the
 timelines and instrumentation controls.
 
 Agents and contributors: start with [`AGENTS.md`](AGENTS.md).
+
+## Experimental work
+
+[Nautilus dimension pilot](experiments/nautilus_cpu_dimensions/README.md) — bounded local engineering evidence, kept outside the published profiling catalogue and Pulse campaign queue.

@@ -96,17 +96,23 @@ def test_completed_directory_cannot_be_reused(tmp_path):
         benchmark.run(tmp_path)
 
 
-def test_restored_numpy_count_serializes_without_changing_posterior(tmp_path):
+def test_restored_count_serializes_without_changing_posterior(tmp_path, monkeypatch):
     import json
+    import sys
     from types import SimpleNamespace
 
-    import numpy as np
+    class RestoredInteger:
+        def __int__(self):
+            return 16300
 
-    arrays = (np.array([[1.0, 2.0]]), np.array([0.0]), np.array([-1.0]))
+    # Tooling CI intentionally has no NumPy: model its opaque restored scalar
+    # and buffer interface, without adding a scientific runtime to this suite.
+    monkeypatch.setitem(sys.modules, "numpy", SimpleNamespace(ascontiguousarray=lambda x: x))
+    arrays = (SimpleNamespace(tobytes=lambda: b"unchanged posterior bytes"),)
     sampler = SimpleNamespace(
         posterior=lambda: arrays,
-        n_like=np.int64(16300),
-        n_eff=np.float64(10020.77),
+        n_like=RestoredInteger(),
+        n_eff=10020.77,
         bounds=[None] * 9,
     )
     result = benchmark.posterior(sampler)

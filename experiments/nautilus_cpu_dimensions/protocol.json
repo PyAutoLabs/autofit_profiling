@@ -1,0 +1,56 @@
+{
+  "schema": "nautilus-cpu-experiment",
+  "version": 1,
+  "status": "experimental",
+  "publication": "off-board; no Pulse campaign or catalogue records",
+  "dimensions": [
+    5,
+    10,
+    30
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "adapters": [
+    "direct",
+    "pyautofit"
+  ],
+  "trace": [
+    false,
+    true
+  ],
+  "workers": 1,
+  "n_live": 400,
+  "n_eff": 500,
+  "n_batch": 100,
+  "n_networks": 4,
+  "f_live": 0.01,
+  "update_interval": 1000000,
+  "checkpoint": true,
+  "cost_profile": "fixed",
+  "work": 100,
+  "max_wall_s": 5400,
+  "case_timeout_s": 120,
+  "memory_limit_mib": 4096,
+  "threads": 1,
+  "target": "normalized AR(0.6) Gaussian; independent N(0,1) priors; float64",
+  "dependency_pins": {
+    "PyAutoFit": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c",
+    "PyAutoNerves": "9b204c90c2ce05c5bb0cf3e9800ed13f005c6c56",
+    "nautilus-sampler": "1.0.5"
+  },
+  "failure_policy": "stop on failure or resource cap; retain all attempts and unrun cases; no automatic resource inflation",
+  "acceptance": "engineering pilot only; exact trace/control posterior hashes, n_like and run-call cadence; analytic errors reported without scientific scoring",
+  "deferred": [
+    "60/100/200 dimensions",
+    "other targets",
+    "multiworker scaling",
+    "JAX/vectorized paths",
+    "lens fixtures",
+    "HPC/GPU execution",
+    "sampler optimization",
+    "Pulse promotion"
+  ]
+}

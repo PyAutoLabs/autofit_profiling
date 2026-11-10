@@ -75,6 +75,8 @@ def main():
     pairs = defaultdict(dict)
     records = []
     measured_sources = set()
+    selected_cases = set()
+    legacy_identity = None
     for case in pilot["cases"]:
         path = args.pilot / case["id"] / "result.json"
         row = json.loads(path.read_text()) if path.exists() else {"status": case["status"]}
@@ -86,7 +88,17 @@ def main():
         ):
             continue
         config = row["manifest"]["config"]
+        # This historical exporter retains its original record IDs. Multi-target
+        # experiments use experiment_report.py; never reuse these IDs for them.
+        identity = (config["dimension"], row["manifest"]["target_sha256"])
+        if legacy_identity is not None and identity != legacy_identity:
+            raise ValueError("multiple dimensions/targets require experiment_report.py")
+        legacy_identity = identity
         key = (config["adapter"], config["workers"], config["cost_profile"])
+        selected_key = (*key, config["seed"], config["trace"])
+        if selected_key in selected_cases:
+            raise ValueError("duplicate selected trace/control identity")
+        selected_cases.add(selected_key)
         groups[(*key, config["trace"])].append(row)
         pairs[(*key, config["seed"])][config["trace"]] = row
         measured_sources.add(

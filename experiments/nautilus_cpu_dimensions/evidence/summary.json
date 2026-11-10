@@ -1,0 +1,1763 @@
+{
+  "groups": [
+    {
+      "group_id": "204eb165307772c8bc9102b0a72253c5ba3c73bc1ffce08487d7b5609ee64d04",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "n": 3,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "metrics": {
+        "max_abs_mean_error": {
+          "median": 0.016611404925784057,
+          "min": 0.012080058816451147,
+          "max": 0.02430511258701646
+        },
+        "max_abs_standardized_mean_error": {
+          "median": 0.024916872961875797,
+          "min": 0.019074067392639386,
+          "max": 0.03837707767110312
+        },
+        "covariance_relative_frobenius_error": {
+          "median": 0.06235298917573015,
+          "min": 0.044759480523868335,
+          "max": 0.06888310983157328
+        },
+        "logZ_error": {
+          "median": -0.05799442471336125,
+          "min": -0.06419114832571271,
+          "max": -0.04531313117691571
+        },
+        "n_like": {
+          "median": 4600,
+          "min": 4500,
+          "max": 4700
+        },
+        "n_eff": {
+          "median": 2418.889044944545,
+          "min": 2339.1849864215524,
+          "max": 2420.502918522037
+        },
+        "calls_per_ess": {
+          "median": 1.9237469572186454,
+          "min": 1.9004315032219699,
+          "max": 1.943040756591525
+        },
+        "wall_s": {
+          "median": 12.962098489999335,
+          "min": 10.330545367999548,
+          "max": 13.406881081999927
+        },
+        "sampled_group_peak_rss_bytes": {
+          "median": 212606976,
+          "min": 211881984,
+          "max": 212684800
+        }
+      },
+      "median_component_shares": {}
+    },
+    {
+      "group_id": "5b438ab5fd327eec725ad72cb07b69a630c41f6c46d979557ab6010b03d83ff8",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "n": 3,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "metrics": {
+        "max_abs_mean_error": {
+          "median": 0.016611404925784057,
+          "min": 0.012080058816451147,
+          "max": 0.02430511258701646
+        },
+        "max_abs_standardized_mean_error": {
+          "median": 0.024916872961875797,
+          "min": 0.019074067392639386,
+          "max": 0.03837707767110312
+        },
+        "covariance_relative_frobenius_error": {
+          "median": 0.06235298917573015,
+          "min": 0.044759480523868335,
+          "max": 0.06888310983157328
+        },
+        "logZ_error": {
+          "median": -0.05799442471336125,
+          "min": -0.06419114832571271,
+          "max": -0.04531313117691571
+        },
+        "n_like": {
+          "median": 4600,
+          "min": 4500,
+          "max": 4700
+        },
+        "n_eff": {
+          "median": 2418.889044944545,
+          "min": 2339.1849864215524,
+          "max": 2420.502918522037
+        },
+        "calls_per_ess": {
+          "median": 1.9237469572186454,
+          "min": 1.9004315032219699,
+          "max": 1.943040756591525
+        },
+        "wall_s": {
+          "median": 11.745688994000375,
+          "min": 11.293822916999488,
+          "max": 14.340422521000619
+        },
+        "sampled_group_peak_rss_bytes": {
+          "median": 219422720,
+          "min": 215674880,
+          "max": 219873280
+        }
+      },
+      "median_component_shares": {
+        "proposal_sampling": 0.010216132645479567,
+        "prior_transform": 0.0004019476872935236,
+        "evaluation_dispatch_wait": 0.006081151484470274,
+        "checkpoint_io": 0.0987607143319977,
+        "nn_training": 0.5975448584235786,
+        "nn_prediction": 0.013633878200383687,
+        "bound_geometry": 0.2604555495691072,
+        "sampler_bookkeeping": 0.011443213599408869,
+        "other": 0.0004555263968761081
+      }
+    },
+    {
+      "group_id": "da94f95481f6c3b1f54484fdd13623f07944632320a3f456f5652c650c1fe469",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "n": 3,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "metrics": {
+        "max_abs_mean_error": {
+          "median": 0.016611404925784057,
+          "min": 0.012080058816451147,
+          "max": 0.02430511258701646
+        },
+        "max_abs_standardized_mean_error": {
+          "median": 0.024916872961875797,
+          "min": 0.019074067392639386,
+          "max": 0.03837707767110312
+        },
+        "covariance_relative_frobenius_error": {
+          "median": 0.06235298917573015,
+          "min": 0.044759480523868335,
+          "max": 0.06888310983157328
+        },
+        "logZ_error": {
+          "median": -0.05799442471336125,
+          "min": -0.06419114832571271,
+          "max": -0.04531313117691571
+        },
+        "n_like": {
+          "median": 4600,
+          "min": 4500,
+          "max": 4700
+        },
+        "n_eff": {
+          "median": 2418.889044944545,
+          "min": 2339.1849864215524,
+          "max": 2420.502918522037
+        },
+        "calls_per_ess": {
+          "median": 1.9237469572186454,
+          "min": 1.9004315032219699,
+          "max": 1.943040756591525
+        },
+        "wall_s": {
+          "median": 15.922336239999822,
+          "min": 15.59101455200016,
+          "max": 19.539170051999463
+        },
+        "sampled_group_peak_rss_bytes": {
+          "median": 280969216,
+          "min": 280276992,
+          "max": 280973312
+        }
+      },
+      "median_component_shares": {}
+    },
+    {
+      "group_id": "5d330b6b2b5b55f19ea9bde46a172175fabea4024bbb401f26b6971615371761",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "n": 3,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "metrics": {
+        "max_abs_mean_error": {
+          "median": 0.016611404925784057,
+          "min": 0.012080058816451147,
+          "max": 0.02430511258701646
+        },
+        "max_abs_standardized_mean_error": {
+          "median": 0.024916872961875797,
+          "min": 0.019074067392639386,
+          "max": 0.03837707767110312
+        },
+        "covariance_relative_frobenius_error": {
+          "median": 0.06235298917573015,
+          "min": 0.044759480523868335,
+          "max": 0.06888310983157328
+        },
+        "logZ_error": {
+          "median": -0.05799442471336125,
+          "min": -0.06419114832571271,
+          "max": -0.04531313117691571
+        },
+        "n_like": {
+          "median": 4600,
+          "min": 4500,
+          "max": 4700
+        },
+        "n_eff": {
+          "median": 2418.889044944545,
+          "min": 2339.1849864215524,
+          "max": 2420.502918522037
+        },
+        "calls_per_ess": {
+          "median": 1.9237469572186454,
+          "min": 1.9004315032219699,
+          "max": 1.943040756591525
+        },
+        "wall_s": {
+          "median": 15.422958481000023,
+          "min": 14.86880395099979,
+          "max": 16.28383840799961
+        },
+        "sampled_group_peak_rss_bytes": {
+          "median": 283660288,
+          "min": 282775552,
+          "max": 284200960
+        }
+      },
+      "median_component_shares": {
+        "samples_output": 0.0587743651851499,
+        "proposal_sampling": 0.0073313306411184765,
+        "prior_transform": 0.02873217323773311,
+        "evaluation_dispatch_wait": 0.013231033154382269,
+        "checkpoint_io": 0.0738507322949915,
+        "nn_training": 0.41719621854178074,
+        "nn_prediction": 0.009699824106526044,
+        "bound_geometry": 0.1821142509460424,
+        "sampler_bookkeeping": 0.008353142284562468,
+        "visualisation": 0.1852012230488924,
+        "other": 0.015615931000382546
+      }
+    },
+    {
+      "group_id": "16bec5feba7fe27b9366449f13fc9cf6a15de901c6724cf60a2a558cf8e7dab1",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "n": 3,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "metrics": {
+        "max_abs_mean_error": {
+          "median": 0.021179226222560618,
+          "min": 0.021127285219175826,
+          "max": 0.02718487927299522
+        },
+        "max_abs_standardized_mean_error": {
+          "median": 0.033464352217269455,
+          "min": 0.03320085610160612,
+          "max": 0.04272017230415645
+        },
+        "covariance_relative_frobenius_error": {
+          "median": 0.06271144173422886,
+          "min": 0.06169831447738435,
+          "max": 0.07500313637435485
+        },
+        "logZ_error": {
+          "median": -0.14876712084341293,
+          "min": -0.15199730563006852,
+          "max": -0.14738204882969796
+        },
+        "n_like": {
+          "median": 6400,
+          "min": 6300,
+          "max": 6800
+        },
+        "n_eff": {
+          "median": 3210.6922835877754,
+          "min": 3145.8447633914375,
+          "max": 3371.4155062729405
+        },
+        "calls_per_ess": {
+          "median": 2.0026417302321575,
+          "min": 1.9933395774846243,
+          "max": 2.0169569687710545
+        },
+        "wall_s": {
+          "median": 21.005551604000175,
+          "min": 20.494725593999647,
+          "max": 21.20562914400034
+        },
+        "sampled_group_peak_rss_bytes": {
+          "median": 218775552,
+          "min": 218320896,
+          "max": 220905472
+        }
+      },
+      "median_component_shares": {}
+    },
+    {
+      "group_id": "af89dfdf6a9b783f464ebdf1715d9cb83fd793b3f04e7e8204c76cdeaa9a0787",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "n": 3,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "metrics": {
+        "max_abs_mean_error": {
+          "median": 0.021179226222560618,
+          "min": 0.021127285219175826,
+          "max": 0.02718487927299522
+        },
+        "max_abs_standardized_mean_error": {
+          "median": 0.033464352217269455,
+          "min": 0.03320085610160612,
+          "max": 0.04272017230415645
+        },
+        "covariance_relative_frobenius_error": {
+          "median": 0.06271144173422886,
+          "min": 0.06169831447738435,
+          "max": 0.07500313637435485
+        },
+        "logZ_error": {
+          "median": -0.14876712084341293,
+          "min": -0.15199730563006852,
+          "max": -0.14738204882969796
+        },
+        "n_like": {
+          "median": 6400,
+          "min": 6300,
+          "max": 6800
+        },
+        "n_eff": {
+          "median": 3210.6922835877754,
+          "min": 3145.8447633914375,
+          "max": 3371.4155062729405
+        },
+        "calls_per_ess": {
+          "median": 2.0026417302321575,
+          "min": 1.9933395774846243,
+          "max": 2.0169569687710545
+        },
+        "wall_s": {
+          "median": 21.880672401999618,
+          "min": 19.92633780699998,
+          "max": 22.265668056000322
+        },
+        "sampled_group_peak_rss_bytes": {
+          "median": 224153600,
+          "min": 223916032,
+          "max": 226582528
+        }
+      },
+      "median_component_shares": {
+        "proposal_sampling": 0.00865477393143545,
+        "prior_transform": 0.000329050260506925,
+        "evaluation_dispatch_wait": 0.004555883988210829,
+        "checkpoint_io": 0.0836903415652218,
+        "nn_training": 0.6060415945803976,
+        "nn_prediction": 0.015979342022614015,
+        "bound_geometry": 0.27017309392474936,
+        "sampler_bookkeeping": 0.010389261985267535,
+        "other": 0.0003228885232497717
+      }
+    },
+    {
+      "group_id": "304f9245128340e0587918673b4b12226db66a0cf2c5358090f2b775ca16239a",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "n": 3,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "metrics": {
+        "max_abs_mean_error": {
+          "median": 0.021179226222560618,
+          "min": 0.021127285219175826,
+          "max": 0.02718487927299522
+        },
+        "max_abs_standardized_mean_error": {
+          "median": 0.033464352217269455,
+          "min": 0.03320085610160612,
+          "max": 0.04272017230415645
+        },
+        "covariance_relative_frobenius_error": {
+          "median": 0.06271144173422886,
+          "min": 0.06169831447738435,
+          "max": 0.07500313637435485
+        },
+        "logZ_error": {
+          "median": -0.14876712084341293,
+          "min": -0.15199730563006852,
+          "max": -0.14738204882969796
+        },
+        "n_like": {
+          "median": 6400,
+          "min": 6300,
+          "max": 6800
+        },
+        "n_eff": {
+          "median": 3210.6922835877754,
+          "min": 3145.8447633914375,
+          "max": 3371.4155062729405
+        },
+        "calls_per_ess": {
+          "median": 2.0026417302321575,
+          "min": 1.9933395774846243,
+          "max": 2.0169569687710545
+        },
+        "wall_s": {
+          "median": 34.385309263000636,
+          "min": 33.91456971700063,
+          "max": 34.62487444100043
+        },
+        "sampled_group_peak_rss_bytes": {
+          "median": 370286592,
+          "min": 369184768,
+          "max": 371736576
+        }
+      },
+      "median_component_shares": {}
+    },
+    {
+      "group_id": "f9aa516b98d3958ebaa0a42839e366801c20cdfb392225a3063764d124eb49a4",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "n": 3,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "metrics": {
+        "max_abs_mean_error": {
+          "median": 0.021179226222560618,
+          "min": 0.021127285219175826,
+          "max": 0.02718487927299522
+        },
+        "max_abs_standardized_mean_error": {
+          "median": 0.033464352217269455,
+          "min": 0.03320085610160612,
+          "max": 0.04272017230415645
+        },
+        "covariance_relative_frobenius_error": {
+          "median": 0.06271144173422886,
+          "min": 0.06169831447738435,
+          "max": 0.07500313637435485
+        },
+        "logZ_error": {
+          "median": -0.14876712084341293,
+          "min": -0.15199730563006852,
+          "max": -0.14738204882969796
+        },
+        "n_like": {
+          "median": 6400,
+          "min": 6300,
+          "max": 6800
+        },
+        "n_eff": {
+          "median": 3210.6922835877754,
+          "min": 3145.8447633914375,
+          "max": 3371.4155062729405
+        },
+        "calls_per_ess": {
+          "median": 2.0026417302321575,
+          "min": 1.9933395774846243,
+          "max": 2.0169569687710545
+        },
+        "wall_s": {
+          "median": 34.00699531200007,
+          "min": 33.349329231999945,
+          "max": 35.663824430000204
+        },
+        "sampled_group_peak_rss_bytes": {
+          "median": 375615488,
+          "min": 374075392,
+          "max": 377446400
+        }
+      },
+      "median_component_shares": {
+        "samples_output": 0.03946651701174816,
+        "proposal_sampling": 0.005479628394212629,
+        "prior_transform": 0.019833917792287194,
+        "evaluation_dispatch_wait": 0.009675475853019219,
+        "checkpoint_io": 0.049467496707947575,
+        "nn_training": 0.37793143104377486,
+        "nn_prediction": 0.009851898937462838,
+        "bound_geometry": 0.16900625772051342,
+        "sampler_bookkeeping": 0.006405018790762429,
+        "visualisation": 0.3063877062989101,
+        "other": 0.013981121667415818
+      }
+    },
+    {
+      "group_id": "3227a6ed7d15f8f42f7bc91448825522ad1e076855a6acdb26d35553e8eca637",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "n": 1,
+      "seeds": [
+        0
+      ],
+      "metrics": {
+        "max_abs_mean_error": {
+          "median": 0.03534098975256178,
+          "min": 0.03534098975256178,
+          "max": 0.03534098975256178
+        },
+        "max_abs_standardized_mean_error": {
+          "median": 0.05301148462884267,
+          "min": 0.05301148462884267,
+          "max": 0.05301148462884267
+        },
+        "covariance_relative_frobenius_error": {
+          "median": 0.10297281361050023,
+          "min": 0.10297281361050023,
+          "max": 0.10297281361050023
+        },
+        "logZ_error": {
+          "median": -0.9080901865173772,
+          "min": -0.9080901865173772,
+          "max": -0.9080901865173772
+        },
+        "n_like": {
+          "median": 34100,
+          "min": 34100,
+          "max": 34100
+        },
+        "n_eff": {
+          "median": 9740.435782984026,
+          "min": 9740.435782984026,
+          "max": 9740.435782984026
+        },
+        "calls_per_ess": {
+          "median": 3.5008700595891935,
+          "min": 3.5008700595891935,
+          "max": 3.5008700595891935
+        },
+        "wall_s": {
+          "median": 92.83232958099961,
+          "min": 92.83232958099961,
+          "max": 92.83232958099961
+        },
+        "sampled_group_peak_rss_bytes": {
+          "median": 289673216,
+          "min": 289673216,
+          "max": 289673216
+        }
+      },
+      "median_component_shares": {}
+    },
+    {
+      "group_id": "21ee197b3ab326d9d9c33aaed7d4c5648214b7bcae6a8bbbdd6f28a19e3e4598",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "n": 1,
+      "seeds": [
+        0
+      ],
+      "metrics": {
+        "max_abs_mean_error": {
+          "median": 0.03534098975256178,
+          "min": 0.03534098975256178,
+          "max": 0.03534098975256178
+        },
+        "max_abs_standardized_mean_error": {
+          "median": 0.05301148462884267,
+          "min": 0.05301148462884267,
+          "max": 0.05301148462884267
+        },
+        "covariance_relative_frobenius_error": {
+          "median": 0.10297281361050023,
+          "min": 0.10297281361050023,
+          "max": 0.10297281361050023
+        },
+        "logZ_error": {
+          "median": -0.9080901865173772,
+          "min": -0.9080901865173772,
+          "max": -0.9080901865173772
+        },
+        "n_like": {
+          "median": 34100,
+          "min": 34100,
+          "max": 34100
+        },
+        "n_eff": {
+          "median": 9740.435782984026,
+          "min": 9740.435782984026,
+          "max": 9740.435782984026
+        },
+        "calls_per_ess": {
+          "median": 3.5008700595891935,
+          "min": 3.5008700595891935,
+          "max": 3.5008700595891935
+        },
+        "wall_s": {
+          "median": 93.67395342100008,
+          "min": 93.67395342100008,
+          "max": 93.67395342100008
+        },
+        "sampled_group_peak_rss_bytes": {
+          "median": 305958912,
+          "min": 305958912,
+          "max": 305958912
+        }
+      },
+      "median_component_shares": {
+        "proposal_sampling": 0.035585599724192216,
+        "prior_transform": 0.0005287036922164797,
+        "evaluation_dispatch_wait": 0.006161903761765363,
+        "checkpoint_io": 0.06600832833657533,
+        "nn_training": 0.5287583526489059,
+        "nn_prediction": 0.07453254713816947,
+        "bound_geometry": 0.26472433497663056,
+        "sampler_bookkeeping": 0.023000136348676176,
+        "other": 0.0007000933728684542
+      }
+    }
+  ],
+  "trace_control_pairs": [
+    {
+      "pair_id": "828398e1ba2003973a74b50da58b37fc7cc0d264f82db285883e7f2ba21ddb58",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 1.1063349450758073,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "417c67521e5676c46a908b6e9a1e30e6b18d9871a83b62f1f7becaeb6a9229b8",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 0.833394579435234,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "906df97d1a6a86722502bdee80c36b8c32f815a33e852d6d221427b3d3228c57",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 0.876094068572752,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "2dd1cde7812e9df6543e137463bbfaeed00a45988093b4b87c561dfc70147f42",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 0.9686366528458763,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "7c87a07d5ff8d8c0ebd2b0536ced768981ca036c34874522b4fcc9eb9c15d090",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 1.0932455659101832,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "6931fdbc5deed5737622ed655a54711ff224e034b16d00f7b2d219e4139bdc7b",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 0.9536777674992473,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "a6e3e6b3b9d0741ca3c9c499de1eafd7c79dd728e8e721377baf179f7e4179ef",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 1.04166140525597,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "fecdd70f5bd096236e7fcfc2dbe0109e5ed7cd0ec09678b08c9d25db7b5bcda0",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 0.9889978028667132,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "e374e69a0f7f4a39adf7944b5f66967c522461b5eef70ef4b97443758c549c75",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 0.9722666310220774,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "df8e8f0b9c4e9cee1199b1e67e8b027da7d74949b9166004296d4d5ec080375c",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 0.9833334024368487,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "95dbb32c778373ad027289ab5b5312ad52dba46d90b365808070ccbb38ae32a7",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 1.0499885622257001,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "4ede29f7a8f15aa33decce6263ff483f5de82270ca13944b88a1fd0fa18e9507",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 1.0300058846645093,
+      "posterior_and_calls_identical": true
+    },
+    {
+      "pair_id": "3720e30b1d5fa857b043bff20cb8464e2ea4719754eea554292ca8232dc6cbfb",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "trace_wall_ratio": 1.0090660639865352,
+      "posterior_and_calls_identical": true
+    }
+  ],
+  "incomplete_pairs": [
+    {
+      "pair_id": "5e6b69457216139f0f54ef54585399a91d055a4d359ac21f01ac9bd8f0874c87",
+      "present_trace_modes": [],
+      "status": "no successful members"
+    },
+    {
+      "pair_id": "8d15619c20db1aae99a6ee5a941b6148c277db4a967056072c52aa87af30cf63",
+      "present_trace_modes": [],
+      "status": "no successful members"
+    },
+    {
+      "pair_id": "9095cc1c2c18823ba4e8e4f9a538996825771603102de34dbb12431366a6846f",
+      "present_trace_modes": [],
+      "status": "no successful members"
+    },
+    {
+      "pair_id": "9cdfe66c22c44a25c9b4e73304cf853137a70fc382e9043af933f126118c3b71",
+      "present_trace_modes": [],
+      "status": "no successful members"
+    },
+    {
+      "pair_id": "bed7e07136b3f50c16150318d8343e9a8c68d8569e40ddddadc5304b0d477192",
+      "present_trace_modes": [],
+      "status": "no successful members"
+    }
+  ],
+  "matching_cross_adapter_pairs": 12,
+  "qualification": "experimental; unreviewed; no scientific acceptance or speedup verdict",
+  "expected_pairs": 18,
+  "coverage": [
+    {
+      "case_id": "case-960e65af1d560833e375",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-960e65af1d560833e375-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-7f441fbb8de3e13384bd",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-7f441fbb8de3e13384bd-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-7ef4aa9b0e7da3cbbd7e",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-7ef4aa9b0e7da3cbbd7e-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-730946f0f68e7eef37cb",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-730946f0f68e7eef37cb-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-173ed692e0115d73c1ad",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-173ed692e0115d73c1ad-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-a5c804d1a57494e196e3",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-a5c804d1a57494e196e3-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-22c3ccd9acbdf31f8d69",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-22c3ccd9acbdf31f8d69-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-fdcd8c16e671730611a5",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-fdcd8c16e671730611a5-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-26645930085e30b63129",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-26645930085e30b63129-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-95ddc57d79dde4c4b8e9",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-95ddc57d79dde4c4b8e9-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-a735aa00f0cc3806cf50",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-a735aa00f0cc3806cf50-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-f491e118f9ae1b2d3bf1",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 5,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-f491e118f9ae1b2d3bf1-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-df51a04f74bcfe676e0c",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-df51a04f74bcfe676e0c-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-9d3dccb7355ca8274946",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-9d3dccb7355ca8274946-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-865c04cc705bfffa8845",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-865c04cc705bfffa8845-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-c3e2c0625dbc5c535984",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-c3e2c0625dbc5c535984-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-8e5f769d7bfc734dec39",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-8e5f769d7bfc734dec39-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-c7f2278b612be121e776",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-c7f2278b612be121e776-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-cbc53190a58000c1b6ef",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-cbc53190a58000c1b6ef-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-9a193f6341d1005d733c",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-9a193f6341d1005d733c-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-64b8075232d22d770aed",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-64b8075232d22d770aed-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-8e36b1e77d47b6713d55",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-8e36b1e77d47b6713d55-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-f55a8f8f603942f70a43",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-f55a8f8f603942f70a43-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-2a2d4fb9cca4660fd087",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 10,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-2a2d4fb9cca4660fd087-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-719639ab504cacbebb25",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-719639ab504cacbebb25-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-f1b6f611f364a30434d7",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "success",
+      "selected_attempt": "case-f1b6f611f364a30434d7-attempt-001",
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-9d4d2d1f4e2fc4400f03",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "timeout",
+      "selected_attempt": null,
+      "unrun_reason": null
+    },
+    {
+      "case_id": "case-4bc1ac55d81850c0b7ec",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 0,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "unrun",
+      "selected_attempt": null,
+      "unrun_reason": "timeout; no escalation or automatic retry"
+    },
+    {
+      "case_id": "case-005a60da581537ecafa9",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "unrun",
+      "selected_attempt": null,
+      "unrun_reason": "timeout; no escalation or automatic retry"
+    },
+    {
+      "case_id": "case-a45a9dbe410383131bb5",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "unrun",
+      "selected_attempt": null,
+      "unrun_reason": "timeout; no escalation or automatic retry"
+    },
+    {
+      "case_id": "case-438e4723e9eeaa5ab196",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "unrun",
+      "selected_attempt": null,
+      "unrun_reason": "timeout; no escalation or automatic retry"
+    },
+    {
+      "case_id": "case-e4a0e87f90733a01dc64",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 1,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "unrun",
+      "selected_attempt": null,
+      "unrun_reason": "timeout; no escalation or automatic retry"
+    },
+    {
+      "case_id": "case-b46334233a255c0e8cbd",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "unrun",
+      "selected_attempt": null,
+      "unrun_reason": "timeout; no escalation or automatic retry"
+    },
+    {
+      "case_id": "case-f04787a000c1508a5aed",
+      "config": {
+        "adapter": "direct",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "unrun",
+      "selected_attempt": null,
+      "unrun_reason": "timeout; no escalation or automatic retry"
+    },
+    {
+      "case_id": "case-27b997c048e96586bff0",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": false,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "unrun",
+      "selected_attempt": null,
+      "unrun_reason": "timeout; no escalation or automatic retry"
+    },
+    {
+      "case_id": "case-349d1f8ef1a457a039fb",
+      "config": {
+        "adapter": "pyautofit",
+        "workers": 1,
+        "seed": 2,
+        "dimension": 30,
+        "cost_profile": "fixed",
+        "work": 100,
+        "trace": true,
+        "n_live": 400,
+        "n_eff": 500,
+        "n_batch": 100,
+        "checkpoint": true,
+        "update_interval": 1000000
+      },
+      "status": "unrun",
+      "selected_attempt": null,
+      "unrun_reason": "timeout; no escalation or automatic retry"
+    }
+  ],
+  "counts": {
+    "success": 26,
+    "timeout": 1,
+    "unrun": 9
+  },
+  "attempts": 27,
+  "halt_reason": "timeout; no escalation or automatic retry",
+  "spent_s": 940.6773508639999
+}

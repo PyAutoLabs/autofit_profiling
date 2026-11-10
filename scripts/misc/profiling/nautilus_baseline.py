@@ -235,7 +235,7 @@ def run_wrapped(config, target, directory):
     search.fit(model=model, analysis=Analysis(use_jax=False))
 
 
-def measure(config, directory):
+def measure(config, directory, expected_environment=None):
     import numpy as np
     from threadpoolctl import threadpool_info
 
@@ -245,6 +245,10 @@ def measure(config, directory):
     if sys.platform != "linux":
         raise RuntimeError("phase-0a fork baseline currently validated on Linux only")
     before = provenance()
+    if expected_environment is not None:
+        from profiling.nautilus_campaign import environment_key
+
+        assert_matching(expected_environment, environment_key(before))
     target = CorrelatedGaussianTarget(config.dimension, config.cost_profile, config.work)
     truth = target.truth()
     trace = Trace() if config.trace else None

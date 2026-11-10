@@ -109,7 +109,7 @@ def run(plan, root):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("prepare", "run", "child"))
+    parser.add_argument("command", choices=("prepare", "run", "child", "synthetic"))
     parser.add_argument("--archive", type=Path)
     parser.add_argument(
         "--output-only",
@@ -122,6 +122,7 @@ def main():
         action="store_true",
         help="prepare the approved three-case plotting comparison",
     )
+    parser.add_argument("--plot-attribution", action="store_true")
     parser.add_argument("--case")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -140,6 +141,11 @@ def main():
 
     signal.signal(signal.SIGTERM, interrupted)
     signal.signal(signal.SIGHUP, interrupted)
+    if args.command == "synthetic":
+        from profiling.nautilus_plot_attribution import synthetic_preflight
+
+        synthetic_preflight(args.output)
+        return 0
     if args.command == "prepare":
         if args.output.exists():
             raise ValueError("refusing to overwrite frozen plan")
@@ -150,6 +156,8 @@ def main():
                 args.archive.resolve(),
                 output_only=args.output_only,
                 plot_comparison=args.plot_comparison,
+                plot_attribution=args.plot_attribution,
+                attribution_preflight=args.output.parent / (args.output.stem + "-preflight"),
             ),
         )
         return 0

@@ -1,0 +1,25 @@
+{
+  "schema": "nautilus-copied-checkpoint-diagnostics@1",
+  "scope": "plot-attribution",
+  "authorization": "Live human continue approving full30D attribution plan",
+  "cases": 1,
+  "dimension": 30,
+  "limits": {
+    "budget_s": 180,
+    "timeout_s": 120,
+    "memory_mib": 4096
+  },
+  "synthetic_preflight": {
+    "timeout_s": 20,
+    "dimension": 2,
+    "points": 30,
+    "likelihood_calls": 0
+  },
+  "plot_policy": "thirty-small (12x12in,100dpi,all original samples,compact hist/KDE)",
+  "summary_timing_calls_per_success": 1,
+  "sampling": "forbidden",
+  "failure_policy": "stop; no automatic retry or escalation",
+  "purpose": "attribution only; no numerical or rendering optimization",
+  "outside_pulse": true,
+  "merge": "human"
+}

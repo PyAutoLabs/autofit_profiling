@@ -51,17 +51,22 @@ def validate_plan(plan):
     body = {k: v for k, v in plan.items() if k != "sha256"}
     if plan["sha256"] != fingerprint(body):
         raise ValueError("plan changed")
-    if plan.get("scope") not in (None, "output-only", "plot-comparison"):
+    if plan.get("scope") not in (None, "output-only", "plot-comparison", "plot-attribution"):
         raise ValueError("unauthorized scope")
     limits = OUTPUT_LIMITS if plan.get("scope") == "output-only" else LIMITS
-    if plan.get("scope") == "plot-comparison":
+    if plan.get("scope") in ("plot-comparison", "plot-attribution"):
         from profiling.nautilus_plot_comparison import LIMITS as plot_limits
         from profiling.nautilus_plot_comparison import POLICIES
 
         limits = plot_limits
-        if [c.get("plot_policy") for c in plan["cases"]] != POLICIES:
+        policies = POLICIES
+        if plan.get("scope") == "plot-attribution":
+            from profiling.nautilus_plot_attribution import LIMITS as attribution_limits
+
+            limits, policies = attribution_limits, POLICIES[-1:]
+        if [c.get("plot_policy") for c in plan["cases"]] != policies:
             raise ValueError("unauthorized plot policies")
-    call_limit = 1 if plan.get("scope") == "plot-comparison" else 0
+    call_limit = 1 if plan.get("scope") in ("plot-comparison", "plot-attribution") else 0
     if any(c.get("summary_timing_call_limit", 0) != call_limit for c in plan["cases"]):
         raise ValueError("unauthorized summary timing calls")
     if plan["protocol"] != PROTOCOL or plan["limits"] != limits:
@@ -71,14 +76,30 @@ def validate_plan(plan):
         expected = [("output", 30, None)]
     if plan.get("scope") == "plot-comparison":
         expected = [("output", 30, None)] * 3
+    if plan.get("scope") == "plot-attribution":
+        expected = [("output", 30, None)]
+        if not all(c.get("attribution") is True for c in plan["cases"]):
+            raise ValueError("missing attribution hooks")
+        if plan.get("synthetic_preflight", {}).get("status") != "success":
+            raise ValueError("missing synthetic preflight witness")
+    elif any(c.get("attribution") for c in plan["cases"]):
+        raise ValueError("attribution hooks outside approved scope")
     if [(c["arm"], c["dimension"], c["resample_seed"]) for c in plan["cases"]] != expected:
         raise ValueError("unauthorized case matrix")
     if not 0 <= plan["preflight_s"] < limits["budget_s"]:
         raise ValueError("preflight exhausted budget")
 
 
-def prepare(archive, *, output_only=False, plot_comparison=False):
+def prepare(
+    archive,
+    *,
+    output_only=False,
+    plot_comparison=False,
+    plot_attribution=False,
+    attribution_preflight=None,
+):
     start = time.monotonic()
+    plot_comparison = plot_comparison or plot_attribution
     output_only = output_only or plot_comparison
     from profiling.nautilus_baseline import provenance
     from profiling.nautilus_target import CorrelatedGaussianTarget
@@ -202,6 +223,19 @@ def prepare(archive, *, output_only=False, plot_comparison=False):
             font_cache=font_cache(),
             interpretation="Three output-only plot policies; original posterior and non-plot output held fixed",
         )
+        if plot_attribution:
+            from profiling.nautilus_plot_attribution import LIMITS as attribution_limits
+            from profiling.nautilus_plot_attribution import run_synthetic_preflight
+
+            witness = run_synthetic_preflight(attribution_preflight)
+            plan.update(
+                scope="plot-attribution",
+                limits=attribution_limits,
+                cases=[{**plan["cases"][-1], "attribution": True}],
+                synthetic_preflight=witness,
+                font_cache=font_cache(),
+                interpretation="One full30D plotting attribution replay; diagnostic probe overhead, not a speedup benchmark",
+            )
         plan["preflight_s"] = time.monotonic() - start
     plan["sha256"] = fingerprint(plan)
     validate_plan(plan)
@@ -420,6 +454,10 @@ def output_replay(case, checkpoint, target, directory, log):
                 from profiling.nautilus_plot_comparison import plot_scope
 
                 plot_receipt = stack.enter_context(plot_scope(case, directory, log))
+            if case.get("attribution"):
+                from profiling.nautilus_plot_attribution import attribution_scope
+
+                stack.enter_context(attribution_scope(directory))
             for owner, names in (
                 (
                     SearchUpdater,
@@ -483,7 +521,7 @@ def child(plan, case, directory):
     assert_environment(environment_key(before), plan["environment"])
     if any(s["dirty"] for s in before["sources"].values()):
         raise ValueError("measurement source must be committed and clean")
-    if plan.get("scope") == "plot-comparison":
+    if plan.get("scope") in ("plot-comparison", "plot-attribution"):
         from profiling.nautilus_plot_comparison import font_cache
 
         if font_cache() != plan["font_cache"]:

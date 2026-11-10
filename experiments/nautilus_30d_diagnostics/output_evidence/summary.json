@@ -1,0 +1,13 @@
+{
+  "coverage": [
+    {
+      "case": "output-d30-rsaved",
+      "status": "timeout",
+      "original_logZ_error": -0.9080901865173772,
+      "fresh_logZ_error": null,
+      "eligible_as_success": false
+    }
+  ],
+  "spent_s": 123.18860822399984,
+  "interpretation": "Output-only follow-up authorized after halted pilot; no new likelihood evaluations"
+}

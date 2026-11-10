@@ -1,0 +1,104 @@
+{
+  "status": "halted",
+  "attempts": [
+    {
+      "case": "output-d30-rsaved",
+      "status": "timeout",
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          0.58251953125,
+          0.54638671875,
+          0.7265625
+        ],
+        "time": 1794322100.960316
+      },
+      "process_wall_s": 120.06163771899992,
+      "supervision": {
+        "returncode": 124,
+        "termination_reason": "timeout",
+        "sampled_group_peak_rss_bytes": 551407616,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "stages": {
+        "completed": [
+          {
+            "stage": "pre_fit_output",
+            "status": "exit",
+            "wall_s": 0.012167230001068674
+          },
+          {
+            "stage": "run",
+            "status": "exit",
+            "wall_s": 0.006292432999543962
+          },
+          {
+            "stage": "samples_from",
+            "status": "exit",
+            "wall_s": 9.901561696999124
+          },
+          {
+            "stage": "summary",
+            "status": "exit",
+            "wall_s": 10.572146516999055
+          },
+          {
+            "stage": "save_samples",
+            "status": "exit",
+            "wall_s": 5.263226290000603
+          },
+          {
+            "stage": "save_samples_summary",
+            "status": "exit",
+            "wall_s": 0.006444653001381084
+          },
+          {
+            "stage": "_save_samples",
+            "status": "exit",
+            "wall_s": 25.771640112001478
+          },
+          {
+            "stage": "samples_drawn_randomly_via_pdf_from",
+            "status": "exit",
+            "wall_s": 0.0077035190006427
+          },
+          {
+            "stage": "_compute_latent_samples",
+            "status": "exit",
+            "wall_s": 0.01646024799993029
+          }
+        ],
+        "incomplete": [
+          {
+            "t_s": 0.00045923899961053394,
+            "id": 0,
+            "stage": "wrapped_replay",
+            "event": "enter"
+          },
+          {
+            "t_s": 26.76710075899973,
+            "id": 10,
+            "stage": "visualize",
+            "event": "enter"
+          }
+        ]
+      },
+      "original_unchanged": true
+    }
+  ],
+  "spent_s": 123.18860822399984,
+  "reason": "timeout",
+  "unrun": []
+}

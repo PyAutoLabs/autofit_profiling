@@ -243,7 +243,8 @@ def test_output_replay_rejects_even_a_swallowed_likelihood_attempt(tmp_path, mon
     assert FakeSampler.evaluate_likelihood is original
 
 
-def test_report_keeps_timeout_and_unrun_cases_separate(tmp_path, monkeypatch):
+@pytest.mark.parametrize("output_only", [False, True])
+def test_report_keeps_timeout_and_unrun_cases_separate(tmp_path, monkeypatch, output_only):
     import importlib.util
     from pathlib import Path
 
@@ -253,6 +254,10 @@ def test_report_keeps_timeout_and_unrun_cases_separate(tmp_path, monkeypatch):
     spec.loader.exec_module(module)
     p = plan()
     p["interpretation"] = "conditional repetitions"
+    if output_only:
+        from profiling.nautilus_diagnostics import OUTPUT_LIMITS
+
+        p.update(scope="output-only", limits=OUTPUT_LIMITS.copy(), cases=[p["cases"][-1]])
     for i, case in enumerate(p["cases"]):
         case.update(
             id=str(i),
@@ -269,6 +274,10 @@ def test_report_keeps_timeout_and_unrun_cases_separate(tmp_path, monkeypatch):
         "child": {"status": "success", "fresh_only": {"logZ_error": 0}},
         "stages": {"completed": [], "incomplete": []},
     }
+    if output_only:
+        log = StageLog(root / "0/stages.jsonl")
+        log.write(id=0, stage="visualize", event="enter")
+        row["stages"] = stage_summary(log.path)
     (root / "0/result.json").write_text(json.dumps(row))
     (root / "plan.json").write_text(json.dumps(p))
     (root / "state.json").write_text(
@@ -280,7 +289,10 @@ def test_report_keeps_timeout_and_unrun_cases_separate(tmp_path, monkeypatch):
     rows = json.loads((out / "summary.json").read_text())["coverage"]
     assert rows[0]["fresh_logZ_error"] is None
     assert rows[0]["eligible_as_success"] is False
-    assert [r["status"] for r in rows] == ["timeout"] + ["unrun"] * 5
+    assert [r["status"] for r in rows] == ["timeout"] + ["unrun"] * (len(p["cases"]) - 1)
+    if output_only:
+        assert "unfinished at termination" in (out / "report.html").read_text()
+        assert "visualize" in (out / "report.html").read_text()
     assert "partial-checkpoint.json" not in (out / "report.html").read_text()
 
 

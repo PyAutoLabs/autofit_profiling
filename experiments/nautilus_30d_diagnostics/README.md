@@ -2,6 +2,8 @@
 
 Reusing exploration samples is the leading explanation for the negative evidence error in the [dimension pilot](../nautilus_cpu_dimensions/README.md). Fresh samples from the same learned bounds substantially reduced the discrepancy. The 30D follow-up timed out before its ESS target, so this is supporting evidence rather than a completed accuracy validation.
 
+A separately authorized output-only replay also timed out inside visualization, after sample and latent output had completed. See the [output replay report](output_evidence/report.html) and the measured stages below.
+
 This is experimental phase 0b.2 for [issue #12](https://github.com/PyAutoLabs/autofit_profiling/issues/12), outside Pulse. Full phase 0b remains incomplete. [Open the report](evidence/report.html), [all attempt receipts](evidence/attempts.json), or the [frozen protocol](protocol.json).
 
 ## Evidence results
@@ -36,13 +38,41 @@ The final harness now performs a full native checkpoint write immediately after 
 
 Measurements were made at commit `3cf17eab18ead7fff72d3bf0de394c8c22188303`. The persistence correction, extra tests and report were added afterwards. **No timed experiments were rerun against the correction.** The completed estimates were calculated from the correct in-memory state and are unaffected by the persisted flag defect. Future runs use the corrected code and receive a new provenance identity.
 
-## Wrapped timeout: what is established
+## Wrapped timeout: original evidence and initial pilot
 
 The original wrapped 30D checkpoint matched the completed direct checkpoint in every dataset and attribute. It reached the same saved sampling result, then had only about 14.5 seconds of its 120-second process budget left for final output. It has no completed-fit receipt.
 
 A preceding read-only replay of its 33,189 thresholded CSV samples took 21.59 seconds for `SamplesPDF.summary()` under cProfile, mostly repeated parameter-array construction. Drawing 100 samples took 0.009 seconds, and drawing plus the empty analysis's latent calculation took 0.026 seconds. These diagnostic timings include profiler overhead and are not end-to-end benchmarks. The original log had already passed its first summary write: the last latent message alone does not locate where it was interrupted. Plotting and subsequent output remain candidates, not established causes.
 
-The new output-only replay rejects any likelihood evaluation, checks the posterior hash, and durably records conversion, summary, CSV, latent, visualization and finalization stages. Its guards have unit tests and its runtime hooks passed preflight, but **the actual replay was not reached** because the earlier evidence case hit the stop rule. The next bounded investigation should isolate this output replay without waiting behind another long resampling attempt. No library optimization is included here.
+The new output-only replay rejects any likelihood evaluation, checks the posterior hash, and durably records conversion, summary, CSV, latent, visualization and finalization stages. Its guards have unit tests and its runtime hooks passed preflight, but **the actual replay was not reached** because the earlier evidence case hit the stop rule. The separately authorized continuation below isolates that replay without another resampling attempt. No library optimization is included here.
+
+## Authorized output-only continuation
+
+The human selected **“Continue the wrapped-output investigation”** after the first pilot stopped. A [separate protocol](output_protocol.json) and plan contain exactly one output replay, with the same 120-second/4096-MiB child caps and a tighter 180-second aggregate budget. No evidence case can be admitted in this scope. The original six-case plan and its halted/unrun coverage are unchanged.
+
+The replay used measurement commit `e701a77f83d7c58ba49a534e4aa180f8db28395c` and the same pinned libraries/packages. It hit the wall cap at **120.06 seconds**; total charged runtime was **123.19 seconds**, including **2.95 seconds** of preflight. Sampled process-group peak RSS was **526 MiB**. There was no retry or cap increase.
+
+| Output stage | Inclusive wall seconds | Result |
+|---|---:|---|
+| Restore sampler / native `run` | 0.0063 for `run` | Already satisfied original stopping criteria |
+| Convert native samples | 9.902 | Completed |
+| Build sample summary | 10.572 | Completed |
+| Write samples | 5.263 | Completed |
+| Complete sample-output parent stage | 25.772 | Completed; includes the stages above |
+| Latent-output parent stage | 0.0165 | Completed |
+| Draw 100 latent samples | 0.0077 | Completed; nested within latent output |
+| Visualization | — | **Entered at trace time26.767s; still active at termination** |
+| Profiling/summary after visualization and post-fit output | — | Not reached |
+
+Nested stage times overlap and must not be summed. The broad visualization stage includes graphics setup: the log records a new Matplotlib font cache during it. This is one instrumented local replay, not a warm-cache steady-state benchmark, and the trace does not separate plot construction, font setup and rendering. No exact visualization duration is reported for the incomplete stage.
+
+This establishes that visualization can exhaust the output-only budget even after sample and latent handling have finished. The latent stage is negligible in this replay. The original timeout's exact instruction remains unobserved; the replay identifies a material contributor without manufacturing a completed original fit.
+
+Both native sampler evaluation and direct wrapper likelihood calls were blocked. The copied checkpoint is [byte-identical to its original input](output_evidence/checkpoint-integrity.json) after termination; original inputs also passed their hash checks. The standard success receipt is absent because the process was killed, and the attempt remains ineligible as success. Around45MB of additional raw output is retained under ignored `output/nautilus-output-only/`.
+
+Source inspection identifies the likely plotting target for a later experiment: the pinned weighted-search configuration enables `corner_anesthetic`, uses compact plots above10parameters, and skips the full corner only **above30parameters**. This30D model is still eligible for the full corner. The current trace measures `SearchUpdater.visualize`, not that plot function individually. A future bounded plot-subset/configuration comparison should isolate it; no plotting behavior or library code was changed here.
+
+To prepare this separately authorized scope, add `--output-only` to the `prepare` command below and use a new plan/output directory. It cannot resume the halted evidence pilot. Detailed [attempts](output_evidence/attempts.json), [durable stages](output_evidence/output-d30-rsaved-stages.jsonl), and [portable plan](output_evidence/plan.json) are retained.
 
 ## Reproduce
 
@@ -60,6 +90,6 @@ The published plan removes local paths while retaining input hashes, case identi
 
 ## Validation and readiness
 
-The stdlib tooling suite covers plan tampering, source/input identity, the resumed exclusion semantics, stage persistence, patch restoration, no-likelihood enforcement even when an exception is swallowed, timeout precedence over child success, no retry/budget reset, and missing-case reporting. Runtime preflight restored all three archived posterior hashes and verified that exclusion leaves zero selected samples. The post-measurement checkpoint-mode smoke passed without sampling. Ruff and the unchanged catalogue check are required alongside the tooling suite; no notebooks are generated for these standalone diagnostic scripts.
+The 81-test stdlib tooling suite covers plan tampering, source/input identity, the resumed exclusion semantics, stage persistence, patch restoration, no-likelihood enforcement even when an exception is swallowed, timeout precedence over child success, no retry/budget reset, and missing-case reporting. Runtime preflight restored all three archived posterior hashes and verified that exclusion leaves zero selected samples. The post-measurement checkpoint-mode smoke passed without sampling. Ruff and the unchanged catalogue check are required alongside the tooling suite; no notebooks are generated for these standalone diagnostic scripts.
 
 [Authoritative Heart readiness](evidence/heart-readiness.json) remains RED: **PyAutoGalaxy: CI failure**; **PyAutoLens: CI failure**. The live phase-0b development override and approval of this bounded member permit the development PR. Merge remains a separate human decision; no release or readiness-clearance claim.

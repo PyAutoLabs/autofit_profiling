@@ -143,6 +143,12 @@ a{color:#125db3}</style><h1>Nautilus evidence diagnostics</h1>
                 f"<tr><td>{html.escape(stage['stage'])}</td><td>{stage['wall_s']:.4f}</td>"
                 f"<td>{html.escape(stage['status'])}</td></tr>"
             )
+        unfinished = attempt.get("stages", {}).get("incomplete", []) if attempt else []
+        for stage in unfinished:
+            document += (
+                f"<tr><td>{html.escape(stage['stage'])}</td><td>—</td>"
+                "<td>unfinished at termination</td></tr>"
+            )
         document += (
             "</table><p>Nested stage times overlap; do not sum them. "
             "This replay excludes the original search and does not replace its timeout receipt.</p>"

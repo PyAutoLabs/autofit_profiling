@@ -1,0 +1,52 @@
+{
+  "target": "pass",
+  "worker_death": {
+    "control": {
+      "status": "detected",
+      "wall_s": 0.06261624300009316
+    },
+    "traced": {
+      "status": "detected",
+      "wall_s": 0.062456993000068906
+    }
+  },
+  "resume": [
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "checkpoint_n_like": 200,
+      "final_n_like": 700,
+      "posterior_sha256": "338a2956b6effe658639dafab40cfd30b9e5daed753905f1f8615ad789e44503"
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "checkpoint_n_like": 200,
+      "final_n_like": 700,
+      "posterior_sha256": "338a2956b6effe658639dafab40cfd30b9e5daed753905f1f8615ad789e44503"
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "checkpoint_n_like": 200,
+      "final_n_like": 700,
+      "posterior_sha256": "338a2956b6effe658639dafab40cfd30b9e5daed753905f1f8615ad789e44503"
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "checkpoint_n_like": 200,
+      "final_n_like": 700,
+      "posterior_sha256": "338a2956b6effe658639dafab40cfd30b9e5daed753905f1f8615ad789e44503"
+    }
+  ],
+  "dependencies": {
+    "PyAutoFit": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c",
+    "PyAutoNerves": "9b204c90c2ce05c5bb0cf3e9800ed13f005c6c56"
+  },
+  "timeout_probe": {
+    "status": "timeout",
+    "returncode": 124,
+    "configured_timeout_s": 0.01
+  }
+}

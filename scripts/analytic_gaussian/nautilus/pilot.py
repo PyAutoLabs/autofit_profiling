@@ -12,6 +12,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = next(p for p in HERE.parents if (p / "ruff.toml").exists())
 sys.path.insert(0, str(ROOT / "scripts" / "misc"))
+from profiling.nautilus_manifest import source_pins
 
 
 def main():
@@ -57,6 +58,7 @@ def main():
         )
 
     save()
+    expected_sources = None
     start = time.monotonic()
     for case in cases:
         remaining = args.budget - (time.monotonic() - start)
@@ -81,6 +83,13 @@ def main():
         output = args.output / case["id"] / "result.json"
         row = json.loads(output.read_text()) if output.exists() else {"status": "driver_failure"}
         case["status"] = row["status"]
+        if row["status"] == "success":
+            actual_sources = source_pins(row["manifest"]["environment"]["sources"])
+            if expected_sources is not None and expected_sources != actual_sources:
+                case["status"] = "source_mismatch"
+                case["included_in_analysis"] = False
+                case["exclusion_reason"] = "source revision/content changed between pilot cases"
+            expected_sources = actual_sources
         save()
         print(
             case["id"],

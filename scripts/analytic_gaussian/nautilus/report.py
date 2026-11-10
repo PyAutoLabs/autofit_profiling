@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = next(p for p in Path(__file__).resolve().parents if (p / "ruff.toml").exists())
 sys.path.insert(0, str(ROOT / "scripts" / "misc"))
-from profiling.nautilus_manifest import assert_matching
+from profiling.nautilus_manifest import assert_matching, source_pins
 
 
 def portable(row):
@@ -23,7 +23,14 @@ def portable(row):
             key: portable(value)
             for key, value in row.items()
             if key
-            not in ("root", "executable", "output_filesystem_path", "command", "driver_output")
+            not in (
+                "root",
+                "executable",
+                "output_filesystem_path",
+                "command",
+                "driver_output",
+                "filepath",
+            )
         }
     if isinstance(row, list):
         return [portable(value) for value in row]
@@ -67,19 +74,25 @@ def main():
     groups = defaultdict(list)
     pairs = defaultdict(dict)
     records = []
-    source_pins = set()
+    measured_sources = set()
     for case in pilot["cases"]:
         path = args.pilot / case["id"] / "result.json"
         row = json.loads(path.read_text()) if path.exists() else {"status": case["status"]}
         records.append({"case": portable(case), "result": portable(row)})
-        if row["status"] != "success":
+        if (
+            row["status"] != "success"
+            or case["status"] != "success"
+            or not case.get("included_in_analysis", True)
+        ):
             continue
         config = row["manifest"]["config"]
         key = (config["adapter"], config["workers"], config["cost_profile"])
         groups[(*key, config["trace"])].append(row)
         pairs[(*key, config["seed"])][config["trace"]] = row
-        source_pins.add(json.dumps(row["manifest"]["environment"]["sources"], sort_keys=True))
-    if len(source_pins) > 1:
+        measured_sources.add(
+            json.dumps(source_pins(row["manifest"]["environment"]["sources"]), sort_keys=True)
+        )
+    if len(measured_sources) > 1:
         raise ValueError("source pins changed across pilot")
     overhead = []
     for key, pair in sorted(pairs.items()):
@@ -113,6 +126,16 @@ def main():
     summary = []
     for key, rows in sorted(groups.items()):
         adapter, workers, cost, traced = key
+
+        def without_seed(row):
+            value = json.loads(json.dumps(row["manifest"]["matching"]))
+            value["constructor"].pop("seed")
+            return value
+
+        for row in rows:
+            assert_matching(without_seed(rows[0]), without_seed(row))
+            if row["manifest"]["target_sha256"] != rows[0]["manifest"]["target_sha256"]:
+                raise ValueError("target changed within group")
         wall = statistics.median(r["wall_s"] for r in rows)
         components = {
             name: statistics.median(r["components_s"][name] for r in rows)
@@ -187,6 +210,7 @@ def main():
                 "measured_at": max(r["manifest"]["measured_at"] for r in rows),
             },
             "pilot_evidence": "pilot_runs.json",
+            "likelihood_count_definition": "native sampler n_like; wrapper diagnostic calls excluded",
         }
         (args.export / f"{variant}.json").write_text(json.dumps(doc, indent=2))
     (args.export / "summary.json").write_text(
@@ -200,11 +224,12 @@ def main():
             f"<tr><td>{g['adapter']}</td><td>{g['workers']}</td><td>{g['cost']}</td><td>{g['traced']}</td><td>{g['n']}</td><td>{g['wall_s']:.3f}</td><td>{html.escape(str(g['logZ_error_range']))}</td></tr>"
         )
     content.append(
-        "</table><p>Detailed trace/control pairs have identical posterior hashes and likelihood counts. Ratios include measurement noise; no assumed timing correction is applied. Failed and unrun cells are retained in pilot_runs.json.</p>"
+        "</table><p>Selected trace/control pairs have identical posterior hashes and likelihood counts. Superseded source pins and interrupted attempts are retained but excluded from aggregates. Ratios include measurement noise; no assumed timing correction is applied. Failed and unrun cells are retained in pilot_runs.json.</p>"
     )
     for case in pilot["cases"]:
         if (
             case["status"] == "success"
+            and case.get("included_in_analysis", True)
             and case["workers"] == 2
             and case["trace"] == "on"
             and case["cost_profile"] == "correlated"
@@ -222,7 +247,11 @@ def main():
         json.dumps(
             {
                 "successful": sum(c["status"] == "success" for c in pilot["cases"]),
-                "planned": len(pilot["cases"]),
+                "attempts": len(pilot["cases"]),
+                "included_successful": sum(
+                    c["status"] == "success" and c.get("included_in_analysis", True)
+                    for c in pilot["cases"]
+                ),
                 "paired": len(overhead),
                 "groups": len(groups),
             },

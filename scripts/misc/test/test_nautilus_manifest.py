@@ -31,3 +31,14 @@ def test_invalid_setup_rejected(change):
 
 def test_fingerprint_is_order_independent():
     assert fingerprint({"a": 1, "b": 2}) == fingerprint({"b": 2, "a": 1})
+
+
+def test_relocated_dependencies_keep_identity_but_revisions_do_not():
+    from profiling.nautilus_manifest import source_pins
+
+    left = {"PyAutoFit": {"root": "/old", "revision": "abc", "code_sha256": "def"}}
+    moved = {"PyAutoFit": {"root": "/new", "revision": "abc", "code_sha256": "def"}}
+    assert_matching(source_pins(left), source_pins(moved))
+    moved["PyAutoFit"]["revision"] = "ghi"
+    with pytest.raises(ValueError):
+        assert_matching(source_pins(left), source_pins(moved))

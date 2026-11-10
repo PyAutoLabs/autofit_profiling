@@ -368,7 +368,9 @@ def render_html(rows, catalogue):
         out.append(
             "<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>"
         )
-        ranked = sorted(doc["components_s"].items(), key=lambda kv: -kv[1])
+        ranked = sorted(
+            ((k, v) for k, v in doc["components_s"].items() if v is not None), key=lambda kv: -kv[1]
+        )
         for name, sec in ranked:
             share = doc["shares_of_wall"][name]
             out.append(

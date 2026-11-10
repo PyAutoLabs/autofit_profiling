@@ -59,5 +59,12 @@ def test_bad_accounting_rejected(fault):
 
 def test_single_worker_tail_unavailable():
     events, batches = fixture()
-    events[1]["pid"] = 1
+    events[1].update(pid=1, start_ns=91, finish_ns=92)
     assert summarize(events, batches)["batches"][0]["worker_tail_s"] is None
+
+
+def test_overlapping_service_on_same_worker_rejected():
+    events, batches = fixture()
+    events[1]["pid"] = 1
+    with pytest.raises(ValueError, match="overlapping"):
+        summarize(events, batches)

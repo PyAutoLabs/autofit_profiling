@@ -81,3 +81,11 @@ def assert_matching(left, right):
     if left != right:
         differences = [key for key in left.keys() | right.keys() if left.get(key) != right.get(key)]
         raise ValueError(f"unmatched baseline settings: {differences}")
+
+
+def source_pins(sources):
+    """Compare code identity, not where an equivalent read-only checkout lives."""
+    return {
+        name: {key: source[key] for key in ("revision", "code_sha256")}
+        for name, source in sources.items()
+    }

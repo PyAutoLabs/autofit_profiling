@@ -1,0 +1,92 @@
+{
+  "schema": "autofit-profiling-breakdown",
+  "version": 1,
+  "status": "success",
+  "variant": "direct-w2-fixed-trace",
+  "axis": "breakdown",
+  "unit": "s",
+  "setup": {
+    "id": "analytic_gaussian/nautilus/direct-w2-fixed-trace",
+    "label": "direct-w2-fixed-trace",
+    "dataset": "analytic_gaussian",
+    "catalogue_model": "correlated_gaussian",
+    "free_parameters": 5,
+    "data_pixels": 0,
+    "instrument_reason": "analytic density; no data pixels or instrument",
+    "search": "Nautilus",
+    "likelihood": "numpy fp64 normalized correlated Gaussian",
+    "search_settings": {
+      "adapter": "direct",
+      "workers": 2,
+      "seed": 1,
+      "dimension": 5,
+      "cost_profile": "fixed",
+      "work": 100,
+      "trace": true,
+      "n_live": 200,
+      "n_eff": 500,
+      "n_batch": 100,
+      "checkpoint": true,
+      "update_interval": 1000000
+    },
+    "config": "explicit matched baseline (see pilot_runs.json)"
+  },
+  "method": {
+    "id": "nautilus-cpu-direct-w2-fixed-trace",
+    "statistic": "median",
+    "repetitions": 3,
+    "warmup": "none; fresh process",
+    "synchronization": "complete logical batch",
+    "cache_state": "cold Python process; shared OS/font cache"
+  },
+  "wall_s": 8.37583185799997,
+  "components_s": {
+    "worker_startup": 0.010417007999990346,
+    "proposal_sampling": 0.07317863599990915,
+    "prior_transform": 0.004588239001577676,
+    "evaluation_dispatch_wait": 0.061798625998562784,
+    "checkpoint_io": 0.9648434930001031,
+    "nn_training": 4.261261879000074,
+    "nn_prediction": 0.10941083800042861,
+    "bound_geometry": 2.775054926999985,
+    "sampler_bookkeeping": 0.1033008799995514,
+    "other": 0.009196389000067029
+  },
+  "shares_of_wall": {
+    "worker_startup": 0.001243698318757533,
+    "proposal_sampling": 0.008736879779888893,
+    "prior_transform": 0.0005477950225559187,
+    "evaluation_dispatch_wait": 0.007378207567471325,
+    "checkpoint_io": 0.11519375142166406,
+    "nn_training": 0.5087568555868316,
+    "nn_prediction": 0.013062683188408033,
+    "bound_geometry": 0.3313169335353192,
+    "sampler_bookkeeping": 0.01233320842047302,
+    "other": 0.0010979672414607182
+  },
+  "likelihood_function_calls": 2500,
+  "reference": null,
+  "identity": {
+    "device": "cpu",
+    "backend": "numpy",
+    "precision": "float64",
+    "library_version": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c",
+    "software": {
+      "numpy": "2.5.4",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "h5py": "3.16.0",
+      "nautilus-sampler": "1.0.5",
+      "jax": "0.11.2",
+      "jaxlib": "0.11.2",
+      "threadpoolctl": "3.8.0",
+      "PyAutoFit": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c"
+    }
+  },
+  "provenance": {
+    "host": "DESKTOP-H143S82",
+    "measured_at": "2026-11-10T12:13:48.616945+00:00"
+  },
+  "pilot_evidence": "pilot_runs.json",
+  "likelihood_count_definition": "native sampler n_like; wrapper diagnostic calls excluded"
+}

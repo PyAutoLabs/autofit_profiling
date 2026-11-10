@@ -75,6 +75,13 @@ def reconcile(events, batches):
         if event["cpu_ns"] < 0:
             raise ValueError("negative CPU duration")
         by_batch[ident[0]].append(event)
+    by_worker = defaultdict(list)
+    for event in events:
+        by_worker[event["pid"]].append(event)
+    for rows in by_worker.values():
+        ordered = sorted(rows, key=lambda event: event["start_ns"])
+        if any(left["finish_ns"] > right["start_ns"] for left, right in zip(ordered, ordered[1:])):
+            raise ValueError("overlapping evaluations on one worker")
     expected = {(batch["id"], i) for batch in batches for i in range(batch["count"])}
     if seen != expected:
         raise ValueError(
@@ -149,6 +156,7 @@ def summarize(events, batches):
         "unavailable": [
             "serialization isolated from dispatch",
             "individual chunk dequeue timestamps",
+            "worker initializer completion (worker_startup times pool construction)",
         ],
     }
 

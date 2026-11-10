@@ -12,6 +12,212 @@ p.m,li{color:var(--muted)}a{color:var(--bar)}
 </style></head><body>
 <h1>autofit_profiling</h1>
 <p>Where the time in one PyAutoFit <code>search.fit</code> goes, and the expectation-propagation / graphical-model baselines. Producer page for the <a href="https://pyautolabs.github.io/PyAutoPulse/">PyAutoPulse</a> instance <code>fit</code> (<a href="catalogue.json">catalogue.json</a>, <code>profiling-summary@2</code>). Measurements are declared, not judged.</p>
+<h2>analytic_gaussian/nautilus/direct-w1-correlated-control</h2>
+<p class=m>direct-w1-correlated-control · wall 8.53 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:14:29.177724+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/direct-w1-correlated-control.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/direct-w1-correlated-trace</h2>
+<p class=m>direct-w1-correlated-trace · wall 8.94 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:14:38.347236+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/direct-w1-correlated-trace.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>4.74</td><td class=n>53.0 %</td><td style="width:40%"><div class=bar style="width:53.0%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>2.76</td><td class=n>30.9 %</td><td style="width:40%"><div class=bar style="width:30.9%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>1.06</td><td class=n>11.9 %</td><td style="width:40%"><div class=bar style="width:11.9%"></div></td></tr>
+<tr><td>nn_prediction</td><td class=n>0.12</td><td class=n>1.3 %</td><td style="width:40%"><div class=bar style="width:1.3%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.11</td><td class=n>1.2 %</td><td style="width:40%"><div class=bar style="width:1.2%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.07</td><td class=n>0.8 %</td><td style="width:40%"><div class=bar style="width:0.8%"></div></td></tr>
+<tr><td>evaluation_dispatch_wait</td><td class=n>0.06</td><td class=n>0.7 %</td><td style="width:40%"><div class=bar style="width:0.7%"></div></td></tr>
+<tr><td>other</td><td class=n>0.00</td><td class=n>0.0 %</td><td style="width:40%"><div class=bar style="width:0.0%"></div></td></tr>
+<tr><td>prior_transform</td><td class=n>0.00</td><td class=n>0.0 %</td><td style="width:40%"><div class=bar style="width:0.0%"></div></td></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/direct-w1-fixed-control</h2>
+<p class=m>direct-w1-fixed-control · wall 8.74 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:12:23.549031+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/direct-w1-fixed-control.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/direct-w1-fixed-trace</h2>
+<p class=m>direct-w1-fixed-trace · wall 8.31 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:12:32.663522+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/direct-w1-fixed-trace.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>4.38</td><td class=n>52.7 %</td><td style="width:40%"><div class=bar style="width:52.7%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>2.69</td><td class=n>32.4 %</td><td style="width:40%"><div class=bar style="width:32.4%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>1.00</td><td class=n>12.1 %</td><td style="width:40%"><div class=bar style="width:12.1%"></div></td></tr>
+<tr><td>nn_prediction</td><td class=n>0.11</td><td class=n>1.4 %</td><td style="width:40%"><div class=bar style="width:1.4%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.10</td><td class=n>1.3 %</td><td style="width:40%"><div class=bar style="width:1.3%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.07</td><td class=n>0.8 %</td><td style="width:40%"><div class=bar style="width:0.8%"></div></td></tr>
+<tr><td>evaluation_dispatch_wait</td><td class=n>0.04</td><td class=n>0.5 %</td><td style="width:40%"><div class=bar style="width:0.5%"></div></td></tr>
+<tr><td>other</td><td class=n>0.00</td><td class=n>0.0 %</td><td style="width:40%"><div class=bar style="width:0.0%"></div></td></tr>
+<tr><td>prior_transform</td><td class=n>0.00</td><td class=n>0.0 %</td><td style="width:40%"><div class=bar style="width:0.0%"></div></td></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/direct-w2-correlated-control</h2>
+<p class=m>direct-w2-correlated-control · wall 8.44 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:15:13.518845+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/direct-w2-correlated-control.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/direct-w2-correlated-trace</h2>
+<p class=m>direct-w2-correlated-trace · wall 9.20 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:15:22.200027+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/direct-w2-correlated-trace.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>4.82</td><td class=n>52.4 %</td><td style="width:40%"><div class=bar style="width:52.4%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>2.87</td><td class=n>31.2 %</td><td style="width:40%"><div class=bar style="width:31.2%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>1.10</td><td class=n>11.9 %</td><td style="width:40%"><div class=bar style="width:11.9%"></div></td></tr>
+<tr><td>nn_prediction</td><td class=n>0.12</td><td class=n>1.3 %</td><td style="width:40%"><div class=bar style="width:1.3%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.11</td><td class=n>1.2 %</td><td style="width:40%"><div class=bar style="width:1.2%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.08</td><td class=n>0.8 %</td><td style="width:40%"><div class=bar style="width:0.8%"></div></td></tr>
+<tr><td>evaluation_dispatch_wait</td><td class=n>0.07</td><td class=n>0.8 %</td><td style="width:40%"><div class=bar style="width:0.8%"></div></td></tr>
+<tr><td>other</td><td class=n>0.01</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+<tr><td>worker_startup</td><td class=n>0.01</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+<tr><td>prior_transform</td><td class=n>0.00</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/direct-w2-fixed-control</h2>
+<p class=m>direct-w2-fixed-control · wall 10.12 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:13:32.875092+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/direct-w2-fixed-control.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/direct-w2-fixed-trace</h2>
+<p class=m>direct-w2-fixed-trace · wall 8.38 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:13:48.616945+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/direct-w2-fixed-trace.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>4.26</td><td class=n>50.9 %</td><td style="width:40%"><div class=bar style="width:50.9%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>2.78</td><td class=n>33.1 %</td><td style="width:40%"><div class=bar style="width:33.1%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>0.96</td><td class=n>11.5 %</td><td style="width:40%"><div class=bar style="width:11.5%"></div></td></tr>
+<tr><td>nn_prediction</td><td class=n>0.11</td><td class=n>1.3 %</td><td style="width:40%"><div class=bar style="width:1.3%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.10</td><td class=n>1.2 %</td><td style="width:40%"><div class=bar style="width:1.2%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.07</td><td class=n>0.9 %</td><td style="width:40%"><div class=bar style="width:0.9%"></div></td></tr>
+<tr><td>evaluation_dispatch_wait</td><td class=n>0.06</td><td class=n>0.7 %</td><td style="width:40%"><div class=bar style="width:0.7%"></div></td></tr>
+<tr><td>worker_startup</td><td class=n>0.01</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+<tr><td>other</td><td class=n>0.01</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+<tr><td>prior_transform</td><td class=n>0.00</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/direct-w2-random-control</h2>
+<p class=m>direct-w2-random-control · wall 8.06 s (median of 1) · 2600 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:15:57.467661+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/direct-w2-random-control.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/direct-w2-random-trace</h2>
+<p class=m>direct-w2-random-trace · wall 8.69 s (median of 1) · 2600 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:16:09.022243+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/direct-w2-random-trace.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>4.44</td><td class=n>51.1 %</td><td style="width:40%"><div class=bar style="width:51.1%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>2.85</td><td class=n>32.8 %</td><td style="width:40%"><div class=bar style="width:32.8%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>0.98</td><td class=n>11.3 %</td><td style="width:40%"><div class=bar style="width:11.3%"></div></td></tr>
+<tr><td>evaluation_dispatch_wait</td><td class=n>0.12</td><td class=n>1.4 %</td><td style="width:40%"><div class=bar style="width:1.4%"></div></td></tr>
+<tr><td>nn_prediction</td><td class=n>0.11</td><td class=n>1.3 %</td><td style="width:40%"><div class=bar style="width:1.3%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.10</td><td class=n>1.2 %</td><td style="width:40%"><div class=bar style="width:1.2%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.07</td><td class=n>0.8 %</td><td style="width:40%"><div class=bar style="width:0.8%"></div></td></tr>
+<tr><td>worker_startup</td><td class=n>0.01</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+<tr><td>other</td><td class=n>0.01</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+<tr><td>prior_transform</td><td class=n>0.00</td><td class=n>0.0 %</td><td style="width:40%"><div class=bar style="width:0.0%"></div></td></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/pyautofit-w1-correlated-control</h2>
+<p class=m>pyautofit-w1-correlated-control · wall 10.26 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:14:47.907179+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/pyautofit-w1-correlated-control.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/pyautofit-w1-correlated-trace</h2>
+<p class=m>pyautofit-w1-correlated-trace · wall 13.46 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:15:01.165967+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/pyautofit-w1-correlated-trace.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>4.69</td><td class=n>34.9 %</td><td style="width:40%"><div class=bar style="width:34.9%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>2.96</td><td class=n>22.0 %</td><td style="width:40%"><div class=bar style="width:22.0%"></div></td></tr>
+<tr><td>visualisation</td><td class=n>2.56</td><td class=n>19.1 %</td><td style="width:40%"><div class=bar style="width:19.1%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>1.11</td><td class=n>8.2 %</td><td style="width:40%"><div class=bar style="width:8.2%"></div></td></tr>
+<tr><td>samples_output</td><td class=n>0.57</td><td class=n>4.2 %</td><td style="width:40%"><div class=bar style="width:4.2%"></div></td></tr>
+<tr><td>prior_transform</td><td class=n>0.31</td><td class=n>2.3 %</td><td style="width:40%"><div class=bar style="width:2.3%"></div></td></tr>
+<tr><td>evaluation_dispatch_wait</td><td class=n>0.18</td><td class=n>1.3 %</td><td style="width:40%"><div class=bar style="width:1.3%"></div></td></tr>
+<tr><td>other</td><td class=n>0.17</td><td class=n>1.3 %</td><td style="width:40%"><div class=bar style="width:1.3%"></div></td></tr>
+<tr><td>nn_prediction</td><td class=n>0.12</td><td class=n>0.9 %</td><td style="width:40%"><div class=bar style="width:0.9%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.12</td><td class=n>0.9 %</td><td style="width:40%"><div class=bar style="width:0.9%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.08</td><td class=n>0.6 %</td><td style="width:40%"><div class=bar style="width:0.6%"></div></td></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/pyautofit-w1-fixed-control</h2>
+<p class=m>pyautofit-w1-fixed-control · wall 12.47 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:12:44.584113+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/pyautofit-w1-fixed-control.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/pyautofit-w1-fixed-trace</h2>
+<p class=m>pyautofit-w1-fixed-trace · wall 11.94 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:13:05.676862+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/pyautofit-w1-fixed-trace.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>4.56</td><td class=n>38.2 %</td><td style="width:40%"><div class=bar style="width:38.2%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>2.89</td><td class=n>24.2 %</td><td style="width:40%"><div class=bar style="width:24.2%"></div></td></tr>
+<tr><td>visualisation</td><td class=n>2.33</td><td class=n>19.5 %</td><td style="width:40%"><div class=bar style="width:19.5%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>1.03</td><td class=n>8.7 %</td><td style="width:40%"><div class=bar style="width:8.7%"></div></td></tr>
+<tr><td>samples_output</td><td class=n>0.49</td><td class=n>4.1 %</td><td style="width:40%"><div class=bar style="width:4.1%"></div></td></tr>
+<tr><td>prior_transform</td><td class=n>0.28</td><td class=n>2.4 %</td><td style="width:40%"><div class=bar style="width:2.4%"></div></td></tr>
+<tr><td>other</td><td class=n>0.16</td><td class=n>1.3 %</td><td style="width:40%"><div class=bar style="width:1.3%"></div></td></tr>
+<tr><td>evaluation_dispatch_wait</td><td class=n>0.13</td><td class=n>1.1 %</td><td style="width:40%"><div class=bar style="width:1.1%"></div></td></tr>
+<tr><td>nn_prediction</td><td class=n>0.11</td><td class=n>1.0 %</td><td style="width:40%"><div class=bar style="width:1.0%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.11</td><td class=n>0.9 %</td><td style="width:40%"><div class=bar style="width:0.9%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.07</td><td class=n>0.6 %</td><td style="width:40%"><div class=bar style="width:0.6%"></div></td></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/pyautofit-w2-correlated-control</h2>
+<p class=m>pyautofit-w2-correlated-control · wall 11.66 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:15:33.031667+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/pyautofit-w2-correlated-control.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/pyautofit-w2-correlated-trace</h2>
+<p class=m>pyautofit-w2-correlated-trace · wall 12.16 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:15:45.401940+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/pyautofit-w2-correlated-trace.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>4.21</td><td class=n>34.7 %</td><td style="width:40%"><div class=bar style="width:34.7%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>2.79</td><td class=n>23.0 %</td><td style="width:40%"><div class=bar style="width:23.0%"></div></td></tr>
+<tr><td>visualisation</td><td class=n>2.49</td><td class=n>20.5 %</td><td style="width:40%"><div class=bar style="width:20.5%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>0.95</td><td class=n>7.8 %</td><td style="width:40%"><div class=bar style="width:7.8%"></div></td></tr>
+<tr><td>samples_output</td><td class=n>0.54</td><td class=n>4.4 %</td><td style="width:40%"><div class=bar style="width:4.4%"></div></td></tr>
+<tr><td>prior_transform</td><td class=n>0.29</td><td class=n>2.4 %</td><td style="width:40%"><div class=bar style="width:2.4%"></div></td></tr>
+<tr><td>other</td><td class=n>0.16</td><td class=n>1.3 %</td><td style="width:40%"><div class=bar style="width:1.3%"></div></td></tr>
+<tr><td>evaluation_dispatch_wait</td><td class=n>0.13</td><td class=n>1.1 %</td><td style="width:40%"><div class=bar style="width:1.1%"></div></td></tr>
+<tr><td>nn_prediction</td><td class=n>0.11</td><td class=n>0.9 %</td><td style="width:40%"><div class=bar style="width:0.9%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.11</td><td class=n>0.9 %</td><td style="width:40%"><div class=bar style="width:0.9%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.07</td><td class=n>0.6 %</td><td style="width:40%"><div class=bar style="width:0.6%"></div></td></tr>
+<tr><td>worker_startup</td><td class=n>0.01</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/pyautofit-w2-fixed-control</h2>
+<p class=m>pyautofit-w2-fixed-control · wall 11.81 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:13:58.848289+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/pyautofit-w2-fixed-control.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/pyautofit-w2-fixed-trace</h2>
+<p class=m>pyautofit-w2-fixed-trace · wall 11.85 s (median of 3) · 2500 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:14:12.961096+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/pyautofit-w2-fixed-trace.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>4.16</td><td class=n>35.1 %</td><td style="width:40%"><div class=bar style="width:35.1%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>2.67</td><td class=n>22.6 %</td><td style="width:40%"><div class=bar style="width:22.6%"></div></td></tr>
+<tr><td>visualisation</td><td class=n>2.23</td><td class=n>18.8 %</td><td style="width:40%"><div class=bar style="width:18.8%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>0.95</td><td class=n>8.0 %</td><td style="width:40%"><div class=bar style="width:8.0%"></div></td></tr>
+<tr><td>samples_output</td><td class=n>0.50</td><td class=n>4.2 %</td><td style="width:40%"><div class=bar style="width:4.2%"></div></td></tr>
+<tr><td>prior_transform</td><td class=n>0.28</td><td class=n>2.4 %</td><td style="width:40%"><div class=bar style="width:2.4%"></div></td></tr>
+<tr><td>other</td><td class=n>0.18</td><td class=n>1.5 %</td><td style="width:40%"><div class=bar style="width:1.5%"></div></td></tr>
+<tr><td>evaluation_dispatch_wait</td><td class=n>0.12</td><td class=n>1.0 %</td><td style="width:40%"><div class=bar style="width:1.0%"></div></td></tr>
+<tr><td>nn_prediction</td><td class=n>0.11</td><td class=n>0.9 %</td><td style="width:40%"><div class=bar style="width:0.9%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.10</td><td class=n>0.9 %</td><td style="width:40%"><div class=bar style="width:0.9%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.07</td><td class=n>0.6 %</td><td style="width:40%"><div class=bar style="width:0.6%"></div></td></tr>
+<tr><td>worker_startup</td><td class=n>0.01</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/pyautofit-w2-random-control</h2>
+<p class=m>pyautofit-w2-random-control · wall 11.57 s (median of 1) · 2600 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:16:19.295520+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/pyautofit-w2-random-control.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
+<h2>analytic_gaussian/nautilus/pyautofit-w2-random-trace</h2>
+<p class=m>pyautofit-w2-random-trace · wall 12.07 s (median of 1) · 2600 likelihood calls · cpu/numpy · PyAutoFit bdb7af0e9c339ad07850679fd6ac168aacc7d18c · measured 2026-11-10T12:16:33.016502+00:00 · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/analytic_gaussian/nautilus/pyautofit-w2-random-trace.json">result row</a></p>
+<table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
+<tr><td>nn_training</td><td class=n>4.61</td><td class=n>38.2 %</td><td style="width:40%"><div class=bar style="width:38.2%"></div></td></tr>
+<tr><td>bound_geometry</td><td class=n>2.96</td><td class=n>24.5 %</td><td style="width:40%"><div class=bar style="width:24.5%"></div></td></tr>
+<tr><td>visualisation</td><td class=n>2.09</td><td class=n>17.3 %</td><td style="width:40%"><div class=bar style="width:17.3%"></div></td></tr>
+<tr><td>checkpoint_io</td><td class=n>1.03</td><td class=n>8.5 %</td><td style="width:40%"><div class=bar style="width:8.5%"></div></td></tr>
+<tr><td>samples_output</td><td class=n>0.48</td><td class=n>4.0 %</td><td style="width:40%"><div class=bar style="width:4.0%"></div></td></tr>
+<tr><td>prior_transform</td><td class=n>0.27</td><td class=n>2.2 %</td><td style="width:40%"><div class=bar style="width:2.2%"></div></td></tr>
+<tr><td>evaluation_dispatch_wait</td><td class=n>0.18</td><td class=n>1.5 %</td><td style="width:40%"><div class=bar style="width:1.5%"></div></td></tr>
+<tr><td>other</td><td class=n>0.16</td><td class=n>1.3 %</td><td style="width:40%"><div class=bar style="width:1.3%"></div></td></tr>
+<tr><td>nn_prediction</td><td class=n>0.11</td><td class=n>0.9 %</td><td style="width:40%"><div class=bar style="width:0.9%"></div></td></tr>
+<tr><td>sampler_bookkeeping</td><td class=n>0.10</td><td class=n>0.9 %</td><td style="width:40%"><div class=bar style="width:0.9%"></div></td></tr>
+<tr><td>proposal_sampling</td><td class=n>0.07</td><td class=n>0.6 %</td><td style="width:40%"><div class=bar style="width:0.6%"></div></td></tr>
+<tr><td>worker_startup</td><td class=n>0.01</td><td class=n>0.1 %</td><td style="width:40%"><div class=bar style="width:0.1%"></div></td></tr>
+</table>
+<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>
 <h2>gaussian_x1/nautilus/search_fit</h2>
 <p class=m>af.Nautilus search.fit (PyAutoFit, checkpointing and output on) · wall 28.41 s (median of 3) · 7501 likelihood calls · cpu/numpy · PyAutoFit 2026.10.12.1 · measured 2026-10-14T09:19:45Z · <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/results/gaussian_x1/nautilus/breakdown.json">result row</a></p>
 <table><tr><th>component</th><th>seconds</th><th>share of wall</th><th></th></tr>
@@ -69,5 +275,5 @@ p.m,li{color:var(--muted)}a{color:var(--bar)}
 <li>Every record is unreviewed: the producer declares measurements, the Brain&#x27;s profiling conductor judges them; nothing here is a verdict.</li>
 <li>No temporal comparisons: one baseline per setup.</li>
 </ul>
-<p class=m>Rendered from 9 result rows by <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/scripts/misc/tooling/build_catalogue.py">build_catalogue.py</a>; evidence updated 2026-10-14T14:45:45Z.</p>
+<p class=m>Rendered from 29 result rows by <a href="https://github.com/PyAutoLabs/autofit_profiling/blob/main/scripts/misc/tooling/build_catalogue.py">build_catalogue.py</a>; evidence updated 2026-11-10T12:16:33.016502+00:00.</p>
 </body></html>

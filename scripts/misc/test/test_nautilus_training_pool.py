@@ -33,6 +33,32 @@ def plan():
     return value
 
 
+def test_retained_checkpoint_survives_fit_finalization(tmp_path):
+    source, retained = tmp_path / "native.hdf5", tmp_path / "retained.hdf5"
+    source.write_bytes(b"first native state")
+    benchmark.retain_checkpoint(source, retained)
+    assert source.samefile(retained)
+    source.unlink()  # Fit discards the resume file after writing its final archive.
+    assert retained.read_bytes() == b"first native state"
+    source.write_bytes(b"later native state")
+    benchmark.retain_checkpoint(source, retained)
+    source.unlink()
+    assert retained.read_bytes() == b"later native state"
+
+
+def test_retention_does_not_destroy_source_or_hide_missing_checkpoint(tmp_path):
+    source = tmp_path / "native.hdf5"
+    source.write_bytes(b"state")
+    with pytest.raises(ValueError, match="separate path"):
+        benchmark.retain_checkpoint(source, source)
+    assert source.read_bytes() == b"state"
+    retained = tmp_path / "retained"
+    retained.write_bytes(b"previous state")
+    with pytest.raises(FileNotFoundError):
+        benchmark.retain_checkpoint(tmp_path / "missing", retained)
+    assert retained.read_bytes() == b"previous state"
+
+
 @pytest.mark.parametrize(
     "mutation", ["order", "workers", "networks", "ess", "discard", "cap", "quiet", "hash"]
 )

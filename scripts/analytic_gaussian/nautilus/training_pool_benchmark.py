@@ -269,13 +269,24 @@ def wrapped_fit(config, directory):
     return fingerprint(target.truth())
 
 
+def retain_checkpoint(source, destination):
+    """Keep the native inode after Fit's normal finalization deletes its pathname."""
+    source, destination = Path(source), Path(destination)
+    if source.resolve() == destination.resolve():
+        raise ValueError("retained checkpoint must have a separate path")
+    pending = destination.with_name(destination.name + ".pending")
+    os.link(source, pending)
+    os.replace(pending, destination)
+
+
 def performance(case, directory):
     import autofit as af
     from nautilus import Sampler
 
     config = configuration(case)
     objects = []
-    timings = {"sampler_run_s": 0.0}
+    timings = {"sampler_run_s": 0.0, "checkpoint_retention_s": 0.0}
+    retained = directory / "final-checkpoint.hdf5"
     original_init, original_run = Sampler.__init__, Sampler.run
 
     @functools.wraps(original_init)
@@ -294,9 +305,13 @@ def performance(case, directory):
             raise ValueError("native stopping configuration differs")
         tick = time.perf_counter()
         try:
-            return original_run(*args, **kwargs)
+            value = original_run(*args, **kwargs)
         finally:
             timings["sampler_run_s"] += time.perf_counter() - tick
+        tick = time.perf_counter()
+        retain_checkpoint(args[0].filepath, retained)
+        timings["checkpoint_retention_s"] += time.perf_counter() - tick
+        return value
 
     workflow = time.perf_counter()
     with TrainingTransport(case["training_workers"]) as transport, TrainingScope(transport):
@@ -315,7 +330,7 @@ def performance(case, directory):
     if result["n_eff"] < 10000 or not result["discard_exploration"]:
         raise ValueError("stopping/exploration policy differs")
     # Reopen the saved native state without running or evaluating a likelihood.
-    saved_hash = sha256(sampler.filepath)
+    saved_hash = sha256(retained)
 
     def forbidden(*args):
         raise RuntimeError("checkpoint read must not evaluate likelihood")
@@ -323,11 +338,9 @@ def performance(case, directory):
     from autofit.non_linear.search.nest.nautilus.search import _large_attribute_hdf5
 
     with _large_attribute_hdf5():
-        reopened = Sampler(
-            lambda x: x, forbidden, filepath=sampler.filepath, **config.constructor()
-        )
+        reopened = Sampler(lambda x: x, forbidden, filepath=str(retained), **config.constructor())
         exact_result(posterior(reopened), result)
-    if sha256(sampler.filepath) != saved_hash:
+    if sha256(retained) != saved_hash:
         raise ValueError("read-only checkpoint reopen changed bytes")
     return {
         **result,

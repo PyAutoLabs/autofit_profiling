@@ -1,0 +1,383 @@
+{
+  "producer": "c9f6d2ea5def8fc71b368402aca606d35918178b",
+  "status": "halted",
+  "spent_s": 96.81927593999717,
+  "reason": "RuntimeError: d5-s0-w0: error",
+  "successful_children": 6,
+  "attempted_children": 7,
+  "complete_performance_pairs": 0,
+  "unrun": [
+    "d5-s0-w2",
+    "d5-s1-w2",
+    "d5-s1-w0",
+    "d5-s2-w0",
+    "d5-s2-w2",
+    "d10-s0-w0",
+    "d10-s0-w2",
+    "d10-s1-w2",
+    "d10-s1-w0",
+    "d10-s2-w0",
+    "d10-s2-w2"
+  ],
+  "raw_data": "output/training-pool-01",
+  "limits": {
+    "children": 18,
+    "timeout_s": 120,
+    "memory_mib": 4096,
+    "budget_s": 1800
+  },
+  "attempts": [
+    {
+      "case": "preflight",
+      "status": "success",
+      "process_wall_s": 6.475115763001668,
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "live_descendants": [],
+        "sampled_group_peak_rss_bytes": 563494912,
+        "rss_sample_interval_s": 0.05
+      },
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          0.59814453125,
+          1.21337890625,
+          1.1044921875
+        ],
+        "time": 1794337606.445281,
+        "available_mib": 13362.59765625
+      },
+      "admission_wait_s": 0.00026432999948156066,
+      "evidence": {
+        "status": "success",
+        "training_equal": true,
+        "corpus_sha256": "950b5bfefbd5a69ea005e54a30a275fece12ac47427b2e550c1e7ba7f30d8e4d",
+        "results": [
+          {
+            "model_sha256": "ce53966a6421c1975853ee7ad84ceabdd0cd1c8836c2e2f8a759c7cdfbbe3aed",
+            "prediction_sha256": "26c56f1bb3c9863626bb95fe77af3a03d3975de78aae9d87241cbcd4e42c0c28",
+            "workers": 0,
+            "worker_info": []
+          },
+          {
+            "model_sha256": "ce53966a6421c1975853ee7ad84ceabdd0cd1c8836c2e2f8a759c7cdfbbe3aed",
+            "prediction_sha256": "26c56f1bb3c9863626bb95fe77af3a03d3975de78aae9d87241cbcd4e42c0c28",
+            "workers": 2,
+            "worker_info": [
+              {
+                "pid": 190410,
+                "pgid": 190106,
+                "start_method": "spawn",
+                "native_threads": [
+                  1,
+                  1,
+                  1
+                ],
+                "autofit_imported": false,
+                "jax_imported": false
+              },
+              {
+                "pid": 190405,
+                "pgid": 190106,
+                "start_method": "spawn",
+                "native_threads": [
+                  1,
+                  1,
+                  1
+                ],
+                "autofit_imported": false,
+                "jax_imported": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case": "control",
+      "status": "success",
+      "process_wall_s": 22.145147571998677,
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "live_descendants": [],
+        "sampled_group_peak_rss_bytes": 218583040,
+        "rss_sample_interval_s": 0.05
+      },
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          0.95068359375,
+          1.2763671875,
+          1.12548828125
+        ],
+        "time": 1794337613.103352,
+        "available_mib": 13114.9296875
+      },
+      "admission_wait_s": 0.00011346000246703625,
+      "evidence": {
+        "status": "success",
+        "posterior_sha256": "9181de303adef000c517ae25c3ea644115a44d5e8b0e764275aeb65f850a0cc1",
+        "n_like": 16300,
+        "n_eff": 10020.771588733165,
+        "shells": 9,
+        "explored": true,
+        "discard_exploration": true,
+        "sampler_run_s": 19.856358404002094,
+        "workflow_s": 19.8774772939978,
+        "checkpoint_sha256": "65eaf581048807ea20bc198e1888b518f6b12a09aeb0cde429474fd5229508df"
+      }
+    },
+    {
+      "case": "training-interrupt",
+      "status": "success",
+      "process_wall_s": 3.2227860599996347,
+      "supervision": {
+        "returncode": -9,
+        "termination_reason": "intentional_checkpoint_kill",
+        "live_descendants": [],
+        "sampled_group_peak_rss_bytes": 565870592,
+        "rss_sample_interval_s": 0.05
+      },
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.02685546875,
+          1.27392578125,
+          1.12744140625
+        ],
+        "time": 1794337638.3578725,
+        "available_mib": 13360.6015625
+      },
+      "admission_wait_s": 0.00011475000064820051,
+      "evidence": {}
+    },
+    {
+      "case": "training-resume",
+      "status": "success",
+      "process_wall_s": 16.58806041799835,
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "live_descendants": [],
+        "sampled_group_peak_rss_bytes": 583008256,
+        "rss_sample_interval_s": 0.05
+      },
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.10498046875,
+          1.2861328125,
+          1.13232421875
+        ],
+        "time": 1794337641.7491987,
+        "available_mib": 13360.1640625
+      },
+      "admission_wait_s": 0.00011691000327118672,
+      "evidence": {
+        "status": "success",
+        "posterior_sha256": "9181de303adef000c517ae25c3ea644115a44d5e8b0e764275aeb65f850a0cc1",
+        "n_like": 16300,
+        "n_eff": 10020.771588733165,
+        "shells": 9,
+        "explored": true,
+        "discard_exploration": true,
+        "sampler_run_s": 13.126921481998579,
+        "workflow_s": 14.574140479999187,
+        "checkpoint_sha256": "65eaf581048807ea20bc198e1888b518f6b12a09aeb0cde429474fd5229508df",
+        "control_equal": true,
+        "recovery": {
+          "mode": "training",
+          "checkpoint_sha256": "67f1da0e36431a21fce4b035b4dd6ebb55b5bf1b026e9dbd74c60bfe763c64fa",
+          "recoverable_n_like": 800,
+          "completed_n_like": 800,
+          "lost_completed_evaluations": 0,
+          "likelihood_in_flight": 0,
+          "training_map_in_flight": true,
+          "training_tasks_observed_started": [
+            0,
+            1
+          ],
+          "worker_pids": [
+            191225,
+            191222
+          ],
+          "training_note": "entry observed before parent pause; workers can advance before group kill"
+        }
+      }
+    },
+    {
+      "case": "checkpoint-interrupt",
+      "status": "success",
+      "process_wall_s": 2.9748101299992413,
+      "supervision": {
+        "returncode": -9,
+        "termination_reason": "intentional_checkpoint_kill",
+        "live_descendants": [],
+        "sampled_group_peak_rss_bytes": 559276032,
+        "rss_sample_interval_s": 0.05
+      },
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.2236328125,
+          1.3046875,
+          1.14111328125
+        ],
+        "time": 1794337661.4902337,
+        "available_mib": 13314.30078125
+      },
+      "admission_wait_s": 0.00011465699935797602,
+      "evidence": {}
+    },
+    {
+      "case": "checkpoint-resume",
+      "status": "success",
+      "process_wall_s": 17.11034895099874,
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "live_descendants": [],
+        "sampled_group_peak_rss_bytes": 583933952,
+        "rss_sample_interval_s": 0.05
+      },
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.20556640625,
+          1.29931640625,
+          1.14013671875
+        ],
+        "time": 1794337664.6354716,
+        "available_mib": 13356.05078125
+      },
+      "admission_wait_s": 8.87180030986201e-05,
+      "evidence": {
+        "status": "success",
+        "posterior_sha256": "9181de303adef000c517ae25c3ea644115a44d5e8b0e764275aeb65f850a0cc1",
+        "n_like": 16300,
+        "n_eff": 10020.771588733165,
+        "shells": 9,
+        "explored": true,
+        "discard_exploration": true,
+        "sampler_run_s": 13.454461968998658,
+        "workflow_s": 15.145977178999601,
+        "checkpoint_sha256": "65eaf581048807ea20bc198e1888b518f6b12a09aeb0cde429474fd5229508df",
+        "control_equal": true,
+        "recovery": {
+          "mode": "checkpoint",
+          "checkpoint_sha256": "3420585f0354bdf8fe7d0e5734be853f946d8dee0876d958d56074bae8a097c1",
+          "recoverable_n_like": 100,
+          "completed_n_like": 100,
+          "lost_completed_evaluations": 0,
+          "likelihood_in_flight": 0,
+          "training_map_in_flight": false,
+          "training_tasks_observed_started": [],
+          "worker_pids": [
+            191481,
+            191478
+          ],
+          "training_note": "entry observed before parent pause; workers can advance before group kill"
+        }
+      }
+    },
+    {
+      "case": "d5-s0-w0",
+      "status": "error",
+      "process_wall_s": 25.004824300998735,
+      "supervision": {
+        "returncode": 1,
+        "termination_reason": null,
+        "live_descendants": [],
+        "sampled_group_peak_rss_bytes": 224169984,
+        "rss_sample_interval_s": 0.05
+      },
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.408203125,
+          1.34375,
+          1.15869140625
+        ],
+        "time": 1794337681.9040318,
+        "available_mib": 13311.4375
+      },
+      "admission_wait_s": 9.404999946127646e-05,
+      "evidence": {
+        "status": "error",
+        "error": "FileNotFoundError: [Errno 2] No such file or directory: 'output/training-pool-01/d5-s0-w0/fit/training/caad7e7812207b3f966e8b4b4e0fe6c4/files/search_internal/checkpoint.hdf5'"
+      }
+    }
+  ]
+}

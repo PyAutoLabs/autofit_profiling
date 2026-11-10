@@ -1,0 +1,13 @@
+{
+  "schema": "nautilus-copied-checkpoint-diagnostics@1",
+  "scope": "experimental; outside Pulse; phase 0b.2",
+  "issue": "https://github.com/PyAutoLabs/autofit_profiling/issues/12",
+  "input": "phase-0b.1 seed-0 direct control checkpoints, D5/D10/D30",
+  "evidence_cases": [{"dimension":5,"resample_seed":null},{"dimension":10,"resample_seed":null},{"dimension":30,"resample_seed":null},{"dimension":30,"resample_seed":1},{"dimension":30,"resample_seed":2}],
+  "evidence_stopping": {"n_eff":10000,"n_shell":100,"discard_exploration":true},
+  "output_cases": [{"dimension":30,"new_likelihood_calls":0}],
+  "limits": {"budget_s":900,"timeout_s":120,"memory_mib":4096},
+  "interpretation": "Conditional resampling from fixed seed-0 learned bounds; not independent exploration seeds. No post-hoc accuracy threshold.",
+  "failure_policy": "Stop on first cap/failure; no automatic retry or resource escalation.",
+  "original_data": "Read-only: use copied checkpoints, verify source hashes before/after. Never promote an old timeout to success."
+}

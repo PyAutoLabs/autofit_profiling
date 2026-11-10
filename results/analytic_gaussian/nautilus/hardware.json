@@ -1,0 +1,9 @@
+{
+  "captured_epoch": 1794311652.3462322,
+  "cpu": {
+    "model name": "Intel(R) Core(TM) i9-10885H CPU @ 2.40GHz",
+    "cache size": "16384 KB",
+    "siblings": "8",
+    "cpu cores": "4"
+  }
+}

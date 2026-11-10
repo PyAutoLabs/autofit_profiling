@@ -1,0 +1,96 @@
+{
+  "schema": "autofit-profiling-breakdown",
+  "version": 1,
+  "status": "success",
+  "variant": "pyautofit-w2-correlated-trace",
+  "axis": "breakdown",
+  "unit": "s",
+  "setup": {
+    "id": "analytic_gaussian/nautilus/pyautofit-w2-correlated-trace",
+    "label": "pyautofit-w2-correlated-trace",
+    "dataset": "analytic_gaussian",
+    "catalogue_model": "correlated_gaussian",
+    "free_parameters": 5,
+    "data_pixels": 0,
+    "instrument_reason": "analytic density; no data pixels or instrument",
+    "search": "Nautilus",
+    "likelihood": "numpy fp64 normalized correlated Gaussian",
+    "search_settings": {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "seed": 0,
+      "dimension": 5,
+      "cost_profile": "correlated",
+      "work": 100,
+      "trace": true,
+      "n_live": 200,
+      "n_eff": 500,
+      "n_batch": 100,
+      "checkpoint": true,
+      "update_interval": 1000000
+    },
+    "config": "explicit matched baseline (see pilot_runs.json)"
+  },
+  "method": {
+    "id": "nautilus-cpu-pyautofit-w2-correlated-trace",
+    "statistic": "median",
+    "repetitions": 3,
+    "warmup": "none; fresh process",
+    "synchronization": "complete logical batch",
+    "cache_state": "cold Python process; shared OS/font cache"
+  },
+  "wall_s": 12.157253817999958,
+  "components_s": {
+    "samples_output": 0.5394038110001134,
+    "worker_startup": 0.009589847999961876,
+    "proposal_sampling": 0.07317019099969002,
+    "prior_transform": 0.2892078560006439,
+    "evaluation_dispatch_wait": 0.1300572689992805,
+    "checkpoint_io": 0.9452094259997921,
+    "nn_training": 4.214535572999921,
+    "nn_prediction": 0.10999471200079824,
+    "bound_geometry": 2.7908656039999187,
+    "sampler_bookkeeping": 0.10660063499994976,
+    "visualisation": 2.4903294050000113,
+    "other": 0.16258467099999052
+  },
+  "shares_of_wall": {
+    "samples_output": 0.04436888618723048,
+    "worker_startup": 0.0007888169601068297,
+    "proposal_sampling": 0.006018644678731201,
+    "prior_transform": 0.023788913214302106,
+    "evaluation_dispatch_wait": 0.010697915083973854,
+    "checkpoint_io": 0.07774859685830698,
+    "nn_training": 0.3466683871286708,
+    "nn_prediction": 0.009047661062890759,
+    "bound_geometry": 0.22956381809416362,
+    "sampler_bookkeeping": 0.008768479838935129,
+    "visualisation": 0.20484308728611425,
+    "other": 0.013373470146627079
+  },
+  "likelihood_function_calls": 2500,
+  "reference": null,
+  "identity": {
+    "device": "cpu",
+    "backend": "numpy",
+    "precision": "float64",
+    "library_version": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c",
+    "software": {
+      "numpy": "2.5.4",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "h5py": "3.16.0",
+      "nautilus-sampler": "1.0.5",
+      "jax": "0.11.2",
+      "jaxlib": "0.11.2",
+      "threadpoolctl": "3.8.0",
+      "PyAutoFit": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c"
+    }
+  },
+  "provenance": {
+    "host": "DESKTOP-H143S82",
+    "measured_at": "2026-11-10T12:15:45.401940+00:00"
+  },
+  "pilot_evidence": "pilot_runs.json",
+  "likelihood_count_definition": "native sampler n_like; wrapper diagnostic calls excluded"
+}

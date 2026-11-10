@@ -1,0 +1,750 @@
+{
+  "groups": [
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "cost": "correlated",
+      "traced": false,
+      "n": 3,
+      "wall_s": 8.527534991000039,
+      "wall_range_s": [
+        7.446829581999964,
+        9.618039969000051
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {}
+    },
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "cost": "correlated",
+      "traced": true,
+      "n": 3,
+      "wall_s": 8.936066494000102,
+      "wall_range_s": [
+        7.923044380999954,
+        9.752186195000036
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {
+        "proposal_sampling": 0.07087392099947465,
+        "prior_transform": 0.002739433998272034,
+        "evaluation_dispatch_wait": 0.06490734400153997,
+        "checkpoint_io": 1.0606829719998814,
+        "nn_training": 4.738217812000016,
+        "nn_prediction": 0.11951376499996513,
+        "bound_geometry": 2.7605633479997778,
+        "sampler_bookkeeping": 0.10715345300081935,
+        "other": 0.003068968000093264
+      }
+    },
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "cost": "fixed",
+      "traced": false,
+      "n": 3,
+      "wall_s": 8.743179956999995,
+      "wall_range_s": [
+        7.458792680999977,
+        10.937453376999997
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {}
+    },
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "cost": "fixed",
+      "traced": true,
+      "n": 3,
+      "wall_s": 8.306538997000018,
+      "wall_range_s": [
+        8.216819003999944,
+        10.182583076000014
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {
+        "proposal_sampling": 0.07011069499981204,
+        "prior_transform": 0.0029374600006235596,
+        "evaluation_dispatch_wait": 0.04329481299936333,
+        "checkpoint_io": 1.0029426060000333,
+        "nn_training": 4.379451108000012,
+        "nn_prediction": 0.11257854500036046,
+        "bound_geometry": 2.6940100929999176,
+        "sampler_bookkeeping": 0.10436705899991239,
+        "other": 0.0032213599999977305
+      }
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "correlated",
+      "traced": false,
+      "n": 3,
+      "wall_s": 8.436998614999993,
+      "wall_range_s": [
+        7.030365984000014,
+        10.740985205000015
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {}
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "correlated",
+      "traced": true,
+      "n": 3,
+      "wall_s": 9.197536860000014,
+      "wall_range_s": [
+        7.294893395000031,
+        10.16088074999999
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {
+        "worker_startup": 0.009468556000001627,
+        "proposal_sampling": 0.07724964100054876,
+        "prior_transform": 0.004708165007059506,
+        "evaluation_dispatch_wait": 0.0743924749931466,
+        "checkpoint_io": 1.0967929449998337,
+        "nn_training": 4.821364331000041,
+        "nn_prediction": 0.12181550399998287,
+        "bound_geometry": 2.867521861999876,
+        "sampler_bookkeeping": 0.11313966699947287,
+        "other": 0.01048755900001197
+      }
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "fixed",
+      "traced": false,
+      "n": 3,
+      "wall_s": 10.115535676999912,
+      "wall_range_s": [
+        9.14464495599998,
+        11.791593094000064
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {}
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "fixed",
+      "traced": true,
+      "n": 3,
+      "wall_s": 8.37583185799997,
+      "wall_range_s": [
+        7.8081241860001,
+        8.812195279999969
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {
+        "worker_startup": 0.010417007999990346,
+        "proposal_sampling": 0.07317863599990915,
+        "prior_transform": 0.004588239001577676,
+        "evaluation_dispatch_wait": 0.061798625998562784,
+        "checkpoint_io": 0.9648434930001031,
+        "nn_training": 4.261261879000074,
+        "nn_prediction": 0.10941083800042861,
+        "bound_geometry": 2.775054926999985,
+        "sampler_bookkeeping": 0.1033008799995514,
+        "other": 0.009196389000067029
+      }
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "random",
+      "traced": false,
+      "n": 1,
+      "wall_s": 8.061939139999936,
+      "wall_range_s": [
+        8.061939139999936,
+        8.061939139999936
+      ],
+      "n_like_range": [
+        2600,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.04304017748073452,
+        -0.04304017748073452
+      ],
+      "components_s": {}
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "random",
+      "traced": true,
+      "n": 1,
+      "wall_s": 8.69011510900009,
+      "wall_range_s": [
+        8.69011510900009,
+        8.69011510900009
+      ],
+      "n_like_range": [
+        2600,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.04304017748073452,
+        -0.04304017748073452
+      ],
+      "components_s": {
+        "worker_startup": 0.009035683999968569,
+        "proposal_sampling": 0.06575979699960044,
+        "prior_transform": 0.0037539390003757944,
+        "evaluation_dispatch_wait": 0.12367346299993187,
+        "checkpoint_io": 0.9843345410004076,
+        "nn_training": 4.439080895000416,
+        "nn_prediction": 0.10899467900003401,
+        "bound_geometry": 2.8471943759996066,
+        "sampler_bookkeeping": 0.09993663299962918,
+        "other": 0.008351102000119681
+      }
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "cost": "correlated",
+      "traced": false,
+      "n": 3,
+      "wall_s": 10.26085263999994,
+      "wall_range_s": [
+        9.620389251999995,
+        20.416843398000026
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {}
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "cost": "correlated",
+      "traced": true,
+      "n": 3,
+      "wall_s": 13.457119624999905,
+      "wall_range_s": [
+        10.28790003100005,
+        13.853654059000007
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {
+        "samples_output": 0.5665623280000318,
+        "proposal_sampling": 0.07969287799983249,
+        "prior_transform": 0.3054389479988231,
+        "evaluation_dispatch_wait": 0.17608014300122932,
+        "checkpoint_io": 1.107418434999886,
+        "nn_training": 4.693134713999939,
+        "nn_prediction": 0.12281303499992191,
+        "bound_geometry": 2.9602689560001636,
+        "sampler_bookkeeping": 0.11614709200034667,
+        "visualisation": 2.564004453999985,
+        "other": 0.17471420699996543
+      }
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "cost": "fixed",
+      "traced": false,
+      "n": 3,
+      "wall_s": 12.46628070700001,
+      "wall_range_s": [
+        10.912595692999957,
+        12.716869110999937
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {}
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "cost": "fixed",
+      "traced": true,
+      "n": 3,
+      "wall_s": 11.936371111000085,
+      "wall_range_s": [
+        11.631277114,
+        23.06504570100003
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {
+        "samples_output": 0.4929450590000215,
+        "proposal_sampling": 0.07032284300021274,
+        "prior_transform": 0.28150074399968616,
+        "evaluation_dispatch_wait": 0.1297880780003311,
+        "checkpoint_io": 1.0340734999999768,
+        "nn_training": 4.555540882000059,
+        "nn_prediction": 0.11458162800022365,
+        "bound_geometry": 2.892014729999687,
+        "sampler_bookkeeping": 0.10642240400045466,
+        "visualisation": 2.3285598219999883,
+        "other": 0.15618678400005592
+      }
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "correlated",
+      "traced": false,
+      "n": 3,
+      "wall_s": 11.659618760999933,
+      "wall_range_s": [
+        10.511189865000006,
+        14.603678237000054
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {}
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "correlated",
+      "traced": true,
+      "n": 3,
+      "wall_s": 12.157253817999958,
+      "wall_range_s": [
+        10.164051028000017,
+        13.538342188000001
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {
+        "samples_output": 0.5394038110001134,
+        "worker_startup": 0.009589847999961876,
+        "proposal_sampling": 0.07317019099969002,
+        "prior_transform": 0.2892078560006439,
+        "evaluation_dispatch_wait": 0.1300572689992805,
+        "checkpoint_io": 0.9452094259997921,
+        "nn_training": 4.214535572999921,
+        "nn_prediction": 0.10999471200079824,
+        "bound_geometry": 2.7908656039999187,
+        "sampler_bookkeeping": 0.10660063499994976,
+        "visualisation": 2.4903294050000113,
+        "other": 0.16258467099999052
+      }
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "fixed",
+      "traced": false,
+      "n": 3,
+      "wall_s": 11.811239602,
+      "wall_range_s": [
+        11.717823134000014,
+        13.572058244999994
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {}
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "fixed",
+      "traced": true,
+      "n": 3,
+      "wall_s": 11.84903913200003,
+      "wall_range_s": [
+        11.059881896000093,
+        12.138249642000005
+      ],
+      "n_like_range": [
+        2500,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.06182404547068732,
+        -0.04304017748073452
+      ],
+      "components_s": {
+        "samples_output": 0.49658498199983114,
+        "worker_startup": 0.010113408999927742,
+        "proposal_sampling": 0.0709861269999692,
+        "prior_transform": 0.2815493729995069,
+        "evaluation_dispatch_wait": 0.11748952599947415,
+        "checkpoint_io": 0.9502832599998214,
+        "nn_training": 4.157426364999992,
+        "nn_prediction": 0.10589604400001917,
+        "bound_geometry": 2.673449704999996,
+        "sampler_bookkeeping": 0.10249808400033089,
+        "visualisation": 2.225542394999934,
+        "other": 0.17574222799999006
+      }
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "random",
+      "traced": false,
+      "n": 1,
+      "wall_s": 11.573695219000001,
+      "wall_range_s": [
+        11.573695219000001,
+        11.573695219000001
+      ],
+      "n_like_range": [
+        2600,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.04304017748073452,
+        -0.04304017748073452
+      ],
+      "components_s": {}
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "random",
+      "traced": true,
+      "n": 1,
+      "wall_s": 12.071732818999863,
+      "wall_range_s": [
+        12.071732818999863,
+        12.071732818999863
+      ],
+      "n_like_range": [
+        2600,
+        2600
+      ],
+      "logZ_error_range": [
+        -0.04304017748073452,
+        -0.04304017748073452
+      ],
+      "components_s": {
+        "samples_output": 0.4836866870000449,
+        "worker_startup": 0.009287428999869007,
+        "proposal_sampling": 0.06677772299940443,
+        "prior_transform": 0.2707305929936865,
+        "evaluation_dispatch_wait": 0.18080139200651502,
+        "checkpoint_io": 1.0316434569999728,
+        "nn_training": 4.613495814999851,
+        "nn_prediction": 0.11121236399890222,
+        "bound_geometry": 2.9565279840005587,
+        "sampler_bookkeeping": 0.10368680600117841,
+        "visualisation": 2.085777592000113,
+        "other": 0.15810497699976622
+      }
+    }
+  ],
+  "paired_tracing": [
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "cost": "correlated",
+      "seed": 0,
+      "trace_wall_ratio": 1.1436113959417926,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "cost": "correlated",
+      "seed": 1,
+      "trace_wall_ratio": 0.9290943396785601,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "cost": "correlated",
+      "seed": 2,
+      "trace_wall_ratio": 1.0639486634891,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "cost": "fixed",
+      "seed": 0,
+      "trace_wall_ratio": 0.930982992568693,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "cost": "fixed",
+      "seed": 1,
+      "trace_wall_ratio": 0.9500592505075465,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 1,
+      "cost": "fixed",
+      "seed": 2,
+      "trace_wall_ratio": 1.1016285551052938,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "correlated",
+      "seed": 0,
+      "trace_wall_ratio": 0.9459915041378157,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "correlated",
+      "seed": 1,
+      "trace_wall_ratio": 1.0901432226915235,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "correlated",
+      "seed": 2,
+      "trace_wall_ratio": 1.0376264068758354,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "fixed",
+      "seed": 0,
+      "trace_wall_ratio": 0.8711545845304665,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "fixed",
+      "seed": 1,
+      "trace_wall_ratio": 0.915927507114907,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "fixed",
+      "seed": 2,
+      "trace_wall_ratio": 0.6621772074184888,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "direct",
+      "workers": 2,
+      "cost": "random",
+      "seed": 0,
+      "trace_wall_ratio": 1.077918718820812,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "cost": "correlated",
+      "seed": 0,
+      "trace_wall_ratio": 0.6785404476559325,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "cost": "correlated",
+      "seed": 1,
+      "trace_wall_ratio": 1.311501109814202,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "cost": "correlated",
+      "seed": 2,
+      "trace_wall_ratio": 1.0693850073541757,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "cost": "fixed",
+      "seed": 0,
+      "trace_wall_ratio": 0.9386249875510057,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "cost": "fixed",
+      "seed": 1,
+      "trace_wall_ratio": 0.9330190284796698,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 1,
+      "cost": "fixed",
+      "seed": 2,
+      "trace_wall_ratio": 2.1136168103245536,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "correlated",
+      "seed": 0,
+      "trace_wall_ratio": 0.9270501560147426,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "correlated",
+      "seed": 1,
+      "trace_wall_ratio": 1.042680216840756,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "correlated",
+      "seed": 2,
+      "trace_wall_ratio": 0.9669743538592253,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "fixed",
+      "seed": 0,
+      "trace_wall_ratio": 1.0276863437724717,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "fixed",
+      "seed": 1,
+      "trace_wall_ratio": 0.8730465871943387,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "fixed",
+      "seed": 2,
+      "trace_wall_ratio": 0.943851240074544,
+      "posterior_identical": true
+    },
+    {
+      "adapter": "pyautofit",
+      "workers": 2,
+      "cost": "random",
+      "seed": 0,
+      "trace_wall_ratio": 1.0430318572051436,
+      "posterior_identical": true
+    }
+  ]
+}

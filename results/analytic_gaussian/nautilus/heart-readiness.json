@@ -1,0 +1,92 @@
+{
+  "na_reasons": [],
+  "penalties": [
+    {
+      "cap": 60,
+      "count": 2,
+      "key": "lib_ci",
+      "points": 60,
+      "weight": 30
+    },
+    {
+      "cap": 15,
+      "count": 1,
+      "key": "test_failing",
+      "points": 15,
+      "weight": 15
+    },
+    {
+      "cap": 0,
+      "count": 1,
+      "key": "manifest_drift",
+      "points": 0,
+      "weight": 0
+    },
+    {
+      "cap": 15,
+      "count": 1,
+      "key": "validation_absent",
+      "points": 15,
+      "weight": 15
+    },
+    {
+      "cap": 15,
+      "count": 1,
+      "key": "open_pr",
+      "points": 5,
+      "weight": 5
+    }
+  ],
+  "profile": "default",
+  "reasons": [
+    "PyAutoGalaxy: CI failure",
+    "PyAutoLens: CI failure",
+    "workspace validation not passing (14 failed, cloud#42607741369: autolens_test scripts/imaging/delaunay.py, autolens_test scripts/imaging/rectangular.py, autolens_test scripts/imaging/rectangular_dspl.py, +7 more)",
+    "manifest drift: organism-map blocks (generated) \u2014 7 mismatch(es) vs PyAutoMind/repos.yaml",
+    "PyAutoArray: open PR 7d old",
+    "release validation incomplete: no rehearsal for current source"
+  ],
+  "red_reasons": [
+    "PyAutoGalaxy: CI failure",
+    "PyAutoLens: CI failure"
+  ],
+  "repository_reasons": [
+    {
+      "key": "lib_ci",
+      "repo": "PyAutoGalaxy",
+      "severity": "red",
+      "text": "PyAutoGalaxy: CI failure",
+      "workflow": ""
+    },
+    {
+      "key": "lib_ci",
+      "repo": "PyAutoLens",
+      "severity": "red",
+      "text": "PyAutoLens: CI failure",
+      "workflow": ""
+    },
+    {
+      "key": "open_pr",
+      "repo": "PyAutoArray",
+      "severity": "yellow",
+      "text": "PyAutoArray: open PR 7d old"
+    }
+  ],
+  "score": 5,
+  "stale_details": [
+    {
+      "key": "validation_absent",
+      "text": "release validation incomplete: no rehearsal for current source"
+    }
+  ],
+  "stale_reasons": [
+    "release validation incomplete: no rehearsal for current source"
+  ],
+  "ts": "2026-11-10T12:13:48.638875+00:00",
+  "verdict": "red",
+  "yellow_reasons": [
+    "workspace validation not passing (14 failed, cloud#42607741369: autolens_test scripts/imaging/delaunay.py, autolens_test scripts/imaging/rectangular.py, autolens_test scripts/imaging/rectangular_dspl.py, +7 more)",
+    "manifest drift: organism-map blocks (generated) \u2014 7 mismatch(es) vs PyAutoMind/repos.yaml",
+    "PyAutoArray: open PR 7d old"
+  ]
+}

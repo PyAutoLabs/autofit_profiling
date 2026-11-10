@@ -1,0 +1,50 @@
+[
+  {
+    "cost": "none",
+    "first_coordinate": -1.0,
+    "work": 100,
+    "median_call_s": 7.219125998744858e-06
+  },
+  {
+    "cost": "none",
+    "first_coordinate": 1.0,
+    "work": 100,
+    "median_call_s": 6.332232998829568e-06
+  },
+  {
+    "cost": "fixed",
+    "first_coordinate": -1.0,
+    "work": 100,
+    "median_call_s": 1.4813282001341577e-05
+  },
+  {
+    "cost": "fixed",
+    "first_coordinate": 1.0,
+    "work": 100,
+    "median_call_s": 1.4507701998809352e-05
+  },
+  {
+    "cost": "random",
+    "first_coordinate": -1.0,
+    "work": 100,
+    "median_call_s": 0.0001241222190001281
+  },
+  {
+    "cost": "random",
+    "first_coordinate": 1.0,
+    "work": 100,
+    "median_call_s": 1.7637639999520615e-05
+  },
+  {
+    "cost": "correlated",
+    "first_coordinate": -1.0,
+    "work": 100,
+    "median_call_s": 1.3941593000708963e-05
+  },
+  {
+    "cost": "correlated",
+    "first_coordinate": 1.0,
+    "work": 100,
+    "median_call_s": 0.00014463386399984302
+  }
+]

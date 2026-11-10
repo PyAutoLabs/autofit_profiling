@@ -227,3 +227,21 @@ esac
     again = subprocess.run(["bash", str(source)], env=env, capture_output=True, timeout=15)
     assert again.returncode != 0
     assert (receipt / "wrapper_exit_code").read_text().strip() == str(exit_code)
+
+
+@pytest.mark.parametrize("suffix", ["", ",gres/gpu=1", ",gres/gpu:a100=1"])
+def test_ral22_legacy_tres_keeps_accelerator_rejection(suffix):
+    rows = scheduler()
+    rows[0]["TRES"] = rows[0].pop("AllocTRES") + suffix
+    if suffix:
+        with pytest.raises(ValueError, match="accelerator"):
+            a.validate_scheduler(*rows)
+    else:
+        a.validate_scheduler(*rows)
+
+
+def test_conflicting_new_and_legacy_tres_are_not_silently_selected():
+    rows = scheduler()
+    rows[0]["TRES"] = rows[0]["AllocTRES"] + ",gres/gpu=1"
+    with pytest.raises(ValueError, match="conflicting"):
+        a.validate_scheduler(*rows)

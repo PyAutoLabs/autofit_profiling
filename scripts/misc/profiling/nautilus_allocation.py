@@ -140,7 +140,11 @@ def validate_scheduler(job, node, partition, step, running, job_id, step_id, hos
         raise ValueError("whole-node CPU allocation not established")
     if set(running.split()) != {job_id}:
         raise ValueError("another job shares the compute node")
-    tres = dict(item.split("=", 1) for item in job.get("AllocTRES", "").split(",") if "=" in item)
+    # RAL22.05 emits TRES; newer Slurm separates ReqTRES and AllocTRES.
+    if "AllocTRES" in job and "TRES" in job and job["AllocTRES"] != job["TRES"]:
+        raise ValueError("conflicting allocation TRES records")
+    raw_tres = job.get("AllocTRES", job.get("TRES", ""))
+    tres = dict(item.split("=", 1) for item in raw_tres.split(",") if "=" in item)
     if (
         int(tres.get("cpu", "0")) != total
         or tres.get("node") != "1"

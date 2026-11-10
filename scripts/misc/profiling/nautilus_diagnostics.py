@@ -51,22 +51,35 @@ def validate_plan(plan):
     body = {k: v for k, v in plan.items() if k != "sha256"}
     if plan["sha256"] != fingerprint(body):
         raise ValueError("plan changed")
-    if plan.get("scope") not in (None, "output-only"):
+    if plan.get("scope") not in (None, "output-only", "plot-comparison"):
         raise ValueError("unauthorized scope")
     limits = OUTPUT_LIMITS if plan.get("scope") == "output-only" else LIMITS
+    if plan.get("scope") == "plot-comparison":
+        from profiling.nautilus_plot_comparison import LIMITS as plot_limits
+        from profiling.nautilus_plot_comparison import POLICIES
+
+        limits = plot_limits
+        if [c.get("plot_policy") for c in plan["cases"]] != POLICIES:
+            raise ValueError("unauthorized plot policies")
+    call_limit = 1 if plan.get("scope") == "plot-comparison" else 0
+    if any(c.get("summary_timing_call_limit", 0) != call_limit for c in plan["cases"]):
+        raise ValueError("unauthorized summary timing calls")
     if plan["protocol"] != PROTOCOL or plan["limits"] != limits:
         raise ValueError("unauthorized protocol or limits")
     expected = [("evidence", d, seed) for d, seed in CASES] + [("output", 30, None)]
     if plan.get("scope") == "output-only":
         expected = [("output", 30, None)]
+    if plan.get("scope") == "plot-comparison":
+        expected = [("output", 30, None)] * 3
     if [(c["arm"], c["dimension"], c["resample_seed"]) for c in plan["cases"]] != expected:
         raise ValueError("unauthorized case matrix")
     if not 0 <= plan["preflight_s"] < limits["budget_s"]:
         raise ValueError("preflight exhausted budget")
 
 
-def prepare(archive, *, output_only=False):
+def prepare(archive, *, output_only=False, plot_comparison=False):
     start = time.monotonic()
+    output_only = output_only or plot_comparison
     from profiling.nautilus_baseline import provenance
     from profiling.nautilus_target import CorrelatedGaussianTarget
 
@@ -131,6 +144,7 @@ def prepare(archive, *, output_only=False):
             **RunConfig(dimension=dimension, n_live=400, trace=False).constructor(),
         )
         restored = estimate(sampler, target)
+        entry["original_selected_samples"] = restored["selected_samples"]
         if restored["posterior_sha256"] != entry["original_posterior_sha256"] or any(
             fresh_counts(sampler)
         ):
@@ -169,6 +183,26 @@ def prepare(archive, *, output_only=False):
             cases=[c for c in cases if c["arm"] == "output"],
             interpretation="Output-only follow-up authorized after halted pilot; no new likelihood evaluations",
         )
+    if plot_comparison:
+        from profiling.nautilus_plot_comparison import LIMITS as plot_limits
+        from profiling.nautilus_plot_comparison import POLICIES, font_cache
+
+        plan.update(
+            scope="plot-comparison",
+            limits=plot_limits,
+            cases=[
+                {
+                    **cases[0],
+                    "id": "plot-" + policy["name"],
+                    "plot_policy": copy.deepcopy(policy),
+                    "summary_timing_call_limit": 1,
+                }
+                for policy in POLICIES
+            ],
+            font_cache=font_cache(),
+            interpretation="Three output-only plot policies; original posterior and non-plot output held fixed",
+        )
+        plan["preflight_s"] = time.monotonic() - start
     plan["sha256"] = fingerprint(plan)
     validate_plan(plan)
     return plan
@@ -348,19 +382,44 @@ def output_replay(case, checkpoint, target, directory, log):
         evaluations.append(True)
         raise RuntimeError("output-only replay attempted likelihood evaluation")
 
+    from profiling.nautilus_plot_comparison import SummaryTimingGate, replaced
+
+    gate = SummaryTimingGate(target, forbidden, case.get("summary_timing_call_limit", 0))
+    original_summary = SearchUpdater._profile_and_summarize
+
+    def timed_summary(instance, *args, **kwargs):
+        with gate.summary():
+            result = original_summary(instance, *args, **kwargs)
+        # Outside the likelihood timer: durable accounting must not time disk I/O as likelihood work.
+        atomic_json(
+            directory / "summary-timing.json",
+            {
+                "calls": gate.calls,
+                "limit": gate.limit,
+                "parameters": gate.parameters,
+                "value": gate.value,
+            },
+        )
+        return result
+
     class NoLikelihood:
         @property
         def prior(self):
             return target.prior
 
-        def __call__(self, *args, **kwargs):
-            # Also catch wrapper/output calls that bypass the native sampler.
-            return forbidden(*args, **kwargs)
+        def __call__(self, parameters):
+            return gate.evaluate(parameters)
 
     Sampler.__init__ = resume
     Sampler.evaluate_likelihood = forbidden
     try:
+        plot_receipt = None
         with contextlib.ExitStack() as stack:
+            stack.enter_context(replaced(SearchUpdater, "_profile_and_summarize", timed_summary))
+            if "plot_policy" in case:
+                from profiling.nautilus_plot_comparison import plot_scope
+
+                plot_receipt = stack.enter_context(plot_scope(case, directory, log))
             for owner, names in (
                 (
                     SearchUpdater,
@@ -390,7 +449,26 @@ def output_replay(case, checkpoint, target, directory, log):
         # Baseline hashes include exactly the same arrays and normalized log weights.
         if result["posterior_sha256"] != case["original_posterior_sha256"]:
             raise ValueError("output replay changed posterior")
-        return {"new_likelihood_calls": 0, "posterior": result}
+        if gate.calls != gate.limit:
+            raise ValueError("summary timing call count differs from approved plan")
+        if gate.limit:
+            import numpy as np
+
+            points, _, log_l = captured[0].posterior()
+            best = int(np.argmax(log_l))
+            if not np.array_equal(gate.parameters, points[best]) or not np.isclose(
+                gate.value, log_l[best], rtol=0, atol=1e-10
+            ):
+                raise ValueError(
+                    "summary timing point/value differs from stored maximum likelihood"
+                )
+        return {
+            "new_likelihood_calls": gate.calls,
+            "new_sampler_likelihood_calls": 0,
+            "summary_timing_calls": gate.calls,
+            "posterior": result,
+            "plot": plot_receipt,
+        }
     finally:
         Sampler.__init__ = original_init
         Sampler.evaluate_likelihood = original_evaluate
@@ -405,6 +483,11 @@ def child(plan, case, directory):
     assert_environment(environment_key(before), plan["environment"])
     if any(s["dirty"] for s in before["sources"].values()):
         raise ValueError("measurement source must be committed and clean")
+    if plan.get("scope") == "plot-comparison":
+        from profiling.nautilus_plot_comparison import font_cache
+
+        if font_cache() != plan["font_cache"]:
+            raise ValueError("font-cache state changed")
     target = CorrelatedGaussianTarget(case["dimension"])
     if fingerprint(target.truth()) != case["target_sha256"]:
         raise ValueError("target changed")

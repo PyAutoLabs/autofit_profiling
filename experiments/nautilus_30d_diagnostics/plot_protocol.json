@@ -1,0 +1,91 @@
+{
+  "schema": "nautilus-copied-checkpoint-diagnostics@1",
+  "scope": "plot-comparison",
+  "authorization": "I approve (live human,2026-11-10)",
+  "limits": {
+    "budget_s": 420,
+    "timeout_s": 120,
+    "memory_mib": 4096
+  },
+  "policies": [
+    {
+      "name": "no-corner",
+      "indices": [],
+      "figsize": null,
+      "dpi": null
+    },
+    {
+      "name": "six-small",
+      "indices": [
+        0,
+        6,
+        12,
+        17,
+        23,
+        29
+      ],
+      "figsize": [
+        12,
+        12
+      ],
+      "dpi": 100
+    },
+    {
+      "name": "thirty-small",
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "figsize": [
+        12,
+        12
+      ],
+      "dpi": 100
+    }
+  ],
+  "style": {
+    "kinds": {
+      "diagonal": "kde_1d",
+      "lower": "hist_2d"
+    },
+    "upper": false
+  },
+  "sampling": "forbidden; original posterior and non-plot output unchanged",
+  "cache": "font-cache established in charged preflight, shared sequentially",
+  "failure_policy": "stop on first failure/cap; no retry or escalation",
+  "status": "experimental, outside Pulse; no defaults/library changes",
+  "summary_timing": {
+    "authorization": "Allow one final-summary timing call per case",
+    "calls_per_case": 1,
+    "scope": "SearchUpdater._profile_and_summarize only; stored maximum-likelihood point",
+    "separate_from_sampler_calls": true
+  }
+}

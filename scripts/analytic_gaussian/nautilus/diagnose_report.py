@@ -155,6 +155,10 @@ a{color:#125db3}</style><h1>Nautilus evidence diagnostics</h1>
             "<p><a href='attempts.json'>Complete receipts</a> · <a href='plan.json'>Portable plan</a> · "
             "<a href='../README.md'>Findings and interpretation</a></p></html>"
         )
+    if plan.get("scope") == "plot-comparison":
+        from profiling.nautilus_plot_comparison import export_plots
+
+        document = export_plots(plan, state, root, destination)
     (destination / "report.html").write_text(document)
 
 

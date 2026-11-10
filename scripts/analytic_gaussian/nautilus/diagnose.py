@@ -117,6 +117,11 @@ def main():
         help="prepare the separately authorized single output replay",
     )
     parser.add_argument("--plan", type=Path)
+    parser.add_argument(
+        "--plot-comparison",
+        action="store_true",
+        help="prepare the approved three-case plotting comparison",
+    )
     parser.add_argument("--case")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -139,7 +144,14 @@ def main():
         if args.output.exists():
             raise ValueError("refusing to overwrite frozen plan")
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        atomic_json(args.output, prepare(args.archive.resolve(), output_only=args.output_only))
+        atomic_json(
+            args.output,
+            prepare(
+                args.archive.resolve(),
+                output_only=args.output_only,
+                plot_comparison=args.plot_comparison,
+            ),
+        )
         return 0
     plan = json.loads(args.plan.read_text())
     validate_plan(plan)

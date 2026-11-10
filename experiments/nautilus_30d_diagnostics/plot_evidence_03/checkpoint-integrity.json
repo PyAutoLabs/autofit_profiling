@@ -1,0 +1,26 @@
+[
+  {
+    "case": "plot-no-corner",
+    "copied_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+    "original_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+    "byte_identical": true,
+    "status": "success",
+    "eligible_as_success": true
+  },
+  {
+    "case": "plot-six-small",
+    "copied_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+    "original_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+    "byte_identical": true,
+    "status": "success",
+    "eligible_as_success": true
+  },
+  {
+    "case": "plot-thirty-small",
+    "copied_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+    "original_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+    "byte_identical": true,
+    "status": "timeout",
+    "eligible_as_success": false
+  }
+]

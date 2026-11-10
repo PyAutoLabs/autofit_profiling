@@ -1,0 +1,557 @@
+{
+  "status": "halted",
+  "attempts": [
+    {
+      "case": "plot-no-corner",
+      "status": "success",
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          0.7275390625,
+          0.88037109375,
+          1.23486328125
+        ],
+        "time": 1794324494.5980358
+      },
+      "process_wall_s": 54.05423309099933,
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 363585536,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "stages": {
+        "completed": [
+          {
+            "stage": "pre_fit_output",
+            "status": "exit",
+            "wall_s": 0.011603932000070927
+          },
+          {
+            "stage": "run",
+            "status": "exit",
+            "wall_s": 0.008171728999514016
+          },
+          {
+            "stage": "samples_from",
+            "status": "exit",
+            "wall_s": 9.239750480001021
+          },
+          {
+            "stage": "summary",
+            "status": "exit",
+            "wall_s": 7.949481527999524
+          },
+          {
+            "stage": "save_samples",
+            "status": "exit",
+            "wall_s": 4.514182073999109
+          },
+          {
+            "stage": "save_samples_summary",
+            "status": "exit",
+            "wall_s": 0.006330404999971506
+          },
+          {
+            "stage": "_save_samples",
+            "status": "exit",
+            "wall_s": 21.736969609999505
+          },
+          {
+            "stage": "samples_drawn_randomly_via_pdf_from",
+            "status": "exit",
+            "wall_s": 0.009035986000526464
+          },
+          {
+            "stage": "_compute_latent_samples",
+            "status": "exit",
+            "wall_s": 0.02104358400174533
+          },
+          {
+            "stage": "search_corner",
+            "status": "exit",
+            "wall_s": 0.009653364999394398
+          },
+          {
+            "stage": "visualize",
+            "status": "exit",
+            "wall_s": 0.02113724000082584
+          },
+          {
+            "stage": "_profile_and_summarize",
+            "status": "exit",
+            "wall_s": 3.174397469001633
+          },
+          {
+            "stage": "summary",
+            "status": "exit",
+            "wall_s": 9.06110340899977
+          },
+          {
+            "stage": "post_fit_output",
+            "status": "exit",
+            "wall_s": 2.1854167500005133
+          },
+          {
+            "stage": "wrapped_replay",
+            "status": "exit",
+            "wall_s": 37.47037237800032
+          }
+        ],
+        "incomplete": []
+      },
+      "child": {
+        "status": "success",
+        "case": "plot-no-corner",
+        "original_unchanged": true,
+        "new_likelihood_calls": 1,
+        "new_sampler_likelihood_calls": 0,
+        "summary_timing_calls": 1,
+        "posterior": {
+          "logZ": -37.675778339891494,
+          "logZ_error": -0.9080901865173772,
+          "n_eff": 9740.435782984026,
+          "posterior_sha256": "a4234203f31abb988319385b0a5d92f0f57fbc10dbf23e0715e5906e146d499a",
+          "n_like": 34100,
+          "selected_samples": 33984,
+          "fresh_samples_per_shell": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "max_standardized_mean_error": 0.05301148462884267,
+          "covariance_relative_error": 0.10297281361050024,
+          "shell_log_v": [
+            -0.6906503003613582,
+            -1.2543778853856073,
+            -1.9080951335307206,
+            -2.6238976432200727,
+            -3.3250784458389484,
+            -4.235060512551583,
+            -5.118574718291416,
+            -5.77617394972751,
+            -6.610165024205517,
+            -7.418196183075631,
+            -8.26128372546977,
+            -9.047098776382557,
+            -9.775100522301566,
+            -10.52025286552771,
+            -11.387655100634438,
+            -12.340946417915271,
+            -12.916200213633221,
+            -13.94249010301089,
+            -14.63927751214904,
+            -15.13039048765964
+          ]
+        },
+        "plot": {
+          "policy": {
+            "name": "no-corner",
+            "indices": [],
+            "figsize": null,
+            "dpi": null
+          },
+          "style": {
+            "kinds": {
+              "diagonal": "kde_1d",
+              "lower": "hist_2d"
+            },
+            "upper": false
+          },
+          "search_plot_calls": 1,
+          "input_samples": 33984,
+          "figures": [],
+          "errors": []
+        }
+      },
+      "original_unchanged": true
+    },
+    {
+      "case": "plot-six-small",
+      "status": "success",
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.080078125,
+          0.96142578125,
+          1.24365234375
+        ],
+        "time": 1794324553.1527698
+      },
+      "process_wall_s": 62.27792608399977,
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 383139840,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "stages": {
+        "completed": [
+          {
+            "stage": "pre_fit_output",
+            "status": "exit",
+            "wall_s": 0.01344928000071377
+          },
+          {
+            "stage": "run",
+            "status": "exit",
+            "wall_s": 0.00509894499919028
+          },
+          {
+            "stage": "samples_from",
+            "status": "exit",
+            "wall_s": 8.33892164200006
+          },
+          {
+            "stage": "summary",
+            "status": "exit",
+            "wall_s": 9.904784260999804
+          },
+          {
+            "stage": "save_samples",
+            "status": "exit",
+            "wall_s": 4.449768088999917
+          },
+          {
+            "stage": "save_samples_summary",
+            "status": "exit",
+            "wall_s": 0.007896074999734992
+          },
+          {
+            "stage": "_save_samples",
+            "status": "exit",
+            "wall_s": 22.728827297998578
+          },
+          {
+            "stage": "samples_drawn_randomly_via_pdf_from",
+            "status": "exit",
+            "wall_s": 0.006807390998801566
+          },
+          {
+            "stage": "_compute_latent_samples",
+            "status": "exit",
+            "wall_s": 0.015989634001016384
+          },
+          {
+            "stage": "axes_construction",
+            "status": "exit",
+            "wall_s": 0.43599861999973655
+          },
+          {
+            "stage": "posterior_plotting",
+            "status": "exit",
+            "wall_s": 2.6486399469995376
+          },
+          {
+            "stage": "png_export",
+            "status": "exit",
+            "wall_s": 1.0051092080011585
+          },
+          {
+            "stage": "search_corner",
+            "status": "exit",
+            "wall_s": 4.716599579000103
+          },
+          {
+            "stage": "visualize",
+            "status": "exit",
+            "wall_s": 4.7281404539990035
+          },
+          {
+            "stage": "_profile_and_summarize",
+            "status": "exit",
+            "wall_s": 3.278178927999761
+          },
+          {
+            "stage": "summary",
+            "status": "exit",
+            "wall_s": 8.733660128000338
+          },
+          {
+            "stage": "post_fit_output",
+            "status": "exit",
+            "wall_s": 2.1252330020015506
+          },
+          {
+            "stage": "wrapped_replay",
+            "status": "exit",
+            "wall_s": 42.68073442499917
+          }
+        ],
+        "incomplete": []
+      },
+      "child": {
+        "status": "success",
+        "case": "plot-six-small",
+        "original_unchanged": true,
+        "new_likelihood_calls": 1,
+        "new_sampler_likelihood_calls": 0,
+        "summary_timing_calls": 1,
+        "posterior": {
+          "logZ": -37.675778339891494,
+          "logZ_error": -0.9080901865173772,
+          "n_eff": 9740.435782984026,
+          "posterior_sha256": "a4234203f31abb988319385b0a5d92f0f57fbc10dbf23e0715e5906e146d499a",
+          "n_like": 34100,
+          "selected_samples": 33984,
+          "fresh_samples_per_shell": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "max_standardized_mean_error": 0.05301148462884267,
+          "covariance_relative_error": 0.10297281361050024,
+          "shell_log_v": [
+            -0.6906503003613582,
+            -1.2543778853856073,
+            -1.9080951335307206,
+            -2.6238976432200727,
+            -3.3250784458389484,
+            -4.235060512551583,
+            -5.118574718291416,
+            -5.77617394972751,
+            -6.610165024205517,
+            -7.418196183075631,
+            -8.26128372546977,
+            -9.047098776382557,
+            -9.775100522301566,
+            -10.52025286552771,
+            -11.387655100634438,
+            -12.340946417915271,
+            -12.916200213633221,
+            -13.94249010301089,
+            -14.63927751214904,
+            -15.13039048765964
+          ]
+        },
+        "plot": {
+          "policy": {
+            "name": "six-small",
+            "indices": [
+              0,
+              6,
+              12,
+              17,
+              23,
+              29
+            ],
+            "figsize": [
+              12,
+              12
+            ],
+            "dpi": 100
+          },
+          "style": {
+            "kinds": {
+              "diagonal": "kde_1d",
+              "lower": "hist_2d"
+            },
+            "upper": false
+          },
+          "search_plot_calls": 1,
+          "input_samples": 33984,
+          "figures": [
+            {
+              "figsize": [
+                12.0,
+                12.0
+              ],
+              "dpi": 100.0,
+              "axes": 27
+            }
+          ],
+          "errors": [],
+          "png": {
+            "path": "fit/baseline/1e4d19895da90a4826f2b5c4989c4595/image/search/diagnostic_corner.png",
+            "dimensions": [
+              1200,
+              1200
+            ],
+            "sha256": "1dbe408952ec1a26fe13dc25ffdf9cb08b05b5757be92c8db4581fd8fe754688",
+            "bytes": 85154
+          }
+        }
+      },
+      "original_unchanged": true
+    },
+    {
+      "case": "plot-thirty-small",
+      "status": "timeout",
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.4501953125,
+          1.1025390625,
+          1.275390625
+        ],
+        "time": 1794324619.614668
+      },
+      "process_wall_s": 120.09174414900008,
+      "supervision": {
+        "returncode": 124,
+        "termination_reason": "timeout",
+        "sampled_group_peak_rss_bytes": 551571456,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "stages": {
+        "completed": [
+          {
+            "stage": "pre_fit_output",
+            "status": "exit",
+            "wall_s": 0.009618496000257437
+          },
+          {
+            "stage": "run",
+            "status": "exit",
+            "wall_s": 0.0041226720004488016
+          },
+          {
+            "stage": "samples_from",
+            "status": "exit",
+            "wall_s": 5.616443762999552
+          },
+          {
+            "stage": "summary",
+            "status": "exit",
+            "wall_s": 6.388765726998827
+          },
+          {
+            "stage": "save_samples",
+            "status": "exit",
+            "wall_s": 4.170694409000134
+          },
+          {
+            "stage": "save_samples_summary",
+            "status": "exit",
+            "wall_s": 0.006654221000644611
+          },
+          {
+            "stage": "_save_samples",
+            "status": "exit",
+            "wall_s": 16.20714361299906
+          },
+          {
+            "stage": "samples_drawn_randomly_via_pdf_from",
+            "status": "exit",
+            "wall_s": 0.006379514999935054
+          },
+          {
+            "stage": "_compute_latent_samples",
+            "status": "exit",
+            "wall_s": 0.013408066999545554
+          },
+          {
+            "stage": "axes_construction",
+            "status": "exit",
+            "wall_s": 9.99675403800029
+          },
+          {
+            "stage": "posterior_plotting",
+            "status": "exit",
+            "wall_s": 74.73858061200008
+          }
+        ],
+        "incomplete": [
+          {
+            "t_s": 0.28567815399946994,
+            "id": 0,
+            "stage": "wrapped_replay",
+            "event": "enter"
+          },
+          {
+            "t_s": 17.116877022999688,
+            "id": 10,
+            "stage": "visualize",
+            "event": "enter"
+          },
+          {
+            "t_s": 17.12402518199997,
+            "id": 11,
+            "stage": "search_corner",
+            "event": "enter"
+          },
+          {
+            "t_s": 109.26098085800004,
+            "id": 14,
+            "stage": "png_export",
+            "event": "enter"
+          }
+        ]
+      },
+      "original_unchanged": true
+    }
+  ],
+  "spent_s": 242.32112973099902,
+  "reason": "timeout",
+  "unrun": []
+}

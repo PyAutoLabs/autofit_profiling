@@ -1,0 +1,27 @@
+{
+  "coverage": [
+    {
+      "case": "plot-no-corner",
+      "status": "success",
+      "original_logZ_error": -0.9080901865173772,
+      "fresh_logZ_error": null,
+      "eligible_as_success": true
+    },
+    {
+      "case": "plot-six-small",
+      "status": "success",
+      "original_logZ_error": -0.9080901865173772,
+      "fresh_logZ_error": null,
+      "eligible_as_success": true
+    },
+    {
+      "case": "plot-thirty-small",
+      "status": "timeout",
+      "original_logZ_error": -0.9080901865173772,
+      "fresh_logZ_error": null,
+      "eligible_as_success": false
+    }
+  ],
+  "spent_s": 242.32112973099902,
+  "interpretation": "Three output-only plot policies; original posterior and non-plot output held fixed"
+}

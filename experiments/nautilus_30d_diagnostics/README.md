@@ -2,7 +2,7 @@
 
 Reusing exploration samples is the leading explanation for the negative evidence error in the [dimension pilot](../nautilus_cpu_dimensions/README.md). Fresh samples from the same learned bounds substantially reduced the discrepancy. The 30D follow-up timed out before its ESS target, so this is supporting evidence rather than a completed accuracy validation.
 
-A separately authorized output-only replay also timed out inside visualization, after sample and latent output had completed. See the [output replay report](output_evidence/report.html) and the measured stages below.
+The corrected plotting comparison completed both the no-corner and six-parameter cases. The full30D corner still hit the120-second cap at PNG export, after74.74seconds plotting the posterior, despite a12×12-inch canvas. See the [latest comparison](plot_evidence_03/report.html). The earlier output-only timeout and two stopped plotting attempts are retained below.
 
 This is experimental phase 0b.2 for [issue #12](https://github.com/PyAutoLabs/autofit_profiling/issues/12), outside Pulse. Full phase 0b remains incomplete. [Open the report](evidence/report.html), [all attempt receipts](evidence/attempts.json), or the [frozen protocol](protocol.json).
 
@@ -95,6 +95,26 @@ This was a **diagnostic harness defect**, not a PyAutoFit or sampling failure: t
 The wrapper's bound argument is now named `updater`, preserving PyAutoFit's keyword unchanged. A regression test exercises the real keyword calling convention and verifies that the guard and method restoration still work. This correction was made **after** the failed measurement; no timed replay has been run against it. There is still no end-to-end plotting or successful finalization witness.
 
 See [attempt02 report](plot_evidence_02/report.html), [attempt receipts](plot_evidence_02/attempts.json), [checkpoint integrity](plot_evidence_02/checkpoint-integrity.json) and [portable plan](plot_evidence_02/plan.json). Raw data remain under `output/nautilus-plot-comparison-02/`; the first comparison's guard-halted state and every earlier experiment remain unchanged. The same120s/4096MiB child and420s aggregate caps apply to any separately authorized next attempt; no automatic retry or merge.
+
+## Corrected plotting comparison: two successes, full30D capped
+
+The human selected **“Run corrected comparison once”** after the wrapper fix. Attempt03 used clean committed code `ab896cdc36061b33998bae9c214d6a47c7773b5d`, the same pinned environment, unchanged original posterior and identical approved caps. The driver charged **242.32seconds**, including4.518seconds of preflight, within its420-second budget. It stopped after the third case timed out; no retry followed.
+
+| Plot policy | Outcome | Child process seconds | Axis construction | Posterior plotting | PNG export |
+|---|---|---:|---:|---:|---:|
+| No corner | Success | 54.054 | — | — | — |
+| Six selected parameters,12×12in | Success | 62.278 | 0.436s | 2.649s | 1.005s |
+| All30parameters,12×12in | Timeout | 120.092 | 9.997s | 74.739s | Entered; unfinished |
+
+Times are inclusive instrumented stage measurements, not additive component totals. Child process time also includes imports, checkpoint copy, provenance/integrity checks and posterior verification after wrapped output. The wrapped replay itself completed in37.470seconds without the corner and42.681seconds for six parameters. These single realizations are not steady-state speedup estimates.
+
+Both successes completed normal wrapped finalization, preserved the posterior hash and native count34100, and made **exactly one separate summary timing evaluation** at the stored maximum-likelihood point. No native sampling occurred. The six-parameter PNG has1200×1200pixels,27axes including diagonal twins, and every one of the33984original selected samples with its original weight. Its parameter indices are0,6,12,17,23,29; the library labels all six axes `x`, so the index list identifies them. The figure was visually inspected and its dimensions/hash verified.
+
+The30D case constructed495axes on the same12×12-inch,100-dpi figure. It finished posterior plotting, entered PNG export at trace109.261seconds, then reached the process cap. No PNG was produced; final summary timing and post-fit output were not reached. It has no success receipt and stays ineligible as success. All three copied checkpoints are byte-identical to the original; original input hashes passed before/after every child. Sampled peak process-group RSS was347MiB,365MiB and526MiB respectively, with the usual shared-page/detection-interval limitations.
+
+**Interpretation:** disabling the corner allows full finalization, and a six-parameter corner completes under the same guard. At a fixed small canvas, the full30D plotting path remains expensive before export begins. Shrinking raster dimensions alone was insufficient for this cap. The earlier default-canvas replay had a different font-cache state and only broad visualization tracing, so this is not a matched large-versus-small-canvas benchmark or proof of the original timeout's exact instruction. The run does not resolve30D evidence accuracy or establish production defaults.
+
+See the [latest report and figure](plot_evidence_03/report.html), [attempt receipts](plot_evidence_03/attempts.json), [checkpoint integrity](plot_evidence_03/checkpoint-integrity.json) and [portable plan](plot_evidence_03/plan.json). About156MiB of raw data are retained in `output/nautilus-plot-comparison-03/`, alongside the45MiB failed attempt02 and all previous archives. No Pulse records, library code or production configuration changed. Further sampling, optimization or timing experiments need a separately scoped decision; PR13 remains for human review/merge.
 
 ## Reproduce
 

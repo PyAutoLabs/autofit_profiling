@@ -19,4 +19,8 @@ GitHub Pages from `dashboard/`. B4b added the expectation-propagation / graphica
 baselines (N = 3, 10, 30 datasets) and the analytic Gaussian parity benchmark; their
 reproduction table is [`wiki/campaigns/ep_graphical_baselines.md`](wiki/campaigns/ep_graphical_baselines.md).
 
+Compare direct Nautilus and PyAutoFit on the same analytic target with the
+[controlled CPU baseline](wiki/campaigns/nautilus_cpu_baseline.md), including worker
+timelines and instrumentation controls.
+
 Agents and contributors: start with [`AGENTS.md`](AGENTS.md).

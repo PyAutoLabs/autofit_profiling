@@ -245,3 +245,32 @@ def test_pulse_reader_refuses_a_broken_catalogue(root):
     outputs["catalogue.json"] = json.dumps(broken)
     with pytest.raises(ValueError):
         bc.validate(outputs, PULSE)
+
+
+def test_explicit_target_metadata_preserves_legacy_defaults():
+    legacy = _row()
+    assert bc._setup(legacy)["configuration"]["free_parameters"]["value"] == 3
+    custom = copy.deepcopy(legacy)
+    custom["setup"].update(free_parameters=5, data_pixels=0, catalogue_model="correlated_gaussian")
+    setup = bc._setup(custom)
+    assert setup["configuration"]["free_parameters"]["value"] == 5
+    assert setup["configuration"]["data_pixels"]["value"] == 0
+    assert setup["model"] == "correlated_gaussian"
+
+
+def test_failed_runs_not_published_as_success(tmp_path):
+    (tmp_path / "results").mkdir()
+    for status in ("timeout", "error", "process_failure", "unrun"):
+        row = _row()
+        row["status"] = status
+        (tmp_path / "results" / f"{status}.json").write_text(json.dumps(row))
+    assert bc.load_rows(tmp_path) == []
+
+
+def test_exploratory_row_has_no_fake_reproduction_verdict():
+    row = _row()
+    row["reference"] = None
+    catalogue = {"limitations": [], "evidence_updated_at": None}
+    output = bc.render_html([("row.json", row)], catalogue)
+    assert "no historical reproduction" in output
+    assert "within ±" not in output

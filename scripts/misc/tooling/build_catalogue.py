@@ -75,7 +75,11 @@ def load_rows(root: Path):
     rows = []
     for path in sorted((root / "results").rglob("*.json")):
         doc = json.loads(path.read_text())
-        if isinstance(doc, dict) and doc.get("schema") in RESULT_SCHEMAS:
+        if (
+            isinstance(doc, dict)
+            and doc.get("schema") in RESULT_SCHEMAS
+            and doc.get("status", "success") == "success"
+        ):
             rows.append((path.relative_to(root).as_posix(), doc))
     return rows
 
@@ -96,20 +100,22 @@ def _setup(doc):
         "search": {"value": s["search"], "unit": "name"},
         "variant": {"value": doc["variant"], "unit": "name"},
         "likelihood": {"value": s["likelihood"], "unit": "name"},
-        "free_parameters": {"value": 3, "unit": "count"},
-        "data_pixels": {"value": 100, "unit": "count"},
+        "free_parameters": {"value": s.get("free_parameters", 3), "unit": "count"},
+        "data_pixels": {"value": s.get("data_pixels", 100), "unit": "count"},
         "output_config": {"value": s["config"], "unit": "name"},
     }
     for key, value in s["search_settings"].items():
         unit = "count" if key in ("n_live", "n_networks", "number_of_cores") else "dimensionless"
+        if "catalogue_model" in s:
+            unit = _unit(value)
         config[key] = {"value": value, "unit": unit}
     return {
         "id": s["id"],
         "label": s["label"],
         "dataset": s["dataset"],
-        "model": "gaussian",
+        "model": s.get("catalogue_model", "gaussian"),
         "instrument": None,
-        "unknowns": {"instrument": "toy 1-D dataset; no instrument"},
+        "unknowns": {"instrument": s.get("instrument_reason", "toy 1-D dataset; no instrument")},
         "configuration_id": f"{s['id']}@{doc['version']}",
         "configuration": dict(sorted(config.items())),
     }
@@ -134,7 +140,7 @@ def _run_setup(doc):
         "dataset": s["dataset"],
         "model": MODEL_NAME.get(s["dataset"], s["dataset"]),
         "instrument": None,
-        "unknowns": {"instrument": "toy 1-D dataset; no instrument"},
+        "unknowns": {"instrument": s.get("instrument_reason", "toy 1-D dataset; no instrument")},
         "configuration_id": f"{s['id']}@{doc['version']}",
         "configuration": dict(sorted(config.items())),
     }
@@ -252,6 +258,8 @@ def build(root: Path):
             continue
         method = _method(doc, "components")
         for metric, value in doc["components_s"].items():
+            if value is None:
+                continue
             if value == 0 and metric in INAPPLICABLE_REASON:
                 slot = _selection(
                     _record(doc, path, sid, "breakdown", metric, 0, method, None),
@@ -368,6 +376,11 @@ def render_html(rows, catalogue):
                 f'<td style="width:40%"><div class=bar style="width:{100 * share:.1f}%"></div></td></tr>'
             )
         out.append("</table>")
+        if ref is None:
+            out.append(
+                "<p class=m>Exploratory baseline; no historical reproduction or scored accuracy verdict.</p>"
+            )
+            continue
         verdict = "within" if ref["within_tolerance"] else "outside"
         role = "reproduction gate" if ref["gates_reproduction"] else "information only"
         out.append(

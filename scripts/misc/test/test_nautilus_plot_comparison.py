@@ -190,3 +190,18 @@ def test_original_zero_call_gate_and_exception_cleanup():
         gate.evaluate([1])
     assert not gate.active
     assert gate.calls == 0
+
+
+def test_guard_halt_report_has_reason_and_all_cases_unrun(tmp_path):
+    from profiling.nautilus_plot_comparison import export_plots
+
+    plan = {"cases": [{"id": p["name"], "plot_policy": p} for p in POLICIES]}
+    state = {
+        "status": "halted",
+        "reason": "RuntimeError: host load exceeds guard",
+        "attempts": [],
+        "spent_s": 6.438,
+    }
+    document = export_plots(plan, state, tmp_path, tmp_path)
+    assert "host load exceeds guard" in document
+    assert document.count("<td>unrun</td>") == 3

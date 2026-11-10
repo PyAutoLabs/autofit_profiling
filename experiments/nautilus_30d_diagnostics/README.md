@@ -74,6 +74,18 @@ Source inspection identifies the likely plotting target for a later experiment: 
 
 To prepare this separately authorized scope, add `--output-only` to the `prepare` command below and use a new plan/output directory. It cannot resume the halted evidence pilot. Detailed [attempts](output_evidence/attempts.json), [durable stages](output_evidence/output-d30-rsaved-stages.jsonl), and [portable plan](output_evidence/plan.json) are retained.
 
+## Approved plotting comparison: stopped by host-load guard
+
+The human approved three sequential output replays and explicitly allowed **one final-summary timing likelihood call per case**. Native sampling remains forbidden; the harness permits that direct call only inside `SearchUpdater._profile_and_summarize`, counts it separately, and checks the point/value against the stored maximum likelihood. Earlier zero-call experiments retain their original constraints.
+
+The [frozen protocol](plot_protocol.json) compares no corner, a six-parameter compact corner (indices 0, 6, 12, 17, 23, 29), and a full 30D compact corner. Both rendered variants use a 12×12-inch, 100-dpi canvas, diagonal KDE and lower-triangle histograms, with all original samples and weights. Durable hooks distinguish axis construction, posterior plotting and PNG export. Required images, actual geometry and swallowed plotting errors are checked explicitly.
+
+Measurement code was frozen at `51663d11fc6a873d9681899608bd352a294293e5`. Runtime/checkpoint/font-cache preflight succeeded in **6.438 seconds**, but the driver then halted with **`RuntimeError: host load exceeds guard` before launching any child**. Its guard limits one-minute load to 2.0 on this eight-CPU affinity. The exact rejected load was not persisted; a later observation cannot substitute for it.
+
+**All three cases are unrun.** No sampler or final-summary evaluations occurred in this continuation, no figure was produced, and there are no new timing comparisons or successful finalization witnesses. Total charged time was 6.438 seconds including preflight. The approved stop rule was honored without retry, cap change or environment change. See the [comparison report](plot_evidence/report.html), [halted state](plot_evidence/attempts.json) and [portable plan](plot_evidence/plan.json).
+
+The small raw plan/state archive is retained under `output/nautilus-plot-comparison/`; earlier raw archives are preserved. This report and its driver-stop display were added after the frozen measurement commit. The runtime plotting path remains unvalidated end to end. A further attempt requires a new human compute decision and separate plan/output identity; PR #13 remains open for human review, outside Pulse.
+
 ## Reproduce
 
 Use the phase-0b.1 pinned environment: PyAutoFit `bdb7af0e9c339ad07850679fd6ac168aacc7d18c`, PyAutoNerves `9b204c90c2ce05c5bb0cf3e9800ed13f005c6c56`, and the [third-party requirements](../nautilus_cpu_dimensions/requirements.txt). Activate the pinned library sources and commit measurement code before preparing a new plan. The runtime preflight verifies dependency, package, target, host, CPU-affinity and thread identities against the input archive; the new producer identity is recorded separately.
@@ -90,6 +102,6 @@ The published plan removes local paths while retaining input hashes, case identi
 
 ## Validation and readiness
 
-The 81-test stdlib tooling suite covers plan tampering, source/input identity, the resumed exclusion semantics, stage persistence, patch restoration, no-likelihood enforcement even when an exception is swallowed, timeout precedence over child success, no retry/budget reset, and missing-case reporting. Runtime preflight restored all three archived posterior hashes and verified that exclusion leaves zero selected samples. The post-measurement checkpoint-mode smoke passed without sampling. Ruff and the unchanged catalogue check are required alongside the tooling suite; no notebooks are generated for these standalone diagnostic scripts.
+The 98-test tooling suite covers plan tampering, source/input identity, the resumed exclusion semantics, stage persistence, patch restoration, no-likelihood enforcement even when an exception is swallowed, timeout precedence over child success, no retry/budget reset, and missing-case reporting. Runtime preflight restored all three archived posterior hashes and verified that exclusion leaves zero selected samples. The post-measurement checkpoint-mode smoke passed without sampling. Ruff and the unchanged catalogue check are required alongside the tooling suite; no notebooks are generated for these standalone diagnostic scripts.
 
 [Authoritative Heart readiness](evidence/heart-readiness.json) remains RED: **PyAutoGalaxy: CI failure**; **PyAutoLens: CI failure**. The live phase-0b development override and approval of this bounded member permit the development PR. Merge remains a separate human decision; no release or readiness-clearance claim.

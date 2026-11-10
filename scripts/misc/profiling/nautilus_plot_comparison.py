@@ -229,6 +229,7 @@ table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:9px;bord
 img{max-width:100%;height:auto}summary{cursor:pointer}h1{font-size:30px}
 </style><h1>Nautilus plotting comparison</h1>
 <p>Experimental · outside Pulse · unchanged posterior · one frozen run per policy.</p>"""
+    document += f"<p>Driver: {html.escape(state.get('status', 'unknown'))}. {html.escape(state.get('reason', ''))}</p>"
     document += f"<p>Charged runtime: {state['spent_s']:.2f}s, including preflight. Stage times are inclusive and overlap.</p>"
     document += "<table><tr><th>Policy</th><th>Status</th><th>Process seconds</th><th>Axes</th><th>Plotting</th><th>PNG export</th></tr>"
     details = []

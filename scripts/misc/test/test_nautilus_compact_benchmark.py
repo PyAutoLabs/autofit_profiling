@@ -77,3 +77,25 @@ def test_auxiliary_metadata_paths_never_reintroduce_library_roots(tmp_path):
     names = ["PyAutoFit", "PyAutoNerves", "PyAutoArray", "PyAutoGalaxy", "PyAutoLens", "unknown"]
     paths = [str(tmp_path / name) for name in names]
     assert benchmark.metadata_paths(benchmark.os.pathsep.join(paths)) == paths[2:5]
+
+
+def test_report_excludes_unmatched_baseline_and_checks_image_identity():
+    spec = importlib.util.spec_from_file_location(
+        "compact_report", SOURCE.with_name("compact_report.py")
+    )
+    report = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(report)
+    a = {
+        "pair": 1,
+        "backend": "baseline",
+        "png_sha256": "same",
+        "process_s": 100,
+        "wrapper_s": 80,
+        "plot_s": 60,
+    }
+    b = {**a, "backend": "candidate", "process_s": 50, "wrapper_s": 40, "plot_s": 30}
+    unmatched = {**a, "pair": 3}
+    result = report.pairs([a, b, unmatched])
+    assert result == [{"pair": 1, "process_speedup": 2, "wrapper_speedup": 2, "plot_speedup": 2}]
+    with pytest.raises(ValueError, match="images differ"):
+        report.pairs([a, {**b, "png_sha256": "different"}])

@@ -247,3 +247,28 @@ def test_plan_command_needs_no_scientific_site_packages(identity, tmp_path):
     )
     assert result.returncode == 0, result.stderr
     assert len(json.loads((tmp_path / "plan.json").read_text())["cases"]) == 36
+
+
+def test_empty_experiment_reports_all_missing_pairs(identity, tmp_path):
+    plan = make_plan(identity)
+    root = tmp_path / "run"
+    root.mkdir()
+    atomic_json(root / "plan.json", plan)
+    state = new_state(plan)
+    state["halt_reason"] = "host not quiet"
+    atomic_json(root / "state.json", state)
+    script = (
+        Path(__file__).resolve().parents[3]
+        / "scripts/analytic_gaussian/nautilus/experiment_report.py"
+    )
+    result = subprocess.run(
+        [sys.executable, "-S", str(script), str(root), "--output", str(tmp_path / "report")],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stderr
+    summary = json.loads((tmp_path / "report/summary.json").read_text())
+    assert summary["counts"] == {"unrun": 36}
+    assert summary["expected_pairs"] == 18
+    assert len(summary["incomplete_pairs"]) == 18
+    assert summary["trace_control_pairs"] == []

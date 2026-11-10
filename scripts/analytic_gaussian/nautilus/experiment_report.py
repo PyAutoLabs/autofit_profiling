@@ -13,6 +13,7 @@ ROOT = next(p for p in Path(__file__).resolve().parents if (p / "ruff.toml").exi
 sys.path.insert(0, str(ROOT / "scripts" / "misc"))
 from profiling.nautilus_campaign import validate_plan, verify_result
 from profiling.nautilus_experiment_report import summarize_rows
+from profiling.nautilus_manifest import fingerprint
 from profiling.nautilus_resources import atomic_json
 from report import portable, timeline_svg
 
@@ -61,6 +62,27 @@ def export(root, output):
         row = json.loads(path.read_text()) if path.exists() else {"status": "missing"}
         records.append({"attempt": portable(attempt), "result": portable(row)})
     summary = summarize_rows(selected)
+    expected_pairs = set()
+    for case in plan["cases"]:
+        config = dict(case["config"])
+        config.pop("trace")
+        expected_pairs.add(
+            fingerprint(
+                {
+                    "config": config,
+                    "target": case["truth_sha256"],
+                    "environment": case["environment"],
+                }
+            )
+        )
+    represented = {
+        p["pair_id"] for p in summary["trace_control_pairs"] + summary["incomplete_pairs"]
+    }
+    for pair_id in sorted(expected_pairs - represented):
+        summary["incomplete_pairs"].append(
+            {"pair_id": pair_id, "present_trace_modes": [], "status": "no successful members"}
+        )
+    summary["expected_pairs"] = len(expected_pairs)
     summary.update(
         coverage=coverage,
         counts=dict(Counter(c["status"] for c in coverage)),

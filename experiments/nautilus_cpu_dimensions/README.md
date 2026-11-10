@@ -28,3 +28,36 @@ Timeout, memory cap, source mismatch, changed target/configuration or accounting
 Report full adapter wall and subprocess wall separately. Worker times overlap; do not sum them into parent wall. Ratios include host noise and are not corrected. Standardized mean error divides by analytic posterior marginal standard deviation; covariance error is the relative Frobenius norm. ESS and logZ error are diagnostics, not a calibrated scientific acceptance test at three seeds. Native logZ uncertainty and proposal-rejection counts remain unavailable.
 
 Full phase 0b remains incomplete: 60/100/200-dimensional probes, harder targets, worker scaling and parity-admitted lens fixtures need later bounded work. Historical Insight correlated_nd failures concern another family, prior and source pin. Neither these measurements nor their failures are pooled with that campaign. No optimization, release or merge is authorized by running this experiment.
+
+## Measured local pilot — 10 November 2026
+
+[Report](evidence/report.html) · [summary and coverage](evidence/summary.json) · [all attempt receipts](evidence/attempts.json) · [frozen plan](evidence/plan.json)
+
+**Outcome: 26 successes, 1 timeout, 9 unrun cases.** All 13 available trace/control pairs have identical posterior hashes, likelihood counts and run-call cadence. All 12 available cross-adapter pairs match. Five of the 18 planned trace/control pairs have no complete evidence; they are explicitly counted as incomplete. All 13 selected detailed timelines reconcile.
+
+The pilot stopped at the first capped case, as pre-registered: PyAutoFit, 30 dimensions, seed 0, tracing off. The supervisor terminated the process group at 120.05 seconds of subprocess wall and recorded exit 124. Peak sampled RSS was 533.0 MiB, below the 4-GiB limit. Its last logs were result-update/sample-output work, but there is no completed fit receipt. This is not a successful wrapped fit or proof that sampling alone exceeded 120 seconds. Remaining cases were not run, and no cap or settings were changed.
+
+Total charged execution was 940.7 seconds (15.7 minutes), including 71.3 seconds of runtime checks. The code measured was commit `544bc89`; the later report-only change counts wholly missing pairs. Dependency source/content pins and Nautilus source digest match phase 0a. Hardware: Intel Core i9-10885H, WSL exposing four cores/eight logical CPUs, float64 and native math threads set to one. This is a monitored low-load local run, not an exclusive scheduler allocation; the manifest retains load observations.
+
+| Dimensions | Adapter | Control cases | Median wall [min–max], s | logZ error [min–max] |
+|---:|---|---:|---|---|
+| 5 | direct | 3 | 12.96 [10.33–13.41] | [-0.0642, -0.0453] |
+| 5 | pyautofit | 3 | 15.92 [15.59–19.54] | [-0.0642, -0.0453] |
+| 10 | direct | 3 | 21.01 [20.49–21.21] | [-0.1520, -0.1474] |
+| 10 | pyautofit | 3 | 34.39 [33.91–34.62] | [-0.1520, -0.1474] |
+| 30 | direct | 1 | 92.83 [92.83–92.83] | [-0.9081, -0.9081] |
+| 30 | pyautofit | 0 complete | subprocess timeout at 120.05 s; adapter wall unavailable | unavailable |
+
+These are dimension-scaling observations at fixed 400-live settings, not optimization speedups. d30 has only one completed direct seed, so no repeated-seed dimensional-robustness claim is possible.
+
+**Accuracy warning:** at d30 the direct search reported ESS 9740.4 and 34,100 likelihood calls, yet logZ was 0.9081 below analytic truth. Both traced and control runs return this same result. Maximum standardized posterior-mean error was 0.0530 and relative covariance Frobenius error 0.1030 for that seed. High ESS and successful termination do not by themselves establish accuracy. Investigating this discrepancy requires a separate, pre-registered correctness experiment; it is not attributed to tracing or diagnosed as a library bug here.
+
+Observed trace/control wall ratios for direct: median 1.042, range 0.876–1.106 (n=7 pairs). Ratios include shared-host noise; a ratio below one does not mean negative instrumentation overhead.
+
+Observed trace/control wall ratios for pyautofit: median 0.976, range 0.833–1.030 (n=6 pairs). Ratios include shared-host noise; a ratio below one does not mean negative instrumentation overhead.
+
+**Next bounded investigation:** retain this baseline and separately test high-dimensional evidence accuracy and end-of-fit output cost. No checkpoint batching, output suppression, neural-network removal or sampler optimization was implemented. Wider dimensions/targets, worker scaling and Pulse promotion remain unstarted.
+
+**Validation:** 66 tooling tests; Ruff lint/format; full-stack analytic-target checks; direct/wrapped × one/two-worker checkpoint/resume equality; traced/control worker-death detection; real subprocess timeout and memory-cap termination; immutable-plan/no-scientific-import test; all-pairs coverage test; unchanged production catalogue and history; links. The runtime-check receipt is [here](evidence/runtime_checks.json). No independent review or scientific acceptance is claimed.
+
+![Dimension scaling and evidence error](evidence/dimension_summary.png)

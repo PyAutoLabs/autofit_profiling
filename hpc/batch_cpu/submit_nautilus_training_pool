@@ -1,0 +1,87 @@
+#!/bin/bash
+#SBATCH --job-name=nautilus-training-pool
+#SBATCH --partition=ral
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --hint=nomultithread
+#SBATCH --exclusive
+#SBATCH --mem=8G
+#SBATCH --time=00:35:00
+#SBATCH --no-requeue
+#SBATCH --output=output/training-pool.%j.out
+#SBATCH --error=error/training-pool.%j.err
+
+# Submit via hpc/sync from this isolated task's RAL checkout, after live discovery.
+# Exact source SHA and read-only runtime/source paths are mandatory submission inputs.
+set -euo pipefail
+if [[ -n "${SLURM_SUBMIT_DIR:-}" ]]; then
+    staging_root="$(cd "$SLURM_SUBMIT_DIR/../.." && pwd)"
+    # Generated only after live discovery; five reviewed, shell-quoted exports.
+    # hpc/sync intentionally does not forward laptop environment variables.
+    source "$staging_root/output/ral-environment.sh"
+    [[ "${NAUTILUS_ROOT:-}" == "$staging_root" ]]
+fi
+: "${NAUTILUS_ROOT:?isolated producer checkout required}"
+: "${NAUTILUS_PYTHON:?verified runtime interpreter required}"
+: "${NAUTILUS_FIT:?pinned read-only PyAutoFit checkout required}"
+: "${NAUTILUS_NERVES:?pinned read-only PyAutoNerves checkout required}"
+: "${NAUTILUS_PRODUCER_SHA:?validated exact producer SHA required}"
+: "${SLURM_JOB_ID:?submit this script through sbatch}"
+[[ "$SLURM_JOB_ID" =~ ^[0-9]+$ ]]
+[[ "${SLURM_JOB_PARTITION:-}" == ral ]]
+[[ "${SLURM_RESTART_COUNT:-0}" == 0 ]]
+[[ "$NAUTILUS_PRODUCER_SHA" =~ ^[0-9a-f]{40}$ ]]
+cd "$NAUTILUS_ROOT"
+[[ "$(git rev-parse HEAD)" == "$NAUTILUS_PRODUCER_SHA" ]]
+[[ -z "$(git status --porcelain)" ]]
+[[ "$(git -C "$NAUTILUS_FIT" rev-parse HEAD)" == bdb7af0e9c339ad07850679fd6ac168aacc7d18c ]]
+[[ "$(git -C "$NAUTILUS_NERVES" rev-parse HEAD)" == 9b204c90c2ce05c5bb0cf3e9800ed13f005c6c56 ]]
+[[ -z "$(git -C "$NAUTILUS_FIT" status --porcelain)" ]]
+[[ -z "$(git -C "$NAUTILUS_NERVES" status --porcelain)" ]]
+
+mkdir -p output
+# This unique claim also rejects an accidental second execution/submission.
+receipt="$NAUTILUS_ROOT/output/training-pool-ral-01"
+mkdir "$receipt"
+printf '%s\n' "$SLURM_JOB_ID" > "$receipt/job_id"
+printf '%s\n' "$NAUTILUS_PRODUCER_SHA" > "$receipt/producer_sha"
+export PYTHONPATH="$NAUTILUS_FIT:$NAUTILUS_NERVES"
+export PYTHONNOUSERSITE=1
+unset PYTHONHOME PYAUTO_TRAINING_AFFINITY
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export MPLBACKEND=Agg JAX_PLATFORMS=cpu
+export NUMBA_CACHE_DIR="$receipt/cache/numba" MPLCONFIGDIR="$receipt/cache/matplotlib"
+mkdir -p "$NUMBA_CACHE_DIR" "$MPLCONFIGDIR"
+runner=""
+finish() {
+    code=$?
+    trap - EXIT INT TERM
+    if [[ -n "$runner" ]]; then
+        kill -TERM "$runner" 2>/dev/null || true
+        wait "$runner" 2>/dev/null || true
+    fi
+    printf '%s\n' "$code" > "$receipt/wrapper_exit_code"
+    # Final accounting is fetched again after job completion; this is a snapshot.
+    timeout 10s sacct -j "$SLURM_JOB_ID" --parsable2 \
+        --format=JobID,State,ExitCode,Elapsed,AllocCPUS,ReqMem,MaxRSS,NodeList \
+        > "$receipt/accounting-at-exit.txt" 2> "$receipt/accounting-error.txt" || true
+    exit "$code"
+}
+trap finish EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+scontrol show job --oneliner "$SLURM_JOB_ID" > "$receipt/submitted-job.txt"
+findmnt --target "$receipt" --json --output TARGET,SOURCE,FSTYPE,OPTIONS > "$receipt/filesystem.json"
+lscpu --json > "$receipt/cpu.json"
+srun --exact --nodes=1 --ntasks=1 --cpus-per-task=4 --hint=nomultithread \
+    --cpu-bind=verbose,cores --kill-on-bad-exit=1 \
+    "$NAUTILUS_PYTHON" scripts/analytic_gaussian/nautilus/training_pool_benchmark.py \
+    run --execution ral --output "$receipt/pilot" &
+runner=$!
+set +e
+wait "$runner"
+code=$?
+set -e
+runner=""
+exit "$code"

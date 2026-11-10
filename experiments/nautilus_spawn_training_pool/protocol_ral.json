@@ -1,0 +1,716 @@
+{
+  "protocol": "nautilus-spawn-training-experiment@2-ral",
+  "limits": {
+    "children": 18,
+    "timeout_s": 120,
+    "memory_mib": 4096,
+    "budget_s": 1800
+  },
+  "cases": [
+    {
+      "dimension": 5,
+      "seed": 0,
+      "id": "preflight",
+      "phase": "preflight",
+      "training_workers": 2
+    },
+    {
+      "dimension": 5,
+      "seed": 0,
+      "id": "control",
+      "phase": "control",
+      "training_workers": 0
+    },
+    {
+      "dimension": 5,
+      "seed": 0,
+      "id": "training-interrupt",
+      "phase": "interrupt",
+      "mode": "training",
+      "training_workers": 2
+    },
+    {
+      "dimension": 5,
+      "seed": 0,
+      "id": "training-resume",
+      "phase": "resume",
+      "mode": "training",
+      "training_workers": 2
+    },
+    {
+      "dimension": 5,
+      "seed": 0,
+      "id": "checkpoint-interrupt",
+      "phase": "interrupt",
+      "mode": "checkpoint",
+      "training_workers": 2
+    },
+    {
+      "dimension": 5,
+      "seed": 0,
+      "id": "checkpoint-resume",
+      "phase": "resume",
+      "mode": "checkpoint",
+      "training_workers": 2
+    },
+    {
+      "dimension": 5,
+      "seed": 0,
+      "id": "d5-s0-w0",
+      "phase": "performance",
+      "training_workers": 0
+    },
+    {
+      "dimension": 5,
+      "seed": 0,
+      "id": "d5-s0-w2",
+      "phase": "performance",
+      "training_workers": 2
+    },
+    {
+      "dimension": 5,
+      "seed": 1,
+      "id": "d5-s1-w2",
+      "phase": "performance",
+      "training_workers": 2
+    },
+    {
+      "dimension": 5,
+      "seed": 1,
+      "id": "d5-s1-w0",
+      "phase": "performance",
+      "training_workers": 0
+    },
+    {
+      "dimension": 5,
+      "seed": 2,
+      "id": "d5-s2-w0",
+      "phase": "performance",
+      "training_workers": 0
+    },
+    {
+      "dimension": 5,
+      "seed": 2,
+      "id": "d5-s2-w2",
+      "phase": "performance",
+      "training_workers": 2
+    },
+    {
+      "dimension": 10,
+      "seed": 0,
+      "id": "d10-s0-w0",
+      "phase": "performance",
+      "training_workers": 0
+    },
+    {
+      "dimension": 10,
+      "seed": 0,
+      "id": "d10-s0-w2",
+      "phase": "performance",
+      "training_workers": 2
+    },
+    {
+      "dimension": 10,
+      "seed": 1,
+      "id": "d10-s1-w2",
+      "phase": "performance",
+      "training_workers": 2
+    },
+    {
+      "dimension": 10,
+      "seed": 1,
+      "id": "d10-s1-w0",
+      "phase": "performance",
+      "training_workers": 0
+    },
+    {
+      "dimension": 10,
+      "seed": 2,
+      "id": "d10-s2-w0",
+      "phase": "performance",
+      "training_workers": 0
+    },
+    {
+      "dimension": 10,
+      "seed": 2,
+      "id": "d10-s2-w2",
+      "phase": "performance",
+      "training_workers": 2
+    }
+  ],
+  "source_pins": {
+    "PyAutoFit": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c",
+    "PyAutoNerves": "9b204c90c2ce05c5bb0cf3e9800ed13f005c6c56"
+  },
+  "nautilus_source_sha256": "61e91f8fb85cf4a38877cd1c65bb0b111589bde77f5f74acb22a90f3ff2ec45c",
+  "configurations": [
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 0
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 0
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 0
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 0
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 0
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 0
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 0
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 0
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 1
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 1
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 2
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 5,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 55,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 2
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 10,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 60,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 0
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 10,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 60,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 0
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 10,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 60,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 1
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 10,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 60,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 1
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 10,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 60,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 2
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    },
+    {
+      "constructor": {
+        "n_dim": 10,
+        "n_live": 400,
+        "n_update": 400,
+        "n_points_min": 60,
+        "n_like_new_bound": 4000,
+        "enlarge_per_dim": 1.1,
+        "split_threshold": 100,
+        "n_networks": 4,
+        "n_batch": 100,
+        "vectorized": false,
+        "seed": 2
+      },
+      "stopping": {
+        "f_live": 0.01,
+        "n_shell": 1,
+        "n_eff": 10000,
+        "discard_exploration": true,
+        "verbose": false
+      },
+      "pool": {
+        "likelihood_workers": 0,
+        "sampler_workers": 0,
+        "start_method": null
+      },
+      "checkpoint": true,
+      "update_interval": 1000000,
+      "cost_profile": "none",
+      "work": 0
+    }
+  ],
+  "execution": "ral",
+  "allocation_policy": {
+    "partition": "ral",
+    "nodes": 1,
+    "tasks": 1,
+    "physical_cores": 4,
+    "job_memory_bytes": 8589934592,
+    "job_seconds": 2100,
+    "exclusive": true
+  }
+}

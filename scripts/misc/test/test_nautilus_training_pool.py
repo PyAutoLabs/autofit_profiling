@@ -259,3 +259,96 @@ def test_exact_sampling_parity_rejects_any_changed_field(field):
     other = {**result, field: None}
     with pytest.raises(ValueError):
         benchmark.exact_result(result, other)
+
+
+def test_ral_protocol_cannot_import_laptop_admission():
+    value = plan()
+    value["protocol"] = benchmark.RAL_PROTOCOL
+    value.pop("quiet_admission")
+    value["allocation"] = {"identity": {"policy": benchmark.allocation.POLICY.copy()}}
+    value["sha256"] = fingerprint({k: v for k, v in value.items() if k != "sha256"})
+    benchmark.validate(value)
+    value["quiet_admission"] = []
+    value["sha256"] = fingerprint({k: v for k, v in value.items() if k != "sha256"})
+    with pytest.raises(ValueError, match="mixed"):
+        benchmark.validate(value)
+
+
+def test_ral_allocation_commands_are_charged_to_aggregate_budget(monkeypatch):
+    clock = [1675.0]
+    monkeypatch.setattr(benchmark.time, "monotonic", lambda: clock[0])
+    monkeypatch.setattr(benchmark, "host_snapshot", lambda: {"load": [90, 90, 90]})
+
+    def inspect(plan):
+        clock[0] += 10
+        return {"verified": True}
+
+    monkeypatch.setattr(benchmark, "check_allocation", inspect)
+    ok, reason, host, wait = benchmark.admit_ral(0, {})
+    assert not ok and wait == 10 and "budget" in reason
+    assert host["allocation"]["verified"]
+    clock[0] = 0
+    assert benchmark.admit_ral(0, {})[0]  # Host-wide load is evidence, not RAL admission.
+
+
+def test_ral_without_verified_allocation_launches_no_children(tmp_path, monkeypatch):
+    import json
+
+    def reject():
+        raise ValueError("no verified scheduler allocation")
+
+    monkeypatch.setattr(benchmark.allocation, "snapshot", reject)
+    root = tmp_path / "unadmitted"
+    assert benchmark.run(root, None, "ral") == 1
+    state = json.loads((root / "state.json").read_text())
+    assert state["status"] == "halted" and state["attempts"] == []
+    assert len(state["unrun"]) == 18
+
+
+def test_ral_requires_approved_python_and_scientific_versions():
+    import json
+
+    ref = json.loads(
+        (benchmark.ROOT / "experiments/nautilus_spawn_training_pool/runtime.json").read_text()
+    )
+    identity = {"python": ref["python"] + " other compiler", "packages": ref["packages"].copy()}
+    benchmark.validate_runtime(identity)
+    identity["packages"]["scikit-learn"] = "different"
+    with pytest.raises(ValueError, match="dependencies"):
+        benchmark.validate_runtime(identity)
+
+
+@pytest.mark.parametrize("failure", ["affinity", "aggregate"])
+def test_ral_supervisor_cleans_up_on_new_admission_failures(tmp_path, monkeypatch, failure):
+    import time
+
+    process = subprocess.Popen(
+        [sys.executable, "-c", "import time; time.sleep(10)"], start_new_session=True
+    )
+    kwargs = {}
+    if failure == "affinity":
+
+        def reject(*args):
+            raise ValueError("escaped")
+
+        monkeypatch.setattr(benchmark.allocation, "verify_process_affinity", reject)
+        kwargs["affinity"] = [0, 1, 2, 3]
+    else:
+        kwargs["budget_deadline"] = time.monotonic() - 1
+    result = benchmark.supervise(process, tmp_path, False, **kwargs)
+    assert result["termination_reason"] == (
+        "affinity_mismatch" if failure == "affinity" else "aggregate_budget"
+    )
+    assert not result["live_descendants"] and process.poll() is not None
+
+
+def test_ral_protocol_receipt_matches_executable_matrix_and_limits():
+    import json
+
+    value = json.loads(
+        (benchmark.ROOT / "experiments/nautilus_spawn_training_pool/protocol_ral.json").read_text()
+    )
+    assert value["protocol"] == benchmark.RAL_PROTOCOL
+    assert value["cases"] == benchmark.matrix()
+    assert value["limits"] == benchmark.LIMITS
+    assert value["allocation_policy"] == benchmark.allocation.POLICY

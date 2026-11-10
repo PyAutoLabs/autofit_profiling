@@ -2,6 +2,7 @@
 
 import concurrent.futures
 import hashlib
+import json
 import multiprocessing
 import os
 import pickle
@@ -12,12 +13,21 @@ from pathlib import Path
 from profiling.nautilus_resources import atomic_json
 
 
+def check_affinity():
+    expected = os.environ.get("PYAUTO_TRAINING_AFFINITY")
+    actual = sorted(os.sched_getaffinity(0))
+    if expected is not None and actual != json.loads(expected):
+        raise RuntimeError("training process CPU affinity differs from RAL allocation")
+    return actual
+
+
 def initialize(ready, release):
     # Environment is set before this fresh interpreter imports scientific code.
     from nautilus.neural import train_network  # noqa: F401
     from threadpoolctl import threadpool_info
 
     info = {
+        "affinity": check_affinity(),
         "pid": os.getpid(),
         "pgid": os.getpgrp(),
         "start_method": multiprocessing.get_start_method(),
@@ -35,6 +45,7 @@ def ping():
 
 
 def run_network(function, seed, event_path=None):
+    check_affinity()
     started = time.perf_counter()
     cpu = time.process_time()
     if event_path is not None:

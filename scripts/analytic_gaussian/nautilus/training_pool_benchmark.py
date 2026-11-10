@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = next(p for p in Path(__file__).resolve().parents if (p / "ruff.toml").exists())
 sys.path.insert(0, str(ROOT / "scripts/misc"))
+from profiling import nautilus_allocation as allocation
 from profiling.nautilus_campaign import environment_key, host_snapshot
 from profiling.nautilus_diagnostics import assert_environment, sha256
 from profiling.nautilus_manifest import RunConfig, fingerprint
@@ -23,6 +24,7 @@ from profiling.nautilus_resources import atomic_json, group_rss, memory_availabl
 from profiling.nautilus_training_worker import TrainingScope, TrainingTransport, model_digest
 
 PROTOCOL = "nautilus-spawn-training-experiment@1"
+RAL_PROTOCOL = "nautilus-spawn-training-experiment@2-ral"
 LIMITS = {"children": 18, "timeout_s": 120, "memory_mib": 4096, "budget_s": 1800}
 SOURCE_PINS = {
     "PyAutoFit": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c",
@@ -93,11 +95,42 @@ def configuration(case):
 def validate(plan):
     if plan["sha256"] != fingerprint({k: v for k, v in plan.items() if k != "sha256"}):
         raise ValueError("frozen protocol changed")
-    if plan["protocol"] != PROTOCOL or plan["cases"] != matrix() or plan["limits"] != LIMITS:
+    if (
+        plan["protocol"] not in (PROTOCOL, RAL_PROTOCOL)
+        or plan["cases"] != matrix()
+        or plan["limits"] != LIMITS
+    ):
         raise ValueError("unapproved protocol, matrix or limits")
     if plan["configurations"] != [configuration(c).matching() for c in matrix()]:
         raise ValueError("sampling configuration changed")
-    validate_quiet(plan["quiet_admission"])
+    if plan["protocol"] == RAL_PROTOCOL:
+        if (
+            plan["allocation"]["identity"]["policy"] != allocation.POLICY
+            or "quiet_admission" in plan
+        ):
+            raise ValueError("RAL allocation policy changed or mixed with laptop admission")
+    else:
+        validate_quiet(plan["quiet_admission"])
+
+
+def validate_runtime(identity):
+    reference = json.loads(
+        (ROOT / "experiments/nautilus_spawn_training_pool/runtime.json").read_text()
+    )
+    if (
+        identity["python"].split()[0] != reference["python"]
+        or identity["packages"] != reference["packages"]
+    ):
+        raise ValueError("RAL Python/scientific dependencies differ from approved runtime")
+    # Complete installed inventory is frozen separately for every child in environment_key.
+
+
+def check_allocation(plan):
+    if plan["protocol"] == RAL_PROTOCOL:
+        receipt = allocation.snapshot()
+        allocation.verify_identity(plan["allocation"]["identity"], receipt)
+        return receipt
+    return None
 
 
 def validate_quiet(readings):
@@ -359,6 +392,7 @@ def child(plan, case, directory):
     from profiling.nautilus_baseline import provenance
 
     validate(plan)
+    check_allocation(plan)
     assert_environment(environment_key(provenance()), plan["environment"])
     if version("nautilus-sampler") != "1.0.5":
         raise ValueError("only the pinned native training schema is supported")
@@ -381,6 +415,7 @@ def child(plan, case, directory):
     else:
         result = native(case, directory)
     assert_environment(environment_key(provenance()), plan["environment"])
+    check_allocation(plan)
     return {"status": "success", **result}
 
 
@@ -398,10 +433,19 @@ def live_group(pgid, proc=Path("/proc")):
     return alive
 
 
-def supervise(process, directory, intentional):
+def supervise(process, directory, intentional, affinity=None, budget_deadline=None):
     started, peak, reason = time.monotonic(), 0, None
     try:
         while process.poll() is None:
+            if budget_deadline is not None and time.monotonic() >= budget_deadline:
+                reason = "aggregate_budget"
+                break
+            if affinity is not None:
+                try:
+                    allocation.verify_process_affinity(process.pid, affinity)
+                except ValueError:
+                    reason = "affinity_mismatch"
+                    break
             peak = max(peak, group_rss(process.pid))
             if peak > LIMITS["memory_mib"] * 1024**2:
                 reason = "memory_cap"
@@ -444,7 +488,16 @@ def admit(started):
         time.sleep(min(1, 60 - wait))
 
 
-def run(root, quiet_path):
+def admit_ral(started, plan):
+    tick = time.monotonic()
+    current = check_allocation(plan)
+    host = {**host_snapshot(), "allocation": current}
+    wait = time.monotonic() - tick
+    ok = time.monotonic() - started + LIMITS["timeout_s"] <= LIMITS["budget_s"]
+    return ok, None if ok else "aggregate budget exhausted", host, wait
+
+
+def run(root, quiet_path, execution="local"):
     started = time.monotonic()
     root.mkdir(parents=True, exist_ok=False)
     state = {"status": "running", "attempts": []}
@@ -452,20 +505,34 @@ def run(root, quiet_path):
     try:
         from profiling.nautilus_baseline import provenance
 
-        quiet = [json.loads(line) for line in quiet_path.read_text().splitlines()][-3:]
-        validate_quiet(quiet)
-        if not 0 <= time.time() - quiet[-1]["time"] <= 120:
-            raise ValueError("quiet admission is not recent")
+        if execution == "ral":
+            if quiet_path is not None:
+                raise ValueError("RAL cannot consume a laptop quiet-host receipt")
+            initial_allocation = allocation.snapshot()
+            admission = {"allocation": initial_allocation}
+            os.environ["PYAUTO_TRAINING_AFFINITY"] = json.dumps(
+                initial_allocation["identity"]["affinity"]
+            )
+        elif execution == "local":
+            quiet = [json.loads(line) for line in quiet_path.read_text().splitlines()][-3:]
+            validate_quiet(quiet)
+            if not 0 <= time.time() - quiet[-1]["time"] <= 120:
+                raise ValueError("quiet admission is not recent")
+            admission = {"quiet_admission": quiet}
+        else:
+            raise ValueError("unknown execution mode")
         identity = provenance()
         validate_sources(identity)
+        if execution == "ral":
+            validate_runtime(identity)
         if any(s["dirty"] for s in identity["sources"].values()):
             raise ValueError("measurement sources must be clean and committed")
         plan = {
-            "protocol": PROTOCOL,
+            "protocol": RAL_PROTOCOL if execution == "ral" else PROTOCOL,
             "cases": matrix(),
             "configurations": [configuration(c).matching() for c in matrix()],
             "limits": LIMITS,
-            "quiet_admission": quiet,
+            **admission,
             "environment": environment_key(identity),
         }
         plan["sha256"] = fingerprint(plan)
@@ -473,7 +540,10 @@ def run(root, quiet_path):
         atomic_json(root / "plan.json", plan)
         state["preflight_s"] = time.monotonic() - started
         for case in plan["cases"]:
-            ok, reason, host, wait = admit(started)
+            if execution == "ral":
+                ok, reason, host, wait = admit_ral(started, plan)
+            else:
+                ok, reason, host, wait = admit(started)
             state["last_admission"] = {"host": host, "wait_s": wait, "reason": reason}
             if not ok:
                 raise RuntimeError(reason)
@@ -500,7 +570,13 @@ def run(root, quiet_path):
                     stderr=subprocess.STDOUT,
                     start_new_session=True,
                 )
-                receipt = supervise(process, directory, case["phase"] == "interrupt")
+                receipt = supervise(
+                    process,
+                    directory,
+                    case["phase"] == "interrupt",
+                    plan["allocation"]["identity"]["affinity"] if execution == "ral" else None,
+                    started + LIMITS["budget_s"] if execution == "ral" else None,
+                )
             row.update(process_wall_s=time.monotonic() - tick, supervision=receipt)
             if case["phase"] == "interrupt":
                 row["status"] = (
@@ -523,6 +599,7 @@ def run(root, quiet_path):
                     else "error"
                 )
             assert_environment(environment_key(provenance()), plan["environment"])
+            check_allocation(plan)
             atomic_json(directory / "result.json", row)
             if row["status"] != "success":
                 raise RuntimeError(f"{case['id']}: {row['status']}")
@@ -535,6 +612,8 @@ def run(root, quiet_path):
                 ):
                     raise ValueError("paired target or trained models differ")
             state["spent_s"] = time.monotonic() - started
+            if execution == "ral" and state["spent_s"] > LIMITS["budget_s"]:
+                raise RuntimeError("aggregate budget exhausted during receipt verification")
             atomic_json(root / "state.json", state)
             print(f"{case['id']}: {row['status']} ({row['process_wall_s']:.2f}s)", flush=True)
         state["status"] = "complete"
@@ -556,6 +635,7 @@ def main():
     parser.add_argument("--plan", type=Path)
     parser.add_argument("--case")
     parser.add_argument("--quiet-log", type=Path)
+    parser.add_argument("--execution", choices=("local", "ral"), default="local")
     args = parser.parse_args()
     for key in (
         "OMP_NUM_THREADS",
@@ -572,7 +652,7 @@ def main():
     signal.signal(signal.SIGTERM, interrupt)
     signal.signal(signal.SIGHUP, interrupt)
     if args.command == "run":
-        return run(args.output.resolve(), args.quiet_log)
+        return run(args.output.resolve(), args.quiet_log, args.execution)
     plan = json.loads(args.plan.read_text())
     case = next(c for c in plan["cases"] if c["id"] == args.case)
     try:

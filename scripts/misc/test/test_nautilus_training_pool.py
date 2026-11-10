@@ -1,0 +1,235 @@
+"""Admission, isolation and ordered-transport contracts without a science stack."""
+
+import functools
+import importlib.util
+import subprocess
+import sys
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+from profiling import nautilus_training_worker as worker
+from profiling.nautilus_manifest import fingerprint
+
+SOURCE = (
+    Path(__file__).resolve().parents[2] / "analytic_gaussian/nautilus/training_pool_benchmark.py"
+)
+spec = importlib.util.spec_from_file_location("training_benchmark", SOURCE)
+benchmark = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(benchmark)
+
+
+def plan():
+    value = {
+        "protocol": benchmark.PROTOCOL,
+        "cases": benchmark.matrix(),
+        "configurations": [benchmark.configuration(c).matching() for c in benchmark.matrix()],
+        "limits": benchmark.LIMITS.copy(),
+        "quiet_admission": [
+            {"time": t, "load": [0.5, 1, 1], "available_mib": 8192} for t in (0, 30, 60)
+        ],
+    }
+    value["sha256"] = fingerprint(value)
+    return value
+
+
+@pytest.mark.parametrize(
+    "mutation", ["order", "workers", "networks", "ess", "discard", "cap", "quiet", "hash"]
+)
+def test_frozen_protocol_cannot_be_expanded(mutation):
+    value = plan()
+    benchmark.validate(value)
+    if mutation == "order":
+        value["cases"].reverse()
+    elif mutation == "workers":
+        value["cases"][-1]["training_workers"] = 4
+    elif mutation == "networks":
+        value["configurations"][-1]["constructor"]["n_networks"] = 0
+    elif mutation == "ess":
+        value["configurations"][-1]["stopping"]["n_eff"] = 500
+    elif mutation == "discard":
+        value["configurations"][-1]["stopping"]["discard_exploration"] = False
+    elif mutation == "cap":
+        value["limits"]["timeout_s"] += 1
+    elif mutation == "quiet":
+        value["quiet_admission"][-1]["time"] = 40
+    else:
+        value["sha256"] = "bad"
+    if mutation != "hash":
+        value["sha256"] = fingerprint({k: v for k, v in value.items() if k != "sha256"})
+    with pytest.raises(ValueError):
+        benchmark.validate(value)
+
+
+def test_correctness_cases_gate_interleaved_timing_matrix():
+    rows = benchmark.matrix()
+    assert len(rows) == 18
+    assert [r["phase"] for r in rows[:6]] == [
+        "preflight",
+        "control",
+        "interrupt",
+        "resume",
+        "interrupt",
+        "resume",
+    ]
+    assert all(r["phase"] == "performance" for r in rows[6:])
+    assert [r["training_workers"] for r in rows[6:12]] == [0, 2, 2, 0, 0, 2]
+
+
+def test_planning_imports_no_scientific_packages():
+    code = (
+        "import runpy,sys; runpy.run_path(sys.argv[1]); "
+        "assert not {'numpy','sklearn','nautilus','autofit','jax'} & set(sys.modules)"
+    )
+    subprocess.run([sys.executable, "-S", "-c", code, str(SOURCE)], check=True, timeout=10)
+
+
+def fake_network(x, y, kwargs, seed):
+    return {"seed": seed}
+
+
+def test_native_training_map_keeps_all_four_seeds_in_order(monkeypatch):
+    monkeypatch.setitem(sys.modules, "nautilus.neural", SimpleNamespace(train_network=fake_network))
+    transport = worker.TrainingTransport(0)
+    function = functools.partial(fake_network, SimpleNamespace(shape=(64, 5)), [0], {})
+    result = transport.map(function, range(4))
+    assert result == [{"seed": i} for i in range(4)]
+    assert len(transport.calls[0]["networks"]) == 4
+    assert transport.calls[0]["input_pickle_bytes"] > 0
+    with pytest.raises(ValueError):
+        transport.map(function, [0, 1])
+    with pytest.raises(ValueError):
+        transport.map(str, range(4))
+
+
+def test_training_hook_restores_original_descriptor_after_failure(monkeypatch):
+    class Emulator:
+        @classmethod
+        def train(cls, *args, **kwargs):
+            assert kwargs["n_networks"] == 4
+            assert kwargs["pool"] is transport
+            raise RuntimeError("training failed")
+
+    transport = worker.TrainingTransport(0)
+    monkeypatch.setitem(
+        sys.modules, "nautilus.neural", SimpleNamespace(NeuralNetworkEmulator=Emulator)
+    )
+    original = vars(Emulator)["train"]
+    with pytest.raises(RuntimeError, match="training failed"), worker.TrainingScope(transport):
+        Emulator.train([], [])
+    assert vars(Emulator)["train"] is original
+    with worker.TrainingScope(transport), pytest.raises(ValueError):
+        Emulator.train([], [], n_networks=0)
+    assert vars(Emulator)["train"] is original
+
+
+@pytest.mark.parametrize("workers", [-1, 1, 3, 4])
+def test_training_worker_count_is_bounded(workers):
+    with pytest.raises(ValueError):
+        worker.TrainingTransport(workers)
+
+
+@pytest.mark.parametrize(
+    "condition,reason",
+    [("marker", "intentional_checkpoint_kill"), ("memory", "memory_cap"), ("timeout", "timeout")],
+)
+def test_supervisor_cleans_group_at_all_stop_conditions(tmp_path, monkeypatch, condition, reason):
+    process = SimpleNamespace(pid=42, returncode=None, poll=lambda: None)
+    cleaned = []
+    monkeypatch.setattr(benchmark, "terminate_group", lambda p: cleaned.append(p.pid))
+    monkeypatch.setattr(benchmark, "live_group", lambda pid: [])
+    monkeypatch.setattr(
+        benchmark, "group_rss", lambda pid: 5000 * 1024**2 if condition == "memory" else 1
+    )
+    ticks = iter(range(0, 2000, 121))
+    monkeypatch.setattr(
+        benchmark.time, "monotonic", lambda: next(ticks) if condition == "timeout" else 0
+    )
+    if condition == "marker":
+        (tmp_path / "paused.json").write_text("{}")
+    result = benchmark.supervise(process, tmp_path, True)
+    assert result["termination_reason"] == reason
+    assert cleaned == [42]
+
+
+def test_admission_wait_is_bounded_and_charged(monkeypatch):
+    clock = [0.0]
+    monkeypatch.setattr(benchmark.time, "monotonic", lambda: clock[0])
+    monkeypatch.setattr(benchmark.time, "sleep", lambda t: clock.__setitem__(0, clock[0] + t))
+    monkeypatch.setattr(benchmark, "memory_available", lambda: 9000 * 1024**2)
+    monkeypatch.setattr(
+        benchmark, "host_snapshot", lambda: {"load": [3, 3, 3], "affinity": list(range(8))}
+    )
+    ok, reason, host, wait = benchmark.admit(0)
+    assert not ok and wait == 60 and "admission" in reason
+    clock[0] = 1681
+    ok, reason, _, _ = benchmark.admit(0)
+    assert not ok and "budget" in reason
+
+
+def test_live_group_accepts_reaped_or_zombie_but_detects_live(tmp_path):
+    for pid, state, group in [(10, "S", 42), (11, "Z", 42), (12, "S", 43)]:
+        directory = tmp_path / str(pid)
+        directory.mkdir()
+        (directory / "stat").write_text(f"{pid} (name with ) spaces) {state} 1 {group} 0")
+    assert benchmark.live_group(42, tmp_path) == [10]
+
+
+def test_completed_attempt_cannot_be_overwritten(tmp_path):
+    with pytest.raises(FileExistsError):
+        benchmark.run(tmp_path, None)
+
+
+@pytest.mark.parametrize("source", ["PyAutoFit", "PyAutoNerves", "nautilus"])
+def test_wrong_baseline_source_is_rejected(source):
+    identity = {
+        "sources": {key: {"revision": value} for key, value in benchmark.SOURCE_PINS.items()},
+        "nautilus_source_sha256": benchmark.NAUTILUS_SOURCE,
+    }
+    benchmark.validate_sources(identity)
+    if source == "nautilus":
+        identity["nautilus_source_sha256"] = "different"
+    else:
+        identity["sources"][source]["revision"] = "different"
+    with pytest.raises(ValueError):
+        benchmark.validate_sources(identity)
+
+
+def test_worker_failure_propagates_without_resubmission(monkeypatch):
+    monkeypatch.setitem(sys.modules, "nautilus.neural", SimpleNamespace(train_network=fake_network))
+    submitted = []
+
+    class Failed:
+        def result(self):
+            raise RuntimeError("worker failed")
+
+    class Executor:
+        def submit(self, func, native, seed, path):
+            submitted.append(seed)
+            return Failed()
+
+    transport = worker.TrainingTransport(2)
+    transport.executor = Executor()
+    function = functools.partial(fake_network, SimpleNamespace(shape=(64, 5)), [0], {})
+    with pytest.raises(RuntimeError, match="worker failed"):
+        transport.map(function, range(4))
+    assert submitted == [0, 1, 2, 3]
+    assert transport.calls == []
+
+
+@pytest.mark.parametrize(
+    "field", ["posterior_sha256", "n_like", "n_eff", "shells", "explored", "discard_exploration"]
+)
+def test_exact_sampling_parity_rejects_any_changed_field(field):
+    result = dict(
+        posterior_sha256="abc",
+        n_like=100,
+        n_eff=10000.0,
+        shells=9,
+        explored=True,
+        discard_exploration=True,
+    )
+    benchmark.exact_result(result, result)
+    other = {**result, field: None}
+    with pytest.raises(ValueError):
+        benchmark.exact_result(result, other)

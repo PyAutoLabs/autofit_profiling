@@ -173,6 +173,7 @@ def test_batch_script_has_no_mail_array_requeue_or_gpu_request():
 def test_batch_wrapper_preserves_exit_status_and_refuses_second_execution(
     tmp_path, exit_code, staged
 ):
+    import hashlib
     import shlex
     import subprocess
 
@@ -194,17 +195,24 @@ esac
         path = binary / name
         path.write_text("#!/bin/sh\necho fixture\n")
         path.chmod(0o755)
+    helper = tmp_path / "hpc/tools/nautilus_runtime_cache.py"
+    helper.parent.mkdir(parents=True)
+    helper.write_text("fixture")
     runner = binary / "srun"
-    runner.write_text(f"#!/bin/sh\nexit {exit_code}\n")
+    runner.write_text(
+        '#!/bin/sh\nprintf "%s\\n" "$*" >> "$NAUTILUS_ROOT/output/srun-calls"\n'
+        + f"exit {exit_code}\n"
+    )
     runner.chmod(0o755)
     env = {
         **os.environ,
         "PATH": str(binary) + ":" + os.environ["PATH"],
         "NAUTILUS_ROOT": str(tmp_path),
         "NAUTILUS_PRODUCER_SHA": sha,
-        "NAUTILUS_PYTHON": "/fixture/python",
-        "NAUTILUS_FIT": "fit",
-        "NAUTILUS_NERVES": "nerves",
+        "NAUTILUS_ARCHIVE": "/fixture/runtime.tar.gz",
+        "NAUTILUS_ARCHIVE_SHA256": "b" * 64,
+        "NAUTILUS_BOOTSTRAP_SHA256": hashlib.sha256(helper.read_bytes()).hexdigest(),
+        "NAUTILUS_WRAPPER_SHA256": hashlib.sha256(source.read_bytes()).hexdigest(),
         "SLURM_JOB_ID": "42",
         "SLURM_JOB_PARTITION": "ral",
         "SLURM_RESTART_COUNT": "0",
@@ -226,6 +234,11 @@ esac
     assert (receipt / "wrapper_exit_code").read_text().strip() == str(exit_code)
     again = subprocess.run(["bash", str(source)], env=env, capture_output=True, timeout=15)
     assert again.returncode != 0
+    calls = (tmp_path / "output/srun-calls").read_text().splitlines()
+    assert len(calls) == 1
+    assert "--cpu-bind=verbose,cores" in calls[0]
+    assert "nautilus_runtime_cache.py supervise" in calls[0]
+    assert "--execution ral" in calls[0]
     assert (receipt / "wrapper_exit_code").read_text().strip() == str(exit_code)
 
 

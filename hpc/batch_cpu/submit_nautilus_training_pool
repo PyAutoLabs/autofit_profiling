@@ -12,47 +12,39 @@
 #SBATCH --output=output/training-pool.%j.out
 #SBATCH --error=error/training-pool.%j.err
 
-# Submit via hpc/sync from this isolated task's RAL checkout, after live discovery.
-# Exact source SHA and read-only runtime/source paths are mandatory submission inputs.
+# Submit once via hpc/sync; bootstrap and science share one bound numbered step.
 set -euo pipefail
+read -r wrapper_started _ < /proc/uptime
 if [[ -n "${SLURM_SUBMIT_DIR:-}" ]]; then
     staging_root="$(cd "$SLURM_SUBMIT_DIR/../.." && pwd)"
-    # Generated only after live discovery; five reviewed, shell-quoted exports.
-    # hpc/sync intentionally does not forward laptop environment variables.
+    # Generated from the validated frozen artifact; six shell-quoted exports.
     source "$staging_root/output/ral-environment.sh"
     [[ "${NAUTILUS_ROOT:-}" == "$staging_root" ]]
 fi
-: "${NAUTILUS_ROOT:?isolated producer checkout required}"
-: "${NAUTILUS_PYTHON:?verified runtime interpreter required}"
-: "${NAUTILUS_FIT:?pinned read-only PyAutoFit checkout required}"
-: "${NAUTILUS_NERVES:?pinned read-only PyAutoNerves checkout required}"
+: "${NAUTILUS_ROOT:?retained NFS producer checkout required}"
+: "${NAUTILUS_ARCHIVE:?validated runtime artifact required}"
+: "${NAUTILUS_ARCHIVE_SHA256:?frozen artifact checksum required}"
+: "${NAUTILUS_BOOTSTRAP_SHA256:?frozen bootstrap checksum required}"
+: "${NAUTILUS_WRAPPER_SHA256:?frozen wrapper checksum required}"
 : "${NAUTILUS_PRODUCER_SHA:?validated exact producer SHA required}"
 : "${SLURM_JOB_ID:?submit this script through sbatch}"
 [[ "$SLURM_JOB_ID" =~ ^[0-9]+$ ]]
 [[ "${SLURM_JOB_PARTITION:-}" == ral ]]
 [[ "${SLURM_RESTART_COUNT:-0}" == 0 ]]
 [[ "$NAUTILUS_PRODUCER_SHA" =~ ^[0-9a-f]{40}$ ]]
+for hash in "$NAUTILUS_ARCHIVE_SHA256" "$NAUTILUS_BOOTSTRAP_SHA256" "$NAUTILUS_WRAPPER_SHA256"; do
+    [[ "$hash" =~ ^[0-9a-f]{64}$ ]]
+done
+[[ "$(sha256sum "$0" | cut -d' ' -f1)" == "$NAUTILUS_WRAPPER_SHA256" ]]
 cd "$NAUTILUS_ROOT"
-[[ "$(git rev-parse HEAD)" == "$NAUTILUS_PRODUCER_SHA" ]]
-[[ -z "$(git status --porcelain)" ]]
-[[ "$(git -C "$NAUTILUS_FIT" rev-parse HEAD)" == bdb7af0e9c339ad07850679fd6ac168aacc7d18c ]]
-[[ "$(git -C "$NAUTILUS_NERVES" rev-parse HEAD)" == 9b204c90c2ce05c5bb0cf3e9800ed13f005c6c56 ]]
-[[ -z "$(git -C "$NAUTILUS_FIT" status --porcelain)" ]]
-[[ -z "$(git -C "$NAUTILUS_NERVES" status --porcelain)" ]]
-
+# Full source checks happen on the local restored artifact, avoiding NFS tree scans.
+bootstrap="$NAUTILUS_ROOT/hpc/tools/nautilus_runtime_cache.py"
+[[ "$(sha256sum "$bootstrap" | cut -d' ' -f1)" == "$NAUTILUS_BOOTSTRAP_SHA256" ]]
 mkdir -p output
-# This unique claim also rejects an accidental second execution/submission.
 receipt="$NAUTILUS_ROOT/output/training-pool-ral-01"
-mkdir "$receipt"
+mkdir "$receipt" # Atomic claim: also refuses an accidental second execution.
 printf '%s\n' "$SLURM_JOB_ID" > "$receipt/job_id"
 printf '%s\n' "$NAUTILUS_PRODUCER_SHA" > "$receipt/producer_sha"
-export PYTHONPATH="$NAUTILUS_FIT:$NAUTILUS_NERVES"
-export PYTHONNOUSERSITE=1
-unset PYTHONHOME PYAUTO_TRAINING_AFFINITY
-export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
-export MPLBACKEND=Agg JAX_PLATFORMS=cpu
-export NUMBA_CACHE_DIR="$receipt/cache/numba" MPLCONFIGDIR="$receipt/cache/matplotlib"
-mkdir -p "$NUMBA_CACHE_DIR" "$MPLCONFIGDIR"
 runner=""
 finish() {
     code=$?
@@ -62,7 +54,6 @@ finish() {
         wait "$runner" 2>/dev/null || true
     fi
     printf '%s\n' "$code" > "$receipt/wrapper_exit_code"
-    # Final accounting is fetched again after job completion; this is a snapshot.
     timeout 10s sacct -j "$SLURM_JOB_ID" --parsable2 \
         --format=JobID,State,ExitCode,Elapsed,AllocCPUS,ReqMem,MaxRSS,NodeList \
         > "$receipt/accounting-at-exit.txt" 2> "$receipt/accounting-error.txt" || true
@@ -72,12 +63,17 @@ trap finish EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM
 scontrol show job --oneliner "$SLURM_JOB_ID" > "$receipt/submitted-job.txt"
-findmnt --target "$receipt" --json --output TARGET,SOURCE,FSTYPE,OPTIONS > "$receipt/filesystem.json"
-lscpu --json > "$receipt/cpu.json"
-srun --exact --nodes=1 --ntasks=1 --cpus-per-task=4 --hint=nomultithread \
+read -r now _ < /proc/uptime
+elapsed=$(( ${now%.*} - ${wrapper_started%.*} ))
+(( elapsed < 180 ))
+remaining=$((1980 - elapsed)) #180s bootstrap +1800s science;120s scheduler reserve.
+timeout --signal=TERM --kill-after=30s "${remaining}s" \
+    srun --exact --nodes=1 --ntasks=1 --cpus-per-task=4 --hint=nomultithread \
     --cpu-bind=verbose,cores --kill-on-bad-exit=1 \
-    "$NAUTILUS_PYTHON" scripts/analytic_gaussian/nautilus/training_pool_benchmark.py \
-    run --execution ral --output "$receipt/pilot" &
+    /usr/bin/python3 -I -S "$bootstrap" supervise \
+    --archive "$NAUTILUS_ARCHIVE" --sha256 "$NAUTILUS_ARCHIVE_SHA256" \
+    --producer "$NAUTILUS_PRODUCER_SHA" --receipt "$receipt" \
+    --execution ral --started "$wrapper_started" &
 runner=$!
 set +e
 wait "$runner"

@@ -13,10 +13,10 @@ import tarfile
 import tempfile
 from pathlib import Path
 
-from nautilus_runtime_cache import SCHEMA, SOURCE_PINS, digest
+from nautilus_runtime_cache import EXPERIMENTS, SCHEMA, SOURCE_PINS, digest, experiment_identity
 
 
-def build(cache, validation, destination, storage):
+def build(cache, validation, destination, storage, experiment="training-pool"):
     identity = json.loads(validation.read_text())
     if identity["status"] != "pass":
         raise ValueError("passing login-host validation required")
@@ -38,6 +38,7 @@ def build(cache, validation, destination, storage):
             raise ValueError("source clone depends on external object storage")
     manifest = {
         "schema": SCHEMA,
+        "experiment": experiment_identity(producer, experiment),
         "sources": pins,
         "python_build": identity["python"],
         "distribution_versions": identity["distribution_versions"],
@@ -77,7 +78,7 @@ def build(cache, validation, destination, storage):
             "archive_sha256": checksum,
             "archive_bytes": target.stat().st_size,
             "bootstrap_sha256": digest(producer / "hpc/tools/nautilus_runtime_cache.py"),
-            "wrapper_sha256": digest(producer / "hpc/batch_cpu/submit_nautilus_training_pool"),
+            "wrapper_sha256": digest(producer / EXPERIMENTS[experiment]["wrapper"]),
             "storage_contract_path": str(storage),
             "storage_contract_sha256": digest(storage),
         }
@@ -91,10 +92,17 @@ if __name__ == "__main__":
     parser.add_argument("--validation", type=Path, required=True)
     parser.add_argument("--destination", type=Path, required=True)
     parser.add_argument("--storage-contract", type=Path, required=True)
+    parser.add_argument("--experiment", choices=tuple(EXPERIMENTS), default="training-pool")
     args = parser.parse_args()
     print(
         json.dumps(
-            build(args.cache.resolve(), args.validation, args.destination, args.storage_contract),
+            build(
+                args.cache.resolve(),
+                args.validation,
+                args.destination,
+                args.storage_contract,
+                args.experiment,
+            ),
             indent=2,
         )
     )

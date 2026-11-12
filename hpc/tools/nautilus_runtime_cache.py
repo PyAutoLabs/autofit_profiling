@@ -33,6 +33,34 @@ SOURCE_PINS = {
 }
 
 
+EXPERIMENTS = {
+    "training-pool": {
+        "entrypoint": "scripts/analytic_gaussian/nautilus/training_pool_benchmark.py",
+        "wrapper": "hpc/batch_cpu/submit_nautilus_training_pool",
+    },
+    "training-diagnostics": {
+        "entrypoint": "scripts/analytic_gaussian/nautilus/training_diagnostics.py",
+        "wrapper": "hpc/batch_cpu/submit_nautilus_training_diagnostics",
+    },
+}
+
+
+def experiment_identity(source, name):
+    if name not in EXPERIMENTS:
+        raise ValueError("unapproved runtime experiment")
+    paths = EXPERIMENTS[name]
+    return {
+        "name": name,
+        **paths,
+        **{key + "_sha256": digest(source / path) for key, path in paths.items()},
+    }
+
+
+def validate_experiment(manifest, source, name):
+    if manifest.get("experiment") != experiment_identity(source, name):
+        raise ValueError("runtime experiment identity differs")
+
+
 def uptime():
     return float(Path("/proc/uptime").read_text().split()[0])
 
@@ -175,7 +203,7 @@ def environment(root):
     return env
 
 
-def prepare(root, archive, expected_hash, producer, receipt, execution):
+def prepare(root, archive, expected_hash, producer, receipt, execution, experiment="training-pool"):
     local_archive = root / "artifact.tar.gz"
     shutil.copyfile(archive, local_archive)
     if digest(local_archive) != expected_hash:
@@ -192,6 +220,7 @@ def prepare(root, archive, expected_hash, producer, receipt, execution):
     source = root / "sources/autofit_profiling"
     if digest(source / "hpc/tools/nautilus_runtime_cache.py") != digest(Path(__file__)):
         raise ValueError("bootstrap differs from frozen producer")
+    validate_experiment(manifest, source, experiment)
     python = root / "python/bin/python3"
     subprocess.run(
         [str(python), "-I", "-m", "venv", "--without-pip", str(root / "venv")], check=True
@@ -314,6 +343,8 @@ def supervise(args):
                 str(receipt),
                 "--execution",
                 args.execution,
+                "--experiment",
+                getattr(args, "experiment", "training-pool"),
             ],
             BOOTSTRAP_SECONDS - (uptime() - args.started),
             receipt / "bootstrap.log",
@@ -337,7 +368,10 @@ def supervise(args):
             code = run_command(
                 [
                     str(root / "venv/bin/python"),
-                    str(source / "scripts/analytic_gaussian/nautilus/training_pool_benchmark.py"),
+                    str(
+                        source
+                        / EXPERIMENTS[getattr(args, "experiment", "training-pool")]["entrypoint"]
+                    ),
                     "run",
                     "--execution",
                     "ral",
@@ -379,6 +413,7 @@ def main():
     parser.add_argument("--producer", required=True)
     parser.add_argument("--receipt", type=Path, required=True)
     parser.add_argument("--execution", choices=("ral", "validate-only"), required=True)
+    parser.add_argument("--experiment", choices=tuple(EXPERIMENTS), default="training-pool")
     parser.add_argument("--local-parent", type=Path, default=Path("/tmp"))
     parser.add_argument("--started", type=float)
     parser.add_argument("--cache", type=Path)
@@ -386,7 +421,15 @@ def main():
     parser.add_argument("--storage-sha256")
     args = parser.parse_args()
     if args.action == "prepare":
-        prepare(args.cache, args.archive, args.sha256, args.producer, args.receipt, args.execution)
+        prepare(
+            args.cache,
+            args.archive,
+            args.sha256,
+            args.producer,
+            args.receipt,
+            args.execution,
+            args.experiment,
+        )
         return 0
     if args.started is None:
         parser.error("--started from wrapper entry is mandatory")

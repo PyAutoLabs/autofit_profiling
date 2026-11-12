@@ -418,3 +418,34 @@ def test_artifact_cannot_override_the_admitted_storage_contract(tmp_path, monkey
     monkeypatch.setattr(c.subprocess, "run", lambda *a, **k: pytest.fail("interpreter launched"))
     with pytest.raises(ValueError, match="contracts differ"):
         c.prepare(root, archive, c.digest(archive), "a" * 40, tmp_path, "validate-only")
+
+
+def test_experiment_is_allowlisted_and_binds_entrypoint_wrapper_and_hashes(tmp_path):
+    for name, paths in c.EXPERIMENTS.items():
+        for relative in paths.values():
+            path = tmp_path / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(name)
+    manifest = {"experiment": c.experiment_identity(tmp_path, "training-diagnostics")}
+    c.validate_experiment(manifest, tmp_path, "training-diagnostics")
+    with pytest.raises(ValueError, match="identity"):
+        c.validate_experiment(manifest, tmp_path, "training-pool")
+    with pytest.raises(ValueError, match="unapproved"):
+        c.experiment_identity(tmp_path, "../../arbitrary")
+    (tmp_path / c.EXPERIMENTS["training-diagnostics"]["entrypoint"]).write_text("changed")
+    with pytest.raises(ValueError, match="identity"):
+        c.validate_experiment(manifest, tmp_path, "training-diagnostics")
+
+
+def test_diagnostic_wrapper_has_separate_claim_and_fixed_experiment():
+    path = TOOLS.parent / "batch_cpu/submit_nautilus_training_diagnostics"
+    text = path.read_text()
+    assert "output/training-diagnostics-ral-01" in text
+    assert "output/ral-diagnostics-environment.sh" in text
+    assert "--experiment training-diagnostics --execution ral" in text
+    assert 'mkdir "$receipt"' in text
+    assert 'mkdir -p "$receipt"' not in text
+    assert "#SBATCH --partition=ral" in text
+    assert "#SBATCH --exclusive" in text
+    assert "#SBATCH --time=00:35:00" in text
+    assert "training-pool-ral-03" not in text

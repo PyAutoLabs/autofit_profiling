@@ -1,0 +1,86 @@
+#!/bin/bash
+#SBATCH --job-name=nautilus-training-diagnostics
+#SBATCH --partition=ral
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --hint=nomultithread
+#SBATCH --exclusive
+#SBATCH --mem=8G
+#SBATCH --time=00:35:00
+#SBATCH --no-requeue
+#SBATCH --output=output/training-diagnostics.%j.out
+#SBATCH --error=error/training-diagnostics.%j.err
+
+# Submit once via hpc/sync; bootstrap and science share one bound numbered step.
+set -euo pipefail
+read -r wrapper_started _ < /proc/uptime
+if [[ -n "${SLURM_SUBMIT_DIR:-}" ]]; then
+    staging_root="$(cd "$SLURM_SUBMIT_DIR/../.." && pwd)"
+    # Generated from the validated frozen artifact; eight shell-quoted exports.
+    source "$staging_root/output/ral-diagnostics-environment.sh"
+    [[ "${NAUTILUS_ROOT:-}" == "$staging_root" ]]
+fi
+: "${NAUTILUS_ROOT:?retained NFS producer checkout required}"
+: "${NAUTILUS_ARCHIVE:?validated runtime artifact required}"
+: "${NAUTILUS_ARCHIVE_SHA256:?frozen artifact checksum required}"
+: "${NAUTILUS_BOOTSTRAP_SHA256:?frozen bootstrap checksum required}"
+: "${NAUTILUS_WRAPPER_SHA256:?frozen wrapper checksum required}"
+: "${NAUTILUS_PRODUCER_SHA:?validated exact producer SHA required}"
+: "${NAUTILUS_STORAGE_CONTRACT:?witnessed shared storage contract required}"
+: "${NAUTILUS_STORAGE_SHA256:?frozen storage contract checksum required}"
+: "${SLURM_JOB_ID:?submit this script through sbatch}"
+[[ "$SLURM_JOB_ID" =~ ^[0-9]+$ ]]
+[[ "${SLURM_JOB_PARTITION:-}" == ral ]]
+[[ "${SLURM_RESTART_COUNT:-0}" == 0 ]]
+[[ "$NAUTILUS_PRODUCER_SHA" =~ ^[0-9a-f]{40}$ ]]
+for hash in "$NAUTILUS_ARCHIVE_SHA256" "$NAUTILUS_BOOTSTRAP_SHA256" "$NAUTILUS_WRAPPER_SHA256" "$NAUTILUS_STORAGE_SHA256"; do
+    [[ "$hash" =~ ^[0-9a-f]{64}$ ]]
+done
+[[ "$(sha256sum "$0" | cut -d' ' -f1)" == "$NAUTILUS_WRAPPER_SHA256" ]]
+cd "$NAUTILUS_ROOT"
+# Full source checks happen on the local restored artifact, avoiding NFS tree scans.
+bootstrap="$NAUTILUS_ROOT/hpc/tools/nautilus_runtime_cache.py"
+[[ "$(sha256sum "$bootstrap" | cut -d' ' -f1)" == "$NAUTILUS_BOOTSTRAP_SHA256" ]]
+mkdir -p output
+receipt="$NAUTILUS_ROOT/output/training-diagnostics-ral-01"
+mkdir "$receipt" # Atomic claim: also refuses an accidental second execution.
+printf '%s\n' "$SLURM_JOB_ID" > "$receipt/job_id"
+printf '%s\n' "$NAUTILUS_PRODUCER_SHA" > "$receipt/producer_sha"
+runner=""
+finish() {
+    code=$?
+    trap - EXIT INT TERM
+    if [[ -n "$runner" ]]; then
+        kill -TERM "$runner" 2>/dev/null || true
+        wait "$runner" 2>/dev/null || true
+    fi
+    printf '%s\n' "$code" > "$receipt/wrapper_exit_code"
+    timeout 10s sacct -j "$SLURM_JOB_ID" --parsable2 \
+        --format=JobID,State,ExitCode,Elapsed,AllocCPUS,ReqMem,MaxRSS,NodeList \
+        > "$receipt/accounting-at-exit.txt" 2> "$receipt/accounting-error.txt" || true
+    exit "$code"
+}
+trap finish EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+scontrol show job --oneliner "$SLURM_JOB_ID" > "$receipt/submitted-job.txt"
+read -r now _ < /proc/uptime
+elapsed=$(( ${now%.*} - ${wrapper_started%.*} ))
+(( elapsed < 180 ))
+remaining=$((1980 - elapsed)) #180s bootstrap +1800s science;120s scheduler reserve.
+timeout --signal=TERM --kill-after=30s "${remaining}s" \
+    srun --exact --nodes=1 --ntasks=1 --cpus-per-task=4 --hint=nomultithread \
+    --cpu-bind=verbose,cores --kill-on-bad-exit=1 \
+    /usr/bin/python3 -I -S "$bootstrap" supervise \
+    --archive "$NAUTILUS_ARCHIVE" --sha256 "$NAUTILUS_ARCHIVE_SHA256" \
+    --producer "$NAUTILUS_PRODUCER_SHA" --receipt "$receipt" \
+    --storage-contract "$NAUTILUS_STORAGE_CONTRACT" --storage-sha256 "$NAUTILUS_STORAGE_SHA256" \
+    --experiment training-diagnostics --execution ral --started "$wrapper_started" &
+runner=$!
+set +e
+wait "$runner"
+code=$?
+set -e
+runner=""
+exit "$code"

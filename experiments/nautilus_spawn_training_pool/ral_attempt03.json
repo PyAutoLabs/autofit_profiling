@@ -1,0 +1,250 @@
+{
+  "job_id": "415139",
+  "producer": "db516b50cd8d6ea1301704bc39e8d14819024968",
+  "status": "complete",
+  "reason": null,
+  "bootstrap": {
+    "status": "complete",
+    "bootstrap_s": 23.559999999939464,
+    "elapsed_s": 590.9099999999162,
+    "cleanup": "complete",
+    "exit_code": 0
+  },
+  "pilot_spent_s": 565.9480373630067,
+  "success_cases": [
+    "preflight",
+    "control",
+    "training-interrupt",
+    "training-resume",
+    "checkpoint-interrupt",
+    "checkpoint-resume",
+    "d5-s0-w0",
+    "d5-s0-w2",
+    "d5-s1-w2",
+    "d5-s1-w0",
+    "d5-s2-w0",
+    "d5-s2-w2",
+    "d10-s0-w0",
+    "d10-s0-w2",
+    "d10-s1-w2",
+    "d10-s1-w0",
+    "d10-s2-w0",
+    "d10-s2-w2"
+  ],
+  "failed_cases": [],
+  "unrun": [],
+  "all_children_reaped": true,
+  "max_child_rss_mib": 594.49609375,
+  "max_child_wall_s": 47.91709722694941,
+  "pairs": [
+    {
+      "dimension": 5,
+      "seed": 0,
+      "posterior_equal": true,
+      "n_like": 16300,
+      "n_eff": 10020.771588733165,
+      "serial": {
+        "sampler_run_s": 22.78641473595053,
+        "checkpoint_retention_s": 0.0014701040927320719,
+        "full_fit_s": 26.794283195049502,
+        "workflow_s": 26.794352935045026
+      },
+      "pool": {
+        "sampler_run_s": 16.361627822043374,
+        "checkpoint_retention_s": 0.0013851429102942348,
+        "full_fit_s": 20.419607313000597,
+        "workflow_s": 22.011335207964294
+      },
+      "serial_training_s": 8.456519266939722,
+      "pool_training_s": 4.351374352932908,
+      "pool_startup_s": 1.3457998860394582,
+      "pool_teardown_s": 0.2457739079836756,
+      "workflow_s_speedup": 1.2172979368080363,
+      "workflow_s_reduction_pct": 17.850842446823567,
+      "full_fit_s_speedup": 1.312184058406957,
+      "full_fit_s_reduction_pct": 23.791179019958587,
+      "sampler_run_s_speedup": 1.3926740654283367,
+      "sampler_run_s_reduction_pct": 28.195690231911097
+    },
+    {
+      "dimension": 5,
+      "seed": 1,
+      "posterior_equal": true,
+      "n_like": 16700,
+      "n_eff": 10083.284245938954,
+      "serial": {
+        "sampler_run_s": 22.671232296037488,
+        "checkpoint_retention_s": 0.00157570606097579,
+        "full_fit_s": 26.84241777600255,
+        "workflow_s": 26.84250947693363
+      },
+      "pool": {
+        "sampler_run_s": 12.835368437925354,
+        "checkpoint_retention_s": 0.00120506901293993,
+        "full_fit_s": 15.500535981031135,
+        "workflow_s": 17.135285263997503
+      },
+      "serial_training_s": 8.211221103090793,
+      "pool_training_s": 3.9769378839991987,
+      "pool_startup_s": 1.409672272973694,
+      "pool_teardown_s": 0.22494740004185587,
+      "workflow_s_speedup": 1.56650496699531,
+      "workflow_s_reduction_pct": 36.1636240504181,
+      "full_fit_s_speedup": 1.7317090072789163,
+      "full_fit_s_reduction_pct": 42.25357748924985,
+      "sampler_run_s_speedup": 1.7663094289564434,
+      "sampler_run_s_reduction_pct": 43.384778249708376
+    },
+    {
+      "dimension": 5,
+      "seed": 2,
+      "posterior_equal": true,
+      "n_like": 16300,
+      "n_eff": 10000.148843421219,
+      "serial": {
+        "sampler_run_s": 13.976434712065384,
+        "checkpoint_retention_s": 0.0013243519933894277,
+        "full_fit_s": 16.612972660106607,
+        "workflow_s": 16.6130259699421
+      },
+      "pool": {
+        "sampler_run_s": 13.653442209935747,
+        "checkpoint_retention_s": 0.0014549240004271269,
+        "full_fit_s": 16.288676737924106,
+        "workflow_s": 17.795971962972544
+      },
+      "serial_training_s": 5.552444020053372,
+      "pool_training_s": 4.285520672798157,
+      "pool_startup_s": 1.3277900440152735,
+      "pool_teardown_s": 0.1793850789545104,
+      "workflow_s_speedup": 0.9335273175586162,
+      "workflow_s_reduction_pct": -7.120593172915912,
+      "full_fit_s_speedup": 1.019909285904573,
+      "full_fit_s_reduction_pct": 1.9520643825607698,
+      "sampler_run_s_speedup": 1.0236564887567028,
+      "sampler_run_s_reduction_pct": 2.310979221695275
+    },
+    {
+      "dimension": 10,
+      "seed": 0,
+      "posterior_equal": true,
+      "n_like": 22900,
+      "n_eff": 10062.151104930388,
+      "serial": {
+        "sampler_run_s": 24.843346560024656,
+        "checkpoint_retention_s": 0.0018983499612659216,
+        "full_fit_s": 29.5603884649463,
+        "workflow_s": 29.560442906920798
+      },
+      "pool": {
+        "sampler_run_s": 23.936016417923383,
+        "checkpoint_retention_s": 0.0013735909014940262,
+        "full_fit_s": 28.593560009961948,
+        "workflow_s": 30.283831121982075
+      },
+      "serial_training_s": 10.754986374056898,
+      "pool_training_s": 9.02664330007974,
+      "pool_startup_s": 1.3766966570401564,
+      "pool_teardown_s": 0.31345572602003813,
+      "workflow_s_speedup": 0.976113054780041,
+      "workflow_s_reduction_pct": -2.447149446776109,
+      "full_fit_s_speedup": 1.033812804514286,
+      "full_fit_s_reduction_pct": 3.2706892743674554,
+      "sampler_run_s_speedup": 1.0379064806047618,
+      "sampler_run_s_reduction_pct": 3.652205792440444
+    },
+    {
+      "dimension": 10,
+      "seed": 1,
+      "posterior_equal": true,
+      "n_like": 23700,
+      "n_eff": 10020.345549791828,
+      "serial": {
+        "sampler_run_s": 25.36019518505782,
+        "checkpoint_retention_s": 0.0012980710016563535,
+        "full_fit_s": 30.28570166393183,
+        "workflow_s": 30.285756765049882
+      },
+      "pool": {
+        "sampler_run_s": 23.47191406704951,
+        "checkpoint_retention_s": 0.0016512470319867134,
+        "full_fit_s": 28.39222819195129,
+        "workflow_s": 29.977332120062783
+      },
+      "serial_training_s": 10.362539776950143,
+      "pool_training_s": 8.138598908903077,
+      "pool_startup_s": 1.4086329049896449,
+      "pool_teardown_s": 0.17635194095782936,
+      "workflow_s_speedup": 1.0102885955211698,
+      "workflow_s_reduction_pct": 1.0183818333475592,
+      "full_fit_s_speedup": 1.0666898511514962,
+      "full_fit_s_reduction_pct": 6.252037654572606,
+      "sampler_run_s_speedup": 1.0804485357527416,
+      "sampler_run_s_reduction_pct": 7.445846154689217
+    },
+    {
+      "dimension": 10,
+      "seed": 2,
+      "posterior_equal": true,
+      "n_like": 23500,
+      "n_eff": 10038.507608002912,
+      "serial": {
+        "sampler_run_s": 26.717389637953602,
+        "checkpoint_retention_s": 0.00164701696485281,
+        "full_fit_s": 31.51999831199646,
+        "workflow_s": 31.52005523990374
+      },
+      "pool": {
+        "sampler_run_s": 29.00424334104173,
+        "checkpoint_retention_s": 0.001506724045611918,
+        "full_fit_s": 36.25555222493131,
+        "workflow_s": 37.79887110798154
+      },
+      "serial_training_s": 10.997647718060762,
+      "pool_training_s": 8.611577754141763,
+      "pool_startup_s": 1.3470613269601017,
+      "pool_teardown_s": 0.19613330299034715,
+      "workflow_s_speedup": 0.8338887992146418,
+      "workflow_s_reduction_pct": -19.920066193694197,
+      "full_fit_s_speedup": 0.8693840357593996,
+      "full_fit_s_reduction_pct": -15.02396626440332,
+      "sampler_run_s_speedup": 0.9211545125932601,
+      "sampler_run_s_reduction_pct": -8.55942041523219
+    }
+  ],
+  "dimensions": {
+    "5": {
+      "pairs": 3,
+      "median_workflow_speedup": 1.2172979368080363,
+      "median_workflow_reduction_pct": 17.850842446823567,
+      "median_sampler_speedup": 1.3926740654283367
+    },
+    "10": {
+      "pairs": 3,
+      "median_workflow_speedup": 0.976113054780041,
+      "median_workflow_reduction_pct": -2.447149446776109,
+      "median_sampler_speedup": 1.0379064806047618
+    }
+  },
+  "raw_bytes": 153104897,
+  "outside_pulse": true,
+  "merge": "human",
+  "scheduler": {
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_s": 591,
+    "bound_step_cpus": 4,
+    "exclusive_node_cpus_reserved": 252,
+    "memory": "8GiB",
+    "time_limit_s": 2100
+  },
+  "validation": {
+    "tooling_tests": 244,
+    "measured_producer_ci": 43206509078,
+    "review": "author only",
+    "all_six_pairs_exact_posterior_state_models_target": true,
+    "all_timing_checkpoint_reopens_equal": true
+  },
+  "interpretation": "Small three-seed-per-dimension pilot. Training improves but full-workflow gains are inconsistent; no production default change, no 30D result.",
+  "raw_retention": "Complete raw outputs retained remotely and in task-local ignored receipts; human review archive provided. No Pulse ingestion."
+}

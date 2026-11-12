@@ -95,3 +95,8 @@ Verification now reuses the captured native sampler's prior and unchanged constr
 [Offline retained-checkpoint validation](prior_checkpoint_validation.json) passes using the pinned Fit/Nerves/native runtime: all reconstructed posterior arrays match exactly; the identity-prior negative control differs; no sampling/training/likelihood calls; checkpoint hash unchanged. This reconstructs stored state and does not claim a retrospective comparison with the unavailable original live object.244 tooling tests, lint/format, shell syntax and unchanged catalogue pass.
 
 The human approved the prior correction and one fresh RAL pilot, using a unique attempt03 claim, with the same scientific/allocation limits, correctness gates and stop-on-first-failure rule. Tests, exact-head CI, a new frozen artifact and fresh runtime restore must pass before submission. No installed library changes; outside Pulse; merge remains human.
+
+
+## Completed RAL pilot
+
+[Job 415139 results](RAL_RESULT.md): 18/18 cases passed at measured producer `db516b5`. Median paired full-workflow time fell 17.9% in 5D but rose 2.4% in 10D; all six pairs preserve exact posterior/model parity. Mixed result; no production default change. All raw data retained, outside Pulse, human merge.

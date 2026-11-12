@@ -1,0 +1,8 @@
+{
+  "status": "incomplete",
+  "eligible_as_success": false,
+  "copied_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+  "input_checkpoint_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+  "byte_identical": true,
+  "note": "Read-only check after timeout. Native and wrapper likelihood entry points were blocked; no completed fit receipt. Checkpoint is byte-identical to input."
+}

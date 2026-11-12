@@ -1,0 +1,47 @@
+{
+  "policy": {
+    "name": "six-small",
+    "indices": [
+      0,
+      6,
+      12,
+      17,
+      23,
+      29
+    ],
+    "figsize": [
+      12,
+      12
+    ],
+    "dpi": 100
+  },
+  "style": {
+    "kinds": {
+      "diagonal": "kde_1d",
+      "lower": "hist_2d"
+    },
+    "upper": false
+  },
+  "search_plot_calls": 1,
+  "input_samples": 33984,
+  "figures": [
+    {
+      "figsize": [
+        12.0,
+        12.0
+      ],
+      "dpi": 100.0,
+      "axes": 27
+    }
+  ],
+  "errors": [],
+  "png": {
+    "path": "fit/baseline/1e4d19895da90a4826f2b5c4989c4595/image/search/diagnostic_corner.png",
+    "dimensions": [
+      1200,
+      1200
+    ],
+    "sha256": "1dbe408952ec1a26fe13dc25ffdf9cb08b05b5757be92c8db4581fd8fe754688",
+    "bytes": 85154
+  }
+}

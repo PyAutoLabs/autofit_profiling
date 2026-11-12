@@ -1,0 +1,11 @@
+{
+  "status": "halted",
+  "attempts": [],
+  "spent_s": 6.437888045998989,
+  "reason": "RuntimeError: host load exceeds guard",
+  "unrun": [
+    "plot-no-corner",
+    "plot-six-small",
+    "plot-thirty-small"
+  ]
+}

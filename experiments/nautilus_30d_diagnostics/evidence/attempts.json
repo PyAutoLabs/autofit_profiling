@@ -1,0 +1,368 @@
+{
+  "status": "halted",
+  "attempts": [
+    {
+      "case": "evidence-d5-rsaved",
+      "status": "success",
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.57080078125,
+          0.8779296875,
+          0.79052734375
+        ],
+        "time": 1794320778.093063
+      },
+      "process_wall_s": 14.937104858001476,
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 203517952,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "stages": {
+        "completed": [
+          {
+            "stage": "fresh_sampling",
+            "status": "exit",
+            "wall_s": 8.692138012000214
+          }
+        ],
+        "incomplete": []
+      },
+      "child": {
+        "status": "success",
+        "case": "evidence-d5-rsaved",
+        "original_unchanged": true,
+        "before": {
+          "logZ": -6.328612823131802,
+          "logZ_error": -0.05799442471336125,
+          "n_eff": 2420.502918522037,
+          "posterior_sha256": "a7e0798c585c9d7d823c81e15d9fa60781f751db70b31060cca51eb2e7ca7da4",
+          "n_like": 4600,
+          "selected_samples": 4600,
+          "fresh_samples_per_shell": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "max_standardized_mean_error": 0.024916872961875797,
+          "covariance_relative_error": 0.06235298917573015,
+          "shell_log_v": [
+            -0.6807246605613883,
+            -1.328999891979708,
+            -2.1683139151726443,
+            -2.999037125681055,
+            -3.801761438490996,
+            -4.63361456232496,
+            -5.520839013422592,
+            -6.371951742840523,
+            -6.650781662638698
+          ]
+        },
+        "fresh_only": {
+          "logZ": -6.25790153102696,
+          "logZ_error": 0.012716867391481479,
+          "n_eff": 10020.771588733165,
+          "posterior_sha256": "9181de303adef000c517ae25c3ea644115a44d5e8b0e764275aeb65f850a0cc1",
+          "n_like": 16300,
+          "selected_samples": 11700,
+          "fresh_samples_per_shell": [
+            800,
+            2400,
+            3100,
+            2200,
+            1600,
+            800,
+            400,
+            200,
+            200
+          ],
+          "max_standardized_mean_error": 0.004564163340760699,
+          "covariance_relative_error": 0.022230858908745967,
+          "shell_log_v": [
+            -0.6286086594223742,
+            -1.3046001254078812,
+            -2.094018654903909,
+            -3.0293950705995742,
+            -3.7526121869330415,
+            -4.630356719720476,
+            -5.5012104495435254,
+            -6.350781045227578,
+            -6.650781662638698
+          ]
+        },
+        "including_exploration": {
+          "logZ": -6.273201001566975,
+          "logZ_error": -0.0025826031485340906,
+          "n_eff": 13032.579415023432,
+          "posterior_sha256": "37a718e9ceaeb92d94c026a417aa22343b5dff4597a040887779ae802a92edec",
+          "n_like": 16300,
+          "selected_samples": 16300,
+          "fresh_samples_per_shell": [
+            800,
+            2400,
+            3100,
+            2200,
+            1600,
+            800,
+            400,
+            200,
+            200
+          ],
+          "max_standardized_mean_error": 0.007882459358441582,
+          "covariance_relative_error": 0.02595499337772197,
+          "shell_log_v": [
+            -0.6464295559924857,
+            -1.3068452693712709,
+            -2.1036013720154494,
+            -3.02921229822973,
+            -3.760337466554787,
+            -4.636883015810543,
+            -5.515719507968037,
+            -6.356688873085923,
+            -6.650781662638698
+          ]
+        },
+        "stopping": {
+          "n_eff": 10000,
+          "n_shell": 100,
+          "discard_exploration": true
+        },
+        "new_likelihood_calls": 11700
+      },
+      "original_unchanged": true
+    },
+    {
+      "case": "evidence-d10-rsaved",
+      "status": "success",
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.97314453125,
+          1.0,
+          0.83203125
+        ],
+        "time": 1794320796.5667238
+      },
+      "process_wall_s": 16.51210627399996,
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 209043456,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "stages": {
+        "completed": [
+          {
+            "stage": "fresh_sampling",
+            "status": "exit",
+            "wall_s": 11.474555912998767
+          }
+        ],
+        "incomplete": []
+      },
+      "child": {
+        "status": "success",
+        "case": "evidence-d10-rsaved",
+        "original_unchanged": true,
+        "before": {
+          "logZ": -12.505581243470253,
+          "logZ_error": -0.14738204882969796,
+          "n_eff": 3210.6922835877754,
+          "posterior_sha256": "ef1251a1ac0a1709d660ddf51917d42322a92ae4a9dcab2c90efa29d209cf7f2",
+          "n_like": 6400,
+          "selected_samples": 6400,
+          "fresh_samples_per_shell": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "max_standardized_mean_error": 0.03346435221726911,
+          "covariance_relative_error": 0.07500313637435485,
+          "shell_log_v": [
+            -0.6733445532637656,
+            -1.2402972672334864,
+            -2.0247306539230756,
+            -2.923278846974185,
+            -3.854223815772788,
+            -4.759068318543592,
+            -5.7136944724400855,
+            -6.575360135709233,
+            -7.447890152165915,
+            -8.416131049994664,
+            -8.81804040495615
+          ]
+        },
+        "fresh_only": {
+          "logZ": -12.375996938899148,
+          "logZ_error": -0.017797744258592374,
+          "n_eff": 10062.151104930388,
+          "posterior_sha256": "1e3d9ba94bf8f1564c38d932b13e4137484eb1b888165647f4bf5d6ae3094f94",
+          "n_like": 22900,
+          "selected_samples": 16500,
+          "fresh_samples_per_shell": [
+            200,
+            1700,
+            3400,
+            3300,
+            2700,
+            2200,
+            1300,
+            800,
+            500,
+            200,
+            200
+          ],
+          "max_standardized_mean_error": 0.013910194771439942,
+          "covariance_relative_error": 0.03249897488605373,
+          "shell_log_v": [
+            -0.6981347220709844,
+            -1.2303896722714658,
+            -1.9828501950152146,
+            -2.951997292752656,
+            -3.918742305219245,
+            -4.702710537866596,
+            -5.696049781717652,
+            -6.557419970420936,
+            -7.358350019064552,
+            -8.42137928159903,
+            -8.81804040495615
+          ]
+        },
+        "including_exploration": {
+          "logZ": -12.40255009450069,
+          "logZ_error": -0.04435089986013452,
+          "n_eff": 13341.267538449827,
+          "posterior_sha256": "0fecb56cd7c190dea15c5ec2336cd02276df214a405a6bebdb0eac2190360bed",
+          "n_like": 22900,
+          "selected_samples": 22900,
+          "fresh_samples_per_shell": [
+            200,
+            1700,
+            3400,
+            3300,
+            2700,
+            2200,
+            1300,
+            800,
+            500,
+            200,
+            200
+          ],
+          "max_standardized_mean_error": 0.011867681081178865,
+          "covariance_relative_error": 0.02928711916481077,
+          "shell_log_v": [
+            -0.6815672331289859,
+            -1.2350709992965423,
+            -1.9891637136306832,
+            -2.9535474293663757,
+            -3.9150038150202495,
+            -4.709745661902723,
+            -5.699178169039977,
+            -6.548997874753905,
+            -7.416858683819009,
+            -8.418466860151996,
+            -8.81804040495615
+          ]
+        },
+        "stopping": {
+          "n_eff": 10000,
+          "n_shell": 100,
+          "discard_exploration": true
+        },
+        "new_likelihood_calls": 16500
+      },
+      "original_unchanged": true
+    },
+    {
+      "case": "evidence-d30-rsaved",
+      "status": "timeout",
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          1.8310546875,
+          1.01611328125,
+          0.84033203125
+        ],
+        "time": 1794320813.96865
+      },
+      "process_wall_s": 120.06555902500077,
+      "supervision": {
+        "returncode": 124,
+        "termination_reason": "timeout",
+        "sampled_group_peak_rss_bytes": 292782080,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "stages": {
+        "completed": [],
+        "incomplete": [
+          {
+            "t_s": 1.2053554449994408,
+            "id": 0,
+            "stage": "fresh_sampling",
+            "event": "enter"
+          }
+        ]
+      },
+      "original_unchanged": true
+    }
+  ],
+  "spent_s": 159.2361714210001,
+  "reason": "timeout",
+  "unrun": [
+    "evidence-d30-r1",
+    "evidence-d30-r2",
+    "output-d30-rsaved"
+  ]
+}

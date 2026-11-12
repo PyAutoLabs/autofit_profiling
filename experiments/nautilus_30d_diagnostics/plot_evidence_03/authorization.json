@@ -1,0 +1,11 @@
+{
+  "authorization": "Run corrected comparison once",
+  "measurement_commit": "ab896cdc36061b33998bae9c214d6a47c7773b5d",
+  "scope": "Same three-case plot comparison, same caps and stop rule; one summary timing call per case; native sampling forbidden",
+  "previous_attempts_retained": [
+    "plot_evidence",
+    "plot_evidence_02"
+  ],
+  "outside_pulse": true,
+  "merge_authorized": false
+}

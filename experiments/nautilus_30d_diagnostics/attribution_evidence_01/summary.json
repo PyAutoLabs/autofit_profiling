@@ -1,0 +1,13 @@
+{
+  "coverage": [
+    {
+      "case": "plot-thirty-small",
+      "status": "success",
+      "original_logZ_error": -0.9080901865173772,
+      "fresh_logZ_error": null,
+      "eligible_as_success": true
+    }
+  ],
+  "spent_s": 118.7550095739989,
+  "interpretation": "One full30D plotting attribution replay; diagnostic probe overhead, not a speedup benchmark"
+}

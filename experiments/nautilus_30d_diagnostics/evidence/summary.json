@@ -1,0 +1,48 @@
+{
+  "coverage": [
+    {
+      "case": "evidence-d5-rsaved",
+      "status": "success",
+      "original_logZ_error": -0.05799442471336125,
+      "fresh_logZ_error": 0.012716867391481479,
+      "eligible_as_success": true
+    },
+    {
+      "case": "evidence-d10-rsaved",
+      "status": "success",
+      "original_logZ_error": -0.14738204882969796,
+      "fresh_logZ_error": -0.017797744258592374,
+      "eligible_as_success": true
+    },
+    {
+      "case": "evidence-d30-rsaved",
+      "status": "timeout",
+      "original_logZ_error": -0.9080901865173772,
+      "fresh_logZ_error": null,
+      "eligible_as_success": false
+    },
+    {
+      "case": "evidence-d30-r1",
+      "status": "unrun",
+      "original_logZ_error": -0.9080901865173772,
+      "fresh_logZ_error": null,
+      "eligible_as_success": false
+    },
+    {
+      "case": "evidence-d30-r2",
+      "status": "unrun",
+      "original_logZ_error": -0.9080901865173772,
+      "fresh_logZ_error": null,
+      "eligible_as_success": false
+    },
+    {
+      "case": "output-d30-rsaved",
+      "status": "unrun",
+      "original_logZ_error": -0.9080901865173772,
+      "fresh_logZ_error": null,
+      "eligible_as_success": false
+    }
+  ],
+  "spent_s": 159.2361714210001,
+  "interpretation": "conditional on seed-0 learned bounds; not independent full searches"
+}

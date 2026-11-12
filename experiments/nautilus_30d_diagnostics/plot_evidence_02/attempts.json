@@ -1,0 +1,118 @@
+{
+  "status": "halted",
+  "attempts": [
+    {
+      "case": "plot-no-corner",
+      "status": "error",
+      "host": {
+        "host": "DESKTOP-H143S82",
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "load": [
+          0.44482421875,
+          0.99560546875,
+          1.34033203125
+        ],
+        "time": 1794324311.336952
+      },
+      "process_wall_s": 18.98168577099932,
+      "supervision": {
+        "returncode": 1,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 351166464,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "stages": {
+        "completed": [
+          {
+            "stage": "pre_fit_output",
+            "status": "exit",
+            "wall_s": 0.011506458000440034
+          },
+          {
+            "stage": "run",
+            "status": "exit",
+            "wall_s": 0.005608808000033605
+          },
+          {
+            "stage": "samples_from",
+            "status": "exit",
+            "wall_s": 5.698441520000415
+          },
+          {
+            "stage": "summary",
+            "status": "exit",
+            "wall_s": 5.787429952999446
+          },
+          {
+            "stage": "save_samples",
+            "status": "exit",
+            "wall_s": 3.288951205000558
+          },
+          {
+            "stage": "save_samples_summary",
+            "status": "exit",
+            "wall_s": 0.00592313400011335
+          },
+          {
+            "stage": "_save_samples",
+            "status": "exit",
+            "wall_s": 14.804700319000403
+          },
+          {
+            "stage": "samples_drawn_randomly_via_pdf_from",
+            "status": "exit",
+            "wall_s": 0.005128658000103314
+          },
+          {
+            "stage": "_compute_latent_samples",
+            "status": "exit",
+            "wall_s": 0.012654674999794224
+          },
+          {
+            "stage": "search_corner",
+            "status": "exit",
+            "wall_s": 0.006763533001503674
+          },
+          {
+            "stage": "visualize",
+            "status": "exit",
+            "wall_s": 0.015012157999080955
+          },
+          {
+            "stage": "_profile_and_summarize",
+            "status": "error",
+            "wall_s": 0.0024213750002672896
+          },
+          {
+            "stage": "wrapped_replay",
+            "status": "error",
+            "wall_s": 15.532258826000543
+          }
+        ],
+        "incomplete": []
+      },
+      "child": {
+        "status": "error",
+        "error": "TypeError: output_replay.<locals>.timed_summary() got multiple values for argument 'instance'"
+      },
+      "original_unchanged": true
+    }
+  ],
+  "spent_s": 22.364123298000777,
+  "reason": "error",
+  "unrun": [
+    "plot-six-small",
+    "plot-thirty-small"
+  ]
+}

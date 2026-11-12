@@ -1,0 +1,740 @@
+{
+  "protocol": "nautilus-training-diagnostics@1-ral",
+  "job_id": 415179,
+  "producer": "0958bc28705541f6ff07fa4ad79bbfaf94ccdaaf",
+  "status": "halted",
+  "reason": "RuntimeError: capture: error",
+  "scheduler_state": "FAILED",
+  "scheduler_exit_code": "1:0",
+  "scheduler_elapsed_s": 70,
+  "host": "euclid-ral-compute-10-2",
+  "reference_host": "euclid-ral-compute-1",
+  "bootstrap_s": 25.800000000046566,
+  "science_spent_s": 42.644982968922704,
+  "cleanup": "complete",
+  "attempts": [
+    {
+      "case": "capture",
+      "status": "error",
+      "process_wall_s": 36.976196059025824,
+      "supervision": {
+        "returncode": 1,
+        "termination_reason": null,
+        "live_descendants": [],
+        "sampled_group_peak_rss_bytes": 253554688,
+        "rss_sample_interval_s": 0.05
+      },
+      "child": {
+        "status": "error",
+        "error": "ValueError: sampling parity differs: posterior_sha256"
+      }
+    }
+  ],
+  "unrun": [
+    "replay-0-P",
+    "replay-0-S",
+    "replay-0-U",
+    "replay-0-B",
+    "replay-1-B",
+    "replay-1-U",
+    "replay-1-S",
+    "replay-1-P",
+    "replay-2-U",
+    "replay-2-P",
+    "replay-2-B",
+    "replay-2-S",
+    "fit-0-w0",
+    "fit-1-w2",
+    "fit-2-w2",
+    "fit-3-w0"
+  ],
+  "raw_bytes": 16627876,
+  "archive_bytes": 11478684,
+  "archive_sha256": "994387cff321f8265dcff2d5a0bb40c4f5db953f619ca1efaa5572f35590f153",
+  "parity_inspection": {
+    "scope": "read-only retained-checkpoint inspection; no new fit/training or retroactive live-validation claim",
+    "cases": [
+      {
+        "checkpoint_sha256": "752fbc1390babd98838eb1bb4c28c9d36420e512c6eb4da201a3217f6931cbf3",
+        "posterior_reconstructed_on_local_host": {
+          "posterior_sha256": "919674e04195da25f5d6646743b2ce8aa0089fc5642e7cda523dd72991eae260",
+          "n_like": 23500,
+          "n_eff": 10038.507608002912,
+          "shells": 12,
+          "explored": true,
+          "discard_exploration": true
+        },
+        "models": [
+          "8b03ab94ffeb847e9564837b645f170aaeafde603866fa40e48e5fcc56365d00",
+          "bb34157118d679c67fb1113a7eb4e57b8f728c41aeaca0c7a5ab9bbdbf65ead0",
+          "85d4ebb3944f903e7ff6373d54064689d756888c7ba32c9820b961ef00e39470",
+          "7ee71f9645a7f4d5c565dd14f28658a34b888035c47287b576045176702d80e3",
+          "4a77eec5e1958acc8b414fc6e5b48b8dac4e11f25ea69ee1f67393f4d97c97c1",
+          "5f3131118864a5e8fe0b3f424b77033187b9ef71512356f10416c1117a9ba5c5",
+          "5eb31a59bc07b362b7877fcd1770383e6fc95cc9995322a4e3de900cbcaf82e6",
+          "06bf98757edc9099be76458e94b94f818419c5814e307967f27fe87907e788d0",
+          "fc6140e3b45569c4c9d578cba21e793e233f8965804918c50548bd2ddd8f4541",
+          "527ccc6771e0a1a8c31004648e68215b5bfb02bc34518bbd5c91092f81e4cf6a",
+          "ae91f626bda8983e74194befe25cee72de492e5f2393d66a27599b2d465ad374"
+        ],
+        "model_iterations": [
+          [
+            88,
+            59,
+            64,
+            77
+          ],
+          [
+            56,
+            69,
+            66,
+            55
+          ],
+          [
+            87,
+            66,
+            114,
+            59
+          ],
+          [
+            98,
+            79,
+            69,
+            92
+          ],
+          [
+            49,
+            49,
+            96,
+            68
+          ],
+          [
+            87,
+            78,
+            55,
+            76
+          ],
+          [
+            63,
+            66,
+            63,
+            109
+          ],
+          [
+            65,
+            65,
+            61,
+            77
+          ],
+          [
+            56,
+            70,
+            103,
+            82
+          ],
+          [
+            68,
+            75,
+            69,
+            83
+          ],
+          [
+            49,
+            85,
+            56,
+            82
+          ]
+        ]
+      },
+      {
+        "checkpoint_sha256": "38d5dfdbfca6f40e8e4510c245c64ac16a9d5cc72f57147b547eda2243523f35",
+        "posterior_reconstructed_on_local_host": {
+          "posterior_sha256": "7f635ee2578c084651b279ff7a04a4ef3d2beb1ae30fd3eb04868adc3875b1be",
+          "n_like": 23500,
+          "n_eff": 10038.507608002512,
+          "shells": 12,
+          "explored": true,
+          "discard_exploration": true
+        },
+        "models": [
+          "2e863cc1c3a7c728d7943c261cf695f99688e5a2734bd41e9aee46fc546e60f4",
+          "d20f8e287d168a4d2b3659f98e97b910c88078abc08f28578d824c9e6381a032",
+          "651c0b535a64862a442097b2a80b0ea7e9a155b2a5b856afe9195aed4fb68fdd",
+          "699f249fd8b99c86194c56d713dd92a0689426333e29d8e3f901a956ed75f181",
+          "3c414bdd75b14af9c41130e4b69ff18e2d1a6661af595eef1c9ddfd77842d948",
+          "c76e434d3bfd4a759c2bdb079ed617a951b0307b24788fc0519c3897583b5305",
+          "a7606cd2e3315011f2ac133d13de3ed31c5a0b3ebcdc4353735063c0f34e3cb7",
+          "e5a1de3dc5a08bee94914c2748835f014eb318ba84ec43d5dd0886c40dfea9bb",
+          "4f72c9ad50acca159c23637392f7166a1d0af3b64e1769ea26cfc8340a28a3e8",
+          "bf602a85e2ba6a57639ebfa3aecbd739fca3df33ece38d94bc33eb6f0a60b8a1",
+          "9e395e1668014af12da57de55ff13455af8fea7f299e61becce01a876d893b2e"
+        ],
+        "model_iterations": [
+          [
+            88,
+            59,
+            64,
+            77
+          ],
+          [
+            56,
+            69,
+            66,
+            55
+          ],
+          [
+            87,
+            66,
+            114,
+            59
+          ],
+          [
+            98,
+            79,
+            69,
+            92
+          ],
+          [
+            49,
+            49,
+            96,
+            68
+          ],
+          [
+            87,
+            78,
+            55,
+            76
+          ],
+          [
+            63,
+            66,
+            63,
+            109
+          ],
+          [
+            65,
+            65,
+            61,
+            77
+          ],
+          [
+            56,
+            70,
+            103,
+            82
+          ],
+          [
+            68,
+            75,
+            69,
+            83
+          ],
+          [
+            49,
+            85,
+            56,
+            82
+          ]
+        ]
+      }
+    ],
+    "matching_model_indices": [],
+    "first_model_arrays": [
+      {
+        "label": "mean",
+        "shape": [
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 1.4389531233227615e-15
+      },
+      {
+        "label": "scale",
+        "shape": [
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 4.829470157119431e-15
+      },
+      {
+        "label": "network0-coef0",
+        "shape": [
+          10,
+          100
+        ],
+        "exact": false,
+        "max_abs_diff": 1.1879386363489175e-14
+      },
+      {
+        "label": "network0-coef1",
+        "shape": [
+          100,
+          50
+        ],
+        "exact": false,
+        "max_abs_diff": 2.6756374893466273e-14
+      },
+      {
+        "label": "network0-coef2",
+        "shape": [
+          50,
+          20
+        ],
+        "exact": false,
+        "max_abs_diff": 1.5709655798445965e-14
+      },
+      {
+        "label": "network0-coef3",
+        "shape": [
+          20,
+          1
+        ],
+        "exact": false,
+        "max_abs_diff": 2.9976021664879227e-15
+      },
+      {
+        "label": "network1-coef0",
+        "shape": [
+          10,
+          100
+        ],
+        "exact": false,
+        "max_abs_diff": 1.304512053934559e-14
+      },
+      {
+        "label": "network1-coef1",
+        "shape": [
+          100,
+          50
+        ],
+        "exact": false,
+        "max_abs_diff": 2.2842838731662596e-14
+      },
+      {
+        "label": "network1-coef2",
+        "shape": [
+          50,
+          20
+        ],
+        "exact": false,
+        "max_abs_diff": 1.6400769631275125e-13
+      },
+      {
+        "label": "network1-coef3",
+        "shape": [
+          20,
+          1
+        ],
+        "exact": false,
+        "max_abs_diff": 3.469446951953614e-15
+      },
+      {
+        "label": "network2-coef0",
+        "shape": [
+          10,
+          100
+        ],
+        "exact": false,
+        "max_abs_diff": 1.3877787807814457e-14
+      },
+      {
+        "label": "network2-coef1",
+        "shape": [
+          100,
+          50
+        ],
+        "exact": false,
+        "max_abs_diff": 5.187517082561044e-14
+      },
+      {
+        "label": "network2-coef2",
+        "shape": [
+          50,
+          20
+        ],
+        "exact": false,
+        "max_abs_diff": 5.0459636469213365e-14
+      },
+      {
+        "label": "network2-coef3",
+        "shape": [
+          20,
+          1
+        ],
+        "exact": false,
+        "max_abs_diff": 3.354955202539145e-15
+      },
+      {
+        "label": "network3-coef0",
+        "shape": [
+          10,
+          100
+        ],
+        "exact": false,
+        "max_abs_diff": 1.5057399771478686e-14
+      },
+      {
+        "label": "network3-coef1",
+        "shape": [
+          100,
+          50
+        ],
+        "exact": false,
+        "max_abs_diff": 2.4795703684743486e-14
+      },
+      {
+        "label": "network3-coef2",
+        "shape": [
+          50,
+          20
+        ],
+        "exact": false,
+        "max_abs_diff": 4.135580766728708e-14
+      },
+      {
+        "label": "network3-coef3",
+        "shape": [
+          20,
+          1
+        ],
+        "exact": false,
+        "max_abs_diff": 2.9976021664879227e-15
+      }
+    ],
+    "raw_dataset_comparison": [
+      {
+        "dataset": "log_l_0",
+        "old_shape": [
+          804
+        ],
+        "new_shape": [
+          804
+        ],
+        "exact": false,
+        "max_abs_diff": 1.0658141036401503e-14
+      },
+      {
+        "dataset": "log_l_1",
+        "old_shape": [
+          1991
+        ],
+        "new_shape": [
+          1991
+        ],
+        "exact": false,
+        "max_abs_diff": 7.105427357601002e-15
+      },
+      {
+        "dataset": "log_l_10",
+        "old_shape": [
+          798
+        ],
+        "new_shape": [
+          798
+        ],
+        "exact": false,
+        "max_abs_diff": 6.231459792616079e-12
+      },
+      {
+        "dataset": "log_l_11",
+        "old_shape": [
+          704
+        ],
+        "new_shape": [
+          704
+        ],
+        "exact": false,
+        "max_abs_diff": 1.3109513474773848e-12
+      },
+      {
+        "dataset": "log_l_2",
+        "old_shape": [
+          3604
+        ],
+        "new_shape": [
+          3604
+        ],
+        "exact": false,
+        "max_abs_diff": 7.105427357601002e-15
+      },
+      {
+        "dataset": "log_l_3",
+        "old_shape": [
+          3903
+        ],
+        "new_shape": [
+          3903
+        ],
+        "exact": false,
+        "max_abs_diff": 3.885546107085247e-09
+      },
+      {
+        "dataset": "log_l_4",
+        "old_shape": [
+          3068
+        ],
+        "new_shape": [
+          3068
+        ],
+        "exact": false,
+        "max_abs_diff": 1.8401991042082955e-10
+      },
+      {
+        "dataset": "log_l_5",
+        "old_shape": [
+          2922
+        ],
+        "new_shape": [
+          2922
+        ],
+        "exact": false,
+        "max_abs_diff": 1.0964384955514106e-10
+      },
+      {
+        "dataset": "log_l_6",
+        "old_shape": [
+          2105
+        ],
+        "new_shape": [
+          2105
+        ],
+        "exact": false,
+        "max_abs_diff": 3.9900527326608426e-11
+      },
+      {
+        "dataset": "log_l_7",
+        "old_shape": [
+          1601
+        ],
+        "new_shape": [
+          1601
+        ],
+        "exact": false,
+        "max_abs_diff": 3.4015101846307516e-10
+      },
+      {
+        "dataset": "log_l_8",
+        "old_shape": [
+          1091
+        ],
+        "new_shape": [
+          1091
+        ],
+        "exact": false,
+        "max_abs_diff": 2.3321788944485888e-11
+      },
+      {
+        "dataset": "log_l_9",
+        "old_shape": [
+          909
+        ],
+        "new_shape": [
+          909
+        ],
+        "exact": false,
+        "max_abs_diff": 2.6574298317427747e-12
+      },
+      {
+        "dataset": "log_l_t",
+        "old_shape": [
+          404
+        ],
+        "new_shape": [
+          404
+        ],
+        "exact": false,
+        "max_abs_diff": 4.858335955759685e-13
+      },
+      {
+        "dataset": "points_0",
+        "old_shape": [
+          804,
+          10
+        ],
+        "new_shape": [
+          804,
+          10
+        ],
+        "exact": true,
+        "max_abs_diff": 0.0
+      },
+      {
+        "dataset": "points_1",
+        "old_shape": [
+          1991,
+          10
+        ],
+        "new_shape": [
+          1991,
+          10
+        ],
+        "exact": true,
+        "max_abs_diff": 0.0
+      },
+      {
+        "dataset": "points_10",
+        "old_shape": [
+          798,
+          10
+        ],
+        "new_shape": [
+          798,
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 1.3877787807814457e-13
+      },
+      {
+        "dataset": "points_11",
+        "old_shape": [
+          704,
+          10
+        ],
+        "new_shape": [
+          704,
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 1.5615286841352827e-13
+      },
+      {
+        "dataset": "points_2",
+        "old_shape": [
+          3604,
+          10
+        ],
+        "new_shape": [
+          3604,
+          10
+        ],
+        "exact": true,
+        "max_abs_diff": 0.0
+      },
+      {
+        "dataset": "points_3",
+        "old_shape": [
+          3903,
+          10
+        ],
+        "new_shape": [
+          3903,
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 3.907985046680551e-14
+      },
+      {
+        "dataset": "points_4",
+        "old_shape": [
+          3068,
+          10
+        ],
+        "new_shape": [
+          3068,
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 6.017408793468348e-14
+      },
+      {
+        "dataset": "points_5",
+        "old_shape": [
+          2922,
+          10
+        ],
+        "new_shape": [
+          2922,
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 6.628031457012185e-14
+      },
+      {
+        "dataset": "points_6",
+        "old_shape": [
+          2105,
+          10
+        ],
+        "new_shape": [
+          2105,
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 1.2634338020234281e-13
+      },
+      {
+        "dataset": "points_7",
+        "old_shape": [
+          1601,
+          10
+        ],
+        "new_shape": [
+          1601,
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 1.0275114092905824e-13
+      },
+      {
+        "dataset": "points_8",
+        "old_shape": [
+          1091,
+          10
+        ],
+        "new_shape": [
+          1091,
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 1.2989609388114332e-13
+      },
+      {
+        "dataset": "points_9",
+        "old_shape": [
+          909,
+          10
+        ],
+        "new_shape": [
+          909,
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 1.3239409568654992e-13
+      },
+      {
+        "dataset": "points_t",
+        "old_shape": [
+          404,
+          10
+        ],
+        "new_shape": [
+          404,
+          10
+        ],
+        "exact": false,
+        "max_abs_diff": 1.1823875212257917e-13
+      },
+      {
+        "dataset": "shell_t",
+        "old_shape": [
+          404
+        ],
+        "new_shape": [
+          404
+        ],
+        "exact": true,
+        "max_abs_diff": 0.0
+      }
+    ],
+    "forbidden_calls": {
+      "run": 0,
+      "train": 0,
+      "likelihood": 0
+    },
+    "checkpoint_bytes_unchanged": true
+  },
+  "next_job_authorized": false,
+  "outside_pulse": true,
+  "merge": "human"
+}

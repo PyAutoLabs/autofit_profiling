@@ -1,0 +1,1062 @@
+{
+  "status": "complete",
+  "protocol": "nautilus-training-diagnostics@2-reference-node",
+  "spent_s": 510.58571503008716,
+  "state_sha256": "b136be8a3d248dc7b9a8473bb97145de30e9554e1168c82c697fb755c9b1a7d9",
+  "plan_sha256": "0391cbc184889d415723e279b05f8b635b3b2c757458fa235db1607bce94ed05",
+  "source": {
+    "sources": {
+      "PyAutoFit": {
+        "revision": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c",
+        "code_sha256": "9e566e1b1a259e279d2eaa86319556a78561183b347ac8835793a315d980ad75"
+      },
+      "PyAutoNerves": {
+        "revision": "9b204c90c2ce05c5bb0cf3e9800ed13f005c6c56",
+        "code_sha256": "560c9250eb0d7f8f56b3d4d21f22b9e556e93fd0eba92b5b33860b903a2f3f0b"
+      },
+      "producer": {
+        "revision": "d3a36cf79b5c5dfc073ec64b38595430400798ed",
+        "code_sha256": "b8acecffb1d2414e34d737caf23f6313c2034fea18b4877003abb537f9824e3d"
+      }
+    },
+    "nautilus_source_sha256": "61e91f8fb85cf4a38877cd1c65bb0b111589bde77f5f74acb22a90f3ff2ec45c",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "h5py": "3.16.0",
+      "nautilus-sampler": "1.0.5",
+      "jax": "0.11.2",
+      "jaxlib": "0.11.2",
+      "threadpoolctl": "3.8.0"
+    },
+    "distribution_versions": {
+      "idna": "3.20",
+      "jedi": "0.20.1",
+      "wheel": "0.48.0",
+      "sphinxcontrib-qthelp": "2.0.0",
+      "urllib3": "2.8.0",
+      "scikit-learn": "1.9.1",
+      "MarkupSafe": "3.0.4",
+      "asttokens": "3.0.2",
+      "charset-normalizer": "3.5.2",
+      "kiwisolver": "1.5.1",
+      "mypy_extensions": "1.2.0",
+      "sphinxcontrib-serializinghtml": "2.0.0",
+      "xxhash": "3.4.1",
+      "array-api-compat": "1.16.0",
+      "jax": "0.11.2",
+      "roman-numerals": "4.1.0",
+      "sphinxcontrib-applehelp": "2.0.0",
+      "wcwidth": "0.9.4",
+      "executing": "2.3.0",
+      "h5py": "3.16.0",
+      "psutil": "6.1.0",
+      "gprof2dot": "2021.2.21",
+      "python-dateutil": "4.0.0",
+      "pluggy": "1.7.0",
+      "Sphinx": "9.1.1",
+      "matplotlib-inline": "0.2.2",
+      "packaging": "26.3",
+      "ptyprocess": "0.7.0",
+      "fonttools": "4.68.0",
+      "dynesty": "2.1.5",
+      "traitlets": "5.16.1",
+      "snowballstemmer": "3.1.1",
+      "typing_extensions": "4.16.0",
+      "prompt_toolkit": "3.0.53",
+      "pytest": "9.2.0",
+      "contourpy": "1.4.0",
+      "tzdata": "2026.6",
+      "opt_einsum": "3.4.0",
+      "networkx": "3.1",
+      "babel": "2.18.0",
+      "anesthetic": "2.16.0",
+      "threadpoolctl": "3.8.0",
+      "stack-data": "0.6.3",
+      "iniconfig": "2.3.1",
+      "jaxlib": "0.11.2",
+      "pyvis": "0.3.2",
+      "sphinxcontrib-devhelp": "2.0.0",
+      "corner": "2.2.2",
+      "optax": "0.2.8",
+      "alabaster": "1.0.0",
+      "cloudpickle": "3.1.2",
+      "ipython_pygments_lexers": "1.1.1",
+      "dill": "0.4.1",
+      "joblib": "1.6.0",
+      "jaxnnls": "1.0.1",
+      "decorator": "5.3.1",
+      "nautilus-sampler": "1.0.5",
+      "sphinxcontrib-jsmath": "2.0.0",
+      "requests": "2.34.2",
+      "imagesize": "2.0.1",
+      "PyYAML": "6.0.3",
+      "absl-py": "2.5.1",
+      "matplotlib": "3.11.2",
+      "ml_dtypes": "0.6.0",
+      "pure_eval": "0.2.4",
+      "jsonpickle": "4.1.4",
+      "parso": "0.8.7",
+      "pexpect": "4.9.0",
+      "scipy": "1.17.1",
+      "timeout-decorator": "0.5.0",
+      "Pygments": "2.21.0",
+      "pillow": "13.0.0",
+      "ruff": "0.17.4",
+      "ipython": "9.12.0",
+      "docutils": "0.22.4",
+      "emcee": "3.1.6",
+      "sphinxcontrib-htmlhelp": "2.1.0",
+      "Jinja2": "3.1.6",
+      "typing-inspect": "0.9.0",
+      "pandas": "3.0.6",
+      "greenlet": "3.5.6",
+      "certifi": "2026.10.23",
+      "cycler": "0.12.1",
+      "numpy": "2.5.4",
+      "SQLAlchemy": "2.0.57",
+      "six": "1.17.0",
+      "astunparse": "1.6.3",
+      "numpydoc": "1.11.0",
+      "narwhals": "2.28.0",
+      "pyparsing": "3.3.3"
+    },
+    "python": "3.12.10 (main, May 30 2025, 05:37:37) [Clang 20.1.4 ]",
+    "host": "euclid-ral-compute-1",
+    "platform": "Linux-5.14.0-687.65.1.el9_8.x86_64-x86_64-with-glibc2.34",
+    "affinity": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "thread_env": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    }
+  },
+  "unrun": [],
+  "replays": [
+    {
+      "id": "replay-0-P",
+      "training_s": 16.602299407008104,
+      "network_cpu_s": 16.566079693000002,
+      "network_wall_sum_s": 16.569688343,
+      "lifecycle_s": 2.969987690448761e-06,
+      "process_s": 22.848737102001905,
+      "workers": 0,
+      "peak_rss_mib": 193.27734375,
+      "arm": "P",
+      "repeat": 0,
+      "workflow_s": 16.61374363291543,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 16.569688343
+    },
+    {
+      "id": "replay-0-S",
+      "training_s": 16.635425261803903,
+      "network_cpu_s": 16.543585764,
+      "network_wall_sum_s": 16.544328064000002,
+      "lifecycle_s": 1.1471654990455136,
+      "process_s": 23.84274265100248,
+      "workers": 1,
+      "peak_rss_mib": 364.4609375,
+      "arm": "S",
+      "repeat": 0,
+      "workflow_s": 17.79321443499066,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 16.544328064000002
+    },
+    {
+      "id": "replay-0-U",
+      "training_s": 8.782661057077348,
+      "network_cpu_s": 15.550295692,
+      "network_wall_sum_s": 15.551670046000002,
+      "lifecycle_s": 1.595879185013473,
+      "process_s": 16.22173189301975,
+      "workers": 2,
+      "peak_rss_mib": 534.01953125,
+      "arm": "U",
+      "repeat": 0,
+      "workflow_s": 10.389487819978967,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 8.750154921
+    },
+    {
+      "id": "replay-0-B",
+      "training_s": 9.649607453960925,
+      "network_cpu_s": 18.051422673,
+      "network_wall_sum_s": 18.05323203,
+      "lifecycle_s": 1.6310565599706024,
+      "process_s": 16.95460430602543,
+      "workers": 2,
+      "peak_rss_mib": 530.72265625,
+      "arm": "B",
+      "repeat": 0,
+      "workflow_s": 11.289342234027572,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 9.618229711000001
+    },
+    {
+      "id": "replay-1-B",
+      "training_s": 9.809848646982573,
+      "network_cpu_s": 18.379390928,
+      "network_wall_sum_s": 18.381078633,
+      "lifecycle_s": 1.6175970260519534,
+      "process_s": 16.9401440450456,
+      "workers": 2,
+      "peak_rss_mib": 532.99609375,
+      "arm": "B",
+      "repeat": 1,
+      "workflow_s": 11.438128213980235,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 9.779340154
+    },
+    {
+      "id": "replay-1-U",
+      "training_s": 8.60758950212039,
+      "network_cpu_s": 14.745724535,
+      "network_wall_sum_s": 14.746774162000001,
+      "lifecycle_s": 1.5668927610386163,
+      "process_s": 15.644197892048396,
+      "workers": 2,
+      "peak_rss_mib": 532.0703125,
+      "arm": "U",
+      "repeat": 1,
+      "workflow_s": 10.185406842036173,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 8.574899488
+    },
+    {
+      "id": "replay-1-S",
+      "training_s": 11.009542988380417,
+      "network_cpu_s": 10.942080627000001,
+      "network_wall_sum_s": 10.942798562,
+      "lifecycle_s": 1.0947591119911522,
+      "process_s": 17.5292000209447,
+      "workers": 1,
+      "peak_rss_mib": 367.3359375,
+      "arm": "S",
+      "repeat": 1,
+      "workflow_s": 12.113724078983068,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 10.942798562
+    },
+    {
+      "id": "replay-1-P",
+      "training_s": 16.39543842896819,
+      "network_cpu_s": 16.355113963,
+      "network_wall_sum_s": 16.363111353,
+      "lifecycle_s": 2.7599744498729706e-06,
+      "process_s": 22.029204577906057,
+      "workers": 0,
+      "peak_rss_mib": 189.3828125,
+      "arm": "P",
+      "repeat": 1,
+      "workflow_s": 16.40682013600599,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 16.363111353
+    },
+    {
+      "id": "replay-2-U",
+      "training_s": 8.492041816818528,
+      "network_cpu_s": 15.343285343000002,
+      "network_wall_sum_s": 15.344735214000002,
+      "lifecycle_s": 1.6485881030093879,
+      "process_s": 15.44354409200605,
+      "workers": 2,
+      "peak_rss_mib": 536.8984375,
+      "arm": "U",
+      "repeat": 2,
+      "workflow_s": 10.149560496094637,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 8.460720064
+    },
+    {
+      "id": "replay-2-P",
+      "training_s": 16.429842521902174,
+      "network_cpu_s": 16.397404878,
+      "network_wall_sum_s": 16.398098155,
+      "lifecycle_s": 1.4299293980002403e-06,
+      "process_s": 21.917875261045992,
+      "workers": 0,
+      "peak_rss_mib": 192.875,
+      "arm": "P",
+      "repeat": 2,
+      "workflow_s": 16.440875764004886,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 16.398098155
+    },
+    {
+      "id": "replay-2-B",
+      "training_s": 9.754291324876249,
+      "network_cpu_s": 18.254297609,
+      "network_wall_sum_s": 18.256265162000002,
+      "lifecycle_s": 1.7028359320247546,
+      "process_s": 16.96146454103291,
+      "workers": 2,
+      "peak_rss_mib": 533.28515625,
+      "arm": "B",
+      "repeat": 2,
+      "workflow_s": 11.467896684072912,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 9.724508197
+    },
+    {
+      "id": "replay-2-S",
+      "training_s": 14.545767747797072,
+      "network_cpu_s": 14.465861256,
+      "network_wall_sum_s": 14.466478032000001,
+      "lifecycle_s": 1.496262304019183,
+      "process_s": 22.546985212014988,
+      "workers": 1,
+      "peak_rss_mib": 367.32421875,
+      "arm": "S",
+      "repeat": 2,
+      "workflow_s": 16.050636015017517,
+      "forbidden_calls": {
+        "sampler_run": 0,
+        "evaluate_likelihood": 0,
+        "target": 0
+      },
+      "worker_busy_union_s": 14.466478032000001
+    }
+  ],
+  "fits": [
+    {
+      "id": "fit-0-w0",
+      "training_s": 10.98174674808979,
+      "network_cpu_s": 10.956865883,
+      "network_wall_sum_s": 10.958649981,
+      "lifecycle_s": 1.2300442904233932e-06,
+      "process_s": 39.50145607802551,
+      "workers": 0,
+      "peak_rss_mib": 244.078125,
+      "full_fit_s": 31.170178182,
+      "workflow_s": 31.17343618394807,
+      "phases": {
+        "full_fit": {
+          "wall_s": 1.030488835,
+          "parent_cpu_s": 1.014019998,
+          "calls": 1
+        },
+        "NonLinearSearch.pre_fit_output": {
+          "wall_s": 0.006662869,
+          "parent_cpu_s": 0.003019709,
+          "calls": 1
+        },
+        "Sampler.run": {
+          "wall_s": 0.313000272,
+          "parent_cpu_s": 0.315273894,
+          "calls": 1
+        },
+        "Sampler.sample_shell": {
+          "wall_s": 1.5322317980000004,
+          "parent_cpu_s": 1.5439587209999992,
+          "calls": 235
+        },
+        "Sampler.evaluate_likelihood": {
+          "wall_s": 2.541316534999999,
+          "parent_cpu_s": 2.5405710659999996,
+          "calls": 235
+        },
+        "Sampler.write": {
+          "wall_s": 1.707815587,
+          "parent_cpu_s": 1.47434343,
+          "calls": 13
+        },
+        "Sampler.write_shell_update": {
+          "wall_s": 1.986513638000001,
+          "parent_cpu_s": 1.1525350310000002,
+          "calls": 235
+        },
+        "NautilusBound.compute": {
+          "wall_s": 4.751215861000001,
+          "parent_cpu_s": 4.750733455000001,
+          "calls": 11
+        },
+        "NeuralNetworkEmulator.train": {
+          "wall_s": 10.981604064,
+          "parent_cpu_s": 10.979887812000001,
+          "calls": 11
+        },
+        "model_validation": {
+          "wall_s": 0.0024098590000000003,
+          "parent_cpu_s": 0.002392771,
+          "calls": 11
+        },
+        "NeuralNetworkEmulator.predict": {
+          "wall_s": 2.6320585380000012,
+          "parent_cpu_s": 2.6188169120000033,
+          "calls": 4511
+        },
+        "retain_checkpoint": {
+          "wall_s": 0.001458944,
+          "parent_cpu_s": 0.000502472,
+          "calls": 1
+        },
+        "SearchUpdater._save_samples": {
+          "wall_s": 2.8197504270000002,
+          "parent_cpu_s": 2.814705496,
+          "calls": 1
+        },
+        "SearchUpdater._compute_latent_samples": {
+          "wall_s": 0.001749539,
+          "parent_cpu_s": 0.001747251,
+          "calls": 1
+        },
+        "SearchUpdater.visualize": {
+          "wall_s": 0.001314721,
+          "parent_cpu_s": 0.0013126210000000001,
+          "calls": 1
+        },
+        "SearchUpdater._profile_and_summarize": {
+          "wall_s": 0.291909541,
+          "parent_cpu_s": 0.290889589,
+          "calls": 1
+        },
+        "NonLinearSearch.post_fit_output": {
+          "wall_s": 0.5686771540000001,
+          "parent_cpu_s": 0.562705101,
+          "calls": 1
+        }
+      }
+    },
+    {
+      "id": "fit-1-w2",
+      "training_s": 8.538829732919112,
+      "network_cpu_s": 14.815115845000001,
+      "network_wall_sum_s": 14.816214777,
+      "lifecycle_s": 1.5989702129736543,
+      "process_s": 48.299235882936046,
+      "workers": 2,
+      "peak_rss_mib": 592.85546875,
+      "full_fit_s": 37.775988398,
+      "workflow_s": 39.380406590062194,
+      "phases": {
+        "full_fit": {
+          "wall_s": 1.463700385,
+          "parent_cpu_s": 1.445073665,
+          "calls": 1
+        },
+        "NonLinearSearch.pre_fit_output": {
+          "wall_s": 0.006872353,
+          "parent_cpu_s": 0.003045271,
+          "calls": 1
+        },
+        "Sampler.run": {
+          "wall_s": 0.397854032,
+          "parent_cpu_s": 0.40043660000000003,
+          "calls": 1
+        },
+        "Sampler.sample_shell": {
+          "wall_s": 2.342677095000001,
+          "parent_cpu_s": 2.3550709540000017,
+          "calls": 235
+        },
+        "Sampler.evaluate_likelihood": {
+          "wall_s": 4.292184785000003,
+          "parent_cpu_s": 4.291323001999998,
+          "calls": 235
+        },
+        "Sampler.write": {
+          "wall_s": 1.9862274910000002,
+          "parent_cpu_s": 1.7959118690000002,
+          "calls": 13
+        },
+        "Sampler.write_shell_update": {
+          "wall_s": 2.4545998400000015,
+          "parent_cpu_s": 1.4845587230000004,
+          "calls": 235
+        },
+        "NautilusBound.compute": {
+          "wall_s": 6.553341093000001,
+          "parent_cpu_s": 6.542789332,
+          "calls": 11
+        },
+        "NeuralNetworkEmulator.train": {
+          "wall_s": 8.538597258,
+          "parent_cpu_s": 0.05854651,
+          "calls": 11
+        },
+        "model_validation": {
+          "wall_s": 0.003014089,
+          "parent_cpu_s": 0.0029792310000000006,
+          "calls": 11
+        },
+        "NeuralNetworkEmulator.predict": {
+          "wall_s": 3.9825325469999986,
+          "parent_cpu_s": 3.9611581289999873,
+          "calls": 4511
+        },
+        "retain_checkpoint": {
+          "wall_s": 0.0015225450000000001,
+          "parent_cpu_s": 0.00045793,
+          "calls": 1
+        },
+        "SearchUpdater._save_samples": {
+          "wall_s": 4.666987639,
+          "parent_cpu_s": 4.6570478500000005,
+          "calls": 1
+        },
+        "SearchUpdater._compute_latent_samples": {
+          "wall_s": 0.0024328,
+          "parent_cpu_s": 0.0024295410000000003,
+          "calls": 1
+        },
+        "SearchUpdater.visualize": {
+          "wall_s": 0.0013606710000000001,
+          "parent_cpu_s": 0.00135772,
+          "calls": 1
+        },
+        "SearchUpdater._profile_and_summarize": {
+          "wall_s": 0.418997818,
+          "parent_cpu_s": 0.41772264000000003,
+          "calls": 1
+        },
+        "NonLinearSearch.post_fit_output": {
+          "wall_s": 0.6630859570000001,
+          "parent_cpu_s": 0.661186891,
+          "calls": 1
+        }
+      }
+    },
+    {
+      "id": "fit-2-w2",
+      "training_s": 8.92879132530652,
+      "network_cpu_s": 15.460957869000001,
+      "network_wall_sum_s": 15.462676072,
+      "lifecycle_s": 1.6384138999274,
+      "process_s": 45.947713756002486,
+      "workers": 2,
+      "peak_rss_mib": 591.22265625,
+      "full_fit_s": 36.197211113,
+      "workflow_s": 37.83913433004636,
+      "phases": {
+        "full_fit": {
+          "wall_s": 1.430507339,
+          "parent_cpu_s": 1.410611534,
+          "calls": 1
+        },
+        "NonLinearSearch.pre_fit_output": {
+          "wall_s": 0.007534573,
+          "parent_cpu_s": 0.0031277600000000003,
+          "calls": 1
+        },
+        "Sampler.run": {
+          "wall_s": 0.38333105700000003,
+          "parent_cpu_s": 0.385592331,
+          "calls": 1
+        },
+        "Sampler.sample_shell": {
+          "wall_s": 2.28362593,
+          "parent_cpu_s": 2.2972251569999993,
+          "calls": 235
+        },
+        "Sampler.evaluate_likelihood": {
+          "wall_s": 4.103723759000004,
+          "parent_cpu_s": 4.102366484,
+          "calls": 235
+        },
+        "Sampler.write": {
+          "wall_s": 1.84467671,
+          "parent_cpu_s": 1.6907101900000003,
+          "calls": 13
+        },
+        "Sampler.write_shell_update": {
+          "wall_s": 2.8988783390000017,
+          "parent_cpu_s": 1.4706292469999998,
+          "calls": 235
+        },
+        "NautilusBound.compute": {
+          "wall_s": 4.7390298060000005,
+          "parent_cpu_s": 4.730575344,
+          "calls": 11
+        },
+        "NeuralNetworkEmulator.train": {
+          "wall_s": 8.928571619000001,
+          "parent_cpu_s": 0.05987550400000001,
+          "calls": 11
+        },
+        "model_validation": {
+          "wall_s": 0.0027131330000000004,
+          "parent_cpu_s": 0.0026933589999999998,
+          "calls": 11
+        },
+        "NeuralNetworkEmulator.predict": {
+          "wall_s": 3.865753680999994,
+          "parent_cpu_s": 3.849804466999995,
+          "calls": 4511
+        },
+        "retain_checkpoint": {
+          "wall_s": 0.001683168,
+          "parent_cpu_s": 0.00069355,
+          "calls": 1
+        },
+        "SearchUpdater._save_samples": {
+          "wall_s": 4.634736381000001,
+          "parent_cpu_s": 4.618872993,
+          "calls": 1
+        },
+        "SearchUpdater._compute_latent_samples": {
+          "wall_s": 0.002376079,
+          "parent_cpu_s": 0.0023727500000000003,
+          "calls": 1
+        },
+        "SearchUpdater.visualize": {
+          "wall_s": 0.001390813,
+          "parent_cpu_s": 0.0013787410000000002,
+          "calls": 1
+        },
+        "SearchUpdater._profile_and_summarize": {
+          "wall_s": 0.40740844800000003,
+          "parent_cpu_s": 0.406070896,
+          "calls": 1
+        },
+        "NonLinearSearch.post_fit_output": {
+          "wall_s": 0.661270278,
+          "parent_cpu_s": 0.659662418,
+          "calls": 1
+        }
+      }
+    },
+    {
+      "id": "fit-3-w0",
+      "training_s": 10.96655659028329,
+      "network_cpu_s": 10.943004173,
+      "network_wall_sum_s": 10.943416575,
+      "lifecycle_s": 1.6799895092844963e-06,
+      "process_s": 40.31239530199673,
+      "workers": 0,
+      "peak_rss_mib": 245.46484375,
+      "full_fit_s": 31.055925013000003,
+      "workflow_s": 31.05958105402533,
+      "phases": {
+        "full_fit": {
+          "wall_s": 1.033355128,
+          "parent_cpu_s": 1.0191964850000002,
+          "calls": 1
+        },
+        "NonLinearSearch.pre_fit_output": {
+          "wall_s": 0.007003723000000001,
+          "parent_cpu_s": 0.0030286500000000004,
+          "calls": 1
+        },
+        "Sampler.run": {
+          "wall_s": 0.31174016600000004,
+          "parent_cpu_s": 0.31400424800000004,
+          "calls": 1
+        },
+        "Sampler.sample_shell": {
+          "wall_s": 1.527676773,
+          "parent_cpu_s": 1.5329732430000005,
+          "calls": 235
+        },
+        "Sampler.evaluate_likelihood": {
+          "wall_s": 2.5438496690000005,
+          "parent_cpu_s": 2.5319193010000003,
+          "calls": 235
+        },
+        "Sampler.write": {
+          "wall_s": 1.6687132599999999,
+          "parent_cpu_s": 1.481240071,
+          "calls": 13
+        },
+        "Sampler.write_shell_update": {
+          "wall_s": 1.9732765349999999,
+          "parent_cpu_s": 1.1250515060000004,
+          "calls": 235
+        },
+        "NautilusBound.compute": {
+          "wall_s": 4.769315403,
+          "parent_cpu_s": 4.769247899000001,
+          "calls": 11
+        },
+        "NeuralNetworkEmulator.train": {
+          "wall_s": 10.966418316,
+          "parent_cpu_s": 10.966078685000001,
+          "calls": 11
+        },
+        "model_validation": {
+          "wall_s": 0.002329619,
+          "parent_cpu_s": 0.0023124710000000004,
+          "calls": 11
+        },
+        "NeuralNetworkEmulator.predict": {
+          "wall_s": 2.561552268000002,
+          "parent_cpu_s": 2.5490374969999947,
+          "calls": 4511
+        },
+        "retain_checkpoint": {
+          "wall_s": 0.0014336840000000002,
+          "parent_cpu_s": 0.0005222720000000001,
+          "calls": 1
+        },
+        "SearchUpdater._save_samples": {
+          "wall_s": 2.8286615320000004,
+          "parent_cpu_s": 2.822728853,
+          "calls": 1
+        },
+        "SearchUpdater._compute_latent_samples": {
+          "wall_s": 0.001717339,
+          "parent_cpu_s": 0.0017145910000000001,
+          "calls": 1
+        },
+        "SearchUpdater.visualize": {
+          "wall_s": 0.001008227,
+          "parent_cpu_s": 0.0010060310000000001,
+          "calls": 1
+        },
+        "SearchUpdater._profile_and_summarize": {
+          "wall_s": 0.285680409,
+          "parent_cpu_s": 0.28470531600000004,
+          "calls": 1
+        },
+        "NonLinearSearch.post_fit_output": {
+          "wall_s": 0.572192962,
+          "parent_cpu_s": 0.5705512930000001,
+          "calls": 1
+        }
+      }
+    }
+  ],
+  "capture": {
+    "models": 11,
+    "n_like": 23500,
+    "corpus_sha256": "7413b144743e7a06cff82ea9ba28baa0727cdb018c9fade25981aa3c09c6692d",
+    "posterior_sha256": "919674e04195da25f5d6646743b2ce8aa0089fc5642e7cda523dd72991eae260"
+  },
+  "arm_medians": {
+    "P": {
+      "n": 3,
+      "training_s": 16.429842521902174,
+      "network_cpu_s": 16.397404878,
+      "network_wall_sum_s": 16.398098155,
+      "lifecycle_s": 2.7599744498729706e-06,
+      "workflow_s": 16.440875764004886,
+      "worker_busy_union_s": 16.398098155
+    },
+    "S": {
+      "n": 3,
+      "training_s": 14.545767747797072,
+      "network_cpu_s": 14.465861256,
+      "network_wall_sum_s": 14.466478032000001,
+      "lifecycle_s": 1.1471654990455136,
+      "workflow_s": 16.050636015017517,
+      "worker_busy_union_s": 14.466478032000001
+    },
+    "U": {
+      "n": 3,
+      "training_s": 8.60758950212039,
+      "network_cpu_s": 15.343285343000002,
+      "network_wall_sum_s": 15.344735214000002,
+      "lifecycle_s": 1.595879185013473,
+      "workflow_s": 10.185406842036173,
+      "worker_busy_union_s": 8.574899488
+    },
+    "B": {
+      "n": 3,
+      "training_s": 9.754291324876249,
+      "network_cpu_s": 18.254297609,
+      "network_wall_sum_s": 18.256265162000002,
+      "lifecycle_s": 1.6310565599706024,
+      "workflow_s": 11.438128213980235,
+      "worker_busy_union_s": 9.724508197
+    }
+  },
+  "job_id": 415180,
+  "producer": "d3a36cf79b5c5dfc073ec64b38595430400798ed",
+  "scheduler_state": "COMPLETED",
+  "scheduler_exit_code": "0:0",
+  "scheduler_elapsed_s": 538,
+  "bootstrap_s": 23.92000000004191,
+  "cleanup": "complete",
+  "raw_bytes": 110486049,
+  "archive_bytes": 57820758,
+  "archive_sha256": "c2e300825ebc13349103bd619cc6a9509e500adfbe0a8271054548569eeeb7b5",
+  "max_child_s": 48.299235882936046,
+  "max_group_rss_mib": 592.85546875,
+  "mean_fit_comparison": {
+    "training_s": {
+      "serial_mean": 10.97415166918654,
+      "pooled_mean": 8.733810529112816,
+      "pooled_minus_serial": -2.240341140073724
+    },
+    "network_cpu_s": {
+      "serial_mean": 10.949935028,
+      "pooled_mean": 15.138036857000001,
+      "pooled_minus_serial": 4.188101829000001
+    },
+    "lifecycle_s": {
+      "serial_mean": 1.4550168998539448e-06,
+      "pooled_mean": 1.6186920564505272,
+      "pooled_minus_serial": 1.6186906014336273
+    },
+    "full_fit_s": {
+      "serial_mean": 31.113051597500004,
+      "pooled_mean": 36.9865997555,
+      "pooled_minus_serial": 5.873548157999998
+    },
+    "workflow_s": {
+      "serial_mean": 31.1165086189867,
+      "pooled_mean": 38.60977046005428,
+      "pooled_minus_serial": 7.493261841067579
+    },
+    "other_fit_s": {
+      "serial_mean": 20.138899928313464,
+      "pooled_mean": 28.252789226387186,
+      "pooled_minus_serial": 8.113889298073723
+    },
+    "phases": {
+      "full_fit": {
+        "wall_s": {
+          "serial_mean": 1.0319219815,
+          "pooled_mean": 1.447103862
+        },
+        "parent_cpu_s": {
+          "serial_mean": 1.0166082415000002,
+          "pooled_mean": 1.4278425995
+        }
+      },
+      "NonLinearSearch.pre_fit_output": {
+        "wall_s": {
+          "serial_mean": 0.006833296000000001,
+          "pooled_mean": 0.007203463
+        },
+        "parent_cpu_s": {
+          "serial_mean": 0.0030241795000000003,
+          "pooled_mean": 0.0030865155000000003
+        }
+      },
+      "Sampler.run": {
+        "wall_s": {
+          "serial_mean": 0.31237021900000006,
+          "pooled_mean": 0.3905925445
+        },
+        "parent_cpu_s": {
+          "serial_mean": 0.314639071,
+          "pooled_mean": 0.3930144655
+        }
+      },
+      "Sampler.sample_shell": {
+        "wall_s": {
+          "serial_mean": 1.5299542855000001,
+          "pooled_mean": 2.3131515125
+        },
+        "parent_cpu_s": {
+          "serial_mean": 1.538465982,
+          "pooled_mean": 2.3261480555000005
+        }
+      },
+      "Sampler.evaluate_likelihood": {
+        "wall_s": {
+          "serial_mean": 2.542583102,
+          "pooled_mean": 4.197954272000003
+        },
+        "parent_cpu_s": {
+          "serial_mean": 2.5362451835,
+          "pooled_mean": 4.196844742999999
+        }
+      },
+      "Sampler.write": {
+        "wall_s": {
+          "serial_mean": 1.6882644235,
+          "pooled_mean": 1.9154521005
+        },
+        "parent_cpu_s": {
+          "serial_mean": 1.4777917505,
+          "pooled_mean": 1.7433110295000003
+        }
+      },
+      "Sampler.write_shell_update": {
+        "wall_s": {
+          "serial_mean": 1.9798950865000005,
+          "pooled_mean": 2.6767390895000016
+        },
+        "parent_cpu_s": {
+          "serial_mean": 1.1387932685000002,
+          "pooled_mean": 1.477593985
+        }
+      },
+      "NautilusBound.compute": {
+        "wall_s": {
+          "serial_mean": 4.760265632000001,
+          "pooled_mean": 5.646185449500001
+        },
+        "parent_cpu_s": {
+          "serial_mean": 4.759990677000001,
+          "pooled_mean": 5.636682338
+        }
+      },
+      "NeuralNetworkEmulator.train": {
+        "wall_s": {
+          "serial_mean": 10.97401119,
+          "pooled_mean": 8.7335844385
+        },
+        "parent_cpu_s": {
+          "serial_mean": 10.9729832485,
+          "pooled_mean": 0.05921100700000001
+        }
+      },
+      "model_validation": {
+        "wall_s": {
+          "serial_mean": 0.002369739,
+          "pooled_mean": 0.0028636110000000003
+        },
+        "parent_cpu_s": {
+          "serial_mean": 0.002352621,
+          "pooled_mean": 0.002836295
+        }
+      },
+      "NeuralNetworkEmulator.predict": {
+        "wall_s": {
+          "serial_mean": 2.5968054030000016,
+          "pooled_mean": 3.924143113999996
+        },
+        "parent_cpu_s": {
+          "serial_mean": 2.5839272044999992,
+          "pooled_mean": 3.905481297999991
+        }
+      },
+      "retain_checkpoint": {
+        "wall_s": {
+          "serial_mean": 0.0014463140000000002,
+          "pooled_mean": 0.0016028565000000001
+        },
+        "parent_cpu_s": {
+          "serial_mean": 0.0005123720000000001,
+          "pooled_mean": 0.00057574
+        }
+      },
+      "SearchUpdater._save_samples": {
+        "wall_s": {
+          "serial_mean": 2.8242059795000003,
+          "pooled_mean": 4.650862010000001
+        },
+        "parent_cpu_s": {
+          "serial_mean": 2.8187171745,
+          "pooled_mean": 4.637960421500001
+        }
+      },
+      "SearchUpdater._compute_latent_samples": {
+        "wall_s": {
+          "serial_mean": 0.001733439,
+          "pooled_mean": 0.0024044395
+        },
+        "parent_cpu_s": {
+          "serial_mean": 0.001730921,
+          "pooled_mean": 0.0024011455
+        }
+      },
+      "SearchUpdater.visualize": {
+        "wall_s": {
+          "serial_mean": 0.001161474,
+          "pooled_mean": 0.0013757420000000001
+        },
+        "parent_cpu_s": {
+          "serial_mean": 0.001159326,
+          "pooled_mean": 0.0013682305
+        }
+      },
+      "SearchUpdater._profile_and_summarize": {
+        "wall_s": {
+          "serial_mean": 0.288794975,
+          "pooled_mean": 0.413203133
+        },
+        "parent_cpu_s": {
+          "serial_mean": 0.2877974525,
+          "pooled_mean": 0.411896768
+        }
+      },
+      "NonLinearSearch.post_fit_output": {
+        "wall_s": {
+          "serial_mean": 0.570435058,
+          "pooled_mean": 0.6621781175000001
+        },
+        "parent_cpu_s": {
+          "serial_mean": 0.566628197,
+          "pooled_mean": 0.6604246545000001
+        }
+      }
+    }
+  },
+  "all_phase_call_counts_equal": true,
+  "all_exact_checks_pass": true,
+  "all_descendants_reaped": true,
+  "all_replay_forbidden_calls_zero": true,
+  "outside_pulse": true,
+  "merge": "human",
+  "no_more_compute_authorized": true,
+  "observational_metadata": {
+    "cpu_model": "AMD EPYC 7763 64-Core Processor",
+    "hypervisor_flag": true,
+    "libraries": [
+      {
+        "internal_api": "openblas",
+        "version": "0.3.34.106.0",
+        "architecture": "Haswell",
+        "num_threads": 1
+      },
+      {
+        "internal_api": "openmp",
+        "version": null,
+        "architecture": null,
+        "num_threads": 1
+      },
+      {
+        "internal_api": "openblas",
+        "version": "0.3.30",
+        "architecture": "Haswell",
+        "num_threads": 1
+      }
+    ],
+    "cpu_ids_note": "Task endpoints only, not continuous placement; no isolated frequency/cache/steal attribution."
+  }
+}

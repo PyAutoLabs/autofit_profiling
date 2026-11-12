@@ -388,8 +388,9 @@ def validate_corpus(root):
 
 
 class TrainingScope:
-    def __init__(self, transport, corpus=None, timer=None):
+    def __init__(self, transport, corpus=None, timer=None, before=None, after=None):
         self.transport, self.corpus, self.timer = transport, corpus, timer
+        self.before, self.after = before, after
 
     def scope(self, name):
         return self.timer.scope(name) if self.timer else contextlib.nullcontext()
@@ -404,6 +405,8 @@ class TrainingScope:
         def train(cls, x, y, n_networks=4, neural_network_kwargs=None, pool=None):
             if n_networks != 4 or neural_network_kwargs or pool is not None:
                 raise ValueError("changed neural settings or sampler pool")
+            if self.before:
+                self.before()
             row = self.corpus.before(x, y) if self.corpus else None
             tick = time.monotonic()
             # PhaseTrace wraps the native method below this boundary: digest/corpus
@@ -415,6 +418,8 @@ class TrainingScope:
                 self.transport.models.append(digest)
                 if self.corpus:
                     self.corpus.after(row, x, y, digest)
+            if self.after:
+                self.after()
             return model
 
         self.owner.train = classmethod(train)

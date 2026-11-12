@@ -34,6 +34,10 @@ SOURCE_PINS = {
 
 
 EXPERIMENTS = {
+    "parent-cpu-diagnostics": {
+        "entrypoint": "scripts/analytic_gaussian/nautilus/parent_cpu_diagnostics.py",
+        "wrapper": "hpc/batch_cpu/submit_nautilus_parent_cpu_diagnostics",
+    },
     "training-pool": {
         "entrypoint": "scripts/analytic_gaussian/nautilus/training_pool_benchmark.py",
         "wrapper": "hpc/batch_cpu/submit_nautilus_training_pool",

@@ -312,6 +312,24 @@ def retain_checkpoint(source, destination):
     os.replace(pending, destination)
 
 
+def verify_checkpoint(sampler, config, retained, expected):
+    """Compare native saved state using the same physical-coordinate prior."""
+    from autofit.non_linear.search.nest.nautilus.search import _large_attribute_hdf5
+    from nautilus import Sampler
+
+    saved_hash = sha256(retained)
+
+    def forbidden(*args):
+        raise RuntimeError("checkpoint read must not evaluate likelihood")
+
+    with _large_attribute_hdf5():
+        reopened = Sampler(sampler.prior, forbidden, filepath=str(retained), **config.constructor())
+        exact_result(posterior(reopened), expected)
+    if sha256(retained) != saved_hash:
+        raise ValueError("read-only checkpoint reopen changed bytes")
+    return saved_hash
+
+
 def performance(case, directory):
     import autofit as af
     from nautilus import Sampler
@@ -362,19 +380,7 @@ def performance(case, directory):
     result = posterior(sampler)
     if result["n_eff"] < 10000 or not result["discard_exploration"]:
         raise ValueError("stopping/exploration policy differs")
-    # Reopen the saved native state without running or evaluating a likelihood.
-    saved_hash = sha256(retained)
-
-    def forbidden(*args):
-        raise RuntimeError("checkpoint read must not evaluate likelihood")
-
-    from autofit.non_linear.search.nest.nautilus.search import _large_attribute_hdf5
-
-    with _large_attribute_hdf5():
-        reopened = Sampler(lambda x: x, forbidden, filepath=str(retained), **config.constructor())
-        exact_result(posterior(reopened), result)
-    if sha256(retained) != saved_hash:
-        raise ValueError("read-only checkpoint reopen changed bytes")
+    saved_hash = verify_checkpoint(sampler, config, retained, result)
     return {
         **result,
         "metrics": timings,

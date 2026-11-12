@@ -1,0 +1,21 @@
+{
+  "status": "pass",
+  "scope": "offline checkpoint reconstruction; original live object unavailable; no retroactive live parity claim",
+  "posterior": {
+    "posterior_sha256": "9181de303adef000c517ae25c3ea644115a44d5e8b0e764275aeb65f850a0cc1",
+    "n_like": 16300,
+    "n_eff": 10020.771588733165,
+    "shells": 9,
+    "explored": true,
+    "discard_exploration": true
+  },
+  "raw_arrays_exact": true,
+  "identity_prior_negative_control": true,
+  "checkpoint_unchanged": true,
+  "checkpoint_sha256": "65eaf581048807ea20bc198e1888b518f6b12a09aeb0cde429474fd5229508df",
+  "forbidden_calls": {
+    "run": 0,
+    "training": 0,
+    "likelihood": 0
+  }
+}

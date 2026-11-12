@@ -232,7 +232,7 @@ esac
         env["SLURM_SUBMIT_DIR"] = str(submit)
     result = subprocess.run(["bash", str(source)], env=env, capture_output=True, timeout=15)
     assert result.returncode == exit_code, result.stderr.decode()
-    receipt = tmp_path / "output/training-pool-ral-02"
+    receipt = tmp_path / "output/training-pool-ral-03"
     assert (receipt / "wrapper_exit_code").read_text().strip() == str(exit_code)
     again = subprocess.run(["bash", str(source)], env=env, capture_output=True, timeout=15)
     assert again.returncode != 0

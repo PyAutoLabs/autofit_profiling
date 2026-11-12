@@ -1,0 +1,63 @@
+{
+  "job_id": "415136",
+  "producer": "47857ec3995d6c924d2c8acb529d06585bd069c8",
+  "scheduler_state": "FAILED",
+  "scheduler_exit_code": "1:0",
+  "scheduler_elapsed_s": 167,
+  "bootstrap_s": 23.92000000004191,
+  "pilot_spent_s": 140.73759241297375,
+  "status": "halted",
+  "reason": "RuntimeError: d5-s0-w0: error",
+  "passed_cases": [
+    "preflight",
+    "control",
+    "training-interrupt",
+    "training-resume",
+    "checkpoint-interrupt",
+    "checkpoint-resume"
+  ],
+  "failed_cases": [
+    "d5-s0-w0"
+  ],
+  "unrun": [
+    "d5-s0-w2",
+    "d5-s1-w2",
+    "d5-s1-w0",
+    "d5-s2-w0",
+    "d5-s2-w2",
+    "d10-s0-w0",
+    "d10-s0-w2",
+    "d10-s1-w2",
+    "d10-s1-w0",
+    "d10-s2-w0",
+    "d10-s2-w2"
+  ],
+  "complete_timing_pairs": 0,
+  "cleanup": "complete",
+  "all_children_reaped": true,
+  "max_child_rss_mib": 557.8046875,
+  "max_child_wall_s": 25.7057549089659,
+  "raw_bytes": 20933974,
+  "checkpoint_inspection": {
+    "scope": "read-only saved checkpoint and samples.csv; zero sampling/training/likelihood calls",
+    "checkpoint_unchanged": true,
+    "checkpoint_sha256": "65eaf581048807ea20bc198e1888b518f6b12a09aeb0cde429474fd5229508df",
+    "checkpoint": {
+      "n_like": 16300,
+      "n_dim": 5
+    },
+    "unit_cube_range": [
+      2.078678671302292e-05,
+      0.9999688002326445
+    ],
+    "comparison": {
+      "shape_match": true,
+      "max_abs_difference_physical": 1.3322676295501878e-15,
+      "max_abs_difference_identity": 4.098576745503499,
+      "likelihood_max_abs_difference": 0.0
+    }
+  },
+  "outside_pulse": true,
+  "merge": "human",
+  "corrected_submission_authorization": "consumed; no further job authorized"
+}

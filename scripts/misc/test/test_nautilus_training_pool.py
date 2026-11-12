@@ -1,7 +1,10 @@
 """Admission, isolation and ordered-transport contracts without a science stack."""
 
+import contextlib
 import functools
+import hashlib
 import importlib.util
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -57,6 +60,71 @@ def test_retention_does_not_destroy_source_or_hide_missing_checkpoint(tmp_path):
     with pytest.raises(FileNotFoundError):
         benchmark.retain_checkpoint(tmp_path / "missing", retained)
     assert retained.read_bytes() == b"previous state"
+
+
+@pytest.mark.parametrize("fault", [None, "state", "write", "likelihood"])
+def test_checkpoint_reopen_keeps_nonidentity_prior_and_read_only_contract(
+    tmp_path, monkeypatch, fault
+):
+    retained = tmp_path / "checkpoint.json"
+    retained.write_text(json.dumps({"points": [0.25, 0.75], "n_like": 100}))
+    original = retained.read_bytes()
+    calls = []
+
+    class Sampler:
+        def __init__(self, prior, likelihood, filepath, **kwargs):
+            self.prior = prior
+            self.state = json.loads(Path(filepath).read_text())
+            calls.append(kwargs)
+            if fault == "state":
+                self.state["n_like"] += 1
+            if fault == "write":
+                Path(filepath).write_bytes(original + b" ")
+            if fault == "likelihood":
+                likelihood([0.5])
+
+        def run(self, *args, **kwargs):
+            pytest.fail("verification must never sample")
+
+        def receipt(self):
+            arrays = ([self.prior(x) for x in self.state["points"]], [0.2, 0.8], [-2, -1])
+            return {
+                "posterior_sha256": hashlib.sha256(json.dumps(arrays).encode()).hexdigest(),
+                "n_like": self.state["n_like"],
+                "n_eff": 2.0,
+                "shells": 1,
+                "explored": True,
+                "discard_exploration": True,
+            }
+
+    # Non-identity coordinates are essential: the former lambda x:x fails here.
+    live = object.__new__(Sampler)
+    live.prior = lambda x: 4 * x - 2
+    live.state = json.loads(original)
+    expected = live.receipt()
+    monkeypatch.setitem(sys.modules, "nautilus", SimpleNamespace(Sampler=Sampler))
+    monkeypatch.setitem(
+        sys.modules,
+        "autofit.non_linear.search.nest.nautilus.search",
+        SimpleNamespace(_large_attribute_hdf5=contextlib.nullcontext),
+    )
+    monkeypatch.setattr(benchmark, "posterior", lambda sampler: sampler.receipt())
+    config = benchmark.configuration(benchmark.matrix()[6])
+    errors = {
+        "state": "sampling parity differs",
+        "write": "changed bytes",
+        "likelihood": "must not evaluate likelihood",
+    }
+    if fault:
+        with pytest.raises((ValueError, RuntimeError), match=errors[fault]):
+            benchmark.verify_checkpoint(live, config, retained, expected)
+    else:
+        assert (
+            benchmark.verify_checkpoint(live, config, retained, expected)
+            == hashlib.sha256(original).hexdigest()
+        )
+        assert calls == [config.constructor()]
+        assert retained.read_bytes() == original
 
 
 @pytest.mark.parametrize(

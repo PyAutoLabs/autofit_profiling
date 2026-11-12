@@ -201,8 +201,8 @@ def test_supervisor_terminates_actual_process_group(tmp_path, cap, timeout, expe
         path = Path("/proc") / child_pid.read_text() / "stat"
         try:
             child_stat = path.read_text()
-        except FileNotFoundError:
-            # The terminated child may be reaped between any check and read.
+        except (FileNotFoundError, ProcessLookupError):
+            # procfs can report ENOENT or ESRCH when the child is reaped during read.
             pass
         else:
             assert child_stat.rsplit(")", 1)[1].split()[0] == "Z"

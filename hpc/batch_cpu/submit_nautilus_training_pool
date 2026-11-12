@@ -17,7 +17,7 @@ set -euo pipefail
 read -r wrapper_started _ < /proc/uptime
 if [[ -n "${SLURM_SUBMIT_DIR:-}" ]]; then
     staging_root="$(cd "$SLURM_SUBMIT_DIR/../.." && pwd)"
-    # Generated from the validated frozen artifact; six shell-quoted exports.
+    # Generated from the validated frozen artifact; eight shell-quoted exports.
     source "$staging_root/output/ral-environment.sh"
     [[ "${NAUTILUS_ROOT:-}" == "$staging_root" ]]
 fi
@@ -27,12 +27,14 @@ fi
 : "${NAUTILUS_BOOTSTRAP_SHA256:?frozen bootstrap checksum required}"
 : "${NAUTILUS_WRAPPER_SHA256:?frozen wrapper checksum required}"
 : "${NAUTILUS_PRODUCER_SHA:?validated exact producer SHA required}"
+: "${NAUTILUS_STORAGE_CONTRACT:?witnessed shared storage contract required}"
+: "${NAUTILUS_STORAGE_SHA256:?frozen storage contract checksum required}"
 : "${SLURM_JOB_ID:?submit this script through sbatch}"
 [[ "$SLURM_JOB_ID" =~ ^[0-9]+$ ]]
 [[ "${SLURM_JOB_PARTITION:-}" == ral ]]
 [[ "${SLURM_RESTART_COUNT:-0}" == 0 ]]
 [[ "$NAUTILUS_PRODUCER_SHA" =~ ^[0-9a-f]{40}$ ]]
-for hash in "$NAUTILUS_ARCHIVE_SHA256" "$NAUTILUS_BOOTSTRAP_SHA256" "$NAUTILUS_WRAPPER_SHA256"; do
+for hash in "$NAUTILUS_ARCHIVE_SHA256" "$NAUTILUS_BOOTSTRAP_SHA256" "$NAUTILUS_WRAPPER_SHA256" "$NAUTILUS_STORAGE_SHA256"; do
     [[ "$hash" =~ ^[0-9a-f]{64}$ ]]
 done
 [[ "$(sha256sum "$0" | cut -d' ' -f1)" == "$NAUTILUS_WRAPPER_SHA256" ]]
@@ -41,7 +43,7 @@ cd "$NAUTILUS_ROOT"
 bootstrap="$NAUTILUS_ROOT/hpc/tools/nautilus_runtime_cache.py"
 [[ "$(sha256sum "$bootstrap" | cut -d' ' -f1)" == "$NAUTILUS_BOOTSTRAP_SHA256" ]]
 mkdir -p output
-receipt="$NAUTILUS_ROOT/output/training-pool-ral-01"
+receipt="$NAUTILUS_ROOT/output/training-pool-ral-02"
 mkdir "$receipt" # Atomic claim: also refuses an accidental second execution.
 printf '%s\n' "$SLURM_JOB_ID" > "$receipt/job_id"
 printf '%s\n' "$NAUTILUS_PRODUCER_SHA" > "$receipt/producer_sha"
@@ -73,6 +75,7 @@ timeout --signal=TERM --kill-after=30s "${remaining}s" \
     /usr/bin/python3 -I -S "$bootstrap" supervise \
     --archive "$NAUTILUS_ARCHIVE" --sha256 "$NAUTILUS_ARCHIVE_SHA256" \
     --producer "$NAUTILUS_PRODUCER_SHA" --receipt "$receipt" \
+    --storage-contract "$NAUTILUS_STORAGE_CONTRACT" --storage-sha256 "$NAUTILUS_STORAGE_SHA256" \
     --execution ral --started "$wrapper_started" &
 runner=$!
 set +e

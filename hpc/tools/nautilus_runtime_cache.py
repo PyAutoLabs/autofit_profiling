@@ -2,7 +2,7 @@
 
 Bootstrap uses the node's /usr/bin/python3 (3.9+), never the slow NFS Python.
 The artifact contains python/, site-packages/, sources/ and manifest.json.
-Only venv path wiring is regenerated. Scientific outputs always remain on NFS.
+Only venv path wiring is regenerated. Outputs remain on verified shared storage.
 """
 
 import argparse
@@ -26,7 +26,7 @@ SCIENCE_SECONDS = 1800
 CLEANUP_SECONDS = 120
 MAX_ARCHIVE_BYTES = 4 * GIB
 MAX_UNPACKED_BYTES = 8 * GIB
-SCHEMA = "nautilus-local-runtime@1"
+SCHEMA = "nautilus-local-runtime@2"
 SOURCE_PINS = {
     "PyAutoFit": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c",
     "PyAutoNerves": "9b204c90c2ce05c5bb0cf3e9800ed13f005c6c56",
@@ -65,18 +65,41 @@ def filesystem(path):
     return rows[0]
 
 
-def check_storage(local, output, archive_bytes):
-    local_fs, output_fs = filesystem(local), filesystem(output)
+def storage_contract(path, expected_hash):
+    if digest(path) != expected_hash:
+        raise ValueError("retained storage contract checksum differs")
+    contract = json.loads(path.read_text())
+    if contract["schema"] != "nautilus-retained-storage@1" or not contract["witnesses"]:
+        raise ValueError("invalid retained storage contract")
+    return contract
+
+
+def check_storage(local, output, archive_bytes, contract, observed=None):
+    observed = observed or {"runtime": filesystem(local), "scientific_output": filesystem(output)}
+    local_fs, output_fs = observed["runtime"], observed["scientific_output"]
     # tmpfs would charge the runtime to the same 8GiB job memory limit.
     if local_fs["fstype"] not in ("ext4", "xfs"):
         raise ValueError("cache requires local ext4/xfs storage, not network or tmpfs")
-    if output_fs["fstype"] not in ("nfs", "nfs4"):
-        raise ValueError("scientific output must remain on retained NFS storage")
+    root = Path(contract["root"]).resolve(strict=True)
+    view = {key: output_fs[key] for key in ("target", "source", "fstype")}
+    if (
+        output_fs["fstype"] not in ("nfs", "nfs4", "ceph")
+        or view not in contract["views"]
+        or not output.resolve(strict=True).is_relative_to(root)
+    ):
+        raise ValueError("output is not the witnessed retained shared storage")
+    for witness in contract["witnesses"]:
+        relative = Path(witness["path"])
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError("unsafe retained storage witness path")
+        path = (root / relative).resolve(strict=True)
+        if not path.is_relative_to(root) or digest(path) != witness["sha256"]:
+            raise ValueError("retained storage witness differs")
     if not 0 < archive_bytes <= MAX_ARCHIVE_BYTES:
         raise ValueError("invalid runtime artifact size")
     if shutil.disk_usage(local).free < MAX_UNPACKED_BYTES + 2 * archive_bytes + GIB:
         raise ValueError("insufficient local disk capacity")
-    return {"runtime": local_fs, "scientific_output": output_fs}
+    return observed
 
 
 def safe_extract(archive, destination):
@@ -164,6 +187,8 @@ def prepare(root, archive, expected_hash, producer, receipt, execution):
         "autofit_profiling": producer,
     }:
         raise ValueError("runtime manifest/source pins differ")
+    if manifest["storage_contract"] != json.loads((root / "storage-contract.json").read_text()):
+        raise ValueError("artifact and admitted retained storage contracts differ")
     source = root / "sources/autofit_profiling"
     if digest(source / "hpc/tools/nautilus_runtime_cache.py") != digest(Path(__file__)):
         raise ValueError("bootstrap differs from frozen producer")
@@ -258,8 +283,16 @@ def supervise(args):
     signal.signal(signal.SIGALRM, interrupted)
     signal.setitimer(signal.ITIMER_REAL, max(0.001, BOOTSTRAP_SECONDS - (uptime() - args.started)))
     try:
-        result["filesystems"] = check_storage(parent, receipt, args.archive.stat().st_size)
+        # Retain observations BEFORE admission can reject them (job415132 witness).
+        result["filesystems"] = {}
+        result["filesystems"]["runtime"] = filesystem(parent)
+        result["filesystems"]["scientific_output"] = filesystem(receipt)
+        write_json(receipt / "bootstrap.json", result)
+        contract = storage_contract(args.storage_contract, args.storage_sha256)
+        check_storage(parent, receipt, args.archive.stat().st_size, contract, result["filesystems"])
+        result["storage_contract_sha256"] = args.storage_sha256
         root = make_cache(parent, token)
+        write_json(root / "storage-contract.json", contract)
         result["cache"] = str(root)
         write_json(receipt / "bootstrap.json", result)
         code = run_command(
@@ -349,12 +382,16 @@ def main():
     parser.add_argument("--local-parent", type=Path, default=Path("/tmp"))
     parser.add_argument("--started", type=float)
     parser.add_argument("--cache", type=Path)
+    parser.add_argument("--storage-contract", type=Path)
+    parser.add_argument("--storage-sha256")
     args = parser.parse_args()
     if args.action == "prepare":
         prepare(args.cache, args.archive, args.sha256, args.producer, args.receipt, args.execution)
         return 0
     if args.started is None:
         parser.error("--started from wrapper entry is mandatory")
+    if args.storage_contract is None or args.storage_sha256 is None:
+        parser.error("frozen --storage-contract and --storage-sha256 are mandatory")
     return supervise(args)
 
 

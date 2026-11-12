@@ -26,6 +26,22 @@ c = load("nautilus_runtime_cache")
 v = load("verify_nautilus_runtime")
 
 
+def storage_fixture(root):
+    marker = root / "witness"
+    marker.write_text("compute-written retained witness")
+    output = root / "output"
+    output.mkdir(exist_ok=True)
+    return {
+        "schema": "nautilus-retained-storage@1",
+        "root": str(root),
+        "views": [
+            {"target": "/shared", "source": "gateway:/shared", "fstype": "nfs4"},
+            {"target": "/shared", "source": "monitors:/volumes/shared", "fstype": "ceph"},
+        ],
+        "witnesses": [{"path": "witness", "sha256": c.digest(marker)}],
+    }
+
+
 def archive(path, entries):
     with tarfile.open(path, "w:gz") as stream:
         for name, kind in entries:
@@ -88,19 +104,33 @@ def test_storage_policy_rejects_network_runtime_memory_runtime_or_local_science(
     tmp_path, monkeypatch, local_fs, output_fs
 ):
     monkeypatch.setattr(
-        c, "filesystem", lambda p: {"fstype": local_fs if p == tmp_path else output_fs}
+        c,
+        "filesystem",
+        lambda p: (
+            {"fstype": local_fs}
+            if p == tmp_path
+            else {"target": "/shared", "source": "gateway:/shared", "fstype": output_fs}
+        ),
     )
     with pytest.raises(ValueError):
-        c.check_storage(tmp_path, tmp_path / "output", 100)
+        c.check_storage(tmp_path, tmp_path / "output", 100, storage_fixture(tmp_path))
 
 
 def test_missing_storage_and_low_capacity_fail(tmp_path, monkeypatch):
     with pytest.raises(FileNotFoundError):
         c.make_cache(tmp_path / "missing", "owner")
-    monkeypatch.setattr(c, "filesystem", lambda p: {"fstype": "ext4" if p == tmp_path else "nfs4"})
+    monkeypatch.setattr(
+        c,
+        "filesystem",
+        lambda p: (
+            {"fstype": "ext4"}
+            if p == tmp_path
+            else {"target": "/shared", "source": "gateway:/shared", "fstype": "nfs4"}
+        ),
+    )
     monkeypatch.setattr(c.shutil, "disk_usage", lambda p: SimpleNamespace(free=1024))
     with pytest.raises(ValueError, match="capacity"):
-        c.check_storage(tmp_path, tmp_path / "output", 100)
+        c.check_storage(tmp_path, tmp_path / "output", 100, storage_fixture(tmp_path))
 
 
 @pytest.mark.parametrize("mutation", ["owner", "mode", "parent", "symlink"])
@@ -141,6 +171,19 @@ def supervision(tmp_path, monkeypatch):
     monkeypatch.setattr(c.signal, "signal", lambda *args: None)
     monkeypatch.setattr(c.signal, "setitimer", lambda *args: None)
     monkeypatch.setattr(c, "stop_descendants", lambda: None)
+    contract_path = tmp_path / "storage-contract.json"
+    c.write_json(contract_path, storage_fixture(tmp_path))
+    args.storage_contract = contract_path
+    args.storage_sha256 = c.digest(contract_path)
+    monkeypatch.setattr(
+        c,
+        "filesystem",
+        lambda p: {
+            "fstype": "ext4" if p == tmp_path else "ceph",
+            "target": "/shared",
+            "source": "fixture",
+        },
+    )
     calls = []
 
     def runner(command, seconds, log, **kwargs):
@@ -286,3 +329,92 @@ def test_memory_admission_checks_most_restrictive_ancestor(headroom):
             v.validate_capacity(snapshot)
     else:
         v.validate_capacity(snapshot)
+
+
+@pytest.mark.parametrize("view_index", [0, 1])
+def test_witnessed_nfs_and_ceph_views_accept_same_retained_output(
+    tmp_path, monkeypatch, view_index
+):
+    contract = storage_fixture(tmp_path)
+    observed = {"runtime": {"fstype": "ext4"}, "scientific_output": contract["views"][view_index]}
+    monkeypatch.setattr(c.shutil, "disk_usage", lambda p: SimpleNamespace(free=20 * c.GIB))
+    assert c.check_storage(tmp_path, tmp_path / "output", 100, contract, observed) == observed
+
+
+@pytest.mark.parametrize("change", ["source", "target", "type", "witness", "traversal", "outside"])
+def test_shared_filesystem_type_alone_cannot_admit_wrong_storage(tmp_path, monkeypatch, change):
+    contract = storage_fixture(tmp_path)
+    view = dict(contract["views"][1])
+    output = tmp_path / "output"
+    monkeypatch.setattr(c.shutil, "disk_usage", lambda p: SimpleNamespace(free=20 * c.GIB))
+    if change in ("source", "target"):
+        view[change] = "unwitnessed"
+    elif change == "type":
+        view["fstype"] = "ext4"
+        contract["views"] = [view]  # Even a manifest cannot admit an ephemeral local disk.
+    elif change == "witness":
+        (tmp_path / "witness").write_text("different data")
+    elif change == "traversal":
+        contract["witnesses"][0]["path"] = "../outside"
+    else:
+        output = tmp_path.parent
+    with pytest.raises(ValueError):
+        c.check_storage(
+            tmp_path,
+            output,
+            100,
+            contract,
+            {
+                "runtime": {"fstype": "ext4"},
+                "scientific_output": view,
+            },
+        )
+
+
+def test_changed_storage_contract_hash_rejects_before_admission(tmp_path):
+    path = tmp_path / "contract.json"
+    c.write_json(path, storage_fixture(tmp_path))
+    original = c.digest(path)
+    path.write_text(path.read_text() + " ")
+    with pytest.raises(ValueError, match="checksum"):
+        c.storage_contract(path, original)
+
+
+def test_storage_rejection_retains_observed_mount_and_never_launches_child(
+    supervision, monkeypatch
+):
+    args, calls = supervision
+
+    def reject(*args):
+        raise ValueError("unwitnessed storage")
+
+    monkeypatch.setattr(c, "check_storage", reject)
+    assert c.supervise(args) == 1
+    assert not calls
+    result = json.loads((args.receipt / "bootstrap.json").read_text())
+    assert result["filesystems"]["scientific_output"]["fstype"] == "ceph"
+    assert not result["sampling_started"]
+    assert result["cleanup"] == "complete"
+
+
+def test_artifact_cannot_override_the_admitted_storage_contract(tmp_path, monkeypatch):
+    archive = tmp_path / "archive"
+    archive.write_bytes(b"fixture")
+    root = tmp_path / "cache"
+    root.mkdir()
+    c.write_json(root / "storage-contract.json", {"identity": "approved"})
+
+    def extract(*args):
+        c.write_json(
+            root / "manifest.json",
+            {
+                "schema": c.SCHEMA,
+                "sources": {**c.SOURCE_PINS, "autofit_profiling": "a" * 40},
+                "storage_contract": {"identity": "different"},
+            },
+        )
+
+    monkeypatch.setattr(c, "safe_extract", extract)
+    monkeypatch.setattr(c.subprocess, "run", lambda *a, **k: pytest.fail("interpreter launched"))
+    with pytest.raises(ValueError, match="contracts differ"):
+        c.prepare(root, archive, c.digest(archive), "a" * 40, tmp_path, "validate-only")

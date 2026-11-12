@@ -211,6 +211,8 @@ esac
         "NAUTILUS_PRODUCER_SHA": sha,
         "NAUTILUS_ARCHIVE": "/fixture/runtime.tar.gz",
         "NAUTILUS_ARCHIVE_SHA256": "b" * 64,
+        "NAUTILUS_STORAGE_CONTRACT": "/fixture/storage.json",
+        "NAUTILUS_STORAGE_SHA256": "c" * 64,
         "NAUTILUS_BOOTSTRAP_SHA256": hashlib.sha256(helper.read_bytes()).hexdigest(),
         "NAUTILUS_WRAPPER_SHA256": hashlib.sha256(source.read_bytes()).hexdigest(),
         "SLURM_JOB_ID": "42",
@@ -230,7 +232,7 @@ esac
         env["SLURM_SUBMIT_DIR"] = str(submit)
     result = subprocess.run(["bash", str(source)], env=env, capture_output=True, timeout=15)
     assert result.returncode == exit_code, result.stderr.decode()
-    receipt = tmp_path / "output/training-pool-ral-01"
+    receipt = tmp_path / "output/training-pool-ral-02"
     assert (receipt / "wrapper_exit_code").read_text().strip() == str(exit_code)
     again = subprocess.run(["bash", str(source)], env=env, capture_output=True, timeout=15)
     assert again.returncode != 0

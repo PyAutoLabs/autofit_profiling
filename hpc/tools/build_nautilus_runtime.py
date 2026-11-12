@@ -16,7 +16,7 @@ from pathlib import Path
 from nautilus_runtime_cache import SCHEMA, SOURCE_PINS, digest
 
 
-def build(cache, validation, destination):
+def build(cache, validation, destination, storage):
     identity = json.loads(validation.read_text())
     if identity["status"] != "pass":
         raise ValueError("passing login-host validation required")
@@ -43,6 +43,7 @@ def build(cache, validation, destination):
         "distribution_versions": identity["distribution_versions"],
         "nautilus_source_sha256": identity["nautilus_source_sha256"],
         "source_identities": identity["sources"],
+        "storage_contract": json.loads(storage.read_text()),
     }
     destination.mkdir(parents=True, exist_ok=True)
     # Assemble on local disk; only one sequential artifact write traverses NFS.
@@ -77,6 +78,8 @@ def build(cache, validation, destination):
             "archive_bytes": target.stat().st_size,
             "bootstrap_sha256": digest(producer / "hpc/tools/nautilus_runtime_cache.py"),
             "wrapper_sha256": digest(producer / "hpc/batch_cpu/submit_nautilus_training_pool"),
+            "storage_contract_path": str(storage),
+            "storage_contract_sha256": digest(storage),
         }
         (destination / f"{checksum}.json").write_text(json.dumps(receipt, indent=2) + "\n")
         return receipt
@@ -87,5 +90,11 @@ if __name__ == "__main__":
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--validation", type=Path, required=True)
     parser.add_argument("--destination", type=Path, required=True)
+    parser.add_argument("--storage-contract", type=Path, required=True)
     args = parser.parse_args()
-    print(json.dumps(build(args.cache.resolve(), args.validation, args.destination), indent=2))
+    print(
+        json.dumps(
+            build(args.cache.resolve(), args.validation, args.destination, args.storage_contract),
+            indent=2,
+        )
+    )

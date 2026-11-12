@@ -440,8 +440,8 @@ def test_experiment_is_allowlisted_and_binds_entrypoint_wrapper_and_hashes(tmp_p
 def test_diagnostic_wrapper_has_separate_claim_and_fixed_experiment():
     path = TOOLS.parent / "batch_cpu/submit_nautilus_training_diagnostics"
     text = path.read_text()
-    assert "output/training-diagnostics-ral-01" in text
-    assert "output/ral-diagnostics-environment.sh" in text
+    assert "output/training-diagnostics-ral-02" in text
+    assert "output/ral-diagnostics-environment-02.sh" in text
     assert "--experiment training-diagnostics --execution ral" in text
     assert 'mkdir "$receipt"' in text
     assert 'mkdir -p "$receipt"' not in text
@@ -449,3 +449,5 @@ def test_diagnostic_wrapper_has_separate_claim_and_fixed_experiment():
     assert "#SBATCH --exclusive" in text
     assert "#SBATCH --time=00:35:00" in text
     assert "training-pool-ral-03" not in text
+    assert "#SBATCH --nodelist=euclid-ral-compute-1" in text
+    assert "training-diagnostics-ral-01" not in text

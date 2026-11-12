@@ -1,6 +1,6 @@
-# Proposed reference-node amendment — awaiting approval
+# Reference-node amendment — approved
 
-Issue16 / draft PR17, existing feature/nautilus-spawn-training-pool worktree. Continue outside Pulse; merge remains human. The previous single-job allowance was consumed by job415179. This plan is not permission to submit another job.
+Issue16 / draft PR17, existing feature/nautilus-spawn-training-pool worktree. Continue outside Pulse; merge remains human. The previous single-job allowance was consumed by job415179. Live human approval: “Approve amendment and one run”. The new one-job allowance is unused until submission; all gates below remain mandatory.
 
 1. Update only the diagnostic protocol/driver, diagnostic wrapper and focused tests. Request `--nodelist=euclid-ral-compute-1`, the actual reference node, in addition to the existing exclusive ral allocation. Validate that exact hostname before launching any child and on subsequent admissions. No fallback node, alternate partition, extra allocation or scheduler manipulation; if unavailable, the job waits normally.
 2. Record candidate result, ordered model digests and completed corpus manifest before historical-reference comparison, explicitly marked unverified. Preserve parent CPU identity and full native-library/thread metadata before the fit starts. The failed capture remains failed; no replay can consume a rejected or incomplete capture. Keep all old raw outputs and reports unchanged.
@@ -9,4 +9,4 @@ Issue16 / draft PR17, existing feature/nautilus-spawn-training-pool worktree. Co
 5. Limits remain120s/4096MiB per child group,1800s total, at most17children, one exclusive ral node/four bound physical cores/8GiB/35minutes;180s bootstrap and120s cleanup reserve. Whole-node reservation on the reference node includes252 scheduler CPUs; only four are bound to the scientific step. Stop on first failure; retain everything; no retry/requeue/replacement or release. Cleanup only the newly owned temporary runtime cache.
 6. Report replay/phase results if exact gates pass, otherwise retain and report the failure. Node pinning addresses a concrete admission omission but does not prove or guarantee cross-run bitwise reproducibility. No new performance claim until measurements complete.
 
-Approval requested: this narrow diagnostic correction plus one fresh job. Workspace AGENTS.md requires an approved plan before source/job-script edits; the approved diagnostic plan's stop-on-first-failure and one-job limits require a new compute decision. The existing PR remains unmerged.
+Approval granted for this narrow diagnostic correction plus one fresh job. Workspace AGENTS.md requires an approved plan before source/job-script edits; the approved diagnostic plan's stop-on-first-failure and one-job limits require a new compute decision. The existing PR remains unmerged.

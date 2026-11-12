@@ -4,6 +4,7 @@ import argparse
 import contextlib
 import json
 import os
+import platform
 import signal
 import subprocess
 import sys
@@ -28,10 +29,12 @@ from profiling.nautilus_training_diagnostics import (
     TrainingScope,
     array_identity,
     forbid_sampling,
+    runtime_metadata,
     validate_corpus,
 )
 
-PROTOCOL = "nautilus-training-diagnostics@1-ral"
+PROTOCOL = "nautilus-training-diagnostics@2-reference-node"
+REFERENCE_NODE = "euclid-ral-compute-1"
 LIMITS = {"children": 17, "timeout_s": 120, "memory_mib": 4096, "budget_s": 1800}
 REFERENCE = ROOT / "experiments/nautilus_spawn_training_pool/diagnostics_10d/reference.json"
 REFERENCE_SHA256 = "5d424a9c4c3344330d6fefbe0a391b0dc5b121cb45bc2af468af79ff1e99ede0"
@@ -79,16 +82,24 @@ def validate(plan):
         plan["protocol"] != PROTOCOL
         or plan["cases"] != matrix()
         or plan["limits"] != LIMITS
+        or plan["required_host"] != REFERENCE_NODE
         or plan["reference_sha256"] != REFERENCE_SHA256
         or plan["configuration"] != base.configuration(matrix()[0]).matching()
         or plan["allocation"]["identity"]["policy"] != allocation.POLICY
     ):
         raise ValueError("unapproved diagnostic protocol/configuration/allocation")
+    validate_node(plan["allocation"])
     reference()
+
+
+def validate_node(receipt):
+    if receipt["identity"]["host"] != REFERENCE_NODE:
+        raise ValueError("diagnostic requires the original reference node")
 
 
 def check_allocation(plan):
     current = allocation.snapshot()
+    validate_node(current)
     allocation.verify_identity(plan["allocation"]["identity"], current)
     return current
 
@@ -103,7 +114,52 @@ def exact_fit(result, expected):
         raise ValueError("target, ordered models or checkpoint parity differs")
 
 
+def cpu_identity():
+    allowed = set(os.sched_getaffinity(0))
+    fields = {
+        "processor",
+        "vendor_id",
+        "cpu family",
+        "model",
+        "model name",
+        "stepping",
+        "microcode",
+        "flags",
+    }
+    try:
+        processors = []
+        for block in Path("/proc/cpuinfo").read_text().split("\n\n"):
+            row = {
+                key.strip(): value.strip()
+                for line in block.splitlines()
+                if ":" in line
+                for key, value in [line.split(":", 1)]
+            }
+            if int(row.get("processor", -1)) in allowed:
+                processors.append({k: v for k, v in row.items() if k in fields})
+        return {"uname": platform.uname()._asdict(), "processors": processors}
+    except (OSError, ValueError) as error:
+        return {"unavailable": str(error), "uname": platform.uname()._asdict()}
+
+
+def require_verified_capture(capture):
+    if (
+        capture.get("status") != "success"
+        or capture.get("historical_reference_verified") is not True
+    ):
+        raise ValueError("replay requires a successful historically verified capture")
+    exact_fit(capture, reference())
+
+
 def fit(case, directory):
+    atomic_json(
+        directory / "parent-runtime-before-fit.json",
+        {
+            "status": "before_fit",
+            "cpu_identity": cpu_identity(),
+            "runtime": runtime_metadata(),
+        },
+    )
     trace = PhaseTrace() if case["phase"] == "fit" else None
     corpus = CorpusWriter(directory / "corpus") if case["phase"] == "capture" else None
     with contextlib.ExitStack() as stack:
@@ -119,22 +175,29 @@ def fit(case, directory):
             )
         )
         result = base.performance(case, directory)
-    exact_fit(result, reference())
+    atomic_json(
+        directory / "candidate.json",
+        {**result, "status": "unverified", "historical_reference_verified": False},
+    )
     if corpus:
         result["corpus_sha256"] = corpus.finish()
         if [r["model_sha256"] for r in corpus.rows] != result["transport"]["models"]:
             raise ValueError("capture model order differs")
     if trace:
         result["phases"] = trace.receipt()
+    atomic_json(
+        directory / "candidate.json",
+        {**result, "status": "unverified", "historical_reference_verified": False},
+    )
+    exact_fit(result, reference())
+    result["historical_reference_verified"] = True
     return result
 
 
 def replay(case, directory):
-    from nautilus.neural import NeuralNetworkEmulator
-
     corpus = directory.parent / "capture/corpus"
     capture = json.loads((directory.parent / "capture/child.json").read_text())
-    exact_fit(capture, reference())
+    require_verified_capture(capture)
     manifest, arrays = validate_corpus(corpus)
     if (
         capture["status"] != "success"
@@ -142,6 +205,8 @@ def replay(case, directory):
         or [row["model_sha256"] for row, _, _ in arrays] != reference()["transport"]["models"]
     ):
         raise ValueError("corpus differs from verified capture")
+    from nautilus.neural import NeuralNetworkEmulator
+
     # Equal eager loading policy in every arm, outside all training/lifecycle timers.
     started = time.monotonic()
     with forbid_sampling() as forbidden:
@@ -193,6 +258,7 @@ def run(root):
         from profiling.nautilus_baseline import provenance
 
         initial = allocation.snapshot()
+        validate_node(initial)
         os.environ["PYAUTO_TRAINING_AFFINITY"] = json.dumps(initial["identity"]["affinity"])
         identity = provenance()
         base.validate_sources(identity)
@@ -201,6 +267,7 @@ def run(root):
             raise ValueError("measurement sources must be clean")
         plan = {
             "protocol": PROTOCOL,
+            "required_host": REFERENCE_NODE,
             "cases": matrix(),
             "limits": LIMITS,
             "configuration": base.configuration(matrix()[0]).matching(),

@@ -21,11 +21,12 @@ spec.loader.exec_module(b)
 def frozen():
     plan = {
         "protocol": b.PROTOCOL,
+        "required_host": b.REFERENCE_NODE,
         "cases": b.matrix(),
         "limits": b.LIMITS.copy(),
         "reference_sha256": b.REFERENCE_SHA256,
         "configuration": b.base.configuration(b.matrix()[0]).matching(),
-        "allocation": {"identity": {"policy": b.allocation.POLICY}},
+        "allocation": {"identity": {"policy": b.allocation.POLICY, "host": b.REFERENCE_NODE}},
     }
     plan["sha256"] = fingerprint(plan)
     return plan
@@ -383,7 +384,13 @@ def test_run_stops_on_first_child_failure_and_preserves_unrun(tmp_path, monkeypa
     monkeypatch.setattr(
         b.allocation,
         "snapshot",
-        lambda: {"identity": {"affinity": [0, 1, 2, 3], "policy": b.allocation.POLICY}},
+        lambda: {
+            "identity": {
+                "affinity": [0, 1, 2, 3],
+                "policy": b.allocation.POLICY,
+                "host": b.REFERENCE_NODE,
+            }
+        },
     )
     monkeypatch.setattr(b, "check_allocation", lambda plan: {})
     monkeypatch.setattr(b.base, "validate_sources", lambda i: None)
@@ -403,3 +410,81 @@ def test_run_stops_on_first_child_failure_and_preserves_unrun(tmp_path, monkeypa
     assert state["attempts"][0]["status"] == "timeout"
     with pytest.raises(FileExistsError):
         b.run(root)
+
+
+def test_wrong_node_rejected_in_frozen_plan_and_live_admission(monkeypatch):
+    plan = frozen()
+    plan["allocation"]["identity"]["host"] = "euclid-ral-compute-10-2"
+    plan["sha256"] = fingerprint({k: v for k, v in plan.items() if k != "sha256"})
+    with pytest.raises(ValueError, match="original reference node"):
+        b.validate(plan)
+    monkeypatch.setattr(b.allocation, "snapshot", lambda: plan["allocation"])
+    monkeypatch.setattr(
+        b.allocation, "verify_identity", lambda *a: pytest.fail("admitted wrong node")
+    )
+    with pytest.raises(ValueError, match="original reference node"):
+        b.check_allocation(frozen())
+
+
+def test_rehashed_node_requirement_cannot_change():
+    plan = frozen()
+    plan["required_host"] = "another-host"
+    plan["sha256"] = fingerprint({k: v for k, v in plan.items() if k != "sha256"})
+    with pytest.raises(ValueError, match="unapproved"):
+        b.validate(plan)
+
+
+@pytest.mark.parametrize(
+    "status,verified",
+    [("unverified", False), ("error", True), ("success", False), ("success", None)],
+)
+def test_replay_refuses_unverified_capture_before_loading_or_training(
+    tmp_path, monkeypatch, status, verified
+):
+    capture = {**b.reference(), "status": status, "historical_reference_verified": verified}
+    directory = tmp_path / "capture"
+    directory.mkdir()
+    (directory / "child.json").write_text(json.dumps(capture))
+    monkeypatch.setattr(b, "validate_corpus", lambda *a: pytest.fail("loaded rejected corpus"))
+    with pytest.raises(ValueError, match="historically verified"):
+        b.replay(b.matrix()[1], tmp_path / "replay-0-P")
+
+
+@pytest.mark.parametrize("mismatch", [False, True])
+def test_candidate_corpus_and_runtime_survive_historical_parity_failure(
+    tmp_path, monkeypatch, mismatch
+):
+    class Corpus:
+        def __init__(self, root):
+            self.root = root
+            root.mkdir()
+            self.rows = [{"model_sha256": h} for h in b.reference()["transport"]["models"]]
+
+        def finish(self):
+            (self.root / "manifest.json").write_text(json.dumps(self.rows))
+            return "a" * 64
+
+    monkeypatch.setattr(b, "CorpusWriter", Corpus)
+    monkeypatch.setattr(b, "runtime_metadata", lambda: {"libraries": ["retained metadata"]})
+    monkeypatch.setattr(b, "cpu_identity", lambda: {"model name": "fixture"})
+    result = copy.deepcopy(b.reference())
+    result.pop("status")
+    if mismatch:
+        result["posterior_sha256"] = "0" * 64
+
+    def performance(case, directory):
+        assert (directory / "parent-runtime-before-fit.json").exists()
+        return result
+
+    monkeypatch.setattr(b.base, "performance", performance)
+    if mismatch:
+        with pytest.raises(ValueError, match="sampling parity"):
+            b.fit(b.matrix()[0], tmp_path)
+    else:
+        assert b.fit(b.matrix()[0], tmp_path)["historical_reference_verified"] is True
+    candidate = json.loads((tmp_path / "candidate.json").read_text())
+    assert candidate["status"] == "unverified"
+    assert candidate["historical_reference_verified"] is False
+    assert candidate["corpus_sha256"] == "a" * 64
+    assert candidate["transport"]["models"] == b.reference()["transport"]["models"]
+    assert (tmp_path / "corpus/manifest.json").is_file()

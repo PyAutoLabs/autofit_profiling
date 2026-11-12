@@ -2,6 +2,7 @@
 #SBATCH --job-name=nautilus-training-diagnostics
 #SBATCH --partition=ral
 #SBATCH --nodes=1
+#SBATCH --nodelist=euclid-ral-compute-1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --hint=nomultithread
@@ -18,7 +19,7 @@ read -r wrapper_started _ < /proc/uptime
 if [[ -n "${SLURM_SUBMIT_DIR:-}" ]]; then
     staging_root="$(cd "$SLURM_SUBMIT_DIR/../.." && pwd)"
     # Generated from the validated frozen artifact; eight shell-quoted exports.
-    source "$staging_root/output/ral-diagnostics-environment.sh"
+    source "$staging_root/output/ral-diagnostics-environment-02.sh"
     [[ "${NAUTILUS_ROOT:-}" == "$staging_root" ]]
 fi
 : "${NAUTILUS_ROOT:?retained NFS producer checkout required}"
@@ -43,7 +44,7 @@ cd "$NAUTILUS_ROOT"
 bootstrap="$NAUTILUS_ROOT/hpc/tools/nautilus_runtime_cache.py"
 [[ "$(sha256sum "$bootstrap" | cut -d' ' -f1)" == "$NAUTILUS_BOOTSTRAP_SHA256" ]]
 mkdir -p output
-receipt="$NAUTILUS_ROOT/output/training-diagnostics-ral-01"
+receipt="$NAUTILUS_ROOT/output/training-diagnostics-ral-02"
 mkdir "$receipt" # Atomic claim: also refuses an accidental second execution.
 printf '%s\n' "$SLURM_JOB_ID" > "$receipt/job_id"
 printf '%s\n' "$NAUTILUS_PRODUCER_SHA" > "$receipt/producer_sha"

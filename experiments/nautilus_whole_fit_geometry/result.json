@@ -1,0 +1,545 @@
+{
+  "status": "complete",
+  "configuration": {
+    "constructor": {
+      "n_dim": 10,
+      "n_live": 400,
+      "n_update": 400,
+      "n_points_min": 60,
+      "n_like_new_bound": 4000,
+      "enlarge_per_dim": 1.1,
+      "split_threshold": 100,
+      "n_networks": 4,
+      "n_batch": 100,
+      "vectorized": false,
+      "seed": 2
+    },
+    "stopping": {
+      "f_live": 0.01,
+      "n_shell": 1,
+      "n_eff": 10000,
+      "discard_exploration": true,
+      "verbose": false
+    }
+  },
+  "nautilus_source_sha256": "61e91f8fb85cf4a38877cd1c65bb0b111589bde77f5f74acb22a90f3ff2ec45c",
+  "harness_sha256": "081a2bda9a61e24e2c82663b6b4711461e86ddd924c8e81ba5bf66daad573286",
+  "versions": {
+    "nautilus-sampler": "1.0.5",
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "scikit-learn": "1.7.2",
+    "h5py": "3.10.0",
+    "threadpoolctl": "3.6.0",
+    "joblib": "1.5.2"
+  },
+  "python": "3.10.12",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "limits": {
+    "child_s": 180,
+    "group_mib": 4096,
+    "total_s": 720
+  },
+  "runs": [
+    {
+      "case": "1-control",
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 165826560,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "science": {
+        "posterior_sha256": "919674e04195da25f5d6646743b2ce8aa0089fc5642e7cda523dd72991eae260",
+        "n_like": 23500,
+        "ess": 10038.507608002912,
+        "log_z": -12.37447679148005,
+        "shells": 12,
+        "explored": true,
+        "discard_exploration": true
+      },
+      "checkpoint_reopen_equal": true,
+      "native_threads": [
+        {
+          "internal_api": "openblas",
+          "version": "0.3.23.dev",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openblas",
+          "version": "0.3.28",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openmp",
+          "version": null,
+          "num_threads": 1,
+          "architecture": null
+        }
+      ],
+      "fit_s": 40.42984520800019,
+      "constructor_s": 0.0002566660004958976,
+      "sampling_s": 40.39556908099985,
+      "posterior_s": 0.03401946099984343,
+      "builds": [],
+      "status": "success"
+    },
+    {
+      "case": "2-traced",
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 168022016,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "science": {
+        "posterior_sha256": "919674e04195da25f5d6646743b2ce8aa0089fc5642e7cda523dd72991eae260",
+        "n_like": 23500,
+        "ess": 10038.507608002912,
+        "log_z": -12.37447679148005,
+        "shells": 12,
+        "explored": true,
+        "discard_exploration": true
+      },
+      "checkpoint_reopen_equal": true,
+      "native_threads": [
+        {
+          "internal_api": "openblas",
+          "version": "0.3.23.dev",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openblas",
+          "version": "0.3.28",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openmp",
+          "version": null,
+          "num_threads": 1,
+          "architecture": null
+        }
+      ],
+      "fit_s": 42.34476173200164,
+      "constructor_s": 0.0002693310016184114,
+      "sampling_s": 42.31147143099952,
+      "posterior_s": 0.03302097000050708,
+      "builds": [
+        {
+          "exclusive_s": {
+            "ellipsoid": 1.2051871910007321,
+            "train": 1.212502182002936,
+            "predict": 0.0031996060024539474,
+            "other_build": 0.20482090599398362
+          },
+          "calls": {
+            "ellipsoid": 24,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.9836215549985354,
+            "train": 1.2654131630006304,
+            "predict": 0.003673580002214294,
+            "other_build": 0.21772415099621867
+          },
+          "calls": {
+            "ellipsoid": 23,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.5505358629998227,
+            "train": 1.8375343229999999,
+            "predict": 0.004024977999506518,
+            "other_build": 0.13143168500027969
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.5457828710023023,
+            "train": 2.035333741001523,
+            "predict": 0.004103993000171613,
+            "other_build": 0.18438552899533533
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.5247999909952341,
+            "train": 1.682445385002211,
+            "predict": 0.004074659998877905,
+            "other_build": 0.1503140130043903
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.5555910600014613,
+            "train": 1.9819268100000045,
+            "predict": 0.005270220000966219,
+            "other_build": 0.19394882999768015
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.6244041349964391,
+            "train": 2.179048841997428,
+            "predict": 0.005598103998636361,
+            "other_build": 0.14469671100596315
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.7790070529990771,
+            "train": 1.888687407998077,
+            "predict": 0.005164949998288648,
+            "other_build": 0.18921245700403233
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.6650532849998854,
+            "train": 2.205295573003241,
+            "predict": 0.005002074998628814,
+            "other_build": 0.13904938499763375
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.8278139800022473,
+            "train": 2.191885870000988,
+            "predict": 0.0051006479989155196,
+            "other_build": 0.24652889299977687
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.6230067210017296,
+            "train": 1.8576464700017823,
+            "predict": 0.005008135998650687,
+            "other_build": 0.1461968519979564
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        }
+      ],
+      "status": "success"
+    },
+    {
+      "case": "3-traced",
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 169558016,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "science": {
+        "posterior_sha256": "919674e04195da25f5d6646743b2ce8aa0089fc5642e7cda523dd72991eae260",
+        "n_like": 23500,
+        "ess": 10038.507608002912,
+        "log_z": -12.37447679148005,
+        "shells": 12,
+        "explored": true,
+        "discard_exploration": true
+      },
+      "checkpoint_reopen_equal": true,
+      "native_threads": [
+        {
+          "internal_api": "openblas",
+          "version": "0.3.23.dev",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openblas",
+          "version": "0.3.28",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openmp",
+          "version": null,
+          "num_threads": 1,
+          "architecture": null
+        }
+      ],
+      "fit_s": 38.625999506999506,
+      "constructor_s": 0.00025585199909983203,
+      "sampling_s": 38.5969371880019,
+      "posterior_s": 0.02880646699850331,
+      "builds": [
+        {
+          "exclusive_s": {
+            "ellipsoid": 1.3758879369961505,
+            "train": 1.2342442939989269,
+            "predict": 0.0033804669983510394,
+            "other_build": 0.21684744500817033
+          },
+          "calls": {
+            "ellipsoid": 24,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.9896712899972044,
+            "train": 1.5002534770028433,
+            "predict": 0.0038808280005468987,
+            "other_build": 0.21473010400222847
+          },
+          "calls": {
+            "ellipsoid": 23,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.6507046349979646,
+            "train": 2.5027131770002597,
+            "predict": 0.0059380629973020405,
+            "other_build": 0.12933030300337123
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.529684482004086,
+            "train": 2.007332122000662,
+            "predict": 0.004286490999220405,
+            "other_build": 0.17398528099511168
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.540081787006784,
+            "train": 1.6176894929994887,
+            "predict": 0.004609438001352828,
+            "other_build": 0.15072747299200273
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.5614668340022035,
+            "train": 1.7773258489978616,
+            "predict": 0.00462809399687103,
+            "other_build": 0.22359191900250153
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.5352737780012831,
+            "train": 1.8139805989994784,
+            "predict": 0.004172806999122258,
+            "other_build": 0.13036681500307168
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.5738748399890028,
+            "train": 1.8986234359981609,
+            "predict": 0.0045988950005266815,
+            "other_build": 0.1388046610118181
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.6204832549992716,
+            "train": 1.7359496979988762,
+            "predict": 0.0040001499983191025,
+            "other_build": 0.14851153700510622
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.4950088610021339,
+            "train": 1.7765598320002027,
+            "predict": 0.004820232999918517,
+            "other_build": 0.12564147599914577
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        },
+        {
+          "exclusive_s": {
+            "ellipsoid": 0.5008066520022112,
+            "train": 1.4906225459999405,
+            "predict": 0.004853778998949565,
+            "other_build": 0.1196184659966093
+          },
+          "calls": {
+            "ellipsoid": 6,
+            "train": 1,
+            "predict": 1,
+            "other_build": 1
+          }
+        }
+      ],
+      "status": "success"
+    },
+    {
+      "case": "4-control",
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 167501824,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "science": {
+        "posterior_sha256": "919674e04195da25f5d6646743b2ce8aa0089fc5642e7cda523dd72991eae260",
+        "n_like": 23500,
+        "ess": 10038.507608002912,
+        "log_z": -12.37447679148005,
+        "shells": 12,
+        "explored": true,
+        "discard_exploration": true
+      },
+      "checkpoint_reopen_equal": true,
+      "native_threads": [
+        {
+          "internal_api": "openblas",
+          "version": "0.3.23.dev",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openblas",
+          "version": "0.3.28",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openmp",
+          "version": null,
+          "num_threads": 1,
+          "architecture": null
+        }
+      ],
+      "fit_s": 39.93698644699907,
+      "constructor_s": 0.00047399300092365593,
+      "sampling_s": 39.904349399999774,
+      "posterior_s": 0.03216305399837438,
+      "builds": [],
+      "status": "success"
+    }
+  ],
+  "unrun": [],
+  "elapsed_s": 166.55003911200038
+}

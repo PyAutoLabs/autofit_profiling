@@ -1,0 +1,274 @@
+{
+  "status": "complete",
+  "baseline_sha256": "081a2bda9a61e24e2c82663b6b4711461e86ddd924c8e81ba5bf66daad573286",
+  "reference_sha256": "24f24946e38c2a4c1875f8c1d7aa8199c9d4ce89a87e170b1557f362e6b5ae36",
+  "candidate_loader_sha256": "965c8cd737f52049761facf7523627f7d1f35803afd2d383bfb41d2f40d1c96c",
+  "nautilus_source_sha256": "61e91f8fb85cf4a38877cd1c65bb0b111589bde77f5f74acb22a90f3ff2ec45c",
+  "driver_sha256": "89b0bc640dbca3fe6f2eb835c82359832d201813d1e4a9ca29cc54b9ada5267a",
+  "configuration": {
+    "constructor": {
+      "n_dim": 10,
+      "n_live": 400,
+      "n_update": 400,
+      "n_points_min": 60,
+      "n_like_new_bound": 4000,
+      "enlarge_per_dim": 1.1,
+      "split_threshold": 100,
+      "n_networks": 4,
+      "n_batch": 100,
+      "vectorized": false,
+      "seed": 2
+    },
+    "stopping": {
+      "f_live": 0.01,
+      "n_shell": 1,
+      "n_eff": 10000,
+      "discard_exploration": true,
+      "verbose": false
+    }
+  },
+  "versions": {
+    "nautilus-sampler": "1.0.5",
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "scikit-learn": "1.7.2",
+    "h5py": "3.10.0",
+    "threadpoolctl": "3.6.0",
+    "joblib": "1.5.2"
+  },
+  "python": "3.10.12",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "limits": {
+    "child_s": 180,
+    "group_mib": 4096,
+    "total_s": 720
+  },
+  "runs": [
+    {
+      "case": "1-native",
+      "variant": "native",
+      "load_average": [
+        1.7109375,
+        3.484375,
+        2.76611328125
+      ],
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 165105664,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "science": {
+        "posterior_sha256": "919674e04195da25f5d6646743b2ce8aa0089fc5642e7cda523dd72991eae260",
+        "n_like": 23500,
+        "ess": 10038.507608002912,
+        "log_z": -12.37447679148005,
+        "shells": 12,
+        "explored": true,
+        "discard_exploration": true
+      },
+      "checkpoint_reopen_equal": true,
+      "native_threads": [
+        {
+          "internal_api": "openblas",
+          "version": "0.3.23.dev",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openblas",
+          "version": "0.3.28",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openmp",
+          "version": null,
+          "num_threads": 1,
+          "architecture": null
+        }
+      ],
+      "fit_s": 41.47792679899794,
+      "constructor_s": 0.00022622599863098003,
+      "sampling_s": 41.452542333001475,
+      "posterior_s": 0.025158239997836063,
+      "builds": [],
+      "native_reopen_equal": true,
+      "solver_call_count": 101,
+      "solver_shapes_sha256": "3020cb4d7bdc3f6abfd50232171553596107f044e6d9c9380c67dbf6e3146b2f",
+      "status": "success"
+    },
+    {
+      "case": "2-candidate",
+      "variant": "candidate",
+      "load_average": [
+        2.13916015625,
+        3.35205078125,
+        2.75537109375
+      ],
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 167063552,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "science": {
+        "posterior_sha256": "919674e04195da25f5d6646743b2ce8aa0089fc5642e7cda523dd72991eae260",
+        "n_like": 23500,
+        "ess": 10038.507608002912,
+        "log_z": -12.37447679148005,
+        "shells": 12,
+        "explored": true,
+        "discard_exploration": true
+      },
+      "checkpoint_reopen_equal": true,
+      "native_threads": [
+        {
+          "internal_api": "openblas",
+          "version": "0.3.23.dev",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openblas",
+          "version": "0.3.28",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openmp",
+          "version": null,
+          "num_threads": 1,
+          "architecture": null
+        }
+      ],
+      "fit_s": 43.16674992600019,
+      "constructor_s": 0.00018324000120628625,
+      "sampling_s": 43.13465697499851,
+      "posterior_s": 0.031909711000480456,
+      "builds": [],
+      "native_reopen_equal": true,
+      "solver_call_count": 101,
+      "solver_shapes_sha256": "3020cb4d7bdc3f6abfd50232171553596107f044e6d9c9380c67dbf6e3146b2f",
+      "status": "success"
+    },
+    {
+      "case": "3-candidate",
+      "variant": "candidate",
+      "load_average": [
+        2.568359375,
+        3.28759765625,
+        2.76171875
+      ],
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 169304064,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "science": {
+        "posterior_sha256": "919674e04195da25f5d6646743b2ce8aa0089fc5642e7cda523dd72991eae260",
+        "n_like": 23500,
+        "ess": 10038.507608002912,
+        "log_z": -12.37447679148005,
+        "shells": 12,
+        "explored": true,
+        "discard_exploration": true
+      },
+      "checkpoint_reopen_equal": true,
+      "native_threads": [
+        {
+          "internal_api": "openblas",
+          "version": "0.3.23.dev",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openblas",
+          "version": "0.3.28",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openmp",
+          "version": null,
+          "num_threads": 1,
+          "architecture": null
+        }
+      ],
+      "fit_s": 38.219748180999886,
+      "constructor_s": 0.0002622360007080715,
+      "sampling_s": 38.18582509100088,
+      "posterior_s": 0.03366085399829899,
+      "builds": [],
+      "native_reopen_equal": true,
+      "solver_call_count": 101,
+      "solver_shapes_sha256": "3020cb4d7bdc3f6abfd50232171553596107f044e6d9c9380c67dbf6e3146b2f",
+      "status": "success"
+    },
+    {
+      "case": "4-native",
+      "variant": "native",
+      "load_average": [
+        2.724609375,
+        3.23486328125,
+        2.7666015625
+      ],
+      "supervision": {
+        "returncode": 0,
+        "termination_reason": null,
+        "sampled_group_peak_rss_bytes": 167489536,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.05,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed"
+      },
+      "science": {
+        "posterior_sha256": "919674e04195da25f5d6646743b2ce8aa0089fc5642e7cda523dd72991eae260",
+        "n_like": 23500,
+        "ess": 10038.507608002912,
+        "log_z": -12.37447679148005,
+        "shells": 12,
+        "explored": true,
+        "discard_exploration": true
+      },
+      "checkpoint_reopen_equal": true,
+      "native_threads": [
+        {
+          "internal_api": "openblas",
+          "version": "0.3.23.dev",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openblas",
+          "version": "0.3.28",
+          "num_threads": 1,
+          "architecture": "Haswell"
+        },
+        {
+          "internal_api": "openmp",
+          "version": null,
+          "num_threads": 1,
+          "architecture": null
+        }
+      ],
+      "fit_s": 45.08070869999938,
+      "constructor_s": 0.00035569399915402755,
+      "sampling_s": 45.051428241000394,
+      "posterior_s": 0.028924764999828767,
+      "builds": [],
+      "native_reopen_equal": true,
+      "solver_call_count": 101,
+      "solver_shapes_sha256": "3020cb4d7bdc3f6abfd50232171553596107f044e6d9c9380c67dbf6e3146b2f",
+      "status": "success"
+    }
+  ],
+  "unrun": [],
+  "elapsed_s": 174.66293823900196
+}

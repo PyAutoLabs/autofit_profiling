@@ -1,0 +1,26 @@
+{
+  "analytic_logZ_eigenbasis": -36.76768815337412,
+  "streams": [
+    {
+      "stream": "saved",
+      "fresh_rows": 980300,
+      "logZ": -36.79671384488542,
+      "ess": 10001.056881946492,
+      "max_shell_probe_log_likelihood_difference": 1.0658141036401503e-14
+    },
+    {
+      "stream": "seed1",
+      "fresh_rows": 636100,
+      "logZ": -36.81580433753688,
+      "ess": 10000.65938257323,
+      "max_shell_probe_log_likelihood_difference": 2.1316282072803006e-14
+    },
+    {
+      "stream": "seed2",
+      "fresh_rows": 835600,
+      "logZ": -36.79544326077416,
+      "ess": 10001.72878163248,
+      "max_shell_probe_log_likelihood_difference": 2.1316282072803006e-14
+    }
+  ]
+}

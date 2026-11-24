@@ -1,0 +1,465 @@
+{
+  "reference": {
+    "best_log_likelihood": -38.17109389598275,
+    "maximum": [
+      50.034002272803015,
+      25.06756677372066,
+      9.998692712238949
+    ],
+    "orders": [
+      16,
+      32,
+      48
+    ],
+    "log_evidences": [
+      -57.45409972242841,
+      -57.45409964698948,
+      -57.45409964698947
+    ]
+  },
+  "software": {
+    "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+    "nautilus-sampler": "1.0.5",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.4",
+    "scipy": "1.17.1",
+    "python": "3.12.10",
+    "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d"
+  },
+  "release": "2026.10.12.1",
+  "dirty_library": null,
+  "python": "3.12.10",
+  "threads": 1,
+  "plan": [
+    [
+      "profile",
+      1,
+      "default"
+    ],
+    [
+      "profile",
+      1,
+      "doubled"
+    ],
+    [
+      "profile",
+      2,
+      "doubled"
+    ],
+    [
+      "profile",
+      2,
+      "default"
+    ],
+    [
+      "symmetric",
+      1,
+      "doubled"
+    ],
+    [
+      "symmetric",
+      1,
+      "default"
+    ],
+    [
+      "symmetric",
+      2,
+      "default"
+    ],
+    [
+      "symmetric",
+      2,
+      "doubled"
+    ]
+  ],
+  "runs": [
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 1,
+      "wall_s": 60.643884812998294,
+      "calls": 7500,
+      "peak_calls": {
+        "positive": 4278
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 22.764653076996183,
+      "geometry_s": 10.384288174012909,
+      "log_evidence": -57.51149618752003,
+      "max_log_likelihood": -38.1725465805512,
+      "ess": 1300.7710405024757,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.033937098383795,
+        25.063416950471492,
+        9.997894324901573
+      ],
+      "folded_std": [
+        0.03360593584893804,
+        0.07121312635689495,
+        0.03349392287587902
+      ],
+      "positive_mass": 1.0
+    },
+    {
+      "fixture": "profile",
+      "arm": "doubled",
+      "seed": 1,
+      "wall_s": 39.57733516100052,
+      "calls": 9300,
+      "peak_calls": {
+        "positive": 6020
+      },
+      "native": {
+        "n_update": 400,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 18,
+      "training_s": 16.660540870998375,
+      "geometry_s": 8.133738180000364,
+      "log_evidence": -57.493357709327576,
+      "max_log_likelihood": -38.17281736129697,
+      "ess": 1451.021417332416,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.03365585121515,
+        25.068127207635868,
+        9.998889071793313
+      ],
+      "folded_std": [
+        0.03273773880751838,
+        0.07395618185943302,
+        0.03294501950876815
+      ],
+      "positive_mass": 1.0
+    },
+    {
+      "fixture": "profile",
+      "arm": "doubled",
+      "seed": 2,
+      "wall_s": 39.89199042799737,
+      "calls": 9200,
+      "peak_calls": {
+        "positive": 5608
+      },
+      "native": {
+        "n_update": 400,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 19,
+      "training_s": 15.584487909007294,
+      "geometry_s": 7.956087384005514,
+      "log_evidence": -57.48150666014687,
+      "max_log_likelihood": -38.17141360222857,
+      "ess": 1569.691785550958,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.03303196328825,
+        25.068648679435057,
+        10.00047564182893
+      ],
+      "folded_std": [
+        0.0331508989842283,
+        0.0732032437125865,
+        0.03483707320484349
+      ],
+      "positive_mass": 1.0
+    },
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 2,
+      "wall_s": 53.548361711000325,
+      "calls": 7400,
+      "peak_calls": {
+        "positive": 4043
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 28,
+      "training_s": 22.69351444199856,
+      "geometry_s": 10.113577308002277,
+      "log_evidence": -57.474307985706695,
+      "max_log_likelihood": -38.17155215580134,
+      "ess": 1381.16015694472,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.03314554257,
+        25.07120680416367,
+        9.998886339534547
+      ],
+      "folded_std": [
+        0.0337409915360141,
+        0.07372776611547285,
+        0.03370912834332465
+      ],
+      "positive_mass": 1.0
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "doubled",
+      "seed": 1,
+      "wall_s": 68.10590155400132,
+      "calls": 9300,
+      "peak_calls": {
+        "negative": 5561,
+        "positive": 6235
+      },
+      "native": {
+        "n_update": 400,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 18,
+      "training_s": 35.52500876600243,
+      "geometry_s": 10.36292251899431,
+      "log_evidence": -57.499111978055815,
+      "max_log_likelihood": -38.17292448342036,
+      "ess": 1562.7711002199553,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.0684391717953,
+        9.999658467957111,
+        50.034768282309216
+      ],
+      "folded_std": [
+        0.07351526265631142,
+        0.033933682392484225,
+        0.03372596574423201
+      ],
+      "positive_mass": 0.48992780449878437
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 1,
+      "wall_s": 98.98152626000228,
+      "calls": 7700,
+      "peak_calls": {
+        "positive": 4737,
+        "negative": 4740
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 25,
+      "training_s": 51.466538063999906,
+      "geometry_s": 14.944942779005942,
+      "log_evidence": -57.473423354378774,
+      "max_log_likelihood": -38.17163153948996,
+      "ess": 1415.5915048740499,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.064956940658522,
+        9.99777411987573,
+        50.032894328435816
+      ],
+      "folded_std": [
+        0.07205842062697214,
+        0.03313758313928911,
+        0.033306893448585145
+      ],
+      "positive_mass": 0.5197215797570399
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 2,
+      "wall_s": 94.12174302499989,
+      "calls": 7500,
+      "peak_calls": {
+        "negative": 4427,
+        "positive": 5136
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 46.75157797701104,
+      "geometry_s": 14.002563065991126,
+      "log_evidence": -57.49655168704079,
+      "max_log_likelihood": -38.17694103073143,
+      "ess": 1405.2477785173687,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.066867220537105,
+        9.998615350821566,
+        50.03489147231716
+      ],
+      "folded_std": [
+        0.07169612016345815,
+        0.034002834724717525,
+        0.03351890314929486
+      ],
+      "positive_mass": 0.49615442364011003
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "doubled",
+      "seed": 2,
+      "wall_s": 63.609210938000615,
+      "calls": 9300,
+      "peak_calls": {
+        "negative": 5486,
+        "positive": 6047
+      },
+      "native": {
+        "n_update": 400,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 18,
+      "training_s": 33.956797005994304,
+      "geometry_s": 9.698836744006258,
+      "log_evidence": -57.4784751887856,
+      "max_log_likelihood": -38.17117055011328,
+      "ess": 1650.036118371665,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.06670376480217,
+        9.9985781369837,
+        50.03360090171649
+      ],
+      "folded_std": [
+        0.07323120285040863,
+        0.0332645654791575,
+        0.03287956142066648
+      ],
+      "positive_mass": 0.5006076236010656
+    }
+  ],
+  "pairs": [
+    {
+      "fixture": "profile",
+      "seed": 1,
+      "checks": {
+        "default_evidence": true,
+        "default_peaks": true,
+        "doubled_evidence": true,
+        "doubled_peaks": true,
+        "peak_discovery": false,
+        "folded_means": true
+      },
+      "mean_shifts_in_baseline_sd": [
+        -0.008368972966805792,
+        0.06614310317974373,
+        0.02969932472306274
+      ],
+      "wall_reduction_pct": 34.73812688114995
+    },
+    {
+      "fixture": "profile",
+      "seed": 2,
+      "checks": {
+        "default_evidence": true,
+        "default_peaks": true,
+        "doubled_evidence": true,
+        "doubled_peaks": true,
+        "peak_discovery": false,
+        "folded_means": true
+      },
+      "mean_shifts_in_baseline_sd": [
+        -0.0033662105520466242,
+        -0.03469689729382813,
+        0.047147534584566136
+      ],
+      "wall_reduction_pct": 25.50287412471399
+    },
+    {
+      "fixture": "symmetric",
+      "seed": 1,
+      "checks": {
+        "default_evidence": true,
+        "default_peaks": true,
+        "default_mode_mass": true,
+        "doubled_evidence": true,
+        "doubled_peaks": true,
+        "doubled_mode_mass": true,
+        "peak_discovery": false,
+        "folded_means": true
+      },
+      "mean_shifts_in_baseline_sd": [
+        0.04832511046565463,
+        0.05686437883717892,
+        0.056263244012606
+      ],
+      "wall_reduction_pct": 31.1933204837614
+    },
+    {
+      "fixture": "symmetric",
+      "seed": 2,
+      "checks": {
+        "default_evidence": true,
+        "default_peaks": true,
+        "default_mode_mass": true,
+        "doubled_evidence": true,
+        "doubled_peaks": true,
+        "doubled_mode_mass": true,
+        "peak_discovery": true,
+        "folded_means": true
+      },
+      "mean_shifts_in_baseline_sd": [
+        -0.0022798407300444667,
+        -0.0010944333955840533,
+        -0.03850276946489345
+      ],
+      "wall_reduction_pct": 32.41815451600251
+    }
+  ],
+  "status": "complete",
+  "pilot_win": false
+}

@@ -13,9 +13,8 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts" / "gaussian_x1" / "nautilus"))
 
-import search_fit_breakdown as baseline
-
 import numpy as np
+import search_fit_breakdown as baseline
 from nautilus import Sampler
 from scipy.optimize import least_squares
 from scipy.special import logsumexp
@@ -39,7 +38,9 @@ def reference(dataset):
         nodes, weights = np.polynomial.legendre.leggauss(order)
         axes = []
         for peak, width, upper in zip(fit.x, widths, (100, 50, 50)):
-            edges = np.unique(np.clip([0, peak - 12 * width, peak, peak + 12 * width, upper], 0, upper))
+            edges = np.unique(
+                np.clip([0, peak - 12 * width, peak, peak + 12 * width, upper], 0, upper)
+            )
             grid, mass = [], []
             for lo, hi in zip(edges[:-1], edges[1:]):
                 grid.extend((hi + lo + (hi - lo) * nodes) / 2)
@@ -57,15 +58,21 @@ def reference(dataset):
         log_evidences.append(float(logsumexp(parts)))
     if abs(log_evidences[-1] - log_evidences[-2]) > 0.001:
         raise RuntimeError("Evidence quadrature failed to converge")
-    return {"best_log_likelihood": -fit.cost, "maximum": fit.x.tolist(),
-            "orders": [16, 32, 48], "log_evidences": log_evidences}
+    return {
+        "best_log_likelihood": -fit.cost,
+        "maximum": fit.x.tolist(),
+        "orders": [16, 32, 48],
+        "log_evidences": log_evidences,
+    }
 
 
 class SignedGaussian(baseline.Gaussian):
     """Identical positive- and negative-centre peaks under a uniform signed prior."""
 
     def model_data_from(self, xvalues):
-        return baseline.Gaussian(abs(self.centre), self.normalization, self.sigma).model_data_from(xvalues)
+        return baseline.Gaussian(abs(self.centre), self.normalization, self.sigma).model_data_from(
+            xvalues
+        )
 
 
 def run_one(directory, fixture, arm, seed, ref):
@@ -74,12 +81,23 @@ def run_one(directory, fixture, arm, seed, ref):
     baseline.af.conf.instance.push(new_path=ROOT / "config", output_path=directory / "output")
     model = baseline.make_model()
     if fixture == "symmetric":
-        model = baseline.af.Model(SignedGaussian, normalization=model.normalization, sigma=model.sigma,
-                                  centre=baseline.af.UniformPrior(lower_limit=-100, upper_limit=100))
+        model = baseline.af.Model(
+            SignedGaussian,
+            normalization=model.normalization,
+            sigma=model.sigma,
+            centre=baseline.af.UniformPrior(lower_limit=-100, upper_limit=100),
+        )
     names = list(model.parameter_names)
     centre_index = names.index("centre")
-    search = baseline.af.Nautilus(name="cadence", verbose=False, n_live=200, n_networks=4,
-                                  number_of_cores=1, seed=seed, n_update=None if arm == "default" else 400)
+    search = baseline.af.Nautilus(
+        name="cadence",
+        verbose=False,
+        n_live=200,
+        n_networks=4,
+        number_of_cores=1,
+        seed=seed,
+        n_update=None if arm == "default" else 400,
+    )
     analysis = baseline.AnalysisGaussianX1(*baseline.make_dataset())
     trace = {"calls": 0, "peak_calls": {}, "native": {}}
     timer = baseline.ExclusiveTimer()
@@ -90,10 +108,18 @@ def run_one(directory, fixture, arm, seed, ref):
     def observed(sampler, points):
         result = evaluate(sampler, points)
         if not trace["native"]:
-            trace["native"] = {"n_update": int(sampler.n_update), "n_batch": int(sampler.n_batch),
-                               "n_networks": int(sampler.n_networks), "n_live": int(sampler.n_live)}
+            trace["native"] = {
+                "n_update": int(sampler.n_update),
+                "n_batch": int(sampler.n_batch),
+                "n_networks": int(sampler.n_networks),
+                "n_live": int(sampler.n_live),
+            }
         for index in np.flatnonzero(np.asarray(result[0]) >= threshold):
-            sign = "negative" if fixture == "symmetric" and points[index, centre_index] < 0.5 else "positive"
+            sign = (
+                "negative"
+                if fixture == "symmetric" and points[index, centre_index] < 0.5
+                else "positive"
+            )
             trace["peak_calls"].setdefault(sign, trace["calls"] + int(index) + 1)
         trace["calls"] += len(points)
         return result
@@ -112,16 +138,30 @@ def run_one(directory, fixture, arm, seed, ref):
     positive_mass = float(weights[params[:, centre_index] > 0].sum())
     params[:, centre_index] = abs(params[:, centre_index])
     mean = weights @ params
-    std = np.sqrt(weights @ (params - mean)**2)
+    std = np.sqrt(weights @ (params - mean) ** 2)
     expected_interval = 200 if arm == "default" else 400
-    if trace["native"]["n_update"] != expected_interval or trace["calls"] != samples.samples_info["total_samples"]:
+    if (
+        trace["native"]["n_update"] != expected_interval
+        or trace["calls"] != samples.samples_info["total_samples"]
+    ):
         raise RuntimeError("Sampler cadence or evaluation accounting mismatch")
-    return {"fixture": fixture, "arm": arm, "seed": seed, "wall_s": wall, **trace,
-            "bounds": timer.counts["bound_geometry"], "training_s": timer.totals["nn_training"],
-            "geometry_s": timer.totals["bound_geometry"], "log_evidence": float(samples.log_evidence),
-            "max_log_likelihood": float(max(samples.log_likelihood_list)), "ess": float(1 / (weights @ weights)),
-            "parameter_names": names, "folded_mean": mean.tolist(), "folded_std": std.tolist(),
-            "positive_mass": positive_mass}
+    return {
+        "fixture": fixture,
+        "arm": arm,
+        "seed": seed,
+        "wall_s": wall,
+        **trace,
+        "bounds": timer.counts["bound_geometry"],
+        "training_s": timer.totals["nn_training"],
+        "geometry_s": timer.totals["bound_geometry"],
+        "log_evidence": float(samples.log_evidence),
+        "max_log_likelihood": float(max(samples.log_likelihood_list)),
+        "ess": float(1 / (weights @ weights)),
+        "parameter_names": names,
+        "folded_mean": mean.tolist(),
+        "folded_std": std.tolist(),
+        "positive_mass": positive_mass,
+    }
 
 
 def compare(base, candidate, ref):
@@ -134,15 +174,21 @@ def compare(base, candidate, ref):
         if len(modes) == 2:
             checks[f"{arm}_mode_mass"] = 0.35 <= row["positive_mass"] <= 0.65
     checks["peak_discovery"] = all(
-        mode in base["peak_calls"] and mode in candidate["peak_calls"]
-        and candidate["peak_calls"][mode] <= base["peak_calls"][mode] * 1.25 for mode in modes
+        mode in base["peak_calls"]
+        and mode in candidate["peak_calls"]
+        and candidate["peak_calls"][mode] <= base["peak_calls"][mode] * 1.25
+        for mode in modes
     )
     # Prior creation order can differ between models. Compare within each fixture by name.
     delta = (np.asarray(candidate["folded_mean"]) - base["folded_mean"]) / base["folded_std"]
     checks["folded_means"] = bool(np.all(abs(delta) <= 0.3))
-    return {"fixture": base["fixture"], "seed": base["seed"], "checks": checks,
-            "mean_shifts_in_baseline_sd": delta.tolist(),
-            "wall_reduction_pct": 100 * (1 - candidate["wall_s"] / base["wall_s"])}
+    return {
+        "fixture": base["fixture"],
+        "seed": base["seed"],
+        "checks": checks,
+        "mean_shifts_in_baseline_sd": delta.tolist(),
+        "wall_reduction_pct": 100 * (1 - candidate["wall_s"] / base["wall_s"]),
+    }
 
 
 def write(path, obj):
@@ -163,20 +209,47 @@ def main():
     directory.mkdir(parents=True, exist_ok=False)
     ref = reference(baseline.make_dataset())
     write(directory / "reference.json", ref)
-    plan = [(fixture, seed, arm) for i, fixture in enumerate(FIXTURES) for seed in (1, 2)
-            for arm in (ARMS if (i + seed) % 2 else ARMS[::-1])]
+    plan = [
+        (fixture, seed, arm)
+        for i, fixture in enumerate(FIXTURES)
+        for seed in (1, 2)
+        for arm in (ARMS if (i + seed) % 2 else ARMS[::-1])
+    ]
     software, release, dirty = baseline.software()
-    receipt = {"reference": ref, "software": software, "release": release, "dirty_library": dirty,
-               "python": platform.python_version(), "threads": 1, "plan": plan, "runs": [], "pairs": [],
-               "status": "running"}
+    receipt = {
+        "reference": ref,
+        "software": software,
+        "release": release,
+        "dirty_library": dirty,
+        "python": platform.python_version(),
+        "threads": 1,
+        "plan": plan,
+        "runs": [],
+        "pairs": [],
+        "status": "running",
+    }
     for fixture, seed, arm in plan:
         case = directory / f"{fixture}-{seed}-{arm}"
         case.mkdir()
-        cmd = [sys.executable, str(Path(__file__).resolve()), str(case), "--case", fixture, arm, str(seed)]
+        cmd = [
+            sys.executable,
+            str(Path(__file__).resolve()),
+            str(case),
+            "--case",
+            fixture,
+            arm,
+            str(seed),
+        ]
         try:
             with (case / "fit.log").open("w") as log:
-                subprocess.run(cmd, env={**os.environ, **dict.fromkeys(THREAD_VARS, "1")},
-                               stdout=log, stderr=subprocess.STDOUT, timeout=300, check=True)
+                subprocess.run(
+                    cmd,
+                    env={**os.environ, **dict.fromkeys(THREAD_VARS, "1")},
+                    stdout=log,
+                    stderr=subprocess.STDOUT,
+                    timeout=300,
+                    check=True,
+                )
         except (subprocess.SubprocessError, OSError) as error:
             receipt.update(status="incomplete", failure=str(error), failed_case=case.name)
             write(directory / "result.json", receipt)
@@ -188,7 +261,9 @@ def main():
             pair = {r["arm"]: r for r in receipt["runs"][-2:]}
             receipt["pairs"].append(compare(pair["default"], pair["doubled"], ref))
         write(directory / "result.json", receipt)
-    passed = all(p["wall_reduction_pct"] > 0 and all(p["checks"].values()) for p in receipt["pairs"])
+    passed = all(
+        p["wall_reduction_pct"] > 0 and all(p["checks"].values()) for p in receipt["pairs"]
+    )
     receipt.update(status="complete", pilot_win=passed)
     write(directory / "result.json", receipt)
 

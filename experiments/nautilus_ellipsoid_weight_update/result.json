@@ -1,0 +1,1011 @@
+{
+  "status": "complete",
+  "source_sha256": "61e91f8fb85cf4a38877cd1c65bb0b111589bde77f5f74acb22a90f3ff2ec45c",
+  "checkpoint_sha256": "752fbc1390babd98838eb1bb4c28c9d36420e512c6eb4da201a3217f6931cbf3",
+  "harness_sha256": "965c8cd737f52049761facf7523627f7d1f35803afd2d383bfb41d2f40d1c96c",
+  "versions": {
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "h5py": "3.10.0",
+    "threadpoolctl": "3.6.0"
+  },
+  "python": "3.10.12",
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "parity": [
+    {
+      "ordinal": 1,
+      "call_count": 20,
+      "call_sequence_sha256": "a05f01383151c9450d67b9416f64d8f7e0caa2b699bd47262cc1bb6539917adc"
+    },
+    {
+      "ordinal": 2,
+      "call_count": 19,
+      "call_sequence_sha256": "49aaf89c96ad7551edafc219854dbdcf77a995a09112e7deca23e776577ecfc5"
+    },
+    {
+      "ordinal": 3,
+      "call_count": 2,
+      "call_sequence_sha256": "0e66de42f37610cb438d1a5662aa03a2fd1524deb0bee074a1bdc0a76a76aeea"
+    },
+    {
+      "ordinal": 4,
+      "call_count": 2,
+      "call_sequence_sha256": "b0d3bccb1d045b890f81555aefc71fdb8b660d821de61b01e9ffdf9590fd6a86"
+    },
+    {
+      "ordinal": 5,
+      "call_count": 2,
+      "call_sequence_sha256": "f632e8729b5de5293a08fdb6a2d4ce2140352de7ba4464673478a363a7b6fdcd"
+    },
+    {
+      "ordinal": 6,
+      "call_count": 2,
+      "call_sequence_sha256": "fe216125c4c21a4b3f1e6bd229b4eae8ce8852660b1e65cbb2a4cd06bee00960"
+    },
+    {
+      "ordinal": 7,
+      "call_count": 2,
+      "call_sequence_sha256": "433c6e598c7d78e6c0c2316f33a63772bcb4fd9182c2c792e297f0feff785a88"
+    },
+    {
+      "ordinal": 8,
+      "call_count": 2,
+      "call_sequence_sha256": "4a9bd2f134d4ee3d2e09328a9c695cc36a22cdb0d323181ac3e2f4709214935e"
+    },
+    {
+      "ordinal": 9,
+      "call_count": 2,
+      "call_sequence_sha256": "c5b0ada971a72860c01c6631654ecb827b679b1ee8cfb2b533a5fbb3c1b4dd84"
+    },
+    {
+      "ordinal": 10,
+      "call_count": 2,
+      "call_sequence_sha256": "d77414dc09bb5c6c01b967f4cbb53a8ea2e4f056e61c740bc25871c198e1ac38"
+    },
+    {
+      "ordinal": 11,
+      "call_count": 2,
+      "call_sequence_sha256": "d151cf237cb0c290c9e310f8ef527114beacb7f91744857e01136044cb7a38c5"
+    }
+  ],
+  "timings": [
+    {
+      "block": 1,
+      "ordinal": 1,
+      "variant": "native",
+      "wall_ns": 904481503,
+      "cpu_ns": 953032400
+    },
+    {
+      "block": 1,
+      "ordinal": 1,
+      "variant": "candidate",
+      "wall_ns": 837916356,
+      "cpu_ns": 882899800
+    },
+    {
+      "block": 1,
+      "ordinal": 2,
+      "variant": "candidate",
+      "wall_ns": 524329545,
+      "cpu_ns": 552481300
+    },
+    {
+      "block": 1,
+      "ordinal": 2,
+      "variant": "native",
+      "wall_ns": 671299016,
+      "cpu_ns": 705935700
+    },
+    {
+      "block": 1,
+      "ordinal": 3,
+      "variant": "native",
+      "wall_ns": 170103635,
+      "cpu_ns": 179243500
+    },
+    {
+      "block": 1,
+      "ordinal": 3,
+      "variant": "candidate",
+      "wall_ns": 143254457,
+      "cpu_ns": 150941200
+    },
+    {
+      "block": 1,
+      "ordinal": 4,
+      "variant": "candidate",
+      "wall_ns": 202644392,
+      "cpu_ns": 213518900
+    },
+    {
+      "block": 1,
+      "ordinal": 4,
+      "variant": "native",
+      "wall_ns": 251694069,
+      "cpu_ns": 265216500
+    },
+    {
+      "block": 1,
+      "ordinal": 5,
+      "variant": "native",
+      "wall_ns": 193101896,
+      "cpu_ns": 203465400
+    },
+    {
+      "block": 1,
+      "ordinal": 5,
+      "variant": "candidate",
+      "wall_ns": 159205057,
+      "cpu_ns": 167759600
+    },
+    {
+      "block": 1,
+      "ordinal": 6,
+      "variant": "candidate",
+      "wall_ns": 158461674,
+      "cpu_ns": 166977600
+    },
+    {
+      "block": 1,
+      "ordinal": 6,
+      "variant": "native",
+      "wall_ns": 180216884,
+      "cpu_ns": 189899900
+    },
+    {
+      "block": 1,
+      "ordinal": 7,
+      "variant": "native",
+      "wall_ns": 181879411,
+      "cpu_ns": 191651000
+    },
+    {
+      "block": 1,
+      "ordinal": 7,
+      "variant": "candidate",
+      "wall_ns": 160745158,
+      "cpu_ns": 169382400
+    },
+    {
+      "block": 1,
+      "ordinal": 8,
+      "variant": "candidate",
+      "wall_ns": 157642558,
+      "cpu_ns": 166103000
+    },
+    {
+      "block": 1,
+      "ordinal": 8,
+      "variant": "native",
+      "wall_ns": 198536001,
+      "cpu_ns": 209188600
+    },
+    {
+      "block": 1,
+      "ordinal": 9,
+      "variant": "native",
+      "wall_ns": 174325152,
+      "cpu_ns": 183690900
+    },
+    {
+      "block": 1,
+      "ordinal": 9,
+      "variant": "candidate",
+      "wall_ns": 146342916,
+      "cpu_ns": 154206200
+    },
+    {
+      "block": 1,
+      "ordinal": 10,
+      "variant": "candidate",
+      "wall_ns": 140071569,
+      "cpu_ns": 147598900
+    },
+    {
+      "block": 1,
+      "ordinal": 10,
+      "variant": "native",
+      "wall_ns": 189828795,
+      "cpu_ns": 199247000
+    },
+    {
+      "block": 1,
+      "ordinal": 11,
+      "variant": "native",
+      "wall_ns": 171253815,
+      "cpu_ns": 179558100
+    },
+    {
+      "block": 1,
+      "ordinal": 11,
+      "variant": "candidate",
+      "wall_ns": 150510996,
+      "cpu_ns": 157839800
+    },
+    {
+      "block": 2,
+      "ordinal": 11,
+      "variant": "candidate",
+      "wall_ns": 149757079,
+      "cpu_ns": 157034500
+    },
+    {
+      "block": 2,
+      "ordinal": 11,
+      "variant": "native",
+      "wall_ns": 184214392,
+      "cpu_ns": 193183200
+    },
+    {
+      "block": 2,
+      "ordinal": 10,
+      "variant": "native",
+      "wall_ns": 188714434,
+      "cpu_ns": 197902600
+    },
+    {
+      "block": 2,
+      "ordinal": 10,
+      "variant": "candidate",
+      "wall_ns": 163921388,
+      "cpu_ns": 171895300
+    },
+    {
+      "block": 2,
+      "ordinal": 9,
+      "variant": "candidate",
+      "wall_ns": 158231157,
+      "cpu_ns": 165935800
+    },
+    {
+      "block": 2,
+      "ordinal": 9,
+      "variant": "native",
+      "wall_ns": 174539636,
+      "cpu_ns": 183037300
+    },
+    {
+      "block": 2,
+      "ordinal": 8,
+      "variant": "native",
+      "wall_ns": 171021613,
+      "cpu_ns": 179349500
+    },
+    {
+      "block": 2,
+      "ordinal": 8,
+      "variant": "candidate",
+      "wall_ns": 147680327,
+      "cpu_ns": 154870900
+    },
+    {
+      "block": 2,
+      "ordinal": 7,
+      "variant": "candidate",
+      "wall_ns": 143665002,
+      "cpu_ns": 150655500
+    },
+    {
+      "block": 2,
+      "ordinal": 7,
+      "variant": "native",
+      "wall_ns": 175901855,
+      "cpu_ns": 184456600
+    },
+    {
+      "block": 2,
+      "ordinal": 6,
+      "variant": "native",
+      "wall_ns": 202041958,
+      "cpu_ns": 211878300
+    },
+    {
+      "block": 2,
+      "ordinal": 6,
+      "variant": "candidate",
+      "wall_ns": 190533713,
+      "cpu_ns": 199811600
+    },
+    {
+      "block": 2,
+      "ordinal": 5,
+      "variant": "candidate",
+      "wall_ns": 144578361,
+      "cpu_ns": 151618900
+    },
+    {
+      "block": 2,
+      "ordinal": 5,
+      "variant": "native",
+      "wall_ns": 199854970,
+      "cpu_ns": 207753900
+    },
+    {
+      "block": 2,
+      "ordinal": 4,
+      "variant": "native",
+      "wall_ns": 189779224,
+      "cpu_ns": 199019200
+    },
+    {
+      "block": 2,
+      "ordinal": 4,
+      "variant": "candidate",
+      "wall_ns": 150998858,
+      "cpu_ns": 158343300
+    },
+    {
+      "block": 2,
+      "ordinal": 3,
+      "variant": "candidate",
+      "wall_ns": 140909382,
+      "cpu_ns": 147771600
+    },
+    {
+      "block": 2,
+      "ordinal": 3,
+      "variant": "native",
+      "wall_ns": 163757369,
+      "cpu_ns": 171731100
+    },
+    {
+      "block": 2,
+      "ordinal": 2,
+      "variant": "native",
+      "wall_ns": 642262191,
+      "cpu_ns": 673507500
+    },
+    {
+      "block": 2,
+      "ordinal": 2,
+      "variant": "candidate",
+      "wall_ns": 576074577,
+      "cpu_ns": 604110200
+    },
+    {
+      "block": 2,
+      "ordinal": 1,
+      "variant": "candidate",
+      "wall_ns": 915944546,
+      "cpu_ns": 960505900
+    },
+    {
+      "block": 2,
+      "ordinal": 1,
+      "variant": "native",
+      "wall_ns": 1284486523,
+      "cpu_ns": 1346971600
+    },
+    {
+      "block": 3,
+      "ordinal": 1,
+      "variant": "native",
+      "wall_ns": 1364355198,
+      "cpu_ns": 1450151000
+    },
+    {
+      "block": 3,
+      "ordinal": 1,
+      "variant": "candidate",
+      "wall_ns": 873167734,
+      "cpu_ns": 962591200
+    },
+    {
+      "block": 3,
+      "ordinal": 2,
+      "variant": "candidate",
+      "wall_ns": 638579080,
+      "cpu_ns": 703969600
+    },
+    {
+      "block": 3,
+      "ordinal": 2,
+      "variant": "native",
+      "wall_ns": 711364073,
+      "cpu_ns": 784202200
+    },
+    {
+      "block": 3,
+      "ordinal": 3,
+      "variant": "native",
+      "wall_ns": 249340119,
+      "cpu_ns": 274727000
+    },
+    {
+      "block": 3,
+      "ordinal": 3,
+      "variant": "candidate",
+      "wall_ns": 170398409,
+      "cpu_ns": 187854400
+    },
+    {
+      "block": 3,
+      "ordinal": 4,
+      "variant": "candidate",
+      "wall_ns": 153010076,
+      "cpu_ns": 168687100
+    },
+    {
+      "block": 3,
+      "ordinal": 4,
+      "variant": "native",
+      "wall_ns": 230553480,
+      "cpu_ns": 254155700
+    },
+    {
+      "block": 3,
+      "ordinal": 5,
+      "variant": "native",
+      "wall_ns": 170902126,
+      "cpu_ns": 188409100
+    },
+    {
+      "block": 3,
+      "ordinal": 5,
+      "variant": "candidate",
+      "wall_ns": 136244018,
+      "cpu_ns": 150201100
+    },
+    {
+      "block": 3,
+      "ordinal": 6,
+      "variant": "candidate",
+      "wall_ns": 139006885,
+      "cpu_ns": 153248500
+    },
+    {
+      "block": 3,
+      "ordinal": 6,
+      "variant": "native",
+      "wall_ns": 160417149,
+      "cpu_ns": 176850100
+    },
+    {
+      "block": 3,
+      "ordinal": 7,
+      "variant": "native",
+      "wall_ns": 166034408,
+      "cpu_ns": 183034000
+    },
+    {
+      "block": 3,
+      "ordinal": 7,
+      "variant": "candidate",
+      "wall_ns": 137660466,
+      "cpu_ns": 151762900
+    },
+    {
+      "block": 3,
+      "ordinal": 8,
+      "variant": "candidate",
+      "wall_ns": 135300083,
+      "cpu_ns": 149162300
+    },
+    {
+      "block": 3,
+      "ordinal": 8,
+      "variant": "native",
+      "wall_ns": 164550291,
+      "cpu_ns": 181406700
+    },
+    {
+      "block": 3,
+      "ordinal": 9,
+      "variant": "native",
+      "wall_ns": 171207549,
+      "cpu_ns": 188745600
+    },
+    {
+      "block": 3,
+      "ordinal": 9,
+      "variant": "candidate",
+      "wall_ns": 148932993,
+      "cpu_ns": 164189700
+    },
+    {
+      "block": 3,
+      "ordinal": 10,
+      "variant": "candidate",
+      "wall_ns": 168990308,
+      "cpu_ns": 186302700
+    },
+    {
+      "block": 3,
+      "ordinal": 10,
+      "variant": "native",
+      "wall_ns": 270240770,
+      "cpu_ns": 297906400
+    },
+    {
+      "block": 3,
+      "ordinal": 11,
+      "variant": "native",
+      "wall_ns": 179584501,
+      "cpu_ns": 197983300
+    },
+    {
+      "block": 3,
+      "ordinal": 11,
+      "variant": "candidate",
+      "wall_ns": 160333585,
+      "cpu_ns": 168795400
+    },
+    {
+      "block": 4,
+      "ordinal": 11,
+      "variant": "candidate",
+      "wall_ns": 138926311,
+      "cpu_ns": 145634000
+    },
+    {
+      "block": 4,
+      "ordinal": 11,
+      "variant": "native",
+      "wall_ns": 166427384,
+      "cpu_ns": 174455500
+    },
+    {
+      "block": 4,
+      "ordinal": 10,
+      "variant": "native",
+      "wall_ns": 173637330,
+      "cpu_ns": 182002200
+    },
+    {
+      "block": 4,
+      "ordinal": 10,
+      "variant": "candidate",
+      "wall_ns": 158356666,
+      "cpu_ns": 165992400
+    },
+    {
+      "block": 4,
+      "ordinal": 9,
+      "variant": "candidate",
+      "wall_ns": 160021543,
+      "cpu_ns": 167747100
+    },
+    {
+      "block": 4,
+      "ordinal": 9,
+      "variant": "native",
+      "wall_ns": 186289413,
+      "cpu_ns": 195282600
+    },
+    {
+      "block": 4,
+      "ordinal": 8,
+      "variant": "native",
+      "wall_ns": 172180040,
+      "cpu_ns": 180493700
+    },
+    {
+      "block": 4,
+      "ordinal": 8,
+      "variant": "candidate",
+      "wall_ns": 147357535,
+      "cpu_ns": 154472000
+    },
+    {
+      "block": 4,
+      "ordinal": 7,
+      "variant": "candidate",
+      "wall_ns": 153074512,
+      "cpu_ns": 160424900
+    },
+    {
+      "block": 4,
+      "ordinal": 7,
+      "variant": "native",
+      "wall_ns": 176998563,
+      "cpu_ns": 185544300
+    },
+    {
+      "block": 4,
+      "ordinal": 6,
+      "variant": "native",
+      "wall_ns": 190002472,
+      "cpu_ns": 199177200
+    },
+    {
+      "block": 4,
+      "ordinal": 6,
+      "variant": "candidate",
+      "wall_ns": 178850704,
+      "cpu_ns": 187485800
+    },
+    {
+      "block": 4,
+      "ordinal": 5,
+      "variant": "candidate",
+      "wall_ns": 157767110,
+      "cpu_ns": 165384500
+    },
+    {
+      "block": 4,
+      "ordinal": 5,
+      "variant": "native",
+      "wall_ns": 189388938,
+      "cpu_ns": 199038200
+    },
+    {
+      "block": 4,
+      "ordinal": 4,
+      "variant": "native",
+      "wall_ns": 258139108,
+      "cpu_ns": 271501100
+    },
+    {
+      "block": 4,
+      "ordinal": 4,
+      "variant": "candidate",
+      "wall_ns": 218837620,
+      "cpu_ns": 230177200
+    },
+    {
+      "block": 4,
+      "ordinal": 3,
+      "variant": "candidate",
+      "wall_ns": 207808202,
+      "cpu_ns": 218567700
+    },
+    {
+      "block": 4,
+      "ordinal": 3,
+      "variant": "native",
+      "wall_ns": 278333592,
+      "cpu_ns": 292761100
+    },
+    {
+      "block": 4,
+      "ordinal": 2,
+      "variant": "native",
+      "wall_ns": 874241797,
+      "cpu_ns": 919494100
+    },
+    {
+      "block": 4,
+      "ordinal": 2,
+      "variant": "candidate",
+      "wall_ns": 776599989,
+      "cpu_ns": 816809500
+    },
+    {
+      "block": 4,
+      "ordinal": 1,
+      "variant": "candidate",
+      "wall_ns": 983296560,
+      "cpu_ns": 1034197100
+    },
+    {
+      "block": 4,
+      "ordinal": 1,
+      "variant": "native",
+      "wall_ns": 1122373366,
+      "cpu_ns": 1180494300
+    },
+    {
+      "block": 5,
+      "ordinal": 1,
+      "variant": "native",
+      "wall_ns": 1216316803,
+      "cpu_ns": 1279296100
+    },
+    {
+      "block": 5,
+      "ordinal": 1,
+      "variant": "candidate",
+      "wall_ns": 1548746986,
+      "cpu_ns": 1627888300
+    },
+    {
+      "block": 5,
+      "ordinal": 2,
+      "variant": "candidate",
+      "wall_ns": 824472185,
+      "cpu_ns": 867089400
+    },
+    {
+      "block": 5,
+      "ordinal": 2,
+      "variant": "native",
+      "wall_ns": 891167544,
+      "cpu_ns": 935815000
+    },
+    {
+      "block": 5,
+      "ordinal": 3,
+      "variant": "native",
+      "wall_ns": 237956193,
+      "cpu_ns": 250332600
+    },
+    {
+      "block": 5,
+      "ordinal": 3,
+      "variant": "candidate",
+      "wall_ns": 186473601,
+      "cpu_ns": 196163300
+    },
+    {
+      "block": 5,
+      "ordinal": 4,
+      "variant": "candidate",
+      "wall_ns": 189551681,
+      "cpu_ns": 199418200
+    },
+    {
+      "block": 5,
+      "ordinal": 4,
+      "variant": "native",
+      "wall_ns": 218243064,
+      "cpu_ns": 229591800
+    },
+    {
+      "block": 5,
+      "ordinal": 5,
+      "variant": "native",
+      "wall_ns": 243114177,
+      "cpu_ns": 255373600
+    },
+    {
+      "block": 5,
+      "ordinal": 5,
+      "variant": "candidate",
+      "wall_ns": 229155598,
+      "cpu_ns": 241082700
+    },
+    {
+      "block": 5,
+      "ordinal": 6,
+      "variant": "candidate",
+      "wall_ns": 231537872,
+      "cpu_ns": 243578100
+    },
+    {
+      "block": 5,
+      "ordinal": 6,
+      "variant": "native",
+      "wall_ns": 266978845,
+      "cpu_ns": 280613900
+    },
+    {
+      "block": 5,
+      "ordinal": 7,
+      "variant": "native",
+      "wall_ns": 317051291,
+      "cpu_ns": 332925200
+    },
+    {
+      "block": 5,
+      "ordinal": 7,
+      "variant": "candidate",
+      "wall_ns": 245804240,
+      "cpu_ns": 258599100
+    },
+    {
+      "block": 5,
+      "ordinal": 8,
+      "variant": "candidate",
+      "wall_ns": 248351816,
+      "cpu_ns": 261278000
+    },
+    {
+      "block": 5,
+      "ordinal": 8,
+      "variant": "native",
+      "wall_ns": 262218192,
+      "cpu_ns": 275854400
+    },
+    {
+      "block": 5,
+      "ordinal": 9,
+      "variant": "native",
+      "wall_ns": 330332412,
+      "cpu_ns": 347525000
+    },
+    {
+      "block": 5,
+      "ordinal": 9,
+      "variant": "candidate",
+      "wall_ns": 292101473,
+      "cpu_ns": 307295500
+    },
+    {
+      "block": 5,
+      "ordinal": 10,
+      "variant": "candidate",
+      "wall_ns": 229874405,
+      "cpu_ns": 241828300
+    },
+    {
+      "block": 5,
+      "ordinal": 10,
+      "variant": "native",
+      "wall_ns": 273899817,
+      "cpu_ns": 288142300
+    },
+    {
+      "block": 5,
+      "ordinal": 11,
+      "variant": "native",
+      "wall_ns": 289872237,
+      "cpu_ns": 304661800
+    },
+    {
+      "block": 5,
+      "ordinal": 11,
+      "variant": "candidate",
+      "wall_ns": 248019693,
+      "cpu_ns": 260916600
+    },
+    {
+      "block": 6,
+      "ordinal": 11,
+      "variant": "candidate",
+      "wall_ns": 239859960,
+      "cpu_ns": 252334400
+    },
+    {
+      "block": 6,
+      "ordinal": 11,
+      "variant": "native",
+      "wall_ns": 296848723,
+      "cpu_ns": 312300200
+    },
+    {
+      "block": 6,
+      "ordinal": 10,
+      "variant": "native",
+      "wall_ns": 356510344,
+      "cpu_ns": 372961800
+    },
+    {
+      "block": 6,
+      "ordinal": 10,
+      "variant": "candidate",
+      "wall_ns": 249025092,
+      "cpu_ns": 261987900
+    },
+    {
+      "block": 6,
+      "ordinal": 9,
+      "variant": "candidate",
+      "wall_ns": 278798966,
+      "cpu_ns": 293311000
+    },
+    {
+      "block": 6,
+      "ordinal": 9,
+      "variant": "native",
+      "wall_ns": 277080841,
+      "cpu_ns": 291501000
+    },
+    {
+      "block": 6,
+      "ordinal": 8,
+      "variant": "native",
+      "wall_ns": 318299415,
+      "cpu_ns": 334652700
+    },
+    {
+      "block": 6,
+      "ordinal": 8,
+      "variant": "candidate",
+      "wall_ns": 269881949,
+      "cpu_ns": 282843300
+    },
+    {
+      "block": 6,
+      "ordinal": 7,
+      "variant": "candidate",
+      "wall_ns": 263859471,
+      "cpu_ns": 276515100
+    },
+    {
+      "block": 6,
+      "ordinal": 7,
+      "variant": "native",
+      "wall_ns": 360001470,
+      "cpu_ns": 377101700
+    },
+    {
+      "block": 6,
+      "ordinal": 6,
+      "variant": "native",
+      "wall_ns": 337834511,
+      "cpu_ns": 354058700
+    },
+    {
+      "block": 6,
+      "ordinal": 6,
+      "variant": "candidate",
+      "wall_ns": 308790704,
+      "cpu_ns": 323580100
+    },
+    {
+      "block": 6,
+      "ordinal": 5,
+      "variant": "candidate",
+      "wall_ns": 364829890,
+      "cpu_ns": 382165700
+    },
+    {
+      "block": 6,
+      "ordinal": 5,
+      "variant": "native",
+      "wall_ns": 336338743,
+      "cpu_ns": 350050300
+    },
+    {
+      "block": 6,
+      "ordinal": 4,
+      "variant": "native",
+      "wall_ns": 309640398,
+      "cpu_ns": 303153400
+    },
+    {
+      "block": 6,
+      "ordinal": 4,
+      "variant": "candidate",
+      "wall_ns": 247158228,
+      "cpu_ns": 259013500
+    },
+    {
+      "block": 6,
+      "ordinal": 3,
+      "variant": "candidate",
+      "wall_ns": 230541334,
+      "cpu_ns": 241609700
+    },
+    {
+      "block": 6,
+      "ordinal": 3,
+      "variant": "native",
+      "wall_ns": 226792088,
+      "cpu_ns": 237679400
+    },
+    {
+      "block": 6,
+      "ordinal": 2,
+      "variant": "native",
+      "wall_ns": 1196558920,
+      "cpu_ns": 1254010100
+    },
+    {
+      "block": 6,
+      "ordinal": 2,
+      "variant": "candidate",
+      "wall_ns": 1291440165,
+      "cpu_ns": 1344126300
+    },
+    {
+      "block": 6,
+      "ordinal": 1,
+      "variant": "candidate",
+      "wall_ns": 2063520262,
+      "cpu_ns": 2150661200
+    },
+    {
+      "block": 6,
+      "ordinal": 1,
+      "variant": "native",
+      "wall_ns": 1964886658,
+      "cpu_ns": 2164001600
+    }
+  ],
+  "threads": [
+    {
+      "internal_api": "openblas",
+      "version": "0.3.23.dev",
+      "num_threads": 1,
+      "architecture": "Haswell"
+    },
+    {
+      "internal_api": "openblas",
+      "version": "0.3.28",
+      "num_threads": 1,
+      "architecture": "Haswell"
+    }
+  ]
+}

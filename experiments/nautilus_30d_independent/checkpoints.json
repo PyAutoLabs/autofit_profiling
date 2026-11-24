@@ -1,0 +1,254 @@
+{
+  "analytic_logZ": -36.76768815337412,
+  "seeds": [
+    {
+      "stream": "seed1",
+      "exploration": {
+        "estimate": {
+          "logZ": -37.66005977621391,
+          "logZ_error": -0.8923716228397964,
+          "n_eff": 9404.067074797325,
+          "posterior_sha256": "b1fc0250d84a27f27f3ed829cc88391229361efd57011c0c16ffb8c51878af88",
+          "n_like": 33700,
+          "selected_samples": 33604,
+          "fresh_samples_per_shell": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "max_standardized_mean_error": 0.07522447858566512,
+          "covariance_relative_error": 0.11324048324169811,
+          "shell_log_v": [
+            -0.6611641347068946,
+            -1.1918213339373716,
+            -1.8723893448819184,
+            -2.6845631510275214,
+            -3.3699083135107455,
+            -4.184129031369544,
+            -5.144183562769725,
+            -5.8852240735247,
+            -6.751225111222878,
+            -7.581958803339073,
+            -8.246729519778587,
+            -9.133985383828069,
+            -10.108029970016997,
+            -10.642726374438181,
+            -11.674553178829672,
+            -12.519699167564522,
+            -13.193992058392128,
+            -13.9516116164908,
+            -14.891077335630303,
+            -15.434981396334377
+          ]
+        },
+        "geometry": {
+          "ellipsoids": 14,
+          "sha256": "317b31244c0dee2d2623068473b7746c28db5214ccb5880dd5aa94568a4d15c8"
+        }
+      },
+      "checkpoint_source": "terminal",
+      "checkpoint_sha256": "dc8d367eab1fee88a2d468b3791531c29a4292bb1d436d85518de8d492c3b8a9",
+      "native_and_raw_agree": true,
+      "completed": false,
+      "supervision": {
+        "returncode": 124,
+        "termination_reason": "timeout",
+        "sampled_group_peak_rss_bytes": 661897216,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.5,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed",
+        "elapsed_s": 2400.390853568002
+      },
+      "estimate": {
+        "total_calls": 1107800,
+        "fresh_samples": 1074100,
+        "ess": 8147.378896306706,
+        "logZ": -36.76345342679733,
+        "logZ_error": 0.004234726576790138
+      }
+    },
+    {
+      "stream": "seed2",
+      "exploration": {
+        "estimate": {
+          "logZ": -37.723370143614204,
+          "logZ_error": -0.9556819902400875,
+          "n_eff": 9743.152828952005,
+          "posterior_sha256": "e560b1267a3a283881d9679d40261fbe97cfdad05af8431deaccd822fa238341",
+          "n_like": 34600,
+          "selected_samples": 34382,
+          "fresh_samples_per_shell": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "max_standardized_mean_error": 0.03684884931157322,
+          "covariance_relative_error": 0.10990721870666056,
+          "shell_log_v": [
+            -0.6981597223834896,
+            -1.2138943376341211,
+            -1.95341635346034,
+            -2.5413888701218523,
+            -3.3398364677866827,
+            -4.186246886303789,
+            -5.0875563368555685,
+            -5.964122815350779,
+            -6.759819660017344,
+            -7.771435806199773,
+            -8.603351144898824,
+            -9.313841859610797,
+            -10.039028502073734,
+            -10.855301444109099,
+            -11.542848656513433,
+            -12.36967389261914,
+            -13.231133932023768,
+            -14.03794446892126,
+            -14.906172323953447,
+            -15.613704352617031
+          ]
+        },
+        "geometry": {
+          "ellipsoids": 14,
+          "sha256": "e46ee4dd4133511541d3a5a56fb16a5c5cd9aea6dfaa141359ce83a7f12c0ad5"
+        }
+      },
+      "checkpoint_source": "terminal",
+      "checkpoint_sha256": "cd5c24b2ffe1cbc16b335efb2e41e28b2d8d2f8b29f460bba7a3e8cc8c40dfdf",
+      "native_and_raw_agree": true,
+      "completed": false,
+      "supervision": {
+        "returncode": 124,
+        "termination_reason": "timeout",
+        "sampled_group_peak_rss_bytes": 639578112,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.5,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed",
+        "elapsed_s": 2400.194811236004
+      },
+      "estimate": {
+        "total_calls": 1124700,
+        "fresh_samples": 1090100,
+        "ess": 9904.195098069627,
+        "logZ": -36.78542499890535,
+        "logZ_error": -0.017736845531231893
+      }
+    },
+    {
+      "stream": "seed3",
+      "exploration": {
+        "estimate": {
+          "logZ": -37.65632698394958,
+          "logZ_error": -0.8886388305754664,
+          "n_eff": 9239.34196874813,
+          "posterior_sha256": "7dcdd8785faf783bbc57e1d09c46a4b27439ae767e3ee4eeacb00549f7820453",
+          "n_like": 34200,
+          "selected_samples": 34200,
+          "fresh_samples_per_shell": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "max_standardized_mean_error": 0.06729117273824446,
+          "covariance_relative_error": 0.1026256527816213,
+          "shell_log_v": [
+            -0.6443570163905132,
+            -1.3037831172331948,
+            -1.884526297077409,
+            -2.686483449392004,
+            -3.358739813266205,
+            -4.058950957511103,
+            -4.934299456910265,
+            -5.649410031881214,
+            -6.542036325016354,
+            -7.282784974475383,
+            -8.160522177103672,
+            -9.05017833555404,
+            -9.853431358131333,
+            -10.593786915007133,
+            -11.454100370817352,
+            -12.224977020710023,
+            -13.109710528005134,
+            -13.72418532917296,
+            -13.871769768261938,
+            -15.22099985137453
+          ]
+        },
+        "geometry": {
+          "ellipsoids": 14,
+          "sha256": "1e2546b454d5f00401130d4f3a68ae6be579c242e71d4a8467cf0b831eb00a82"
+        }
+      },
+      "checkpoint_source": "terminal",
+      "checkpoint_sha256": "ba75eacd2703186ccbed1ad4e8fffffba6b61227f15e91053a7caa3a8beb202a",
+      "native_and_raw_agree": true,
+      "completed": false,
+      "supervision": {
+        "returncode": 124,
+        "termination_reason": "timeout",
+        "sampled_group_peak_rss_bytes": 576385024,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.5,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed",
+        "elapsed_s": 2400.3947408360036
+      },
+      "estimate": {
+        "total_calls": 970700,
+        "fresh_samples": 936500,
+        "ess": 6920.338728359906,
+        "logZ": -36.771195776280365,
+        "logZ_error": -0.0035076229062482867
+      }
+    }
+  ]
+}

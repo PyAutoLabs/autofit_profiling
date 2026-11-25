@@ -1,0 +1,1457 @@
+{
+  "seed1": {
+    "checkpoint_sha256": "16bb15f9fbc5d74b2e37b75444c64df312ab2fa6cdfabbdcaafbfda81c34bb9b",
+    "shells": [
+      {
+        "shell": 0,
+        "components": 0,
+        "train_n": 77000,
+        "test_n": 77000,
+        "tail_n": 770,
+        "log_test_squared_mass": -84.46912330414013,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": null,
+            "tie_probability": 0.1,
+            "selected": 7700.000000000001,
+            "tail_selected": 76.99999999999997,
+            "squared_weight_fraction": 0.09999999999999964
+          },
+          "neural": {
+            "cutoff": null,
+            "tie_probability": 0.1,
+            "selected": 7700.000000000001,
+            "tail_selected": 76.99999999999997,
+            "squared_weight_fraction": 0.09999999999999964
+          }
+        }
+      },
+      {
+        "shell": 1,
+        "components": 1,
+        "train_n": 92950,
+        "test_n": 92950,
+        "tail_n": 930,
+        "log_test_squared_mass": -86.17423975670226,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7231562134559197,
+            "tie_probability": 1.0,
+            "selected": 9161.0,
+            "tail_selected": 859.0,
+            "squared_weight_fraction": 0.9987933041121169
+          },
+          "neural": {
+            "cutoff": 0.3083455269150235,
+            "tie_probability": 1.0,
+            "selected": 9083.0,
+            "tail_selected": 41.0,
+            "squared_weight_fraction": 0.003908364812756221
+          }
+        }
+      },
+      {
+        "shell": 2,
+        "components": 1,
+        "train_n": 81850,
+        "test_n": 81850,
+        "tail_n": 819,
+        "log_test_squared_mass": -84.4865743285877,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7571305960496345,
+            "tie_probability": 1.0,
+            "selected": 8064.0,
+            "tail_selected": 771.0,
+            "squared_weight_fraction": 0.9998155710855597
+          },
+          "neural": {
+            "cutoff": 0.2917666497176067,
+            "tie_probability": 1.0,
+            "selected": 8176.0,
+            "tail_selected": 64.0,
+            "squared_weight_fraction": 0.009099814129059322
+          }
+        }
+      },
+      {
+        "shell": 3,
+        "components": 1,
+        "train_n": 76400,
+        "test_n": 76400,
+        "tail_n": 764,
+        "log_test_squared_mass": -85.31024331160022,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7777270240021619,
+            "tie_probability": 1.0,
+            "selected": 7648.0,
+            "tail_selected": 678.0,
+            "squared_weight_fraction": 0.9947874899060393
+          },
+          "neural": {
+            "cutoff": 0.253302725115655,
+            "tie_probability": 1.0,
+            "selected": 7609.0,
+            "tail_selected": 57.0,
+            "squared_weight_fraction": 0.015471595329182946
+          }
+        }
+      },
+      {
+        "shell": 4,
+        "components": 1,
+        "train_n": 74800,
+        "test_n": 74800,
+        "tail_n": 748,
+        "log_test_squared_mass": -84.05045653239614,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7908705788210058,
+            "tie_probability": 1.0,
+            "selected": 7360.0,
+            "tail_selected": 658.0,
+            "squared_weight_fraction": 0.994548405084559
+          },
+          "neural": {
+            "cutoff": 0.22779515137307565,
+            "tie_probability": 1.0,
+            "selected": 7395.0,
+            "tail_selected": 72.0,
+            "squared_weight_fraction": 0.20556503872240112
+          }
+        }
+      },
+      {
+        "shell": 5,
+        "components": 1,
+        "train_n": 56250,
+        "test_n": 56250,
+        "tail_n": 563,
+        "log_test_squared_mass": -84.22472579599219,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7988702426347697,
+            "tie_probability": 1.0,
+            "selected": 5480.0,
+            "tail_selected": 499.0,
+            "squared_weight_fraction": 0.9861738172651208
+          },
+          "neural": {
+            "cutoff": 0.21883329134524276,
+            "tie_probability": 1.0,
+            "selected": 5555.0,
+            "tail_selected": 58.0,
+            "squared_weight_fraction": 0.03128771130462752
+          }
+        }
+      },
+      {
+        "shell": 6,
+        "components": 1,
+        "train_n": 37600,
+        "test_n": 37600,
+        "tail_n": 376,
+        "log_test_squared_mass": -85.06461344853753,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.818777965797674,
+            "tie_probability": 1.0,
+            "selected": 3738.0,
+            "tail_selected": 331.0,
+            "squared_weight_fraction": 0.9262043177137116
+          },
+          "neural": {
+            "cutoff": 0.2082067150599251,
+            "tie_probability": 1.0,
+            "selected": 3652.0,
+            "tail_selected": 40.0,
+            "squared_weight_fraction": 0.12849284635550792
+          }
+        }
+      },
+      {
+        "shell": 7,
+        "components": 1,
+        "train_n": 32450,
+        "test_n": 32450,
+        "tail_n": 325,
+        "log_test_squared_mass": -84.94673310752003,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8173117004599434,
+            "tie_probability": 1.0,
+            "selected": 3112.0,
+            "tail_selected": 276.0,
+            "squared_weight_fraction": 0.9334740153778628
+          },
+          "neural": {
+            "cutoff": 0.20819412714436392,
+            "tie_probability": 1.0,
+            "selected": 3201.0,
+            "tail_selected": 32.0,
+            "squared_weight_fraction": 0.06602397955193443
+          }
+        }
+      },
+      {
+        "shell": 8,
+        "components": 1,
+        "train_n": 24100,
+        "test_n": 24100,
+        "tail_n": 241,
+        "log_test_squared_mass": -85.42660228435113,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8181878853387887,
+            "tie_probability": 1.0,
+            "selected": 2377.0,
+            "tail_selected": 209.0,
+            "squared_weight_fraction": 0.8936109038129019
+          },
+          "neural": {
+            "cutoff": 0.1824078387010314,
+            "tie_probability": 1.0,
+            "selected": 2516.0,
+            "tail_selected": 29.0,
+            "squared_weight_fraction": 0.2811440624649054
+          }
+        }
+      },
+      {
+        "shell": 9,
+        "components": 1,
+        "train_n": 19250,
+        "test_n": 19250,
+        "tail_n": 193,
+        "log_test_squared_mass": -85.42531720807794,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.825295223903171,
+            "tie_probability": 1.0,
+            "selected": 1894.0,
+            "tail_selected": 175.0,
+            "squared_weight_fraction": 0.9171213252625796
+          },
+          "neural": {
+            "cutoff": 0.18036193638529963,
+            "tie_probability": 1.0,
+            "selected": 1892.0,
+            "tail_selected": 19.0,
+            "squared_weight_fraction": 0.2594966752369193
+          }
+        }
+      },
+      {
+        "shell": 10,
+        "components": 1,
+        "train_n": 16000,
+        "test_n": 16000,
+        "tail_n": 160,
+        "log_test_squared_mass": -85.88000458691509,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8263531748035788,
+            "tie_probability": 1.0,
+            "selected": 1520.0,
+            "tail_selected": 138.0,
+            "squared_weight_fraction": 0.7993064743847575
+          },
+          "neural": {
+            "cutoff": 0.18695283005348595,
+            "tie_probability": 1.0,
+            "selected": 1627.0,
+            "tail_selected": 23.0,
+            "squared_weight_fraction": 0.1528076690725344
+          }
+        }
+      },
+      {
+        "shell": 11,
+        "components": 1,
+        "train_n": 11700,
+        "test_n": 11700,
+        "tail_n": 117,
+        "log_test_squared_mass": -85.89638230233895,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8343724345908011,
+            "tie_probability": 1.0,
+            "selected": 1151.0,
+            "tail_selected": 98.0,
+            "squared_weight_fraction": 0.8027834484134073
+          },
+          "neural": {
+            "cutoff": 0.18287132641968257,
+            "tie_probability": 1.0,
+            "selected": 1179.0,
+            "tail_selected": 10.0,
+            "squared_weight_fraction": 0.08957553743178946
+          }
+        }
+      },
+      {
+        "shell": 12,
+        "components": 1,
+        "train_n": 7650,
+        "test_n": 7650,
+        "tail_n": 77,
+        "log_test_squared_mass": -86.5966009083642,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.833660301356828,
+            "tie_probability": 1.0,
+            "selected": 798.0,
+            "tail_selected": 68.0,
+            "squared_weight_fraction": 0.7709587529471468
+          },
+          "neural": {
+            "cutoff": 0.15470386500315675,
+            "tie_probability": 1.0,
+            "selected": 848.0,
+            "tail_selected": 14.0,
+            "squared_weight_fraction": 0.15947100584156487
+          }
+        }
+      },
+      {
+        "shell": 13,
+        "components": 1,
+        "train_n": 6050,
+        "test_n": 6050,
+        "tail_n": 61,
+        "log_test_squared_mass": -86.68939346419702,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8371564018802031,
+            "tie_probability": 1.0,
+            "selected": 600.0,
+            "tail_selected": 52.0,
+            "squared_weight_fraction": 0.6688360015943183
+          },
+          "neural": {
+            "cutoff": 0.1742953649001956,
+            "tie_probability": 1.0,
+            "selected": 625.0,
+            "tail_selected": 9.0,
+            "squared_weight_fraction": 0.1849223442133766
+          }
+        }
+      },
+      {
+        "shell": 14,
+        "components": 1,
+        "train_n": 3250,
+        "test_n": 3250,
+        "tail_n": 33,
+        "log_test_squared_mass": -87.26495964102644,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.839534351993898,
+            "tie_probability": 1.0,
+            "selected": 320.0,
+            "tail_selected": 31.0,
+            "squared_weight_fraction": 0.618022319885795
+          },
+          "neural": {
+            "cutoff": 0.15576279461085968,
+            "tie_probability": 1.0,
+            "selected": 330.0,
+            "tail_selected": 4.0,
+            "squared_weight_fraction": 0.10955460002988915
+          }
+        }
+      },
+      {
+        "shell": 15,
+        "components": 1,
+        "train_n": 2500,
+        "test_n": 2500,
+        "tail_n": 25,
+        "log_test_squared_mass": -87.66552834869495,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8480765649971936,
+            "tie_probability": 1.0,
+            "selected": 298.0,
+            "tail_selected": 25.0,
+            "squared_weight_fraction": 0.6906336826254985
+          },
+          "neural": {
+            "cutoff": 0.16201445698189965,
+            "tie_probability": 1.0,
+            "selected": 216.0,
+            "tail_selected": 5.0,
+            "squared_weight_fraction": 0.14834232384511994
+          }
+        }
+      },
+      {
+        "shell": 16,
+        "components": 1,
+        "train_n": 1850,
+        "test_n": 1850,
+        "tail_n": 19,
+        "log_test_squared_mass": -87.98967143679934,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8368547412077441,
+            "tie_probability": 1.0,
+            "selected": 162.0,
+            "tail_selected": 19.0,
+            "squared_weight_fraction": 0.5593313181726866
+          },
+          "neural": {
+            "cutoff": 0.179476406626897,
+            "tie_probability": 1.0,
+            "selected": 156.0,
+            "tail_selected": 3.0,
+            "squared_weight_fraction": 0.08046094643616758
+          }
+        }
+      },
+      {
+        "shell": 17,
+        "components": 1,
+        "train_n": 1200,
+        "test_n": 1200,
+        "tail_n": 12,
+        "log_test_squared_mass": -88.30586977393185,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8479832352056174,
+            "tie_probability": 1.0,
+            "selected": 124.0,
+            "tail_selected": 12.0,
+            "squared_weight_fraction": 0.628573814224433
+          },
+          "neural": {
+            "cutoff": 0.1668165192978509,
+            "tie_probability": 1.0,
+            "selected": 107.0,
+            "tail_selected": 1.0,
+            "squared_weight_fraction": 0.0864863240552084
+          }
+        }
+      },
+      {
+        "shell": 18,
+        "components": 1,
+        "train_n": 750,
+        "test_n": 750,
+        "tail_n": 8,
+        "log_test_squared_mass": -88.77584974960166,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.842540337234073,
+            "tie_probability": 1.0,
+            "selected": 84.0,
+            "tail_selected": 8.0,
+            "squared_weight_fraction": 0.5594854403163936
+          },
+          "neural": {
+            "cutoff": 0.1571490160529953,
+            "tie_probability": 1.0,
+            "selected": 76.0,
+            "tail_selected": 5.0,
+            "squared_weight_fraction": 0.3112334629362431
+          }
+        }
+      },
+      {
+        "shell": 19,
+        "components": 1,
+        "train_n": 650,
+        "test_n": 650,
+        "tail_n": 7,
+        "log_test_squared_mass": -88.93014819720483,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8303204759121091,
+            "tie_probability": 1.0,
+            "selected": 83.0,
+            "tail_selected": 6.0,
+            "squared_weight_fraction": 0.5715658056958662
+          },
+          "neural": {
+            "cutoff": 0.1823207744673458,
+            "tie_probability": 1.0,
+            "selected": 63.0,
+            "tail_selected": 1.0,
+            "squared_weight_fraction": 0.0933375336556565
+          }
+        }
+      }
+    ]
+  },
+  "seed2": {
+    "checkpoint_sha256": "7857bf859fac1d8486f2b1ad89e12a3b7f400fbec5aba112a10b184d2e9c637f",
+    "shells": [
+      {
+        "shell": 0,
+        "components": 0,
+        "train_n": 47000,
+        "test_n": 47000,
+        "tail_n": 470,
+        "log_test_squared_mass": -84.23767999255583,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": null,
+            "tie_probability": 0.1,
+            "selected": 4699.999999999999,
+            "tail_selected": 47.000000000000014,
+            "squared_weight_fraction": 0.09999999999999953
+          },
+          "neural": {
+            "cutoff": null,
+            "tie_probability": 0.1,
+            "selected": 4699.999999999999,
+            "tail_selected": 47.000000000000014,
+            "squared_weight_fraction": 0.09999999999999953
+          }
+        }
+      },
+      {
+        "shell": 1,
+        "components": 1,
+        "train_n": 110250,
+        "test_n": 110250,
+        "tail_n": 1103,
+        "log_test_squared_mass": -85.39201843760507,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7328851393167333,
+            "tie_probability": 1.0,
+            "selected": 11267.0,
+            "tail_selected": 1022.0,
+            "squared_weight_fraction": 0.9995182600446343
+          },
+          "neural": {
+            "cutoff": 0.36385448855456015,
+            "tie_probability": 1.0,
+            "selected": 10844.0,
+            "tail_selected": 32.0,
+            "squared_weight_fraction": 0.006016156115940213
+          }
+        }
+      },
+      {
+        "shell": 2,
+        "components": 1,
+        "train_n": 51250,
+        "test_n": 51250,
+        "tail_n": 513,
+        "log_test_squared_mass": -84.02857265916845,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7632636429060369,
+            "tie_probability": 1.0,
+            "selected": 5015.0,
+            "tail_selected": 446.0,
+            "squared_weight_fraction": 0.9993395754730303
+          },
+          "neural": {
+            "cutoff": 0.28712796905312665,
+            "tie_probability": 1.0,
+            "selected": 5405.0,
+            "tail_selected": 33.0,
+            "squared_weight_fraction": 0.040303765830943875
+          }
+        }
+      },
+      {
+        "shell": 3,
+        "components": 1,
+        "train_n": 64700,
+        "test_n": 64700,
+        "tail_n": 647,
+        "log_test_squared_mass": -84.77558343105565,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7919125569402226,
+            "tie_probability": 1.0,
+            "selected": 6552.0,
+            "tail_selected": 567.0,
+            "squared_weight_fraction": 0.987978680011673
+          },
+          "neural": {
+            "cutoff": 0.2798274144012383,
+            "tie_probability": 1.0,
+            "selected": 6342.0,
+            "tail_selected": 38.0,
+            "squared_weight_fraction": 0.09985275895752405
+          }
+        }
+      },
+      {
+        "shell": 4,
+        "components": 1,
+        "train_n": 45000,
+        "test_n": 45000,
+        "tail_n": 450,
+        "log_test_squared_mass": -84.3950948146829,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7953067720581539,
+            "tie_probability": 1.0,
+            "selected": 4451.0,
+            "tail_selected": 392.0,
+            "squared_weight_fraction": 0.9942147846300545
+          },
+          "neural": {
+            "cutoff": 0.2558449815764985,
+            "tie_probability": 1.0,
+            "selected": 4549.0,
+            "tail_selected": 37.0,
+            "squared_weight_fraction": 0.016011750333814297
+          }
+        }
+      },
+      {
+        "shell": 5,
+        "components": 1,
+        "train_n": 55150,
+        "test_n": 55150,
+        "tail_n": 552,
+        "log_test_squared_mass": -84.58913528823891,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8060074171302309,
+            "tie_probability": 1.0,
+            "selected": 5601.0,
+            "tail_selected": 490.0,
+            "squared_weight_fraction": 0.9856994485492924
+          },
+          "neural": {
+            "cutoff": 0.2259511951173493,
+            "tie_probability": 1.0,
+            "selected": 5539.0,
+            "tail_selected": 49.0,
+            "squared_weight_fraction": 0.01673837371602299
+          }
+        }
+      },
+      {
+        "shell": 6,
+        "components": 1,
+        "train_n": 44100,
+        "test_n": 44100,
+        "tail_n": 441,
+        "log_test_squared_mass": -84.86308408627515,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8091839629143915,
+            "tie_probability": 1.0,
+            "selected": 4290.0,
+            "tail_selected": 396.0,
+            "squared_weight_fraction": 0.9436204840567979
+          },
+          "neural": {
+            "cutoff": 0.20177985282780653,
+            "tie_probability": 1.0,
+            "selected": 4418.0,
+            "tail_selected": 44.0,
+            "squared_weight_fraction": 0.09801233904117691
+          }
+        }
+      },
+      {
+        "shell": 7,
+        "components": 1,
+        "train_n": 45750,
+        "test_n": 45750,
+        "tail_n": 458,
+        "log_test_squared_mass": -84.48039279751546,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8202888167409008,
+            "tie_probability": 1.0,
+            "selected": 4458.0,
+            "tail_selected": 410.0,
+            "squared_weight_fraction": 0.9754646044070346
+          },
+          "neural": {
+            "cutoff": 0.19015236030020527,
+            "tie_probability": 1.0,
+            "selected": 4606.0,
+            "tail_selected": 39.0,
+            "squared_weight_fraction": 0.15347275029673077
+          }
+        }
+      },
+      {
+        "shell": 8,
+        "components": 1,
+        "train_n": 26600,
+        "test_n": 26600,
+        "tail_n": 266,
+        "log_test_squared_mass": -85.17010195131965,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8281667940197927,
+            "tie_probability": 1.0,
+            "selected": 2653.0,
+            "tail_selected": 242.0,
+            "squared_weight_fraction": 0.9212503502301169
+          },
+          "neural": {
+            "cutoff": 0.20821185016414584,
+            "tie_probability": 1.0,
+            "selected": 2517.0,
+            "tail_selected": 27.0,
+            "squared_weight_fraction": 0.04765654588547283
+          }
+        }
+      },
+      {
+        "shell": 9,
+        "components": 1,
+        "train_n": 13550,
+        "test_n": 13550,
+        "tail_n": 136,
+        "log_test_squared_mass": -85.85653810483245,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8362004961966313,
+            "tie_probability": 1.0,
+            "selected": 1375.0,
+            "tail_selected": 114.0,
+            "squared_weight_fraction": 0.8462488796273969
+          },
+          "neural": {
+            "cutoff": 0.16626077489578256,
+            "tie_probability": 1.0,
+            "selected": 1324.0,
+            "tail_selected": 11.0,
+            "squared_weight_fraction": 0.09151240439048888
+          }
+        }
+      },
+      {
+        "shell": 10,
+        "components": 1,
+        "train_n": 11850,
+        "test_n": 11850,
+        "tail_n": 119,
+        "log_test_squared_mass": -86.12264416420862,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8255891769996933,
+            "tie_probability": 1.0,
+            "selected": 1235.0,
+            "tail_selected": 109.0,
+            "squared_weight_fraction": 0.8319068466883365
+          },
+          "neural": {
+            "cutoff": 0.15810633449962352,
+            "tie_probability": 1.0,
+            "selected": 1253.0,
+            "tail_selected": 16.0,
+            "squared_weight_fraction": 0.09473679177550216
+          }
+        }
+      },
+      {
+        "shell": 11,
+        "components": 1,
+        "train_n": 11350,
+        "test_n": 11350,
+        "tail_n": 114,
+        "log_test_squared_mass": -86.44026831970271,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8346326039647054,
+            "tie_probability": 1.0,
+            "selected": 1155.0,
+            "tail_selected": 101.0,
+            "squared_weight_fraction": 0.76618791543689
+          },
+          "neural": {
+            "cutoff": 0.17011410769196128,
+            "tie_probability": 1.0,
+            "selected": 1117.0,
+            "tail_selected": 13.0,
+            "squared_weight_fraction": 0.08832855892503393
+          }
+        }
+      },
+      {
+        "shell": 12,
+        "components": 1,
+        "train_n": 6500,
+        "test_n": 6500,
+        "tail_n": 65,
+        "log_test_squared_mass": -86.57633253430677,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8383184733973396,
+            "tie_probability": 1.0,
+            "selected": 649.0,
+            "tail_selected": 60.0,
+            "squared_weight_fraction": 0.7614519405786204
+          },
+          "neural": {
+            "cutoff": 0.16395682967638148,
+            "tie_probability": 1.0,
+            "selected": 655.0,
+            "tail_selected": 7.0,
+            "squared_weight_fraction": 0.11674443542248669
+          }
+        }
+      },
+      {
+        "shell": 13,
+        "components": 1,
+        "train_n": 5600,
+        "test_n": 5600,
+        "tail_n": 56,
+        "log_test_squared_mass": -86.69349630879397,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.839419388426627,
+            "tie_probability": 1.0,
+            "selected": 543.0,
+            "tail_selected": 51.0,
+            "squared_weight_fraction": 0.7383737721053403
+          },
+          "neural": {
+            "cutoff": 0.17598490288367352,
+            "tie_probability": 1.0,
+            "selected": 609.0,
+            "tail_selected": 10.0,
+            "squared_weight_fraction": 0.16613665486738954
+          }
+        }
+      },
+      {
+        "shell": 14,
+        "components": 1,
+        "train_n": 3550,
+        "test_n": 3550,
+        "tail_n": 36,
+        "log_test_squared_mass": -87.09605153268696,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8458669574070086,
+            "tie_probability": 1.0,
+            "selected": 339.0,
+            "tail_selected": 33.0,
+            "squared_weight_fraction": 0.5644494558399133
+          },
+          "neural": {
+            "cutoff": 0.1796412284886375,
+            "tie_probability": 1.0,
+            "selected": 368.0,
+            "tail_selected": 6.0,
+            "squared_weight_fraction": 0.1392827860703504
+          }
+        }
+      },
+      {
+        "shell": 15,
+        "components": 1,
+        "train_n": 2550,
+        "test_n": 2550,
+        "tail_n": 26,
+        "log_test_squared_mass": -87.48970664782928,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.844472331972109,
+            "tie_probability": 1.0,
+            "selected": 245.0,
+            "tail_selected": 24.0,
+            "squared_weight_fraction": 0.6137106359163467
+          },
+          "neural": {
+            "cutoff": 0.1742718136073697,
+            "tie_probability": 1.0,
+            "selected": 231.0,
+            "tail_selected": 3.0,
+            "squared_weight_fraction": 0.10362541105094696
+          }
+        }
+      },
+      {
+        "shell": 16,
+        "components": 1,
+        "train_n": 1700,
+        "test_n": 1700,
+        "tail_n": 17,
+        "log_test_squared_mass": -87.90146116640935,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8393145872244527,
+            "tie_probability": 1.0,
+            "selected": 166.0,
+            "tail_selected": 16.0,
+            "squared_weight_fraction": 0.5806064033705309
+          },
+          "neural": {
+            "cutoff": 0.16428324143635664,
+            "tie_probability": 1.0,
+            "selected": 171.0,
+            "tail_selected": 3.0,
+            "squared_weight_fraction": 0.10874213139916449
+          }
+        }
+      },
+      {
+        "shell": 17,
+        "components": 1,
+        "train_n": 1100,
+        "test_n": 1100,
+        "tail_n": 11,
+        "log_test_squared_mass": -88.33472144470406,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8500134984289549,
+            "tie_probability": 1.0,
+            "selected": 141.0,
+            "tail_selected": 10.0,
+            "squared_weight_fraction": 0.5699310330631311
+          },
+          "neural": {
+            "cutoff": 0.1677615788490021,
+            "tie_probability": 1.0,
+            "selected": 136.0,
+            "tail_selected": 0.0,
+            "squared_weight_fraction": 0.10433022022337479
+          }
+        }
+      },
+      {
+        "shell": 18,
+        "components": 1,
+        "train_n": 700,
+        "test_n": 700,
+        "tail_n": 7,
+        "log_test_squared_mass": -88.66911863130146,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8444596799585531,
+            "tie_probability": 1.0,
+            "selected": 88.0,
+            "tail_selected": 7.0,
+            "squared_weight_fraction": 0.6648630369894696
+          },
+          "neural": {
+            "cutoff": 0.1615253089561623,
+            "tie_probability": 1.0,
+            "selected": 78.0,
+            "tail_selected": 2.0,
+            "squared_weight_fraction": 0.15104577132572566
+          }
+        }
+      },
+      {
+        "shell": 19,
+        "components": 1,
+        "train_n": 550,
+        "test_n": 550,
+        "tail_n": 6,
+        "log_test_squared_mass": -88.96550180589247,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8314296352413786,
+            "tie_probability": 1.0,
+            "selected": 59.0,
+            "tail_selected": 6.0,
+            "squared_weight_fraction": 0.6523220536551152
+          },
+          "neural": {
+            "cutoff": 0.1757371764973502,
+            "tie_probability": 1.0,
+            "selected": 59.0,
+            "tail_selected": 0.0,
+            "squared_weight_fraction": 0.05513082445183553
+          }
+        }
+      }
+    ]
+  },
+  "seed3": {
+    "checkpoint_sha256": "7c5699cf368ab0909c99f4645c810919266b6e93e1371b7c3be9bec011322eb2",
+    "shells": [
+      {
+        "shell": 0,
+        "components": 0,
+        "train_n": 224350,
+        "test_n": 224350,
+        "tail_n": 2244,
+        "log_test_squared_mass": -83.00746593771454,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": null,
+            "tie_probability": 0.1,
+            "selected": 22435.0,
+            "tail_selected": 224.39999999999947,
+            "squared_weight_fraction": 0.0999999999999997
+          },
+          "neural": {
+            "cutoff": null,
+            "tie_probability": 0.1,
+            "selected": 22435.0,
+            "tail_selected": 224.39999999999947,
+            "squared_weight_fraction": 0.0999999999999997
+          }
+        }
+      },
+      {
+        "shell": 1,
+        "components": 1,
+        "train_n": 34350,
+        "test_n": 34350,
+        "tail_n": 344,
+        "log_test_squared_mass": -84.9373355349695,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7347292111341208,
+            "tie_probability": 1.0,
+            "selected": 3438.0,
+            "tail_selected": 313.0,
+            "squared_weight_fraction": 0.9998228270276789
+          },
+          "neural": {
+            "cutoff": 0.2733391979320279,
+            "tie_probability": 1.0,
+            "selected": 3493.0,
+            "tail_selected": 16.0,
+            "squared_weight_fraction": 0.001113934217950078
+          }
+        }
+      },
+      {
+        "shell": 2,
+        "components": 1,
+        "train_n": 71750,
+        "test_n": 71750,
+        "tail_n": 718,
+        "log_test_squared_mass": -84.06993178701441,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7640652627244288,
+            "tie_probability": 1.0,
+            "selected": 6973.0,
+            "tail_selected": 644.0,
+            "squared_weight_fraction": 0.9995196830915498
+          },
+          "neural": {
+            "cutoff": 0.2768952204816618,
+            "tie_probability": 1.0,
+            "selected": 6962.0,
+            "tail_selected": 44.0,
+            "squared_weight_fraction": 0.0030817618149874457
+          }
+        }
+      },
+      {
+        "shell": 3,
+        "components": 1,
+        "train_n": 81550,
+        "test_n": 81550,
+        "tail_n": 816,
+        "log_test_squared_mass": -84.4901734502166,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.782476542897178,
+            "tie_probability": 1.0,
+            "selected": 8150.0,
+            "tail_selected": 728.0,
+            "squared_weight_fraction": 0.9990658924072412
+          },
+          "neural": {
+            "cutoff": 0.2556962969419292,
+            "tie_probability": 1.0,
+            "selected": 8015.0,
+            "tail_selected": 62.0,
+            "squared_weight_fraction": 0.6033677873336922
+          }
+        }
+      },
+      {
+        "shell": 4,
+        "components": 1,
+        "train_n": 55450,
+        "test_n": 55450,
+        "tail_n": 555,
+        "log_test_squared_mass": -84.39540264350826,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7957890807977074,
+            "tie_probability": 1.0,
+            "selected": 5642.0,
+            "tail_selected": 511.0,
+            "squared_weight_fraction": 0.9962139211686786
+          },
+          "neural": {
+            "cutoff": 0.22852623503142194,
+            "tie_probability": 1.0,
+            "selected": 5761.0,
+            "tail_selected": 59.0,
+            "squared_weight_fraction": 0.01655575836061062
+          }
+        }
+      },
+      {
+        "shell": 5,
+        "components": 1,
+        "train_n": 86650,
+        "test_n": 86650,
+        "tail_n": 867,
+        "log_test_squared_mass": -84.86818290772766,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.7962058616279759,
+            "tie_probability": 1.0,
+            "selected": 8458.0,
+            "tail_selected": 759.0,
+            "squared_weight_fraction": 0.9908089688057794
+          },
+          "neural": {
+            "cutoff": 0.2257739808300504,
+            "tie_probability": 1.0,
+            "selected": 8512.0,
+            "tail_selected": 85.0,
+            "squared_weight_fraction": 0.07494777784550766
+          }
+        }
+      },
+      {
+        "shell": 6,
+        "components": 1,
+        "train_n": 65800,
+        "test_n": 65800,
+        "tail_n": 658,
+        "log_test_squared_mass": -85.43936019557928,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8153299227710488,
+            "tie_probability": 1.0,
+            "selected": 6641.0,
+            "tail_selected": 592.0,
+            "squared_weight_fraction": 0.9757160095737106
+          },
+          "neural": {
+            "cutoff": 0.2068914176976019,
+            "tie_probability": 1.0,
+            "selected": 6380.0,
+            "tail_selected": 75.0,
+            "squared_weight_fraction": 0.07527900449982415
+          }
+        }
+      },
+      {
+        "shell": 7,
+        "components": 1,
+        "train_n": 45700,
+        "test_n": 45700,
+        "tail_n": 457,
+        "log_test_squared_mass": -84.90142300911431,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8185439146587522,
+            "tie_probability": 1.0,
+            "selected": 4676.0,
+            "tail_selected": 400.0,
+            "squared_weight_fraction": 0.962556580157998
+          },
+          "neural": {
+            "cutoff": 0.17966172280336862,
+            "tie_probability": 1.0,
+            "selected": 4587.0,
+            "tail_selected": 57.0,
+            "squared_weight_fraction": 0.06769230610471047
+          }
+        }
+      },
+      {
+        "shell": 8,
+        "components": 1,
+        "train_n": 28950,
+        "test_n": 28950,
+        "tail_n": 290,
+        "log_test_squared_mass": -85.50922567561129,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8245242327162211,
+            "tie_probability": 1.0,
+            "selected": 2721.0,
+            "tail_selected": 246.0,
+            "squared_weight_fraction": 0.901138227181035
+          },
+          "neural": {
+            "cutoff": 0.18705917120041526,
+            "tie_probability": 1.0,
+            "selected": 2968.0,
+            "tail_selected": 36.0,
+            "squared_weight_fraction": 0.08038220297175726
+          }
+        }
+      },
+      {
+        "shell": 9,
+        "components": 1,
+        "train_n": 24900,
+        "test_n": 24900,
+        "tail_n": 249,
+        "log_test_squared_mass": -85.50141713926001,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8252593560404036,
+            "tie_probability": 1.0,
+            "selected": 2497.0,
+            "tail_selected": 218.0,
+            "squared_weight_fraction": 0.8736277236078103
+          },
+          "neural": {
+            "cutoff": 0.18737884367017477,
+            "tie_probability": 1.0,
+            "selected": 2451.0,
+            "tail_selected": 32.0,
+            "squared_weight_fraction": 0.09592471942457786
+          }
+        }
+      },
+      {
+        "shell": 10,
+        "components": 1,
+        "train_n": 20450,
+        "test_n": 20450,
+        "tail_n": 205,
+        "log_test_squared_mass": -85.60264465772927,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8272250697772767,
+            "tie_probability": 1.0,
+            "selected": 1964.0,
+            "tail_selected": 183.0,
+            "squared_weight_fraction": 0.8943956382291909
+          },
+          "neural": {
+            "cutoff": 0.1676216429620448,
+            "tie_probability": 1.0,
+            "selected": 2140.0,
+            "tail_selected": 14.0,
+            "squared_weight_fraction": 0.06089304365026644
+          }
+        }
+      },
+      {
+        "shell": 11,
+        "components": 1,
+        "train_n": 11400,
+        "test_n": 11400,
+        "tail_n": 114,
+        "log_test_squared_mass": -86.16078290669128,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8322967432977557,
+            "tie_probability": 1.0,
+            "selected": 1045.0,
+            "tail_selected": 101.0,
+            "squared_weight_fraction": 0.8246941443103852
+          },
+          "neural": {
+            "cutoff": 0.16660182640296128,
+            "tie_probability": 1.0,
+            "selected": 1147.0,
+            "tail_selected": 11.0,
+            "squared_weight_fraction": 0.08199752499038009
+          }
+        }
+      },
+      {
+        "shell": 12,
+        "components": 1,
+        "train_n": 8800,
+        "test_n": 8800,
+        "tail_n": 88,
+        "log_test_squared_mass": -86.68992264934121,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8380177555574365,
+            "tie_probability": 1.0,
+            "selected": 932.0,
+            "tail_selected": 78.0,
+            "squared_weight_fraction": 0.768796432498602
+          },
+          "neural": {
+            "cutoff": 0.1670453360964368,
+            "tie_probability": 1.0,
+            "selected": 913.0,
+            "tail_selected": 16.0,
+            "squared_weight_fraction": 0.13865049026093415
+          }
+        }
+      },
+      {
+        "shell": 13,
+        "components": 1,
+        "train_n": 6950,
+        "test_n": 6950,
+        "tail_n": 70,
+        "log_test_squared_mass": -86.7746738242227,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8384670980374291,
+            "tie_probability": 1.0,
+            "selected": 659.0,
+            "tail_selected": 61.0,
+            "squared_weight_fraction": 0.6420171918098313
+          },
+          "neural": {
+            "cutoff": 0.17707797018124688,
+            "tie_probability": 1.0,
+            "selected": 720.0,
+            "tail_selected": 12.0,
+            "squared_weight_fraction": 0.15009715958675562
+          }
+        }
+      },
+      {
+        "shell": 14,
+        "components": 1,
+        "train_n": 4500,
+        "test_n": 4500,
+        "tail_n": 45,
+        "log_test_squared_mass": -87.31823999687394,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8390916471229307,
+            "tie_probability": 1.0,
+            "selected": 398.0,
+            "tail_selected": 41.0,
+            "squared_weight_fraction": 0.685570624390118
+          },
+          "neural": {
+            "cutoff": 0.16559618833076106,
+            "tie_probability": 1.0,
+            "selected": 471.0,
+            "tail_selected": 1.0,
+            "squared_weight_fraction": 0.059675126359730254
+          }
+        }
+      },
+      {
+        "shell": 15,
+        "components": 1,
+        "train_n": 3150,
+        "test_n": 3150,
+        "tail_n": 32,
+        "log_test_squared_mass": -87.63556312866339,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8476594089479814,
+            "tie_probability": 1.0,
+            "selected": 357.0,
+            "tail_selected": 28.0,
+            "squared_weight_fraction": 0.6335341436325006
+          },
+          "neural": {
+            "cutoff": 0.15932911982155246,
+            "tie_probability": 1.0,
+            "selected": 326.0,
+            "tail_selected": 4.0,
+            "squared_weight_fraction": 0.12085439841754012
+          }
+        }
+      },
+      {
+        "shell": 16,
+        "components": 1,
+        "train_n": 1700,
+        "test_n": 1700,
+        "tail_n": 17,
+        "log_test_squared_mass": -88.22371411905311,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8531114041430069,
+            "tie_probability": 1.0,
+            "selected": 154.0,
+            "tail_selected": 16.0,
+            "squared_weight_fraction": 0.5103804391833194
+          },
+          "neural": {
+            "cutoff": 0.15917713479919438,
+            "tie_probability": 1.0,
+            "selected": 156.0,
+            "tail_selected": 1.0,
+            "squared_weight_fraction": 0.11781771303061513
+          }
+        }
+      },
+      {
+        "shell": 17,
+        "components": 1,
+        "train_n": 1350,
+        "test_n": 1350,
+        "tail_n": 14,
+        "log_test_squared_mass": -88.47847057995338,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8444519355169211,
+            "tie_probability": 1.0,
+            "selected": 96.0,
+            "tail_selected": 13.0,
+            "squared_weight_fraction": 0.5160712126058552
+          },
+          "neural": {
+            "cutoff": 0.15320344056024593,
+            "tie_probability": 1.0,
+            "selected": 163.0,
+            "tail_selected": 3.0,
+            "squared_weight_fraction": 0.214546454082111
+          }
+        }
+      },
+      {
+        "shell": 18,
+        "components": 1,
+        "train_n": 1900,
+        "test_n": 1900,
+        "tail_n": 19,
+        "log_test_squared_mass": -88.1360024420112,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.832023131169985,
+            "tie_probability": 1.0,
+            "selected": 159.0,
+            "tail_selected": 18.0,
+            "squared_weight_fraction": 0.5175077139090053
+          },
+          "neural": {
+            "cutoff": 0.13388042298591624,
+            "tie_probability": 1.0,
+            "selected": 177.0,
+            "tail_selected": 1.0,
+            "squared_weight_fraction": 0.11017559957633716
+          }
+        }
+      },
+      {
+        "shell": 19,
+        "components": 1,
+        "train_n": 650,
+        "test_n": 650,
+        "tail_n": 7,
+        "log_test_squared_mass": -89.28833310780067,
+        "scores": {
+          "ellipsoid": {
+            "cutoff": -0.8282062486141535,
+            "tie_probability": 1.0,
+            "selected": 54.0,
+            "tail_selected": 7.0,
+            "squared_weight_fraction": 0.4569256596970246
+          },
+          "neural": {
+            "cutoff": 0.16877858755697422,
+            "tie_probability": 1.0,
+            "selected": 57.0,
+            "tail_selected": 1.0,
+            "squared_weight_fraction": 0.08873425827832657
+          }
+        }
+      }
+    ]
+  }
+}

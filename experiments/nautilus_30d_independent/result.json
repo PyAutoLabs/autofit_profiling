@@ -1,0 +1,191 @@
+{
+  "status": "incomplete",
+  "runs": [
+    {
+      "stream": "seed1",
+      "supervision": {
+        "returncode": 124,
+        "termination_reason": "timeout",
+        "sampled_group_peak_rss_bytes": 661897216,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.5,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed",
+        "elapsed_s": 2400.390853568002
+      },
+      "result": null
+    },
+    {
+      "stream": "seed2",
+      "supervision": {
+        "returncode": 124,
+        "termination_reason": "timeout",
+        "sampled_group_peak_rss_bytes": 639578112,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.5,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed",
+        "elapsed_s": 2400.194811236004
+      },
+      "result": null
+    },
+    {
+      "stream": "seed3",
+      "supervision": {
+        "returncode": 124,
+        "termination_reason": "timeout",
+        "sampled_group_peak_rss_bytes": 576385024,
+        "memory_limit_bytes": 4294967296,
+        "rss_sample_interval_s": 0.5,
+        "rss_note": "process group sum; shared pages may repeat; sub-interval spikes may be missed",
+        "elapsed_s": 2400.3947408360036
+      },
+      "result": null
+    }
+  ],
+  "seed0_geometry": {
+    "ellipsoids": 14,
+    "sha256": "66ee00f22a4b31eceb7d4ebad092a488a57c9ad101472e2129006378ff17c001"
+  },
+  "seed0_file_sha256": "4ceaaa063547ebf9a03d3f16c8c7cf376b965cf079e4a228f91ad9a00846172c",
+  "environment": {
+    "sources": {
+      "PyAutoFit": {
+        "revision": "bdb7af0e9c339ad07850679fd6ac168aacc7d18c",
+        "code_sha256": "9e566e1b1a259e279d2eaa86319556a78561183b347ac8835793a315d980ad75"
+      },
+      "PyAutoNerves": {
+        "revision": "9b204c90c2ce05c5bb0cf3e9800ed13f005c6c56",
+        "code_sha256": "560c9250eb0d7f8f56b3d4d21f22b9e556e93fd0eba92b5b33860b903a2f3f0b"
+      },
+      "producer": {
+        "revision": "e918b1d42c2436cea2486a5f9568e22c12819985",
+        "code_sha256": "8da8262fbc27b2992ad1eecac76babd9a597211ea21c81c6e8b5c36c584b4cc3"
+      }
+    },
+    "nautilus_source_sha256": "61e91f8fb85cf4a38877cd1c65bb0b111589bde77f5f74acb22a90f3ff2ec45c",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "h5py": "3.16.0",
+      "nautilus-sampler": "1.0.5",
+      "jax": "0.11.2",
+      "jaxlib": "0.11.2",
+      "threadpoolctl": "3.8.0"
+    },
+    "distribution_versions": {
+      "networkx": "3.1",
+      "jsonpickle": "4.1.4",
+      "dynesty": "2.1.5",
+      "array-api-compat": "1.16.0",
+      "pyparsing": "3.3.3",
+      "pillow": "13.0.0",
+      "psutil": "6.1.0",
+      "cycler": "0.12.1",
+      "emcee": "3.1.6",
+      "jaxlib": "0.11.2",
+      "pure_eval": "0.2.4",
+      "six": "1.17.0",
+      "imagesize": "2.0.1",
+      "mypy_extensions": "1.2.0",
+      "joblib": "1.6.0",
+      "snowballstemmer": "3.1.1",
+      "urllib3": "2.8.0",
+      "prompt_toolkit": "3.0.53",
+      "nautilus-sampler": "1.0.5",
+      "ml_dtypes": "0.6.0",
+      "autofit": "9999.0.0.dev0",
+      "Pygments": "2.21.0",
+      "babel": "2.18.0",
+      "pluggy": "1.7.0",
+      "MarkupSafe": "3.0.4",
+      "traitlets": "5.16.1",
+      "roman-numerals": "4.1.0",
+      "corner": "2.2.2",
+      "typing_extensions": "4.16.0",
+      "sphinxcontrib-devhelp": "2.0.0",
+      "dill": "0.4.1",
+      "asttokens": "3.0.2",
+      "sphinxcontrib-serializinghtml": "2.0.0",
+      "optax": "0.2.8",
+      "matplotlib-inline": "0.2.2",
+      "threadpoolctl": "3.8.0",
+      "ipython": "9.12.0",
+      "ruff": "0.17.4",
+      "Sphinx": "9.1.1",
+      "typing-inspect": "0.9.0",
+      "jedi": "0.20.1",
+      "certifi": "2026.10.23",
+      "wheel": "0.48.0",
+      "parso": "0.8.7",
+      "contourpy": "1.4.0",
+      "anesthetic": "2.16.0",
+      "alabaster": "1.0.0",
+      "pyvis": "0.3.2",
+      "charset-normalizer": "3.5.2",
+      "numpydoc": "1.11.0",
+      "gprof2dot": "2021.2.21",
+      "timeout-decorator": "0.5.0",
+      "absl-py": "2.5.1",
+      "ipython_pygments_lexers": "1.1.1",
+      "fonttools": "4.68.0",
+      "sphinxcontrib-qthelp": "2.0.0",
+      "PyYAML": "6.0.3",
+      "sphinxcontrib-applehelp": "2.0.0",
+      "iniconfig": "2.3.1",
+      "sphinxcontrib-jsmath": "2.0.0",
+      "executing": "2.3.0",
+      "numpy": "2.5.4",
+      "sphinxcontrib-htmlhelp": "2.1.0",
+      "decorator": "5.3.1",
+      "xxhash": "3.4.1",
+      "jax": "0.11.2",
+      "scipy": "1.17.1",
+      "Jinja2": "3.1.6",
+      "pandas": "3.0.6",
+      "stack-data": "0.6.3",
+      "kiwisolver": "1.5.1",
+      "python-dateutil": "4.0.0",
+      "packaging": "26.3",
+      "cloudpickle": "3.1.2",
+      "opt_einsum": "3.4.0",
+      "scikit-learn": "1.9.1",
+      "jaxnnls": "1.0.1",
+      "pexpect": "4.9.0",
+      "requests": "2.34.2",
+      "autonerves": "9999.0.0.dev0",
+      "h5py": "3.16.0",
+      "ptyprocess": "0.7.0",
+      "greenlet": "3.5.6",
+      "docutils": "0.22.4",
+      "tzdata": "2026.6",
+      "wcwidth": "0.9.4",
+      "idna": "3.20",
+      "astunparse": "1.6.3",
+      "SQLAlchemy": "2.0.57",
+      "pytest": "9.2.0",
+      "narwhals": "2.28.0",
+      "matplotlib": "3.11.2"
+    },
+    "python": "3.12.10 (main, Apr  9 2025, 08:55:05) [GCC 11.4.0]",
+    "host": "DESKTOP-H143S82",
+    "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "thread_env": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    }
+  },
+  "timeout_s": 2400,
+  "rss_limit_bytes_per_child": 4294967296
+}

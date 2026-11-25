@@ -9,14 +9,10 @@ import numpy as np
 from scipy.special import logsumexp, ndtri
 
 
-def verify(directory):
+def verify(directory, streams=("saved", "seed1", "seed2")):
     receipt = json.loads((directory / "result.json").read_text())
-    if receipt["status"] != "complete" or [r["stream"] for r in receipt["runs"]] != [
-        "saved",
-        "seed1",
-        "seed2",
-    ]:
-        raise ValueError("All three conditional streams are required")
+    if receipt["status"] != "complete" or [r["stream"] for r in receipt["runs"]] != list(streams):
+        raise ValueError("All expected streams are required")
     dimension = 30
     axis = np.arange(dimension)
     covariance = 0.6 ** abs(axis[:, None] - axis)

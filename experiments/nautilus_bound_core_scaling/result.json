@@ -1,0 +1,1086 @@
+{
+  "status": "complete",
+  "software": {
+    "PyAutoFit": "911fe05e1c6b570df51789f0ab5b2cbf54c1f43a",
+    "nautilus-sampler": "1.0.5",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.4",
+    "scipy": "1.17.1",
+    "python": "3.12.10",
+    "PyAutoNerves": "7f3055b7f3d1967f372bdb41ee732135bca0e68d"
+  },
+  "release": "2026.10.12.1",
+  "dirty_library": null,
+  "platform": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "affinity": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "runs": [
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 1,
+      "wall_s": 33.83486730799996,
+      "calls": 7500,
+      "peak_calls": {
+        "positive": 4278
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 12.757910115001323,
+      "geometry_s": 5.823446515998512,
+      "log_evidence": -57.51149618752003,
+      "max_log_likelihood": -38.1725465805512,
+      "ess": 1300.7710405024757,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.033937098383795,
+        25.063416950471492,
+        9.997894324901573
+      ],
+      "folded_std": [
+        0.03360593584893804,
+        0.07121312635689495,
+        0.03349392287587902
+      ],
+      "positive_mass": 1.0,
+      "training_workers": 1,
+      "fit_including_pool_s": 33.83486810799968,
+      "pool_setup_teardown_s": 7.999997251317836e-07,
+      "training_process_cpu_s": 12.751617000000003,
+      "trajectory_sha256": "c6fe36e4c1959dd8ed5576cc9186273b10e79e60bc8f6152ab4eea700bbe861e",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 1,
+      "wall_s": 47.86541819200011,
+      "calls": 7500,
+      "peak_calls": {
+        "positive": 4278
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 26.578744920001554,
+      "geometry_s": 7.1265457399995285,
+      "log_evidence": -57.51149618752003,
+      "max_log_likelihood": -38.1725465805512,
+      "ess": 1300.7710405024757,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.033937098383795,
+        25.063416950471492,
+        9.997894324901573
+      ],
+      "folded_std": [
+        0.03360593584893804,
+        0.07121312635689495,
+        0.03349392287587902
+      ],
+      "positive_mass": 1.0,
+      "training_workers": 2,
+      "fit_including_pool_s": 47.86571169400031,
+      "pool_setup_teardown_s": 0.00029350200020417105,
+      "training_process_cpu_s": 32.83124909999998,
+      "trajectory_sha256": "c6fe36e4c1959dd8ed5576cc9186273b10e79e60bc8f6152ab4eea700bbe861e",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libgomp": 1,
+        "libscipy_openblas": 1
+      }
+    },
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 1,
+      "wall_s": 72.20665440099947,
+      "calls": 7500,
+      "peak_calls": {
+        "positive": 4278
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 51.38343412800259,
+      "geometry_s": 6.853448847999971,
+      "log_evidence": -57.51149618752003,
+      "max_log_likelihood": -38.1725465805512,
+      "ess": 1300.7710405024757,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.033937098383795,
+        25.063416950471492,
+        9.997894324901573
+      ],
+      "folded_std": [
+        0.03360593584893804,
+        0.07121312635689495,
+        0.03349392287587902
+      ],
+      "positive_mass": 1.0,
+      "training_workers": 4,
+      "fit_including_pool_s": 72.20711140399908,
+      "pool_setup_teardown_s": 0.0004570029996102676,
+      "training_process_cpu_s": 70.87580089999999,
+      "trajectory_sha256": "c6fe36e4c1959dd8ed5576cc9186273b10e79e60bc8f6152ab4eea700bbe861e",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 1,
+      "wall_s": 174.42052244099978,
+      "calls": 7700,
+      "peak_calls": {
+        "positive": 4737,
+        "negative": 4740
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 25,
+      "training_s": 133.15019231700626,
+      "geometry_s": 12.750912977993721,
+      "log_evidence": -57.473423354378774,
+      "max_log_likelihood": -38.17163153948996,
+      "ess": 1415.5915048740499,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.064956940658522,
+        9.99777411987573,
+        50.032894328435816
+      ],
+      "folded_std": [
+        0.07205842062697214,
+        0.03313758313928911,
+        0.033306893448585145
+      ],
+      "positive_mass": 0.5197215797570399,
+      "training_workers": 4,
+      "fit_including_pool_s": 174.42119964099948,
+      "pool_setup_teardown_s": 0.0006771999996999511,
+      "training_process_cpu_s": 180.61903030000008,
+      "trajectory_sha256": "c5340c3c3bb849e00fa9444a6eccd6e5d11fa8068b64e6c43855c7af7e3c7319",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libgomp": 1,
+        "libscipy_openblas": 1
+      }
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 1,
+      "wall_s": 119.99997516099938,
+      "calls": 7700,
+      "peak_calls": {
+        "positive": 4737,
+        "negative": 4740
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 25,
+      "training_s": 78.22368692799773,
+      "geometry_s": 12.635479878001206,
+      "log_evidence": -57.473423354378774,
+      "max_log_likelihood": -38.17163153948996,
+      "ess": 1415.5915048740499,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.064956940658522,
+        9.99777411987573,
+        50.032894328435816
+      ],
+      "folded_std": [
+        0.07205842062697214,
+        0.03313758313928911,
+        0.033306893448585145
+      ],
+      "positive_mass": 0.5197215797570399,
+      "training_workers": 2,
+      "fit_including_pool_s": 120.00037306100057,
+      "pool_setup_teardown_s": 0.00039790000118955504,
+      "training_process_cpu_s": 95.47664329999999,
+      "trajectory_sha256": "c5340c3c3bb849e00fa9444a6eccd6e5d11fa8068b64e6c43855c7af7e3c7319",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libgomp": 1,
+        "libscipy_openblas": 1
+      }
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 1,
+      "wall_s": 85.2355224009998,
+      "calls": 7700,
+      "peak_calls": {
+        "positive": 4737,
+        "negative": 4740
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 25,
+      "training_s": 43.219382818005215,
+      "geometry_s": 12.724971525996807,
+      "log_evidence": -57.473423354378774,
+      "max_log_likelihood": -38.17163153948996,
+      "ess": 1415.5915048740499,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.064956940658522,
+        9.99777411987573,
+        50.032894328435816
+      ],
+      "folded_std": [
+        0.07205842062697214,
+        0.03313758313928911,
+        0.033306893448585145
+      ],
+      "positive_mass": 0.5197215797570399,
+      "training_workers": 1,
+      "fit_including_pool_s": 85.23552340100014,
+      "pool_setup_teardown_s": 1.0000003385357559e-06,
+      "training_process_cpu_s": 42.79533139999996,
+      "trajectory_sha256": "c5340c3c3bb849e00fa9444a6eccd6e5d11fa8068b64e6c43855c7af7e3c7319",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 2,
+      "wall_s": 75.26122249899981,
+      "calls": 7400,
+      "peak_calls": {
+        "positive": 4043
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 28,
+      "training_s": 40.822293235998586,
+      "geometry_s": 10.364742568999645,
+      "log_evidence": -57.474307985706695,
+      "max_log_likelihood": -38.17155215580134,
+      "ess": 1381.16015694472,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.03314554257,
+        25.07120680416367,
+        9.998886339534547
+      ],
+      "folded_std": [
+        0.0337409915360141,
+        0.07372776611547285,
+        0.03370912834332465
+      ],
+      "positive_mass": 1.0,
+      "training_workers": 2,
+      "fit_including_pool_s": 75.26165140000012,
+      "pool_setup_teardown_s": 0.0004289010003049043,
+      "training_process_cpu_s": 49.53963930000002,
+      "trajectory_sha256": "4c7c23fc11238cc108a953c28a1cab49acd8604acab8ad543ba9b16edee7ac62",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libgomp": 1,
+        "libscipy_openblas": 1
+      }
+    },
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 2,
+      "wall_s": 97.64665089200025,
+      "calls": 7400,
+      "peak_calls": {
+        "positive": 4043
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 28,
+      "training_s": 65.67115303399714,
+      "geometry_s": 10.458112179003365,
+      "log_evidence": -57.474307985706695,
+      "max_log_likelihood": -38.17155215580134,
+      "ess": 1381.16015694472,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.03314554257,
+        25.07120680416367,
+        9.998886339534547
+      ],
+      "folded_std": [
+        0.0337409915360141,
+        0.07372776611547285,
+        0.03370912834332465
+      ],
+      "positive_mass": 1.0,
+      "training_workers": 4,
+      "fit_including_pool_s": 97.64719929200055,
+      "pool_setup_teardown_s": 0.0005484000002979883,
+      "training_process_cpu_s": 85.34138349999999,
+      "trajectory_sha256": "4c7c23fc11238cc108a953c28a1cab49acd8604acab8ad543ba9b16edee7ac62",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 2,
+      "wall_s": 54.299997621999864,
+      "calls": 7400,
+      "peak_calls": {
+        "positive": 4043
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 28,
+      "training_s": 21.957590253999115,
+      "geometry_s": 9.87566514500304,
+      "log_evidence": -57.474307985706695,
+      "max_log_likelihood": -38.17155215580134,
+      "ess": 1381.16015694472,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.03314554257,
+        25.07120680416367,
+        9.998886339534547
+      ],
+      "folded_std": [
+        0.0337409915360141,
+        0.07372776611547285,
+        0.03370912834332465
+      ],
+      "positive_mass": 1.0,
+      "training_workers": 1,
+      "fit_including_pool_s": 54.29999852199944,
+      "pool_setup_teardown_s": 8.999995770864189e-07,
+      "training_process_cpu_s": 21.83934219999999,
+      "trajectory_sha256": "4c7c23fc11238cc108a953c28a1cab49acd8604acab8ad543ba9b16edee7ac62",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 2,
+      "wall_s": 99.95646521900017,
+      "calls": 7500,
+      "peak_calls": {
+        "negative": 4427,
+        "positive": 5136
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 46.998600991002604,
+      "geometry_s": 14.24631119699734,
+      "log_evidence": -57.49655168704079,
+      "max_log_likelihood": -38.17694103073143,
+      "ess": 1405.2477785173687,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.066867220537105,
+        9.998615350821566,
+        50.03489147231716
+      ],
+      "folded_std": [
+        0.07169612016345815,
+        0.034002834724717525,
+        0.03351890314929486
+      ],
+      "positive_mass": 0.49615442364011003,
+      "training_workers": 1,
+      "fit_including_pool_s": 99.95646751899949,
+      "pool_setup_teardown_s": 2.2999993234407157e-06,
+      "training_process_cpu_s": 46.6131927,
+      "trajectory_sha256": "0f9b8e209bd0988ba38588f31f762c04635ef9485fec4f4e244f845db2d9a5f1",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 2,
+      "wall_s": 223.67264208300003,
+      "calls": 7500,
+      "peak_calls": {
+        "negative": 4427,
+        "positive": 5136
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 149.01556060600524,
+      "geometry_s": 22.187559317993873,
+      "log_evidence": -57.49655168704079,
+      "max_log_likelihood": -38.17694103073143,
+      "ess": 1405.2477785173687,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.066867220537105,
+        9.998615350821566,
+        50.03489147231716
+      ],
+      "folded_std": [
+        0.07169612016345815,
+        0.034002834724717525,
+        0.03351890314929486
+      ],
+      "positive_mass": 0.49615442364011003,
+      "training_workers": 4,
+      "fit_including_pool_s": 223.6738138820001,
+      "pool_setup_teardown_s": 0.0011717990000761347,
+      "training_process_cpu_s": 176.7135915000001,
+      "trajectory_sha256": "0f9b8e209bd0988ba38588f31f762c04635ef9485fec4f4e244f845db2d9a5f1",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 2,
+      "wall_s": 290.1732597800001,
+      "calls": 7500,
+      "peak_calls": {
+        "negative": 4427,
+        "positive": 5136
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 139.86771850600144,
+      "geometry_s": 49.85513005699795,
+      "log_evidence": -57.49655168704079,
+      "max_log_likelihood": -38.17694103073143,
+      "ess": 1405.2477785173687,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.066867220537105,
+        9.998615350821566,
+        50.03489147231716
+      ],
+      "folded_std": [
+        0.07169612016345815,
+        0.034002834724717525,
+        0.03351890314929486
+      ],
+      "positive_mass": 0.49615442364011003,
+      "training_workers": 2,
+      "fit_including_pool_s": 290.17379379400063,
+      "pool_setup_teardown_s": 0.0005340140005500871,
+      "training_process_cpu_s": 106.77342209999996,
+      "trajectory_sha256": "0f9b8e209bd0988ba38588f31f762c04635ef9485fec4f4e244f845db2d9a5f1",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 3,
+      "wall_s": 109.95775067200066,
+      "calls": 7500,
+      "peak_calls": {
+        "positive": 4098
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 27,
+      "training_s": 62.699675683998976,
+      "geometry_s": 15.80843144300161,
+      "log_evidence": -57.47423748718776,
+      "max_log_likelihood": -38.17242995101483,
+      "ess": 1430.2957349795709,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.03654693835584,
+        25.073343712767976,
+        10.00181148449458
+      ],
+      "folded_std": [
+        0.03344431112793408,
+        0.07278501599419437,
+        0.033603843064406405
+      ],
+      "positive_mass": 1.0,
+      "training_workers": 4,
+      "fit_including_pool_s": 109.95862107800076,
+      "pool_setup_teardown_s": 0.0008704060001036851,
+      "training_process_cpu_s": 76.51552399999998,
+      "trajectory_sha256": "c2e1f0c5f8650048de6f90e9e559962d939fae726d30508775d04198541cbef5",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 3,
+      "wall_s": 86.29161739899973,
+      "calls": 7500,
+      "peak_calls": {
+        "positive": 4098
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 27,
+      "training_s": 34.14355796599557,
+      "geometry_s": 17.163980481002,
+      "log_evidence": -57.47423748718776,
+      "max_log_likelihood": -38.17242995101483,
+      "ess": 1430.2957349795709,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.03654693835584,
+        25.073343712767976,
+        10.00181148449458
+      ],
+      "folded_std": [
+        0.03344431112793408,
+        0.07278501599419437,
+        0.033603843064406405
+      ],
+      "positive_mass": 1.0,
+      "training_workers": 1,
+      "fit_including_pool_s": 86.29161869900054,
+      "pool_setup_teardown_s": 1.3000008038943633e-06,
+      "training_process_cpu_s": 31.67631330000001,
+      "trajectory_sha256": "c2e1f0c5f8650048de6f90e9e559962d939fae726d30508775d04198541cbef5",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "profile",
+      "arm": "default",
+      "seed": 3,
+      "wall_s": 97.29985218399997,
+      "calls": 7500,
+      "peak_calls": {
+        "positive": 4098
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 27,
+      "training_s": 48.22163374600132,
+      "geometry_s": 16.95449808099511,
+      "log_evidence": -57.47423748718776,
+      "max_log_likelihood": -38.17242995101483,
+      "ess": 1430.2957349795709,
+      "parameter_names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "folded_mean": [
+        50.03654693835584,
+        25.073343712767976,
+        10.00181148449458
+      ],
+      "folded_std": [
+        0.03344431112793408,
+        0.07278501599419437,
+        0.033603843064406405
+      ],
+      "positive_mass": 1.0,
+      "training_workers": 2,
+      "fit_including_pool_s": 97.3002177899998,
+      "pool_setup_teardown_s": 0.00036560599983204156,
+      "training_process_cpu_s": 55.41582299999998,
+      "trajectory_sha256": "c2e1f0c5f8650048de6f90e9e559962d939fae726d30508775d04198541cbef5",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 3,
+      "wall_s": 169.63863014600065,
+      "calls": 7600,
+      "peak_calls": {
+        "positive": 4408,
+        "negative": 4849
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 103.95055193299777,
+      "geometry_s": 20.93741948800016,
+      "log_evidence": -57.499729609067,
+      "max_log_likelihood": -38.17355579802415,
+      "ess": 1376.6235412142682,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.06779689054723,
+        9.999191562378769,
+        50.033913102627956
+      ],
+      "folded_std": [
+        0.0699015112761534,
+        0.0333018637518721,
+        0.033928032641678596
+      ],
+      "positive_mass": 0.5058455839029707,
+      "training_workers": 2,
+      "fit_including_pool_s": 169.63920314100142,
+      "pool_setup_teardown_s": 0.000572995000766241,
+      "training_process_cpu_s": 117.5924555,
+      "trajectory_sha256": "6999b6a1e6370851092926e8df2c7b8e82d52431a7680da701677b76eb4a013e",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libscipy_openblas": 1,
+        "libgomp": 1
+      }
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 3,
+      "wall_s": 122.40491288699923,
+      "calls": 7600,
+      "peak_calls": {
+        "positive": 4408,
+        "negative": 4849
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 60.694421819001946,
+      "geometry_s": 18.94876010000189,
+      "log_evidence": -57.499729609067,
+      "max_log_likelihood": -38.17355579802415,
+      "ess": 1376.6235412142682,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.06779689054723,
+        9.999191562378769,
+        50.033913102627956
+      ],
+      "folded_std": [
+        0.0699015112761534,
+        0.0333018637518721,
+        0.033928032641678596
+      ],
+      "positive_mass": 0.5058455839029707,
+      "training_workers": 1,
+      "fit_including_pool_s": 122.40491418700003,
+      "pool_setup_teardown_s": 1.3000008038943633e-06,
+      "training_process_cpu_s": 58.689193599999975,
+      "trajectory_sha256": "6999b6a1e6370851092926e8df2c7b8e82d52431a7680da701677b76eb4a013e",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libgomp": 1,
+        "libscipy_openblas": 1
+      }
+    },
+    {
+      "fixture": "symmetric",
+      "arm": "default",
+      "seed": 3,
+      "wall_s": 183.3102992460008,
+      "calls": 7600,
+      "peak_calls": {
+        "positive": 4408,
+        "negative": 4849
+      },
+      "native": {
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4,
+        "n_live": 200
+      },
+      "bounds": 26,
+      "training_s": 137.91367825099223,
+      "geometry_s": 14.799001548008164,
+      "log_evidence": -57.499729609067,
+      "max_log_likelihood": -38.17355579802415,
+      "ess": 1376.6235412142682,
+      "parameter_names": [
+        "normalization",
+        "sigma",
+        "centre"
+      ],
+      "folded_mean": [
+        25.06779689054723,
+        9.999191562378769,
+        50.033913102627956
+      ],
+      "folded_std": [
+        0.0699015112761534,
+        0.0333018637518721,
+        0.033928032641678596
+      ],
+      "positive_mass": 0.5058455839029707,
+      "training_workers": 4,
+      "fit_including_pool_s": 183.31562392600063,
+      "pool_setup_teardown_s": 0.0053246799998305505,
+      "training_process_cpu_s": 179.93206050000006,
+      "trajectory_sha256": "6999b6a1e6370851092926e8df2c7b8e82d52431a7680da701677b76eb4a013e",
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "thread_limits": {
+        "libgomp": 1,
+        "libscipy_openblas": 1
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "fixture": "profile",
+      "seed": 1,
+      "workers": 2,
+      "mismatched_fields": [],
+      "wall_saved_pct": -41.46859252181707
+    },
+    {
+      "fixture": "profile",
+      "seed": 1,
+      "workers": 4,
+      "mismatched_fields": [],
+      "wall_saved_pct": -113.41035281567105
+    },
+    {
+      "fixture": "symmetric",
+      "seed": 1,
+      "workers": 4,
+      "mismatched_fields": [],
+      "wall_saved_pct": -104.63439735146021
+    },
+    {
+      "fixture": "symmetric",
+      "seed": 1,
+      "workers": 2,
+      "mismatched_fields": [],
+      "wall_saved_pct": -40.786808448920155
+    },
+    {
+      "fixture": "profile",
+      "seed": 2,
+      "workers": 2,
+      "mismatched_fields": [],
+      "wall_saved_pct": -38.60341334909641
+    },
+    {
+      "fixture": "profile",
+      "seed": 2,
+      "workers": 4,
+      "mismatched_fields": [],
+      "wall_saved_pct": -79.82910119682445
+    },
+    {
+      "fixture": "symmetric",
+      "seed": 2,
+      "workers": 4,
+      "mismatched_fields": [],
+      "wall_saved_pct": -123.77122704889976
+    },
+    {
+      "fixture": "symmetric",
+      "seed": 2,
+      "workers": 2,
+      "mismatched_fields": [],
+      "wall_saved_pct": -190.3001686597669
+    },
+    {
+      "fixture": "profile",
+      "seed": 3,
+      "workers": 4,
+      "mismatched_fields": [],
+      "wall_saved_pct": -27.426768365018916
+    },
+    {
+      "fixture": "profile",
+      "seed": 3,
+      "workers": 2,
+      "mismatched_fields": [],
+      "wall_saved_pct": -12.757437230838242
+    },
+    {
+      "fixture": "symmetric",
+      "seed": 3,
+      "workers": 2,
+      "mismatched_fields": [],
+      "wall_saved_pct": -38.588556078590756
+    },
+    {
+      "fixture": "symmetric",
+      "seed": 3,
+      "workers": 4,
+      "mismatched_fields": [],
+      "wall_saved_pct": -49.76165388747897
+    }
+  ],
+  "median_wall_saved_pct": {
+    "2": {
+      "profile": -38.60341334909641,
+      "symmetric": -40.786808448920155
+    },
+    "4": {
+      "profile": -79.82910119682445,
+      "symmetric": -104.63439735146021
+    }
+  },
+  "qualifies": {
+    "2": false,
+    "4": false
+  }
+}

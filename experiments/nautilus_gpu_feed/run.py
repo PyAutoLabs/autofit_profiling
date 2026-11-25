@@ -99,7 +99,7 @@ class Feed:
             ]
         )
         self.collect_s += clock() - collect
-        self.cache_sizes.add(sampler.likelihood.func.__self__._call._cache_size())
+        self.cache_sizes.add(sampler.likelihood.func.__self__._call.__wrapped__._cache_size())
         if len(values) != len(points) or not np.isfinite(values).all():
             raise ValueError("Missing or non-finite likelihood")
         sampler.n_like += len(values)

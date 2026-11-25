@@ -1,0 +1,120 @@
+{
+  "cpu": {
+    "device": "cpu",
+    "backend": "cpu",
+    "fp64": true,
+    "checks": [
+      {
+        "repeats": 1,
+        "width": 50,
+        "max_abs_error": 4.656612873077393e-10,
+        "lengths": [
+          1,
+          17,
+          50,
+          99,
+          100,
+          137
+        ]
+      },
+      {
+        "repeats": 1,
+        "width": 100,
+        "max_abs_error": 4.656612873077393e-10,
+        "lengths": [
+          1,
+          17,
+          50,
+          99,
+          100,
+          137
+        ]
+      },
+      {
+        "repeats": 64,
+        "width": 50,
+        "max_abs_error": 2.3283064365386963e-10,
+        "lengths": [
+          1,
+          17,
+          50,
+          99,
+          100,
+          137
+        ]
+      },
+      {
+        "repeats": 64,
+        "width": 100,
+        "max_abs_error": 2.3283064365386963e-10,
+        "lengths": [
+          1,
+          17,
+          50,
+          99,
+          100,
+          137
+        ]
+      }
+    ]
+  },
+  "cuda": {
+    "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+    "backend": "gpu",
+    "fp64": true,
+    "checks": [
+      {
+        "repeats": 1,
+        "width": 50,
+        "max_abs_error": 2.3283064365386963e-10,
+        "lengths": [
+          1,
+          17,
+          50,
+          99,
+          100,
+          137
+        ]
+      },
+      {
+        "repeats": 1,
+        "width": 100,
+        "max_abs_error": 2.3283064365386963e-10,
+        "lengths": [
+          1,
+          17,
+          50,
+          99,
+          100,
+          137
+        ]
+      },
+      {
+        "repeats": 64,
+        "width": 50,
+        "max_abs_error": 2.3283064365386963e-10,
+        "lengths": [
+          1,
+          17,
+          50,
+          99,
+          100,
+          137
+        ]
+      },
+      {
+        "repeats": 64,
+        "width": 100,
+        "max_abs_error": 2.3283064365386963e-10,
+        "lengths": [
+          1,
+          17,
+          50,
+          99,
+          100,
+          137
+        ]
+      }
+    ]
+  }
+}

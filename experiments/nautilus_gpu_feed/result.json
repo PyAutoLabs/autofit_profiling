@@ -1,0 +1,1170 @@
+{
+  "runs": [
+    {
+      "arm": "gpu",
+      "seed": 1,
+      "repeats": 1,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 70.11533556899849,
+      "cpu_s": 67.9290839,
+      "start_epoch": 1795607997.4449902,
+      "end_epoch": 1795608067.5603492,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7500,
+      "batches": 75,
+      "device_chunks": 75,
+      "width": 100,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.2511286469998595,
+      "warm_batch_median_s": 0.0040095045005728025,
+      "evaluation_wall_s": 0.5496130630035623,
+      "prepare_worker_s": 0.004968098011886468,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.20993441099926713,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 25.284949317005157,
+      "bounds": 26,
+      "proposal_sha256": "b325f600e883c531009116ca654a8459624f062283c9b6b9b015cb6154ea212b",
+      "logz": -57.51149618752003,
+      "ess": 1300.771040502477,
+      "mean": [
+        50.03393709838379,
+        25.063416950471506,
+        9.997894324901576
+      ],
+      "std": [
+        0.03360593584893805,
+        0.07121312635689482,
+        0.03349392287587901
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 75.95420319000004,
+      "gpu_samples": 70,
+      "device_util_mean_pct": 0.05714285714285714,
+      "peak_device_memory_mib": 99,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "feed",
+      "seed": 1,
+      "repeats": 1,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 59.862281241001256,
+      "cpu_s": 59.965159299999996,
+      "start_epoch": 1795608074.447518,
+      "end_epoch": 1795608134.3098297,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7500,
+      "batches": 75,
+      "device_chunks": 150,
+      "width": 50,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.2398969189998752,
+      "warm_batch_median_s": 0.006704296500174678,
+      "evaluation_wall_s": 0.7332285580050666,
+      "prepare_worker_s": 0.030992801001048065,
+      "wait_for_prepare_s": 0.0564965969970217,
+      "collect_s": 0.2856158660069923,
+      "parallel_membership_s": 0.39194475599651923,
+      "membership_jobs": 106,
+      "training_s": 24.674758312999984,
+      "bounds": 26,
+      "proposal_sha256": "b325f600e883c531009116ca654a8459624f062283c9b6b9b015cb6154ea212b",
+      "logz": -57.51149618752003,
+      "ess": 1300.771040502477,
+      "mean": [
+        50.03393709838379,
+        25.063416950471506,
+        9.997894324901576
+      ],
+      "std": [
+        0.03360593584893805,
+        0.07121312635689482,
+        0.03349392287587901
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 65.12187737599925,
+      "gpu_samples": 60,
+      "device_util_mean_pct": 0.1,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "split",
+      "seed": 1,
+      "repeats": 1,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 52.15581311300048,
+      "cpu_s": 52.170482,
+      "start_epoch": 1795608139.6942463,
+      "end_epoch": 1795608191.8500764,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7500,
+      "batches": 75,
+      "device_chunks": 150,
+      "width": 50,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.19364945599954808,
+      "warm_batch_median_s": 0.005503600999873015,
+      "evaluation_wall_s": 0.5915035800098849,
+      "prepare_worker_s": 0.01007170101365773,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.26345188700543076,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 21.851035205996595,
+      "bounds": 26,
+      "proposal_sha256": "b325f600e883c531009116ca654a8459624f062283c9b6b9b015cb6154ea212b",
+      "logz": -57.51149618752003,
+      "ess": 1300.771040502477,
+      "mean": [
+        50.03393709838379,
+        25.063416950471506,
+        9.997894324901576
+      ],
+      "std": [
+        0.03360593584893805,
+        0.07121312635689482,
+        0.03349392287587901
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 57.25774043999991,
+      "gpu_samples": 52,
+      "device_util_mean_pct": 0.15384615384615385,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "cpu",
+      "seed": 1,
+      "repeats": 1,
+      "device": "cpu",
+      "fit_wall_s": 44.757903869000074,
+      "cpu_s": 44.7863895,
+      "start_epoch": 1795608196.9183757,
+      "end_epoch": 1795608241.6762965,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7500,
+      "batches": 75,
+      "device_chunks": 75,
+      "width": 100,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.09836447999987286,
+      "warm_batch_median_s": 0.00048165000043809414,
+      "evaluation_wall_s": 0.13475727700460993,
+      "prepare_worker_s": 0.0034368000051472336,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.013299897989782039,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 18.881206649994056,
+      "bounds": 26,
+      "proposal_sha256": "b325f600e883c531009116ca654a8459624f062283c9b6b9b015cb6154ea212b",
+      "logz": -57.511496187520024,
+      "ess": 1300.7710405024757,
+      "mean": [
+        50.03393709838374,
+        25.06341695047148,
+        9.997894324901575
+      ],
+      "std": [
+        0.03360593584893798,
+        0.07121312635689493,
+        0.033493922875879
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 48.3760876209999,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "cpu",
+      "seed": 1,
+      "repeats": 64,
+      "device": "cpu",
+      "fit_wall_s": 40.34556910399988,
+      "cpu_s": 40.5000596,
+      "start_epoch": 1795608244.6027122,
+      "end_epoch": 1795608284.9483025,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7500,
+      "batches": 75,
+      "device_chunks": 75,
+      "width": 100,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.11233915200136835,
+      "warm_batch_median_s": 0.0011075000002165325,
+      "evaluation_wall_s": 0.1985087980137905,
+      "prepare_worker_s": 0.0032038520021160366,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.06518537501506216,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 16.875911932002055,
+      "bounds": 26,
+      "proposal_sha256": "b325f600e883c531009116ca654a8459624f062283c9b6b9b015cb6154ea212b",
+      "logz": -57.511496187520024,
+      "ess": 1300.7710405024757,
+      "mean": [
+        50.033937098383745,
+        25.063416950471485,
+        9.99789432490157
+      ],
+      "std": [
+        0.033605935848938,
+        0.07121312635689488,
+        0.03349392287587898
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 43.28768343199954,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "split",
+      "seed": 1,
+      "repeats": 64,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 44.15721454599952,
+      "cpu_s": 44.0819006,
+      "start_epoch": 1795608288.6753051,
+      "end_epoch": 1795608332.8325365,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7500,
+      "batches": 75,
+      "device_chunks": 150,
+      "width": 50,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.18032370999935665,
+      "warm_batch_median_s": 0.0077591825001945836,
+      "evaluation_wall_s": 0.6778095799927542,
+      "prepare_worker_s": 0.008413394993112888,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.3816841149910033,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 17.292123727005674,
+      "bounds": 26,
+      "proposal_sha256": "b325f600e883c531009116ca654a8459624f062283c9b6b9b015cb6154ea212b",
+      "logz": -57.51149618752003,
+      "ess": 1300.7710405024773,
+      "mean": [
+        50.03393709838378,
+        25.063416950471492,
+        9.997894324901576
+      ],
+      "std": [
+        0.03360593584893804,
+        0.07121312635689489,
+        0.03349392287587902
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 48.01347664499917,
+      "gpu_samples": 44,
+      "device_util_mean_pct": 0.5454545454545454,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "feed",
+      "seed": 1,
+      "repeats": 64,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 45.31926330600072,
+      "cpu_s": 45.371512200000005,
+      "start_epoch": 1795608338.3631706,
+      "end_epoch": 1795608383.6824489,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7500,
+      "batches": 75,
+      "device_chunks": 150,
+      "width": 50,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.1790588170006231,
+      "warm_batch_median_s": 0.008163453499946627,
+      "evaluation_wall_s": 0.7378495759967336,
+      "prepare_worker_s": 0.027178005993846455,
+      "wait_for_prepare_s": 0.039168403009171016,
+      "collect_s": 0.40064884700223047,
+      "parallel_membership_s": 0.31112247399869375,
+      "membership_jobs": 106,
+      "training_s": 17.726851676001388,
+      "bounds": 26,
+      "proposal_sha256": "b325f600e883c531009116ca654a8459624f062283c9b6b9b015cb6154ea212b",
+      "logz": -57.51149618752003,
+      "ess": 1300.7710405024773,
+      "mean": [
+        50.03393709838378,
+        25.063416950471492,
+        9.997894324901576
+      ],
+      "std": [
+        0.03360593584893804,
+        0.07121312635689489,
+        0.03349392287587902
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 49.36179587400147,
+      "gpu_samples": 45,
+      "device_util_mean_pct": 0.5333333333333333,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "gpu",
+      "seed": 1,
+      "repeats": 64,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 46.519652691000374,
+      "cpu_s": 46.406938100000005,
+      "start_epoch": 1795608389.1909404,
+      "end_epoch": 1795608435.71061,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7500,
+      "batches": 75,
+      "device_chunks": 75,
+      "width": 100,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.2385899020009674,
+      "warm_batch_median_s": 0.006761645500773739,
+      "evaluation_wall_s": 0.7154130250073649,
+      "prepare_worker_s": 0.003639111004304141,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.4064930720051052,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 19.01962144400204,
+      "bounds": 26,
+      "proposal_sha256": "b325f600e883c531009116ca654a8459624f062283c9b6b9b015cb6154ea212b",
+      "logz": -57.51149618752003,
+      "ess": 1300.7710405024773,
+      "mean": [
+        50.03393709838378,
+        25.063416950471492,
+        9.997894324901576
+      ],
+      "std": [
+        0.03360593584893804,
+        0.07121312635689489,
+        0.03349392287587902
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 50.418129265999596,
+      "gpu_samples": 46,
+      "device_util_mean_pct": 0.5217391304347826,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "cpu",
+      "seed": 2,
+      "repeats": 1,
+      "device": "cpu",
+      "fit_wall_s": 47.88176831599958,
+      "cpu_s": 47.934956,
+      "start_epoch": 1795608440.4897718,
+      "end_epoch": 1795608488.3715587,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7400,
+      "batches": 74,
+      "device_chunks": 74,
+      "width": 100,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.12630024800091633,
+      "warm_batch_median_s": 0.00047708099918963853,
+      "evaluation_wall_s": 0.16202774901103112,
+      "prepare_worker_s": 0.0033316230055788765,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.013299641013873043,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 19.52797426199868,
+      "bounds": 28,
+      "proposal_sha256": "fdd497a8a68ff665935a9473301908f9e36842323f342d3107c774b6797b83d9",
+      "logz": -57.47430798570669,
+      "ess": 1381.1601569447214,
+      "mean": [
+        50.033145542570026,
+        25.071206804163666,
+        9.99888633953453
+      ],
+      "std": [
+        0.03374099153601408,
+        0.07372776611547278,
+        0.033709128343324665
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 50.97454659399955,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "split",
+      "seed": 2,
+      "repeats": 1,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 47.49614932099939,
+      "cpu_s": 47.543245899999995,
+      "start_epoch": 1795608492.2670772,
+      "end_epoch": 1795608539.7632413,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7400,
+      "batches": 74,
+      "device_chunks": 148,
+      "width": 50,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.10976837500129477,
+      "warm_batch_median_s": 0.005087613999421592,
+      "evaluation_wall_s": 0.4703684300020541,
+      "prepare_worker_s": 0.008663242992042797,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.24490169599084766,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 18.801045253996563,
+      "bounds": 28,
+      "proposal_sha256": "fdd497a8a68ff665935a9473301908f9e36842323f342d3107c774b6797b83d9",
+      "logz": -57.474307985706695,
+      "ess": 1381.1601569447198,
+      "mean": [
+        50.03314554257004,
+        25.071206804163673,
+        9.998886339534554
+      ],
+      "std": [
+        0.033740991536014085,
+        0.07372776611547281,
+        0.033709128343324665
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 51.47016352100036,
+      "gpu_samples": 48,
+      "device_util_mean_pct": 0.041666666666666664,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "feed",
+      "seed": 2,
+      "repeats": 1,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 59.07240615000046,
+      "cpu_s": 58.9957623,
+      "start_epoch": 1795608544.7047112,
+      "end_epoch": 1795608603.7771347,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7400,
+      "batches": 74,
+      "device_chunks": 148,
+      "width": 50,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.15827711600104521,
+      "warm_batch_median_s": 0.005506939000042621,
+      "evaluation_wall_s": 0.5914501950028352,
+      "prepare_worker_s": 0.028574734020367032,
+      "wait_for_prepare_s": 0.04773279899927729,
+      "collect_s": 0.24767332899682515,
+      "parallel_membership_s": 0.39251646299999265,
+      "membership_jobs": 112,
+      "training_s": 22.71088926399716,
+      "bounds": 28,
+      "proposal_sha256": "fdd497a8a68ff665935a9473301908f9e36842323f342d3107c774b6797b83d9",
+      "logz": -57.474307985706695,
+      "ess": 1381.1601569447198,
+      "mean": [
+        50.03314554257004,
+        25.071206804163673,
+        9.998886339534554
+      ],
+      "std": [
+        0.033740991536014085,
+        0.07372776611547281,
+        0.033709128343324665
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 62.888926855001046,
+      "gpu_samples": 59,
+      "device_util_mean_pct": 0.1016949152542373,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "gpu",
+      "seed": 2,
+      "repeats": 1,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 55.01150318300097,
+      "cpu_s": 51.9655063,
+      "start_epoch": 1795608610.3505328,
+      "end_epoch": 1795608665.3620532,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7400,
+      "batches": 74,
+      "device_chunks": 74,
+      "width": 100,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.20078769999963697,
+      "warm_batch_median_s": 0.00399107399971399,
+      "evaluation_wall_s": 0.49959018999106775,
+      "prepare_worker_s": 0.0036037950030731736,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.22057308300645673,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 23.671892094000214,
+      "bounds": 28,
+      "proposal_sha256": "fdd497a8a68ff665935a9473301908f9e36842323f342d3107c774b6797b83d9",
+      "logz": -57.474307985706695,
+      "ess": 1381.1601569447198,
+      "mean": [
+        50.03314554257004,
+        25.071206804163673,
+        9.998886339534554
+      ],
+      "std": [
+        0.033740991536014085,
+        0.07372776611547281,
+        0.033709128343324665
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 59.8319328639991,
+      "gpu_samples": 55,
+      "device_util_mean_pct": 0.03636363636363636,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.862645149230957e-09
+    },
+    {
+      "arm": "gpu",
+      "seed": 2,
+      "repeats": 64,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 38.92697059099919,
+      "cpu_s": 38.740271,
+      "start_epoch": 1795608670.423809,
+      "end_epoch": 1795608709.3507938,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7400,
+      "batches": 74,
+      "device_chunks": 74,
+      "width": 100,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.17560781899919675,
+      "warm_batch_median_s": 0.0069985770005587256,
+      "evaluation_wall_s": 0.6268717419934546,
+      "prepare_worker_s": 0.002668200011612498,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.3944655639897974,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 15.645789934003915,
+      "bounds": 28,
+      "proposal_sha256": "fdd497a8a68ff665935a9473301908f9e36842323f342d3107c774b6797b83d9",
+      "logz": -57.474307985706695,
+      "ess": 1381.16015694472,
+      "mean": [
+        50.03314554256999,
+        25.07120680416366,
+        9.998886339534556
+      ],
+      "std": [
+        0.03374099153601409,
+        0.0737277661154728,
+        0.03370912834332465
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 42.40038020099928,
+      "gpu_samples": 39,
+      "device_util_mean_pct": 0.5897435897435898,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.3969838619232178e-09
+    },
+    {
+      "arm": "feed",
+      "seed": 2,
+      "repeats": 64,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 43.2823934349999,
+      "cpu_s": 43.2866802,
+      "start_epoch": 1795608712.9425807,
+      "end_epoch": 1795608756.224988,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7400,
+      "batches": 74,
+      "device_chunks": 148,
+      "width": 50,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.15659244199923705,
+      "warm_batch_median_s": 0.008071266000115429,
+      "evaluation_wall_s": 0.6805437820039515,
+      "prepare_worker_s": 0.022830832000181545,
+      "wait_for_prepare_s": 0.03437111200582876,
+      "collect_s": 0.3867110999944998,
+      "parallel_membership_s": 0.27877547101161326,
+      "membership_jobs": 112,
+      "training_s": 16.51006749400949,
+      "bounds": 28,
+      "proposal_sha256": "fdd497a8a68ff665935a9473301908f9e36842323f342d3107c774b6797b83d9",
+      "logz": -57.474307985706695,
+      "ess": 1381.16015694472,
+      "mean": [
+        50.03314554256999,
+        25.07120680416366,
+        9.998886339534556
+      ],
+      "std": [
+        0.03374099153601409,
+        0.0737277661154728,
+        0.03370912834332465
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 46.84031285099991,
+      "gpu_samples": 44,
+      "device_util_mean_pct": 0.5227272727272727,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.3969838619232178e-09
+    },
+    {
+      "arm": "split",
+      "seed": 2,
+      "repeats": 64,
+      "device": "NVIDIA GeForce RTX 2060 with Max-Q Design",
+      "fit_wall_s": 55.69797363900034,
+      "cpu_s": 55.52109780000001,
+      "start_epoch": 1795608760.740526,
+      "end_epoch": 1795608816.4385154,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7400,
+      "batches": 74,
+      "device_chunks": 148,
+      "width": 50,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.25403830299910624,
+      "warm_batch_median_s": 0.007956585001011263,
+      "evaluation_wall_s": 0.7692811470078595,
+      "prepare_worker_s": 0.009907070987537736,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.38788618800390395,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 21.649647100997754,
+      "bounds": 28,
+      "proposal_sha256": "fdd497a8a68ff665935a9473301908f9e36842323f342d3107c774b6797b83d9",
+      "logz": -57.474307985706695,
+      "ess": 1381.16015694472,
+      "mean": [
+        50.03314554256999,
+        25.07120680416366,
+        9.998886339534556
+      ],
+      "std": [
+        0.03374099153601409,
+        0.0737277661154728,
+        0.03370912834332465
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 59.86127013499936,
+      "gpu_samples": 56,
+      "device_util_mean_pct": 0.42857142857142855,
+      "peak_device_memory_mib": 91,
+      "max_abs_numpy_error": 1.3969838619232178e-09
+    },
+    {
+      "arm": "cpu",
+      "seed": 2,
+      "repeats": 64,
+      "device": "cpu",
+      "fit_wall_s": 48.572754504999466,
+      "cpu_s": 48.3915309,
+      "start_epoch": 1795608821.2512777,
+      "end_epoch": 1795608869.824056,
+      "native": {
+        "n_live": 200,
+        "n_update": 200,
+        "n_batch": 100,
+        "n_networks": 4
+      },
+      "calls": 7400,
+      "batches": 74,
+      "device_chunks": 74,
+      "width": 100,
+      "padding": 0,
+      "objective_cache_sizes": [
+        1
+      ],
+      "first_batch_s": 0.17697006900016277,
+      "warm_batch_median_s": 0.001352086001134012,
+      "evaluation_wall_s": 0.29449638199730543,
+      "prepare_worker_s": 0.003327491995150922,
+      "wait_for_prepare_s": 0.0,
+      "collect_s": 0.094353135997153,
+      "parallel_membership_s": 0.0,
+      "membership_jobs": 0,
+      "training_s": 19.275349335997817,
+      "bounds": 28,
+      "proposal_sha256": "fdd497a8a68ff665935a9473301908f9e36842323f342d3107c774b6797b83d9",
+      "logz": -57.47430798570669,
+      "ess": 1381.1601569447214,
+      "mean": [
+        50.03314554257007,
+        25.07120680416366,
+        9.998886339534524
+      ],
+      "std": [
+        0.03374099153601403,
+        0.07372776611547277,
+        0.03370912834332464
+      ],
+      "names": [
+        "centre",
+        "normalization",
+        "sigma"
+      ],
+      "affinity": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "jax": "0.12.0.1",
+      "fresh_process_s": 52.05276893100017,
+      "max_abs_numpy_error": 2.7939677238464355e-09
+    }
+  ],
+  "pairs": [
+    {
+      "repeats": 1,
+      "seed": 1,
+      "parity": {
+        "cpu": {
+          "trajectory_equal": true,
+          "logz_delta": 7.105427357601002e-15,
+          "max_mean_shift_sd": 1.4800358998119894e-12,
+          "ess_relative_delta": -9.992007221626409e-16
+        },
+        "gpu": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        },
+        "split": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        },
+        "feed": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        }
+      },
+      "parity_pass": true,
+      "feed_saving_pct": {
+        "cpu": -33.74683813658814,
+        "gpu": 14.62312665951302,
+        "split": -14.77585654988063
+      },
+      "advances": false
+    },
+    {
+      "repeats": 1,
+      "seed": 2,
+      "parity": {
+        "cpu": {
+          "trajectory_equal": true,
+          "logz_delta": 7.105427357601002e-15,
+          "max_mean_shift_sd": 6.850559491484518e-13,
+          "ess_relative_delta": 1.1102230246251565e-15
+        },
+        "gpu": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        },
+        "split": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        },
+        "feed": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        }
+      },
+      "parity_pass": true,
+      "feed_saving_pct": {
+        "cpu": -23.37139631132119,
+        "gpu": -7.381916021255619,
+        "split": -24.37304285609292
+      },
+      "advances": false
+    },
+    {
+      "repeats": 64,
+      "seed": 1,
+      "parity": {
+        "cpu": {
+          "trajectory_equal": true,
+          "logz_delta": 7.105427357601002e-15,
+          "max_mean_shift_sd": 1.057168499865707e-12,
+          "ess_relative_delta": -1.2212453270876722e-15
+        },
+        "gpu": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        },
+        "split": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        },
+        "feed": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        }
+      },
+      "parity_pass": true,
+      "feed_saving_pct": {
+        "cpu": -12.327733410278618,
+        "gpu": 2.5803919753508375,
+        "split": -2.6316169893159103
+      },
+      "advances": false
+    },
+    {
+      "repeats": 64,
+      "seed": 2,
+      "parity": {
+        "cpu": {
+          "trajectory_equal": true,
+          "logz_delta": 7.105427357601002e-15,
+          "max_mean_shift_sd": 2.316461294570605e-12,
+          "ess_relative_delta": 8.881784197001252e-16
+        },
+        "gpu": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        },
+        "split": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        },
+        "feed": {
+          "trajectory_equal": true,
+          "logz_delta": 0.0,
+          "max_mean_shift_sd": 0.0,
+          "ess_relative_delta": 0.0
+        }
+      },
+      "parity_pass": true,
+      "feed_saving_pct": {
+        "cpu": 10.891622523600219,
+        "gpu": -11.18870227473543,
+        "split": 22.29090107383531
+      },
+      "advances": false
+    }
+  ],
+  "advance": {
+    "1": false,
+    "64": false
+  }
+}
